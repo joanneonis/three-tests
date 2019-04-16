@@ -4,7 +4,10 @@ import * as THREE from 'three';
 import 'three/examples/js/controls/OrbitControls';
 import {
 	SpotLight, 
-	PointLight
+	PointLight,
+	HemisphereLight,
+	DirectionalLight,
+	AmbientLight
 } from './classes/lights';
 
 import {
@@ -27,8 +30,6 @@ var renderer,
 		camera,
 		theCanvas = document.getElementById('gl-canvas');
 
-
-var spotLight;
 var activeLight, activeLightSettings, activeLightHelper, activeShadowCameraHelper;
 
 var gui;
@@ -125,17 +126,21 @@ function setLight() {
 	});
 
 	scene.add(activeLight);
-	scene.add(activeLightHelper);
 
-	activeShadowCameraHelper = new THREE.CameraHelper(activeLight.shadow.camera);
-	scene.add(activeShadowCameraHelper);
+	if (activeLightHelper) { scene.add(activeLightHelper); }
+	
+
+	if (activeLight.shadow) {
+		activeShadowCameraHelper = new THREE.CameraHelper(activeLight.shadow.camera);
+		scene.add(activeShadowCameraHelper);
+	}
 } 
 
 function render() {
 	if (activeLightHelper) { 
 		activeLightHelper.update(); 
 		activeShadowCameraHelper.update();
-	}
+	} 
 	
 	renderer.render(scene, camera);
 }
@@ -144,7 +149,7 @@ gui = new dat.GUI();
 gui.add(
 	activeLightType,
 	'type',
-	['SpotLight', 'PointLight'] //'HemisphereLight', 'DirectionalLight', 'AmbientLight'
+	['SpotLight', 'PointLight', 'HemisphereLight', 'DirectionalLight', 'AmbientLight'] 
 )
 .onChange((val) => {
 	setlightType(val); 
@@ -196,6 +201,33 @@ function setlightType(type) {
 			activeLight = new THREE.PointLight(0xffffff, 2.0, 600);
 			activeLightHelper = new THREE.PointLightHelper(activeLight);
 			activeLightSettings = new PointLight;
+			activeLightSettings.params.color = activeLight.color.getHex();
+
+			buildGui();
+			setLight();
+			break;
+		case 'HemisphereLight':
+			activeLight = new THREE.HemisphereLight(0xffffbb, 0x0808dd, 1);
+			activeLightHelper = new THREE.HemisphereLightHelper(activeLight);
+			activeLightSettings = new HemisphereLight;
+			activeLightSettings.params.color = activeLight.color.getHex();
+
+			buildGui();
+			setLight();
+			break;
+		case 'DirectionalLight':
+			activeLight = new THREE.DirectionalLight(0xffffff, 2.0, 1000);
+			activeLightHelper = new THREE.DirectionalLightHelper(activeLight);
+			activeLightSettings = new DirectionalLight;
+			activeLightSettings.params.color = activeLight.color.getHex();
+
+			buildGui();
+			setLight();
+			break;
+		case 'AmbientLight':
+			activeLight = new THREE.AmbientLight(0xffffff, 0.5);
+			activeLightHelper = null;
+			activeLightSettings = new AmbientLight;
 			activeLightSettings.params.color = activeLight.color.getHex();
 
 			buildGui();

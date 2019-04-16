@@ -90,13 +90,16 @@
 /*!**********************************************!*\
   !*** ./experiments/lights/classes/lights.js ***!
   \**********************************************/
-/*! exports provided: SpotLight, PointLight */
+/*! exports provided: SpotLight, PointLight, HemisphereLight, DirectionalLight, AmbientLight */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SpotLight", function() { return SpotLight; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PointLight", function() { return PointLight; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HemisphereLight", function() { return HemisphereLight; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DirectionalLight", function() { return DirectionalLight; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AmbientLight", function() { return AmbientLight; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var SpotLight = function SpotLight() {
@@ -179,6 +182,90 @@ var PointLight = function PointLight() {
     decay: {
       decay: this.decay,
       min: 1,
+      max: 2
+    },
+    position: {
+      x: this.position.x,
+      y: this.position.y,
+      z: this.position.z,
+      min: -300,
+      max: 300
+    }
+  };
+  Object.assign(this, config);
+};
+var HemisphereLight = function HemisphereLight() {
+  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  _classCallCheck(this, HemisphereLight);
+
+  this.position = {
+    x: 15,
+    y: 40,
+    z: 35
+  };
+  this.intensity = 1.37;
+  this.params = {
+    color: null,
+    intensity: {
+      intensity: this.intensity,
+      min: 0,
+      max: 2
+    },
+    position: {
+      x: this.position.x,
+      y: this.position.y,
+      z: this.position.z,
+      min: -300,
+      max: 300
+    }
+  };
+  Object.assign(this, config);
+};
+var DirectionalLight = function DirectionalLight() {
+  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  _classCallCheck(this, DirectionalLight);
+
+  this.position = {
+    x: 15,
+    y: 40,
+    z: 35
+  };
+  this.intensity = 1.37;
+  this.params = {
+    color: null,
+    intensity: {
+      intensity: this.intensity,
+      min: 0,
+      max: 2
+    },
+    position: {
+      x: this.position.x,
+      y: this.position.y,
+      z: this.position.z,
+      min: -300,
+      max: 300
+    }
+  };
+  Object.assign(this, config);
+};
+var AmbientLight = function AmbientLight() {
+  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  _classCallCheck(this, AmbientLight);
+
+  this.position = {
+    x: 15,
+    y: 40,
+    z: 35
+  };
+  this.intensity = 1.37;
+  this.params = {
+    color: null,
+    intensity: {
+      intensity: this.intensity,
+      min: 0,
       max: 2
     },
     position: {
@@ -282,7 +369,6 @@ var renderer,
     scene,
     camera,
     theCanvas = document.getElementById('gl-canvas');
-var spotLight;
 var activeLight, activeLightSettings, activeLightHelper, activeShadowCameraHelper;
 var gui;
 var lightsGui;
@@ -367,9 +453,15 @@ function setLight() {
     }
   });
   scene.add(activeLight);
-  scene.add(activeLightHelper);
-  activeShadowCameraHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](activeLight.shadow.camera);
-  scene.add(activeShadowCameraHelper);
+
+  if (activeLightHelper) {
+    scene.add(activeLightHelper);
+  }
+
+  if (activeLight.shadow) {
+    activeShadowCameraHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](activeLight.shadow.camera);
+    scene.add(activeShadowCameraHelper);
+  }
 }
 
 function render() {
@@ -382,8 +474,7 @@ function render() {
 }
 
 gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
-gui.add(activeLightType, 'type', ['SpotLight', 'PointLight'] //'HemisphereLight', 'DirectionalLight', 'AmbientLight'
-).onChange(function (val) {
+gui.add(activeLightType, 'type', ['SpotLight', 'PointLight', 'HemisphereLight', 'DirectionalLight', 'AmbientLight']).onChange(function (val) {
   setlightType(val);
   render();
 });
@@ -429,6 +520,33 @@ function setlightType(type) {
       activeLight = new three__WEBPACK_IMPORTED_MODULE_1__["PointLight"](0xffffff, 2.0, 600);
       activeLightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["PointLightHelper"](activeLight);
       activeLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["PointLight"]();
+      activeLightSettings.params.color = activeLight.color.getHex();
+      buildGui();
+      setLight();
+      break;
+
+    case 'HemisphereLight':
+      activeLight = new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLight"](0xffffbb, 0x0808dd, 1);
+      activeLightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLightHelper"](activeLight);
+      activeLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["HemisphereLight"]();
+      activeLightSettings.params.color = activeLight.color.getHex();
+      buildGui();
+      setLight();
+      break;
+
+    case 'DirectionalLight':
+      activeLight = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 2.0, 1000);
+      activeLightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLightHelper"](activeLight);
+      activeLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["DirectionalLight"]();
+      activeLightSettings.params.color = activeLight.color.getHex();
+      buildGui();
+      setLight();
+      break;
+
+    case 'AmbientLight':
+      activeLight = new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0xffffff, 0.5);
+      activeLightHelper = null;
+      activeLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["AmbientLight"]();
       activeLightSettings.params.color = activeLight.color.getHex();
       buildGui();
       setLight();
