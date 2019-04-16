@@ -34,13 +34,15 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 //SCENE
 scene = new THREE.Scene();
 
-
+let prevLightType = 'SpotLight';
 var options = {
   uh: 0,
   lights: {
-		activeLightEl: null,
+		activeLightEl: {intensity: 0},
 		activeHelperEl: null,
-    type: 'SpotLight',
+		intensity: 0,
+		position: { x: 0, y: 1, z: 0 },
+		type: 'SpotLight',
   },
   reset: function() {
     // could do somethings
@@ -49,11 +51,20 @@ var options = {
 
 const gui = new dat.GUI();
 let lightsGui = gui.addFolder('Lights');
-lightsGui.add(options.lights, 'type',['SpotLight', 'HemisphereLight', 'DirectionalLight', 'PointLight', 'AmbientLight']).onChange(test);
+lightsGui.add(options.lights, 'type',['SpotLight', 'HemisphereLight', 'DirectionalLight', 'PointLight', 'AmbientLight']).onChange(updateLights);
+lightsGui.add(options.lights, 'intensity', 0, 10).onChange(updateLights);
+lightsGui.add(options.lights.position, 'x', -1000, 1000).onChange(updateLights);
+lightsGui.add(options.lights.position, 'y', -1000, 1000).onChange(updateLights);
+lightsGui.add(options.lights.position, 'z', -1000, 1000).onChange(updateLights);
+lightsGui.open();
 
-function test() {
-	console.log('updated');
-	changeLight(options.lights.type);
+// to play: ?angle, color, position.x
+function updateLights() {
+	if (options.lights.type != prevLightType) { changeLight(options.lights.type); }
+	options.lights.activeLightEl.intensity = options.lights.intensity;
+	options.lights.activeLightEl.position.x = options.lights.position.x;
+	options.lights.activeLightEl.position.y = options.lights.position.y;
+	options.lights.activeLightEl.position.z = options.lights.position.z;
 }
 
 //MATERIAL
@@ -168,6 +179,7 @@ function changeLight(type) {
 }
 
 function setLight(type) {
+	prevLightType = type;
 	var light;
 	var helper;
 
@@ -199,5 +211,35 @@ function setLight(type) {
 	scene.add(helper);
 	options.lights.activeLightEl = light;
 	options.lights.activeHelperEl = helper;
+	options.lights.intensity = light.intensity;
 }
 
+document.addEventListener('keyup', function (event) {
+	if (event.defaultPrevented) {
+		return;
+	}
+
+	let key = event.key || event.keyCode;
+
+	switch (key) {
+		case 'ArrowUp':
+			// code block
+			options.lights.activeLightEl.intensity += 1;
+
+			break;
+		case 'ArrowDown':
+			// code block
+			options.lights.activeLightEl.intensity -= 1;
+			break;
+		case 'ArrowLeft':
+			// code block
+			break;
+		case 'ArrowRight':
+			// code block
+			break;
+		case 'Enter':
+			// nextLight();
+			break;
+	}
+});
+	
