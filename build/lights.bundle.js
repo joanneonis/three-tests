@@ -90,12 +90,13 @@
 /*!**********************************************!*\
   !*** ./experiments/lights/classes/lights.js ***!
   \**********************************************/
-/*! exports provided: SpotLight */
+/*! exports provided: SpotLight, PointLight */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SpotLight", function() { return SpotLight; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PointLight", function() { return PointLight; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var SpotLight = function SpotLight() {
@@ -134,6 +135,46 @@ var SpotLight = function SpotLight() {
       penumbra: this.penumbra,
       min: 0,
       max: 1
+    },
+    decay: {
+      decay: this.decay,
+      min: 1,
+      max: 2
+    },
+    position: {
+      x: this.position.x,
+      y: this.position.y,
+      z: this.position.z,
+      min: -300,
+      max: 300
+    }
+  };
+  Object.assign(this, config);
+};
+var PointLight = function PointLight() {
+  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  _classCallCheck(this, PointLight);
+
+  this.position = {
+    x: 15,
+    y: 40,
+    z: 35
+  };
+  this.decay = 2;
+  this.distance = 200;
+  this.castShadow = true;
+  this.params = {
+    color: null,
+    intensity: {
+      intensity: 0,
+      min: 0,
+      max: 2
+    },
+    distance: {
+      distance: this.distance,
+      min: 50,
+      max: 200
     },
     decay: {
       decay: this.decay,
@@ -244,6 +285,7 @@ var renderer,
 var spotLight, lightHelper, shadowCameraHelper;
 var spotLightSettings;
 var activeLight;
+var activeLightSettings;
 var activeLightHelper;
 var activeShadowCameraHelper;
 var gui;

@@ -3,7 +3,8 @@ import * as dat from 'dat.gui';
 import * as THREE from 'three';
 import 'three/examples/js/controls/OrbitControls';
 import {
-	SpotLight
+	SpotLight, 
+	PointLight
 } from './classes/lights';
 
 import {
@@ -32,6 +33,7 @@ var spotLight, lightHelper, shadowCameraHelper;
 var spotLightSettings;
 
 var activeLight;
+var activeLightSettings;
 var activeLightHelper;
 var activeShadowCameraHelper;
 
