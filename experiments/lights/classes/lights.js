@@ -11,7 +11,7 @@ export class SpotLight {
 			intensity: {
 				intensity: 0,
 				min: 0,
-				max: 2
+				max: 10
 			},
 			distance: {
 				distance: this.distance,

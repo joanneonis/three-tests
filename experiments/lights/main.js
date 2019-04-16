@@ -192,59 +192,31 @@ function setlightType(type) {
 			activeLight = new THREE.SpotLight(0xffffff, 1);
 			activeLightHelper = new THREE.SpotLightHelper(activeLight);
 			activeLightSettings = new SpotLight;
-			activeLightSettings.params.color = activeLight.color.getHex();
-			setLight();
-			buildGui();
-			
 			break;
 		case 'PointLight':
 			activeLight = new THREE.PointLight(0xffffff, 2.0, 600);
 			activeLightHelper = new THREE.PointLightHelper(activeLight);
 			activeLightSettings = new PointLight;
-			activeLightSettings.params.color = activeLight.color.getHex();
-
-			buildGui();
-			setLight();
 			break;
 		case 'HemisphereLight':
 			activeLight = new THREE.HemisphereLight(0xffffbb, 0x0808dd, 1);
 			activeLightHelper = new THREE.HemisphereLightHelper(activeLight);
 			activeLightSettings = new HemisphereLight;
-			activeLightSettings.params.color = activeLight.color.getHex();
-
-			buildGui();
-			setLight();
 			break;
 		case 'DirectionalLight':
 			activeLight = new THREE.DirectionalLight(0xffffff, 2.0, 1000);
 			activeLightHelper = new THREE.DirectionalLightHelper(activeLight);
 			activeLightSettings = new DirectionalLight;
-			activeLightSettings.params.color = activeLight.color.getHex();
-
-			buildGui();
-			setLight();
 			break;
 		case 'AmbientLight':
 			activeLight = new THREE.AmbientLight(0xffffff, 0.5);
 			activeLightHelper = null;
 			activeLightSettings = new AmbientLight;
-			activeLightSettings.params.color = activeLight.color.getHex();
-
-			buildGui();
-			setLight();
 			break;
-		// case 'HemisphereLight':
-		// 	light = new THREE.HemisphereLight(0xffffbb, 0x0808dd, 1);
-		// 	helper = new THREE.HemisphereLightHelper(light, 100);
-		// 	break;
-		// case 'DirectionalLight':
-		// 	light = new THREE.DirectionalLight(0xffffff, 2.0, 1000);
-		// 	// light.target = meshes[0];
-		// 	helper = new THREE.DirectionalLightHelper(light, 100);
-		// 	break;
-		// case 'AmbientLight':
-		// 	light = new THREE.AmbientLight(0xffffff, 0.5);
-		// 	break;
 	}
+
+	activeLightSettings.params.color = activeLight.color.getHex();
+	buildGui();
+	setLight();
 	render();
 }

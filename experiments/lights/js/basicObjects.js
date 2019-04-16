@@ -23,16 +23,12 @@ export function createObjects() {
 		meshes[i] = new THREE.Mesh(geometries[i], materials[i]);
 	}
 
-	meshes[0].position.z = 0;
 	meshes[0].position.x = -50;
-	meshes[0].position.y = 0;
 	meshes[0].castShadow = true;
 	// scene.add(meshes[0]);
 
 
-	meshes[1].position.z = 0;
 	meshes[1].position.x = 50;
-	meshes[1].position.y = 0;
 	meshes[1].castShadow = true;
 	// scene.add(meshes[1]);
 

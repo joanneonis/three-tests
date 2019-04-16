@@ -122,7 +122,7 @@ var SpotLight = function SpotLight() {
     intensity: {
       intensity: 0,
       min: 0,
-      max: 2
+      max: 10
     },
     distance: {
       distance: this.distance,
@@ -312,14 +312,10 @@ function createObjects() {
     meshes[i] = new three__WEBPACK_IMPORTED_MODULE_0__["Mesh"](geometries[i], materials[i]);
   }
 
-  meshes[0].position.z = 0;
   meshes[0].position.x = -50;
-  meshes[0].position.y = 0;
   meshes[0].castShadow = true; // scene.add(meshes[0]);
 
-  meshes[1].position.z = 0;
   meshes[1].position.x = 50;
-  meshes[1].position.y = 0;
   meshes[1].castShadow = true; // scene.add(meshes[1]);
 
   meshes[2].rotation.x = -90 * (Math.PI / 180);
@@ -511,60 +507,36 @@ function setlightType(type) {
       activeLight = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 1);
       activeLightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](activeLight);
       activeLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["SpotLight"]();
-      activeLightSettings.params.color = activeLight.color.getHex();
-      setLight();
-      buildGui();
       break;
 
     case 'PointLight':
       activeLight = new three__WEBPACK_IMPORTED_MODULE_1__["PointLight"](0xffffff, 2.0, 600);
       activeLightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["PointLightHelper"](activeLight);
       activeLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["PointLight"]();
-      activeLightSettings.params.color = activeLight.color.getHex();
-      buildGui();
-      setLight();
       break;
 
     case 'HemisphereLight':
       activeLight = new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLight"](0xffffbb, 0x0808dd, 1);
       activeLightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLightHelper"](activeLight);
       activeLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["HemisphereLight"]();
-      activeLightSettings.params.color = activeLight.color.getHex();
-      buildGui();
-      setLight();
       break;
 
     case 'DirectionalLight':
       activeLight = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 2.0, 1000);
       activeLightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLightHelper"](activeLight);
       activeLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["DirectionalLight"]();
-      activeLightSettings.params.color = activeLight.color.getHex();
-      buildGui();
-      setLight();
       break;
 
     case 'AmbientLight':
       activeLight = new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0xffffff, 0.5);
       activeLightHelper = null;
       activeLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["AmbientLight"]();
-      activeLightSettings.params.color = activeLight.color.getHex();
-      buildGui();
-      setLight();
       break;
-    // case 'HemisphereLight':
-    // 	light = new THREE.HemisphereLight(0xffffbb, 0x0808dd, 1);
-    // 	helper = new THREE.HemisphereLightHelper(light, 100);
-    // 	break;
-    // case 'DirectionalLight':
-    // 	light = new THREE.DirectionalLight(0xffffff, 2.0, 1000);
-    // 	// light.target = meshes[0];
-    // 	helper = new THREE.DirectionalLightHelper(light, 100);
-    // 	break;
-    // case 'AmbientLight':
-    // 	light = new THREE.AmbientLight(0xffffff, 0.5);
-    // 	break;
   }
 
+  activeLightSettings.params.color = activeLight.color.getHex();
+  buildGui();
+  setLight();
   render();
 }
 
