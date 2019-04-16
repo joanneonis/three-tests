@@ -42,8 +42,3 @@ export class SpotLight {
 		Object.assign(this,config);
 	}
 }
-
-	// spotLight.shadow.mapSize.width = 1024;
-	// spotLight.shadow.mapSize.height = 1024;
-	// spotLight.shadow.camera.near = 10;
-	// spotLight.shadow.camera.far = 200;

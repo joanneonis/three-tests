@@ -147,10 +147,7 @@ var SpotLight = function SpotLight() {
     }
   };
   Object.assign(this, config);
-}; // spotLight.shadow.mapSize.width = 1024;
-// spotLight.shadow.mapSize.height = 1024;
-// spotLight.shadow.camera.near = 10;
-// spotLight.shadow.camera.far = 200;
+};
 
 /***/ }),
 
@@ -267,11 +264,6 @@ function init() {
       spotLight[key] = spotLightSettings[key];
     }
   });
-  spotLight.castShadow = true;
-  spotLight.shadow.mapSize.width = 1024;
-  spotLight.shadow.mapSize.height = 1024;
-  spotLight.shadow.camera.near = 10;
-  spotLight.shadow.camera.far = 200;
   scene.add(spotLight);
   lightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](spotLight);
   scene.add(lightHelper);
@@ -355,8 +347,8 @@ function initRenderer() {
 function initControls() {
   controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement);
   controls.addEventListener('change', render);
-  controls.minDistance = 20;
-  controls.maxDistance = 500;
+  controls.minDistance = 0;
+  controls.maxDistance = 700;
   controls.enablePan = false;
 }
 

@@ -62,12 +62,6 @@ function init() {
 		}
 	});
 
-
-	spotLight.castShadow = true;
-	spotLight.shadow.mapSize.width = 1024;
-	spotLight.shadow.mapSize.height = 1024;
-	spotLight.shadow.camera.near = 10;
-	spotLight.shadow.camera.far = 200;
 	scene.add(spotLight);
 
 	lightHelper = new THREE.SpotLightHelper(spotLight);
@@ -162,7 +156,7 @@ function initRenderer() {
 function initControls() {
 	controls = new THREE.OrbitControls(camera, renderer.domElement);
 	controls.addEventListener('change', render);
-	controls.minDistance = 20;
-	controls.maxDistance = 500;
+	controls.minDistance = 0;
+	controls.maxDistance = 700;
 	controls.enablePan = false;
 }
