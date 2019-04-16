@@ -28,17 +28,12 @@ var renderer,
 		theCanvas = document.getElementById('gl-canvas');
 
 
-var spotLight, lightHelper, shadowCameraHelper;
-
-var spotLightSettings;
-
-var activeLight;
-var activeLightSettings;
-var activeLightHelper;
-var activeShadowCameraHelper;
+var spotLight;
+var activeLight, activeLightSettings, activeLightHelper, activeShadowCameraHelper;
 
 var gui;
 var lightsGui;
+var activeLightType = { type: 'SpotLight'};
 
 var controls;
 
@@ -67,6 +62,8 @@ function init() {
 	controls.update();
 
 	window.addEventListener('resize', onResize, false);
+
+	setlightType('SpotLight');
 }
 
 function onResize() {
@@ -77,15 +74,16 @@ function onResize() {
 }
 
 function buildGui() {
-	lightsGui = gui.addFolder('Light Options');
+	if (lightsGui) { gui.removeFolder(lightsGui) }
+	lightsGui = gui.addFolder('Light');
 
-	var settings = spotLightSettings.params;
+	var settings = activeLightSettings.params;
 
 	// build settings of params
 	Object.keys(settings).forEach((key) => {
 		if (key === 'color') {
 			lightsGui.addColor(settings, key).onChange((val) => {
-				spotLight[key].setHex(val);
+				activeLight[key].setHex(val);
 				render();
 			});
 		} else if(key === 'position') {
@@ -106,9 +104,9 @@ function createGuiSetting(setting, name, key) {
 	.onChange(
 		(val) => {
 			if (name === 'x' || name === 'y' || name === 'z') {
-				spotLight[key][name] = val;
+				activeLight[key][name] = val;
 			} else {
-				spotLight[key] = val;
+				activeLight[key] = val;
 			}
 			render();
 		}
@@ -116,44 +114,47 @@ function createGuiSetting(setting, name, key) {
 }
 
 function setLight() {
-	spotLight = new THREE.SpotLight(0xffffff, 1);
-	spotLightSettings = new SpotLight;
-	spotLightSettings.params.color = spotLight.color.getHex()
-
-	Object.keys(spotLightSettings).forEach((key,index) => {
+	Object.keys(activeLightSettings).forEach((key) => {
 		if (key === 'position') {
-			spotLight.position.x = spotLightSettings[key].x;
-			spotLight.position.y = spotLightSettings[key].y;
-			spotLight.position.z = spotLightSettings[key].z;
+			activeLight.position.x = activeLightSettings[key].x;
+			activeLight.position.y = activeLightSettings[key].y;
+			activeLight.position.z = activeLightSettings[key].z;
 		} else {
-			spotLight[key] = spotLightSettings[key];
+			activeLight[key] = activeLightSettings[key];
 		}
 	});
 
-	scene.add(spotLight);
+	scene.add(activeLight);
+	scene.add(activeLightHelper);
 
-	lightHelper = new THREE.SpotLightHelper(spotLight);
-	scene.add(lightHelper);
-
-	shadowCameraHelper = new THREE.CameraHelper(spotLight.shadow.camera);
-	scene.add(shadowCameraHelper);
-}
+	activeShadowCameraHelper = new THREE.CameraHelper(activeLight.shadow.camera);
+	scene.add(activeShadowCameraHelper);
+} 
 
 function render() {
-	if (lightHelper) { 
-		lightHelper.update(); 
-		shadowCameraHelper.update();
+	if (activeLightHelper) { 
+		activeLightHelper.update(); 
+		activeShadowCameraHelper.update();
 	}
 	
 	renderer.render(scene, camera);
 }
 
-init();
-setLight();
-
 gui = new dat.GUI();
-buildGui();
+gui.add(
+	activeLightType,
+	'type',
+	['SpotLight', 'PointLight'] //'HemisphereLight', 'DirectionalLight', 'AmbientLight'
+)
+.onChange((val) => {
+	setlightType(val); 
+	render();
+}
+);
 
+
+init();
+buildGui();
 render();
 
 
@@ -176,13 +177,42 @@ function initControls() {
 	controls.enablePan = false;
 }
 
-dat.GUI.prototype.removeFolder = function(name) {
-  var folder = this.__folders[name];
-  if (!folder) {
-    return;
-  }
-  folder.close();
-  this.__ul.removeChild(folder.domElement.parentNode);
-  delete this.__folders[name];
-  this.onResize();
+function setlightType(type) {
+	scene.remove(activeLight);
+	scene.remove(activeLightHelper);
+	scene.remove(activeShadowCameraHelper);
+
+	switch(type) {
+		case 'SpotLight':
+			activeLight = new THREE.SpotLight(0xffffff, 1);
+			activeLightHelper = new THREE.SpotLightHelper(activeLight);
+			activeLightSettings = new SpotLight;
+			activeLightSettings.params.color = activeLight.color.getHex();
+			setLight();
+			buildGui();
+			
+			break;
+		case 'PointLight':
+			activeLight = new THREE.PointLight(0xffffff, 2.0, 600);
+			activeLightHelper = new THREE.PointLightHelper(activeLight);
+			activeLightSettings = new PointLight;
+			activeLightSettings.params.color = activeLight.color.getHex();
+
+			buildGui();
+			setLight();
+			break;
+		// case 'HemisphereLight':
+		// 	light = new THREE.HemisphereLight(0xffffbb, 0x0808dd, 1);
+		// 	helper = new THREE.HemisphereLightHelper(light, 100);
+		// 	break;
+		// case 'DirectionalLight':
+		// 	light = new THREE.DirectionalLight(0xffffff, 2.0, 1000);
+		// 	// light.target = meshes[0];
+		// 	helper = new THREE.DirectionalLightHelper(light, 100);
+		// 	break;
+		// case 'AmbientLight':
+		// 	light = new THREE.AmbientLight(0xffffff, 0.5);
+		// 	break;
+	}
+	render();
 }

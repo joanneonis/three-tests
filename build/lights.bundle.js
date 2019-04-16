@@ -282,14 +282,13 @@ var renderer,
     scene,
     camera,
     theCanvas = document.getElementById('gl-canvas');
-var spotLight, lightHelper, shadowCameraHelper;
-var spotLightSettings;
-var activeLight;
-var activeLightSettings;
-var activeLightHelper;
-var activeShadowCameraHelper;
+var spotLight;
+var activeLight, activeLightSettings, activeLightHelper, activeShadowCameraHelper;
 var gui;
 var lightsGui;
+var activeLightType = {
+  type: 'SpotLight'
+};
 var controls;
 
 function init() {
@@ -311,6 +310,7 @@ function init() {
   controls.target.copy(meshes[0].position);
   controls.update();
   window.addEventListener('resize', onResize, false);
+  setlightType('SpotLight');
 }
 
 function onResize() {
@@ -320,13 +320,17 @@ function onResize() {
 }
 
 function buildGui() {
-  lightsGui = gui.addFolder('Light Options');
-  var settings = spotLightSettings.params; // build settings of params
+  if (lightsGui) {
+    gui.removeFolder(lightsGui);
+  }
+
+  lightsGui = gui.addFolder('Light');
+  var settings = activeLightSettings.params; // build settings of params
 
   Object.keys(settings).forEach(function (key) {
     if (key === 'color') {
       lightsGui.addColor(settings, key).onChange(function (val) {
-        spotLight[key].setHex(val);
+        activeLight[key].setHex(val);
         render();
       });
     } else if (key === 'position') {
@@ -343,9 +347,9 @@ function buildGui() {
 function createGuiSetting(setting, name, key) {
   lightsGui.add(setting, name, setting.min, setting.max).onChange(function (val) {
     if (name === 'x' || name === 'y' || name === 'z') {
-      spotLight[key][name] = val;
+      activeLight[key][name] = val;
     } else {
-      spotLight[key] = val;
+      activeLight[key] = val;
     }
 
     render();
@@ -353,37 +357,37 @@ function createGuiSetting(setting, name, key) {
 }
 
 function setLight() {
-  spotLight = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 1);
-  spotLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["SpotLight"]();
-  spotLightSettings.params.color = spotLight.color.getHex();
-  Object.keys(spotLightSettings).forEach(function (key, index) {
+  Object.keys(activeLightSettings).forEach(function (key) {
     if (key === 'position') {
-      spotLight.position.x = spotLightSettings[key].x;
-      spotLight.position.y = spotLightSettings[key].y;
-      spotLight.position.z = spotLightSettings[key].z;
+      activeLight.position.x = activeLightSettings[key].x;
+      activeLight.position.y = activeLightSettings[key].y;
+      activeLight.position.z = activeLightSettings[key].z;
     } else {
-      spotLight[key] = spotLightSettings[key];
+      activeLight[key] = activeLightSettings[key];
     }
   });
-  scene.add(spotLight);
-  lightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](spotLight);
-  scene.add(lightHelper);
-  shadowCameraHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](spotLight.shadow.camera);
-  scene.add(shadowCameraHelper);
+  scene.add(activeLight);
+  scene.add(activeLightHelper);
+  activeShadowCameraHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](activeLight.shadow.camera);
+  scene.add(activeShadowCameraHelper);
 }
 
 function render() {
-  if (lightHelper) {
-    lightHelper.update();
-    shadowCameraHelper.update();
+  if (activeLightHelper) {
+    activeLightHelper.update();
+    activeShadowCameraHelper.update();
   }
 
   renderer.render(scene, camera);
 }
 
-init();
-setLight();
 gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+gui.add(activeLightType, 'type', ['SpotLight', 'PointLight'] //'HemisphereLight', 'DirectionalLight', 'AmbientLight'
+).onChange(function (val) {
+  setlightType(val);
+  render();
+});
+init();
 buildGui();
 render();
 
@@ -406,20 +410,45 @@ function initControls() {
   controls.enablePan = false;
 }
 
-dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"].prototype.removeFolder = function (name) {
-  var folder = this.__folders[name];
+function setlightType(type) {
+  scene.remove(activeLight);
+  scene.remove(activeLightHelper);
+  scene.remove(activeShadowCameraHelper);
 
-  if (!folder) {
-    return;
+  switch (type) {
+    case 'SpotLight':
+      activeLight = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 1);
+      activeLightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](activeLight);
+      activeLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["SpotLight"]();
+      activeLightSettings.params.color = activeLight.color.getHex();
+      setLight();
+      buildGui();
+      break;
+
+    case 'PointLight':
+      activeLight = new three__WEBPACK_IMPORTED_MODULE_1__["PointLight"](0xffffff, 2.0, 600);
+      activeLightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["PointLightHelper"](activeLight);
+      activeLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["PointLight"]();
+      activeLightSettings.params.color = activeLight.color.getHex();
+      buildGui();
+      setLight();
+      break;
+    // case 'HemisphereLight':
+    // 	light = new THREE.HemisphereLight(0xffffbb, 0x0808dd, 1);
+    // 	helper = new THREE.HemisphereLightHelper(light, 100);
+    // 	break;
+    // case 'DirectionalLight':
+    // 	light = new THREE.DirectionalLight(0xffffff, 2.0, 1000);
+    // 	// light.target = meshes[0];
+    // 	helper = new THREE.DirectionalLightHelper(light, 100);
+    // 	break;
+    // case 'AmbientLight':
+    // 	light = new THREE.AmbientLight(0xffffff, 0.5);
+    // 	break;
   }
 
-  folder.close();
-
-  this.__ul.removeChild(folder.domElement.parentNode);
-
-  delete this.__folders[name];
-  this.onResize();
-};
+  render();
+}
 
 /***/ }),
 
