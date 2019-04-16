@@ -34,7 +34,9 @@ export class SpotLight {
 				max: 2
 			},
 			position: {
-				position: this.position,
+				x: this.position.x,
+				y: this.position.y,
+				z: this.position.z,
 				min: -300,
 				max: 300,
 			}

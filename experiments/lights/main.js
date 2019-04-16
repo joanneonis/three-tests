@@ -31,7 +31,13 @@ var spotLight, lightHelper, shadowCameraHelper;
 
 var spotLightSettings;
 
+var activeLight;
+var activeLightHelper;
+var activeShadowCameraHelper;
+
 var gui;
+var lightsGui;
+
 var controls;
 
 function init() {
@@ -47,29 +53,6 @@ function init() {
 
 	var ambient = new THREE.AmbientLight(0xffffff, 0.1);
 	scene.add(ambient);
-
-	spotLight = new THREE.SpotLight(0xffffff, 1);
-	spotLightSettings = new SpotLight;
-	spotLightSettings.params.color = spotLight.color.getHex()
-
-	Object.keys(spotLightSettings).forEach((key,index) => {
-		if (key === 'position') {
-			spotLight.position.x = spotLightSettings[key].x;
-			spotLight.position.y = spotLightSettings[key].y;
-			spotLight.position.z = spotLightSettings[key].z;
-		} else {
-			spotLight[key] = spotLightSettings[key];
-		}
-	});
-
-	scene.add(spotLight);
-
-	lightHelper = new THREE.SpotLightHelper(spotLight);
-	scene.add(lightHelper);
-
-	shadowCameraHelper = new THREE.CameraHelper(spotLight.shadow.camera);
-	scene.add(shadowCameraHelper);
-
 	scene.add(new THREE.AxesHelper(10));
 
 	var meshes = createObjects();
@@ -91,52 +74,82 @@ function onResize() {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function render() {
-	lightHelper.update();
-	shadowCameraHelper.update();
-	renderer.render(scene, camera);
-}
-
 function buildGui() {
-	gui = new dat.GUI();
+	lightsGui = gui.addFolder('Light Options');
 
-	Object.keys(spotLightSettings.params).forEach((key) => {
+	var settings = spotLightSettings.params;
+
+	// build settings of params
+	Object.keys(settings).forEach((key) => {
 		if (key === 'color') {
-			gui.addColor(spotLightSettings.params, key).onChange((val) => {
+			lightsGui.addColor(settings, key).onChange((val) => {
 				spotLight[key].setHex(val);
 				render();
 			});
 		} else if(key === 'position') {
-			gui
-				.add(spotLightSettings.params[key][key], 'x', spotLightSettings.params[key].min, spotLightSettings.params[key].max)
-				.onChange( (val) => { spotLight[key]['x'] = val; render(); });
-			gui
-				.add(spotLightSettings.params[key][key], 'y', spotLightSettings.params[key].min, spotLightSettings.params[key].max)
-				.onChange( (val) => { spotLight[key]['y'] = val; render(); });
-			gui
-				.add(spotLightSettings.params[key][key], 'z', spotLightSettings.params[key].min, spotLightSettings.params[key].max)
-				.onChange( (val) => { spotLight[key]['z'] = val; render(); });
+			createGuiSetting(settings[key], 'x', key);
+			createGuiSetting(settings[key], 'y', key);
+			createGuiSetting(settings[key], 'z', key);
 		} else {
-			createGuiSetting(spotLightSettings.params[key], key);
+			createGuiSetting(settings[key], key, key);
 		}
 	});
 
-	gui.open();
+	lightsGui.open();
 }
 
-function createGuiSetting(setting, key) {
-	gui
-	.add(setting, key, setting.min, setting.max)
+function createGuiSetting(setting, name, key) {
+	lightsGui
+	.add(setting, name, setting.min, setting.max)
 	.onChange(
 		(val) => {
-			spotLight[key] = val;
+			if (name === 'x' || name === 'y' || name === 'z') {
+				spotLight[key][name] = val;
+			} else {
+				spotLight[key] = val;
+			}
 			render();
 		}
 	);
 }
 
-init();
+function setLight() {
+	spotLight = new THREE.SpotLight(0xffffff, 1);
+	spotLightSettings = new SpotLight;
+	spotLightSettings.params.color = spotLight.color.getHex()
 
+	Object.keys(spotLightSettings).forEach((key,index) => {
+		if (key === 'position') {
+			spotLight.position.x = spotLightSettings[key].x;
+			spotLight.position.y = spotLightSettings[key].y;
+			spotLight.position.z = spotLightSettings[key].z;
+		} else {
+			spotLight[key] = spotLightSettings[key];
+		}
+	});
+
+	scene.add(spotLight);
+
+	lightHelper = new THREE.SpotLightHelper(spotLight);
+	scene.add(lightHelper);
+
+	shadowCameraHelper = new THREE.CameraHelper(spotLight.shadow.camera);
+	scene.add(shadowCameraHelper);
+}
+
+function render() {
+	if (lightHelper) { 
+		lightHelper.update(); 
+		shadowCameraHelper.update();
+	}
+	
+	renderer.render(scene, camera);
+}
+
+init();
+setLight();
+
+gui = new dat.GUI();
 buildGui();
 
 render();
@@ -159,4 +172,15 @@ function initControls() {
 	controls.minDistance = 0;
 	controls.maxDistance = 700;
 	controls.enablePan = false;
+}
+
+dat.GUI.prototype.removeFolder = function(name) {
+  var folder = this.__folders[name];
+  if (!folder) {
+    return;
+  }
+  folder.close();
+  this.__ul.removeChild(folder.domElement.parentNode);
+  delete this.__folders[name];
+  this.onResize();
 }

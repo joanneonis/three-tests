@@ -141,7 +141,9 @@ var SpotLight = function SpotLight() {
       max: 2
     },
     position: {
-      position: this.position,
+      x: this.position.x,
+      y: this.position.y,
+      z: this.position.z,
       min: -300,
       max: 300
     }
@@ -241,7 +243,11 @@ var renderer,
     theCanvas = document.getElementById('gl-canvas');
 var spotLight, lightHelper, shadowCameraHelper;
 var spotLightSettings;
+var activeLight;
+var activeLightHelper;
+var activeShadowCameraHelper;
 var gui;
+var lightsGui;
 var controls;
 
 function init() {
@@ -252,23 +258,6 @@ function init() {
   initControls();
   var ambient = new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0xffffff, 0.1);
   scene.add(ambient);
-  spotLight = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 1);
-  spotLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["SpotLight"]();
-  spotLightSettings.params.color = spotLight.color.getHex();
-  Object.keys(spotLightSettings).forEach(function (key, index) {
-    if (key === 'position') {
-      spotLight.position.x = spotLightSettings[key].x;
-      spotLight.position.y = spotLightSettings[key].y;
-      spotLight.position.z = spotLightSettings[key].z;
-    } else {
-      spotLight[key] = spotLightSettings[key];
-    }
-  });
-  scene.add(spotLight);
-  lightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](spotLight);
-  scene.add(lightHelper);
-  shadowCameraHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](spotLight.shadow.camera);
-  scene.add(shadowCameraHelper);
   scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AxesHelper"](10));
   var meshes = Object(_js_basicObjects__WEBPACK_IMPORTED_MODULE_4__["createObjects"])();
 
@@ -288,48 +277,71 @@ function onResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function render() {
-  lightHelper.update();
-  shadowCameraHelper.update();
-  renderer.render(scene, camera);
-}
-
 function buildGui() {
-  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
-  Object.keys(spotLightSettings.params).forEach(function (key) {
+  lightsGui = gui.addFolder('Light Options');
+  var settings = spotLightSettings.params; // build settings of params
+
+  Object.keys(settings).forEach(function (key) {
     if (key === 'color') {
-      gui.addColor(spotLightSettings.params, key).onChange(function (val) {
+      lightsGui.addColor(settings, key).onChange(function (val) {
         spotLight[key].setHex(val);
         render();
       });
     } else if (key === 'position') {
-      gui.add(spotLightSettings.params[key][key], 'x', spotLightSettings.params[key].min, spotLightSettings.params[key].max).onChange(function (val) {
-        spotLight[key]['x'] = val;
-        render();
-      });
-      gui.add(spotLightSettings.params[key][key], 'y', spotLightSettings.params[key].min, spotLightSettings.params[key].max).onChange(function (val) {
-        spotLight[key]['y'] = val;
-        render();
-      });
-      gui.add(spotLightSettings.params[key][key], 'z', spotLightSettings.params[key].min, spotLightSettings.params[key].max).onChange(function (val) {
-        spotLight[key]['z'] = val;
-        render();
-      });
+      createGuiSetting(settings[key], 'x', key);
+      createGuiSetting(settings[key], 'y', key);
+      createGuiSetting(settings[key], 'z', key);
     } else {
-      createGuiSetting(spotLightSettings.params[key], key);
+      createGuiSetting(settings[key], key, key);
     }
   });
-  gui.open();
+  lightsGui.open();
 }
 
-function createGuiSetting(setting, key) {
-  gui.add(setting, key, setting.min, setting.max).onChange(function (val) {
-    spotLight[key] = val;
+function createGuiSetting(setting, name, key) {
+  lightsGui.add(setting, name, setting.min, setting.max).onChange(function (val) {
+    if (name === 'x' || name === 'y' || name === 'z') {
+      spotLight[key][name] = val;
+    } else {
+      spotLight[key] = val;
+    }
+
     render();
   });
 }
 
+function setLight() {
+  spotLight = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 1);
+  spotLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["SpotLight"]();
+  spotLightSettings.params.color = spotLight.color.getHex();
+  Object.keys(spotLightSettings).forEach(function (key, index) {
+    if (key === 'position') {
+      spotLight.position.x = spotLightSettings[key].x;
+      spotLight.position.y = spotLightSettings[key].y;
+      spotLight.position.z = spotLightSettings[key].z;
+    } else {
+      spotLight[key] = spotLightSettings[key];
+    }
+  });
+  scene.add(spotLight);
+  lightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](spotLight);
+  scene.add(lightHelper);
+  shadowCameraHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](spotLight.shadow.camera);
+  scene.add(shadowCameraHelper);
+}
+
+function render() {
+  if (lightHelper) {
+    lightHelper.update();
+    shadowCameraHelper.update();
+  }
+
+  renderer.render(scene, camera);
+}
+
 init();
+setLight();
+gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
 buildGui();
 render();
 
@@ -351,6 +363,21 @@ function initControls() {
   controls.maxDistance = 700;
   controls.enablePan = false;
 }
+
+dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"].prototype.removeFolder = function (name) {
+  var folder = this.__folders[name];
+
+  if (!folder) {
+    return;
+  }
+
+  folder.close();
+
+  this.__ul.removeChild(folder.domElement.parentNode);
+
+  delete this.__folders[name];
+  this.onResize();
+};
 
 /***/ }),
 
