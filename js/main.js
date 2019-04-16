@@ -4,6 +4,7 @@ import 'three/examples/js/controls/OrbitControls';
 import 'three/examples/js/exporters/OBJExporter';
 import 'three/examples/js/controls/TrackballControls.js';
 
+// file to download later on
 let objFile;
 
 // init renderer
@@ -13,43 +14,61 @@ document.body.appendChild(renderer.domElement);
 
 // init scene and camera
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 3000);
-camera.position.z = 5;
+var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+camera.position.z = -100;
 var controls = new THREE.OrbitControls(camera)
  
 
+//?--------------------------------------------------------------------
+//?		Creating and merging geometries
+//?--------------------------------------------------------------------
 
+// Init array so it can be updated
+let meshes = new Array(12);
 
+// generates 12 cubes grid
+function addCubes() {
+	let count = 0;
+	var xDistance = 50;
+	var zDistance = 30;
+	var geometry = new THREE.BoxGeometry(10, 10, 10);
+	var material = new THREE.MeshBasicMaterial({
+		color: 0x00ff44
+	});
 
+	//initial offset so does not start in middle.
+	var xOffset = -80;
 
+	for (var i = 0; i < 4; i++) {
+		for (var j = 0; j < 3; j++) {
+			var mesh = new THREE.Mesh(geometry, material);
+			mesh.position.x = (xDistance * i) + xOffset;
+			mesh.position.z = (zDistance * j);
 
-// our code
-var box = new THREE.BoxGeometry(1, 1, 1);
-var sphere = new THREE.SphereGeometry(.65, 32, 32);
+			// save meshes instead of adding to scene (for merging later)
+			meshes[count] = mesh;
+			count++;
+		}
+	}
+}
+
+addCubes();
 
 var singleGeometry = new THREE.Geometry();
 
-var boxMesh = new THREE.Mesh(box);
-var sphereMesh = new THREE.Mesh(sphere);
-
-boxMesh.updateMatrix(); // as needed
-singleGeometry.merge(boxMesh.geometry, boxMesh.matrix);
-
-sphereMesh.updateMatrix(); // as needed
-singleGeometry.merge(sphereMesh.geometry, sphereMesh.matrix);
+meshes.forEach(element => {
+	element.updateMatrix();
+	singleGeometry.merge(element.geometry, element.matrix);
+});
 
 var material = new THREE.MeshPhongMaterial({color: 0xFF0000});
 var mesh = new THREE.Mesh(singleGeometry, material);
 scene.add(mesh);
 
 
-
-
-
-
-
-
-
+//?--------------------------------------------------------------------
+//?		Lights and rendering
+//?--------------------------------------------------------------------
 
 // a light
 var light = new THREE.HemisphereLight(0xfffff0, 0x101020, 1.25);
@@ -62,11 +81,11 @@ requestAnimationFrame(function animate(){
 	renderer.render(scene, camera);		
 })
 
-
 //?--------------------------------------------------------------------
 //?		Download part
 //?--------------------------------------------------------------------
-// download file (https://stackoverflow.com/questions/2897619/using-html5-javascript-to-generate-and-save-a-file)
+// create download file 
+// inspiration from: (https://stackoverflow.com/questions/2897619/using-html5-javascript-to-generate-and-save-a-file)
 function download(filename, text) {
 	var pom = document.createElement('a');
 	pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -81,11 +100,13 @@ function download(filename, text) {
 	}
 }
 
+// mesh to obj
 function generateObj(mesh) {
 	var exporter = new THREE.OBJExporter();
 	objFile = exporter.parse(mesh);
 }
 
+// download attached to btn
 document.querySelector('button').addEventListener('click', function () {
 	generateObj(mesh);
 	download('test.obj', objFile);
