@@ -11,9 +11,6 @@ import 'three/src/helpers/PointLightHelper';
 import 'three/src/helpers/HemisphereLightHelper';
 
 
-
-// ShadowMapViewer
-// UnpackDepthRGBAShader
 //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
@@ -41,13 +38,11 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 //SCENE
 scene = new THREE.Scene();
 
-let prevLightType = 'SpotLight';
 var options = {
   uh: 0,
   lights: {
 		activeLightEl: null,
 		activeHelperEl: null,
-		intensity: 0,
 		position: { x: 0, y: 1, z: 0 },
 		type: 'SpotLight',
 	},
@@ -59,29 +54,36 @@ var options = {
 
 const gui = new dat.GUI();
 let lightsGui = gui.addFolder('Lights');
-lightsGui.add(options.lights, 'type',['SpotLight', 'HemisphereLight', 'DirectionalLight', 'PointLight', 'AmbientLight']).onChange(updateLights);
+
+lightsGui
+	.add(
+		options.lights, 
+		'type',
+		['SpotLight', 'HemisphereLight', 'DirectionalLight', 'PointLight', 'AmbientLight']
+	)
+	.onChange((val) => {
+		changeLight(val); 
+	}
+);
 // lightsGui.add(options.lights, 'intensity', 0, 10).onChange(updateLights);
-lightsGui.add(options.lights.position, 'x', -1000, 1000).onChange(updateLights);
-lightsGui.add(options.lights.position, 'y', -1000, 1000).onChange(updateLights);
-lightsGui.add(options.lights.position, 'z', -1000, 1000).onChange(updateLights);
+lightsGui.add(options.lights.position, 'x', -1000, 1000).onChange((val) => { options.lights.activeLightEl.position.x = val });
+lightsGui.add(options.lights.position, 'y', -1000, 1000).onChange((val) => { options.lights.activeLightEl.position.y = val });
+lightsGui.add(options.lights.position, 'z', -1000, 1000).onChange((val) => { options.lights.activeLightEl.position.z = val });
 lightsGui.open();
 
 Object.keys(options.pointLightSettings).forEach((key,index) => {
-	lightsGui.add(options.pointLightSettings, key, options.pointLightSettings[key], options.pointLightSettings[key]+100).onChange(updateLights);
+	lightsGui
+		.add(
+				options.pointLightSettings, 
+				key,
+				options.pointLightSettings[key] - 100,
+				options.pointLightSettings[key] + 100
+		)
+		.onChange((val) => {
+			options.lights.activeLightEl[key] = val;
+		} 
+	);
 });
-
-// to play: ?angle, color, position.x
-function updateLights() {
-	if (options.lights.type != prevLightType) { changeLight(options.lights.type); }
-	options.lights.activeLightEl.intensity = options.lights.intensity;
-	options.lights.activeLightEl.position.x = options.lights.position.x;
-	options.lights.activeLightEl.position.y = options.lights.position.y;
-	options.lights.activeLightEl.position.z = options.lights.position.z;
-
-	Object.keys(options.pointLightSettings).forEach((key,index) => {
-		options.lights.activeLightEl[key] = options.pointLightSettings[key];
-	});
-}
 
 setObjects();
 
@@ -148,6 +150,10 @@ render();
 var delta = 0;
 function render() {
 
+	
+	if (options.activeHelperEl) { options.activeHelperEl.update(); }
+	// shadowCameraHelper.update();
+
 
 	delta += 0.01;
 
@@ -161,20 +167,22 @@ function render() {
 }
 
 function changeLight(type) {
-	scene.remove(options.lights.activeLightEl);
+	// check if there's a helper 
 	if (options.lights.activeHelperEl !== null) { scene.remove(options.lights.activeHelperEl); }
+
+	scene.remove(options.lights.activeLightEl);
+
 	setLight(type);
 }
 
 function setLight(type) {
-	prevLightType = type;
 	var light;
 	var helper;
 
 	switch(type) {
 		case 'SpotLight':
 			light = new THREE.SpotLight(0xffffff, 2.0, 1000);
-			light.target = meshes[0];
+			// light.target = meshes[0];
 			helper = new THREE.SpotLightHelper(light);
 			break;
 		case 'HemisphereLight':
@@ -183,7 +191,7 @@ function setLight(type) {
 			break;
 		case 'DirectionalLight':
 			light = new THREE.DirectionalLight(0xffffff, 2.0, 1000);
-			light.target = meshes[0];
+			// light.target = meshes[0];
 			helper = new THREE.DirectionalLightHelper(light, 100);
 			break;
 		case 'PointLight':
@@ -199,9 +207,10 @@ function setLight(type) {
 	scene.add(helper);
 	options.lights.activeLightEl = light;
 	options.lights.activeHelperEl = helper;
-	// options.lights.intensity = light.intensity;
-
-	// console.log(light);
+	
+	Object.keys(options.pointLightSettings).forEach((key,index) => {
+		options.pointLightSettings[key] = light[key];
+	});
 }
 
 document.addEventListener('keyup', function (event) {
@@ -265,7 +274,10 @@ function setObjects() {
 	scene.add(meshes[2]);
 }
 
+window.addEventListener( 'resize', onResize, false );
 
-var test = new PointLight;
-test.color = 'rgb';
-console.log(test);
+function onResize() {
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize( window.innerWidth, window.innerHeight );
+}

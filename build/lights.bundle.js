@@ -138,9 +138,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // ShadowMapViewer
-// UnpackDepthRGBAShader
-//?--------------------------------------------------------------------
+ //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
 
@@ -161,13 +159,11 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight); //SCENE
 
 scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
-var prevLightType = 'SpotLight';
 var options = {
   uh: 0,
   lights: {
     activeLightEl: null,
     activeHelperEl: null,
-    intensity: 0,
     position: {
       x: 0,
       y: 1,
@@ -181,30 +177,25 @@ var options = {
 };
 var gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
 var lightsGui = gui.addFolder('Lights');
-lightsGui.add(options.lights, 'type', ['SpotLight', 'HemisphereLight', 'DirectionalLight', 'PointLight', 'AmbientLight']).onChange(updateLights); // lightsGui.add(options.lights, 'intensity', 0, 10).onChange(updateLights);
+lightsGui.add(options.lights, 'type', ['SpotLight', 'HemisphereLight', 'DirectionalLight', 'PointLight', 'AmbientLight']).onChange(function (val) {
+  changeLight(val);
+}); // lightsGui.add(options.lights, 'intensity', 0, 10).onChange(updateLights);
 
-lightsGui.add(options.lights.position, 'x', -1000, 1000).onChange(updateLights);
-lightsGui.add(options.lights.position, 'y', -1000, 1000).onChange(updateLights);
-lightsGui.add(options.lights.position, 'z', -1000, 1000).onChange(updateLights);
+lightsGui.add(options.lights.position, 'x', -1000, 1000).onChange(function (val) {
+  options.lights.activeLightEl.position.x = val;
+});
+lightsGui.add(options.lights.position, 'y', -1000, 1000).onChange(function (val) {
+  options.lights.activeLightEl.position.y = val;
+});
+lightsGui.add(options.lights.position, 'z', -1000, 1000).onChange(function (val) {
+  options.lights.activeLightEl.position.z = val;
+});
 lightsGui.open();
 Object.keys(options.pointLightSettings).forEach(function (key, index) {
-  lightsGui.add(options.pointLightSettings, key, options.pointLightSettings[key], options.pointLightSettings[key] + 100).onChange(updateLights);
-}); // to play: ?angle, color, position.x
-
-function updateLights() {
-  if (options.lights.type != prevLightType) {
-    changeLight(options.lights.type);
-  }
-
-  options.lights.activeLightEl.intensity = options.lights.intensity;
-  options.lights.activeLightEl.position.x = options.lights.position.x;
-  options.lights.activeLightEl.position.y = options.lights.position.y;
-  options.lights.activeLightEl.position.z = options.lights.position.z;
-  Object.keys(options.pointLightSettings).forEach(function (key, index) {
-    options.lights.activeLightEl[key] = options.pointLightSettings[key];
+  lightsGui.add(options.pointLightSettings, key, options.pointLightSettings[key] - 100, options.pointLightSettings[key] + 100).onChange(function (val) {
+    options.lights.activeLightEl[key] = val;
   });
-}
-
+});
 setObjects(); //?--------------------------------------------------------------------
 //?		Lights
 //?--------------------------------------------------------------------
@@ -252,6 +243,11 @@ render();
 var delta = 0;
 
 function render() {
+  if (options.activeHelperEl) {
+    options.activeHelperEl.update();
+  } // shadowCameraHelper.update();
+
+
   delta += 0.01; // spotLightHelper.update();
   // directionalLightHelper.update();
 
@@ -261,24 +257,23 @@ function render() {
 }
 
 function changeLight(type) {
-  scene.remove(options.lights.activeLightEl);
-
+  // check if there's a helper 
   if (options.lights.activeHelperEl !== null) {
     scene.remove(options.lights.activeHelperEl);
   }
 
+  scene.remove(options.lights.activeLightEl);
   setLight(type);
 }
 
 function setLight(type) {
-  prevLightType = type;
   var light;
   var helper;
 
   switch (type) {
     case 'SpotLight':
-      light = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 2.0, 1000);
-      light.target = meshes[0];
+      light = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 2.0, 1000); // light.target = meshes[0];
+
       helper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](light);
       break;
 
@@ -288,8 +283,8 @@ function setLight(type) {
       break;
 
     case 'DirectionalLight':
-      light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 2.0, 1000);
-      light.target = meshes[0];
+      light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 2.0, 1000); // light.target = meshes[0];
+
       helper = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLightHelper"](light, 100);
       break;
 
@@ -306,8 +301,10 @@ function setLight(type) {
   scene.add(light);
   scene.add(helper);
   options.lights.activeLightEl = light;
-  options.lights.activeHelperEl = helper; // options.lights.intensity = light.intensity;
-  // console.log(light);
+  options.lights.activeHelperEl = helper;
+  Object.keys(options.pointLightSettings).forEach(function (key, index) {
+    options.pointLightSettings[key] = light[key];
+  });
 }
 
 document.addEventListener('keyup', function (event) {
@@ -369,9 +366,13 @@ function setObjects() {
   scene.add(meshes[2]);
 }
 
-var test = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["PointLight"]();
-test.color = 'rgb';
-console.log(test);
+window.addEventListener('resize', onResize, false);
+
+function onResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
 
 /***/ }),
 
