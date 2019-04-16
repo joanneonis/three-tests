@@ -90,23 +90,117 @@
 /*!**********************************************!*\
   !*** ./experiments/lights/classes/lights.js ***!
   \**********************************************/
-/*! exports provided: PointLight */
+/*! exports provided: SpotLight */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PointLight", function() { return PointLight; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SpotLight", function() { return SpotLight; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var PointLight = function PointLight(angle, decay, distance, intensity) {
-  _classCallCheck(this, PointLight);
+var SpotLight = function SpotLight() {
+  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  this.angle = angle || 2; // this.color = color || {b: 1, g: 1, r: 1}; 
+  _classCallCheck(this, SpotLight);
 
-  this.decay = decay || 1;
-  this.distance = distance || 1000;
-  this.intensity = intensity || 1;
-};
+  this.position = {
+    x: 15,
+    y: 40,
+    z: 35
+  };
+  this.angle = Math.PI / 4;
+  this.penumbra = 0.05;
+  this.decay = 2;
+  this.distance = 200;
+  this.castShadow = true;
+  this.params = {
+    color: null,
+    intensity: {
+      intensity: 0,
+      min: 0,
+      max: 2
+    },
+    distance: {
+      distance: this.distance,
+      min: 50,
+      max: 200
+    },
+    angle: {
+      angle: 0,
+      min: 0,
+      max: this.angle
+    },
+    penumbra: {
+      penumbra: this.penumbra,
+      min: 0,
+      max: 1
+    },
+    decay: {
+      decay: this.decay,
+      min: 1,
+      max: 2
+    },
+    position: {
+      position: this.position,
+      min: -300,
+      max: 300
+    }
+  };
+  Object.assign(this, config);
+}; // spotLight.shadow.mapSize.width = 1024;
+// spotLight.shadow.mapSize.height = 1024;
+// spotLight.shadow.camera.near = 10;
+// spotLight.shadow.camera.far = 200;
+
+/***/ }),
+
+/***/ "./experiments/lights/js/basicObjects.js":
+/*!***********************************************!*\
+  !*** ./experiments/lights/js/basicObjects.js ***!
+  \***********************************************/
+/*! exports provided: createObjects */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createObjects", function() { return createObjects; });
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
+var materials = new Array(3);
+var geometries = new Array(3);
+var meshes = new Array(3);
+
+function createObjects() {
+  var cubeSize = 30; //MATERIAL
+
+  materials[0] = new three__WEBPACK_IMPORTED_MODULE_0__["MeshLambertMaterial"]();
+  materials[1] = new three__WEBPACK_IMPORTED_MODULE_0__["MeshPhongMaterial"]();
+  materials[2] = new three__WEBPACK_IMPORTED_MODULE_0__["MeshStandardMaterial"](); //GEOMETRY
+
+  geometries[0] = new three__WEBPACK_IMPORTED_MODULE_0__["BoxGeometry"](cubeSize, cubeSize, cubeSize, 10, 10, 10);
+  geometries[1] = new three__WEBPACK_IMPORTED_MODULE_0__["SphereGeometry"](cubeSize, 20, 20);
+  geometries[2] = new three__WEBPACK_IMPORTED_MODULE_0__["PlaneGeometry"](10000, 10000, 100, 100);
+
+  for (var i = 0; i < meshes.length; i++) {
+    meshes[i] = new three__WEBPACK_IMPORTED_MODULE_0__["Mesh"](geometries[i], materials[i]);
+  }
+
+  meshes[0].position.z = 0;
+  meshes[0].position.x = -50;
+  meshes[0].position.y = 0;
+  meshes[0].castShadow = true; // scene.add(meshes[0]);
+
+  meshes[1].position.z = 0;
+  meshes[1].position.x = 50;
+  meshes[1].position.y = 0;
+  meshes[1].castShadow = true; // scene.add(meshes[1]);
+
+  meshes[2].rotation.x = -90 * (Math.PI / 180);
+  meshes[2].position.y = -cubeSize * 2;
+  meshes[2].receiveShadow = true; // scene.add(meshes[2]);
+
+  return meshes;
+}
 
 /***/ }),
 
@@ -125,11 +219,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _classes_lights__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./classes/lights */ "./experiments/lights/classes/lights.js");
-/* harmony import */ var three_src_helpers_SpotLightHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/src/helpers/SpotLightHelper */ "./node_modules/three/src/helpers/SpotLightHelper.js");
-/* harmony import */ var three_src_helpers_DirectionalLightHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/src/helpers/DirectionalLightHelper */ "./node_modules/three/src/helpers/DirectionalLightHelper.js");
-/* harmony import */ var three_src_helpers_PointLightHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/src/helpers/PointLightHelper */ "./node_modules/three/src/helpers/PointLightHelper.js");
-/* harmony import */ var three_src_helpers_HemisphereLightHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/src/helpers/HemisphereLightHelper */ "./node_modules/three/src/helpers/HemisphereLightHelper.js");
+/* harmony import */ var _js_basicObjects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/basicObjects */ "./experiments/lights/js/basicObjects.js");
+/* harmony import */ var three_src_helpers_SpotLightHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/src/helpers/SpotLightHelper */ "./node_modules/three/src/helpers/SpotLightHelper.js");
+/* harmony import */ var three_src_helpers_DirectionalLightHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/src/helpers/DirectionalLightHelper */ "./node_modules/three/src/helpers/DirectionalLightHelper.js");
+/* harmony import */ var three_src_helpers_PointLightHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/src/helpers/PointLightHelper */ "./node_modules/three/src/helpers/PointLightHelper.js");
+/* harmony import */ var three_src_helpers_HemisphereLightHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! three/src/helpers/HemisphereLightHelper */ "./node_modules/three/src/helpers/HemisphereLightHelper.js");
 /* eslint-disable no-unused-vars */
+
 
 
 
@@ -146,232 +242,122 @@ var renderer,
     scene,
     camera,
     theCanvas = document.getElementById('gl-canvas');
-var materials = new Array(3);
-var geometries = new Array(3);
-var meshes = new Array(3); //RENDERER
+var spotLight, lightHelper, shadowCameraHelper;
+var spotLightSettings;
+var gui;
+var controls;
 
-renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
-  canvas: theCanvas,
-  antialias: true
-});
-renderer.setClearColor(0x333333);
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight); //SCENE
-
-scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
-var options = {
-  uh: 0,
-  lights: {
-    activeLightEl: null,
-    activeHelperEl: null,
-    position: {
-      x: 0,
-      y: 1,
-      z: 0
-    },
-    type: 'SpotLight'
-  },
-  pointLightSettings: new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["PointLight"](),
-  reset: function reset() {// could do somethings
-  }
-};
-var gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
-var lightsGui = gui.addFolder('Lights');
-lightsGui.add(options.lights, 'type', ['SpotLight', 'HemisphereLight', 'DirectionalLight', 'PointLight', 'AmbientLight']).onChange(function (val) {
-  changeLight(val);
-}); // lightsGui.add(options.lights, 'intensity', 0, 10).onChange(updateLights);
-
-lightsGui.add(options.lights.position, 'x', -1000, 1000).onChange(function (val) {
-  options.lights.activeLightEl.position.x = val;
-});
-lightsGui.add(options.lights.position, 'y', -1000, 1000).onChange(function (val) {
-  options.lights.activeLightEl.position.y = val;
-});
-lightsGui.add(options.lights.position, 'z', -1000, 1000).onChange(function (val) {
-  options.lights.activeLightEl.position.z = val;
-});
-lightsGui.open();
-Object.keys(options.pointLightSettings).forEach(function (key, index) {
-  lightsGui.add(options.pointLightSettings, key, options.pointLightSettings[key] - 100, options.pointLightSettings[key] + 100).onChange(function (val) {
-    options.lights.activeLightEl[key] = val;
+function init() {
+  initRenderer();
+  scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](35, window.innerWidth / window.innerHeight, 1, 1000);
+  camera.position.set(0, 0, -300);
+  initControls();
+  var ambient = new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0xffffff, 0.1);
+  scene.add(ambient);
+  spotLight = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 1);
+  spotLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["SpotLight"]();
+  spotLightSettings.params.color = spotLight.color.getHex();
+  Object.keys(spotLightSettings).forEach(function (key, index) {
+    if (key === 'position') {
+      spotLight.position.x = spotLightSettings[key].x;
+      spotLight.position.y = spotLightSettings[key].y;
+      spotLight.position.z = spotLightSettings[key].z;
+    } else {
+      spotLight[key] = spotLightSettings[key];
+    }
   });
-});
-setObjects(); //?--------------------------------------------------------------------
-//?		Lights
-//?--------------------------------------------------------------------
-
-setLight(options.lights.type); //shadows
-// renderer.shadowMap.enabled = true;
-// renderer.shadowMap.type = THREE.PCFShadowMap;
-//
-// var light = new THREE.SpotLight(0xffffff, 4.0, 3000);
-// light.position.y = 100;
-// light.target = mesh;
-//
-// light.castShadow = true;
-// light.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 100, 1, 500, 1000 ) );
-// light.shadow.bias = 0.0001;    
-// light.shadow.mapSize.width = 2048 * 2;
-// light.shadow.mapSize.height = 2048 * 2;
-// scene.add(light);
-//
-// mesh.castShadow = true;
-// mesh3.receiveShadow = true;
-//
-//
-// var shadowMapViewer = new THREE.ShadowMapViewer( light );  
-// shadowMapViewer.position.x = 10;
-// shadowMapViewer.position.y = 10;
-// shadowMapViewer.size.width = 2048 / 4;
-// shadowMapViewer.size.height = 1024 / 4;
-// shadowMapViewer.update();
-//cameras
-//perspective camera
-
-camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](35, window.innerWidth / window.innerHeight, 300, 10000);
-camera.position.z = 2000; // var controls = new THREE.OrbitControls(camera)
-//orthographic camera
-// camera = new THREE.OrthographicCamera(-300, 300, 200, -200, 0.1, 10000);
-//camera helper
-// newCamera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 300, 1000 );
-// newCamera = new THREE.OrthographicCamera(-300, 300, 200, -200, 0.1, 1000);
-// var cameraHelper = new THREE.CameraHelper(newCamera);
-// scene.add(cameraHelper);
-//RENDER LOOP
-
-render();
-var delta = 0;
-
-function render() {
-  if (options.activeHelperEl) {
-    options.activeHelperEl.update();
-  } // shadowCameraHelper.update();
-
-
-  delta += 0.01; // spotLightHelper.update();
-  // directionalLightHelper.update();
-
-  renderer.render(scene, camera); // shadowMapViewer.render(renderer);
-
-  requestAnimationFrame(render);
-}
-
-function changeLight(type) {
-  // check if there's a helper 
-  if (options.lights.activeHelperEl !== null) {
-    scene.remove(options.lights.activeHelperEl);
-  }
-
-  scene.remove(options.lights.activeLightEl);
-  setLight(type);
-}
-
-function setLight(type) {
-  var light;
-  var helper;
-
-  switch (type) {
-    case 'SpotLight':
-      light = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 2.0, 1000); // light.target = meshes[0];
-
-      helper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](light);
-      break;
-
-    case 'HemisphereLight':
-      light = new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLight"](0xffffbb, 0x0808dd, 1);
-      helper = new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLightHelper"](light, 100);
-      break;
-
-    case 'DirectionalLight':
-      light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 2.0, 1000); // light.target = meshes[0];
-
-      helper = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLightHelper"](light, 100);
-      break;
-
-    case 'PointLight':
-      light = new three__WEBPACK_IMPORTED_MODULE_1__["PointLight"](0xffffff, 2.0, 600);
-      helper = new three__WEBPACK_IMPORTED_MODULE_1__["PointLightHelper"](light);
-      break;
-
-    case 'AmbientLight':
-      light = new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0xffffff, 0.5);
-      break;
-  }
-
-  scene.add(light);
-  scene.add(helper);
-  options.lights.activeLightEl = light;
-  options.lights.activeHelperEl = helper;
-  Object.keys(options.pointLightSettings).forEach(function (key, index) {
-    options.pointLightSettings[key] = light[key];
-  });
-}
-
-document.addEventListener('keyup', function (event) {
-  if (event.defaultPrevented) {
-    return;
-  }
-
-  var key = event.key || event.keyCode;
-
-  switch (key) {
-    case 'ArrowUp':
-      // code block
-      options.lights.activeLightEl.intensity += 1;
-      break;
-
-    case 'ArrowDown':
-      // code block
-      options.lights.activeLightEl.intensity -= 1;
-      break;
-
-    case 'ArrowLeft':
-      // code block
-      break;
-
-    case 'ArrowRight':
-      // code block
-      break;
-
-    case 'Enter':
-      // nextLight();
-      break;
-  }
-});
-
-function setObjects() {
-  //MATERIAL
-  materials[0] = new three__WEBPACK_IMPORTED_MODULE_1__["MeshLambertMaterial"]();
-  materials[1] = new three__WEBPACK_IMPORTED_MODULE_1__["MeshPhongMaterial"]();
-  materials[2] = new three__WEBPACK_IMPORTED_MODULE_1__["MeshStandardMaterial"](); //GEOMETRY
-
-  geometries[0] = new three__WEBPACK_IMPORTED_MODULE_1__["BoxGeometry"](100, 100, 100, 10, 10, 10);
-  geometries[1] = new three__WEBPACK_IMPORTED_MODULE_1__["SphereGeometry"](50, 20, 20);
-  geometries[2] = new three__WEBPACK_IMPORTED_MODULE_1__["PlaneGeometry"](10000, 10000, 100, 100);
+  spotLight.castShadow = true;
+  spotLight.shadow.mapSize.width = 1024;
+  spotLight.shadow.mapSize.height = 1024;
+  spotLight.shadow.camera.near = 10;
+  spotLight.shadow.camera.far = 200;
+  scene.add(spotLight);
+  lightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](spotLight);
+  scene.add(lightHelper);
+  shadowCameraHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](spotLight.shadow.camera);
+  scene.add(shadowCameraHelper);
+  scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AxesHelper"](10));
+  var meshes = Object(_js_basicObjects__WEBPACK_IMPORTED_MODULE_4__["createObjects"])();
 
   for (var i = 0; i < meshes.length; i++) {
-    meshes[i] = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](geometries[i], materials[i]);
-  }
+    scene.add(meshes[i]);
+  } // mesh.castShadow = true;
 
-  meshes[0].position.z = 0;
-  meshes[0].position.x = -100;
-  meshes[0].position.y = -50;
-  scene.add(meshes[0]);
-  meshes[1].position.z = 0;
-  meshes[1].position.x = 100;
-  meshes[1].position.y = -50;
-  scene.add(meshes[1]);
-  meshes[2].rotation.x = -90 * (Math.PI / 180);
-  meshes[2].position.y = -100;
-  scene.add(meshes[2]);
+
+  controls.target.copy(meshes[0].position);
+  controls.update();
+  window.addEventListener('resize', onResize, false);
 }
-
-window.addEventListener('resize', onResize, false);
 
 function onResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function render() {
+  lightHelper.update();
+  shadowCameraHelper.update();
+  renderer.render(scene, camera);
+}
+
+function buildGui() {
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+  Object.keys(spotLightSettings.params).forEach(function (key) {
+    if (key === 'color') {
+      gui.addColor(spotLightSettings.params, key).onChange(function (val) {
+        spotLight[key].setHex(val);
+        render();
+      });
+    } else if (key === 'position') {
+      gui.add(spotLightSettings.params[key][key], 'x', spotLightSettings.params[key].min, spotLightSettings.params[key].max).onChange(function (val) {
+        spotLight[key]['x'] = val;
+        render();
+      });
+      gui.add(spotLightSettings.params[key][key], 'y', spotLightSettings.params[key].min, spotLightSettings.params[key].max).onChange(function (val) {
+        spotLight[key]['y'] = val;
+        render();
+      });
+      gui.add(spotLightSettings.params[key][key], 'z', spotLightSettings.params[key].min, spotLightSettings.params[key].max).onChange(function (val) {
+        spotLight[key]['z'] = val;
+        render();
+      });
+    } else {
+      createGuiSetting(spotLightSettings.params[key], key);
+    }
+  });
+  gui.open();
+}
+
+function createGuiSetting(setting, key) {
+  gui.add(setting, key, setting.min, setting.max).onChange(function (val) {
+    spotLight[key] = val;
+    render();
+  });
+}
+
+init();
+buildGui();
+render();
+
+function initRenderer() {
+  renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
+    canvas: theCanvas,
+    antialias: true
+  });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = three__WEBPACK_IMPORTED_MODULE_1__["PCFSoftShadowMap"];
+}
+
+function initControls() {
+  controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement);
+  controls.addEventListener('change', render);
+  controls.minDistance = 20;
+  controls.maxDistance = 500;
+  controls.enablePan = false;
 }
 
 /***/ }),
