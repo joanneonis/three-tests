@@ -86,6 +86,30 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./experiments/lights/classes/lights.js":
+/*!**********************************************!*\
+  !*** ./experiments/lights/classes/lights.js ***!
+  \**********************************************/
+/*! exports provided: PointLight */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PointLight", function() { return PointLight; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var PointLight = function PointLight(angle, decay, distance, intensity) {
+  _classCallCheck(this, PointLight);
+
+  this.angle = angle || 2; // this.color = color || {b: 1, g: 1, r: 1}; 
+
+  this.decay = decay || 1;
+  this.distance = distance || 1000;
+  this.intensity = intensity || 1;
+};
+
+/***/ }),
+
 /***/ "./experiments/lights/main.js":
 /*!************************************!*\
   !*** ./experiments/lights/main.js ***!
@@ -100,11 +124,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var three_src_helpers_SpotLightHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three/src/helpers/SpotLightHelper */ "./node_modules/three/src/helpers/SpotLightHelper.js");
-/* harmony import */ var three_src_helpers_DirectionalLightHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/src/helpers/DirectionalLightHelper */ "./node_modules/three/src/helpers/DirectionalLightHelper.js");
-/* harmony import */ var three_src_helpers_PointLightHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/src/helpers/PointLightHelper */ "./node_modules/three/src/helpers/PointLightHelper.js");
-/* harmony import */ var three_src_helpers_HemisphereLightHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/src/helpers/HemisphereLightHelper */ "./node_modules/three/src/helpers/HemisphereLightHelper.js");
+/* harmony import */ var _classes_lights__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./classes/lights */ "./experiments/lights/classes/lights.js");
+/* harmony import */ var three_src_helpers_SpotLightHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/src/helpers/SpotLightHelper */ "./node_modules/three/src/helpers/SpotLightHelper.js");
+/* harmony import */ var three_src_helpers_DirectionalLightHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/src/helpers/DirectionalLightHelper */ "./node_modules/three/src/helpers/DirectionalLightHelper.js");
+/* harmony import */ var three_src_helpers_PointLightHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/src/helpers/PointLightHelper */ "./node_modules/three/src/helpers/PointLightHelper.js");
+/* harmony import */ var three_src_helpers_HemisphereLightHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/src/helpers/HemisphereLightHelper */ "./node_modules/three/src/helpers/HemisphereLightHelper.js");
 /* eslint-disable no-unused-vars */
+
 
 
  // helpers
@@ -121,7 +147,10 @@ __webpack_require__.r(__webpack_exports__);
 var renderer,
     scene,
     camera,
-    theCanvas = document.getElementById('gl-canvas'); //RENDERER
+    theCanvas = document.getElementById('gl-canvas');
+var materials = new Array(3);
+var geometries = new Array(3);
+var meshes = new Array(3); //RENDERER
 
 renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
   canvas: theCanvas,
@@ -136,9 +165,7 @@ var prevLightType = 'SpotLight';
 var options = {
   uh: 0,
   lights: {
-    activeLightEl: {
-      intensity: 0
-    },
+    activeLightEl: null,
     activeHelperEl: null,
     intensity: 0,
     position: {
@@ -148,17 +175,21 @@ var options = {
     },
     type: 'SpotLight'
   },
+  pointLightSettings: new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["PointLight"](),
   reset: function reset() {// could do somethings
   }
 };
 var gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
 var lightsGui = gui.addFolder('Lights');
-lightsGui.add(options.lights, 'type', ['SpotLight', 'HemisphereLight', 'DirectionalLight', 'PointLight', 'AmbientLight']).onChange(updateLights);
-lightsGui.add(options.lights, 'intensity', 0, 10).onChange(updateLights);
+lightsGui.add(options.lights, 'type', ['SpotLight', 'HemisphereLight', 'DirectionalLight', 'PointLight', 'AmbientLight']).onChange(updateLights); // lightsGui.add(options.lights, 'intensity', 0, 10).onChange(updateLights);
+
 lightsGui.add(options.lights.position, 'x', -1000, 1000).onChange(updateLights);
 lightsGui.add(options.lights.position, 'y', -1000, 1000).onChange(updateLights);
 lightsGui.add(options.lights.position, 'z', -1000, 1000).onChange(updateLights);
-lightsGui.open(); // to play: ?angle, color, position.x
+lightsGui.open();
+Object.keys(options.pointLightSettings).forEach(function (key, index) {
+  lightsGui.add(options.pointLightSettings, key, options.pointLightSettings[key], options.pointLightSettings[key] + 100).onChange(updateLights);
+}); // to play: ?angle, color, position.x
 
 function updateLights() {
   if (options.lights.type != prevLightType) {
@@ -169,30 +200,12 @@ function updateLights() {
   options.lights.activeLightEl.position.x = options.lights.position.x;
   options.lights.activeLightEl.position.y = options.lights.position.y;
   options.lights.activeLightEl.position.z = options.lights.position.z;
-} //MATERIAL
+  Object.keys(options.pointLightSettings).forEach(function (key, index) {
+    options.lights.activeLightEl[key] = options.pointLightSettings[key];
+  });
+}
 
-
-var material = new three__WEBPACK_IMPORTED_MODULE_1__["MeshLambertMaterial"]();
-var material2 = new three__WEBPACK_IMPORTED_MODULE_1__["MeshPhongMaterial"]();
-var material3 = new three__WEBPACK_IMPORTED_MODULE_1__["MeshStandardMaterial"](); //GEOMETRY
-
-var geometry = new three__WEBPACK_IMPORTED_MODULE_1__["BoxGeometry"](100, 100, 100, 10, 10, 10);
-var geometry2 = new three__WEBPACK_IMPORTED_MODULE_1__["SphereGeometry"](50, 20, 20);
-var geometry3 = new three__WEBPACK_IMPORTED_MODULE_1__["PlaneGeometry"](10000, 10000, 100, 100);
-var mesh = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](geometry, material);
-mesh.position.z = 0;
-mesh.position.x = -100;
-mesh.position.y = -50;
-scene.add(mesh);
-var mesh2 = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](geometry2, material2);
-mesh2.position.z = 0;
-mesh2.position.x = 100;
-mesh2.position.y = -50;
-scene.add(mesh2);
-var mesh3 = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](geometry3, material3);
-mesh3.rotation.x = -90 * (Math.PI / 180);
-mesh3.position.y = -100;
-scene.add(mesh3); //?--------------------------------------------------------------------
+setObjects(); //?--------------------------------------------------------------------
 //?		Lights
 //?--------------------------------------------------------------------
 
@@ -265,7 +278,7 @@ function setLight(type) {
   switch (type) {
     case 'SpotLight':
       light = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 2.0, 1000);
-      light.target = mesh;
+      light.target = meshes[0];
       helper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](light);
       break;
 
@@ -276,7 +289,7 @@ function setLight(type) {
 
     case 'DirectionalLight':
       light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 2.0, 1000);
-      light.target = mesh;
+      light.target = meshes[0];
       helper = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLightHelper"](light, 100);
       break;
 
@@ -293,8 +306,8 @@ function setLight(type) {
   scene.add(light);
   scene.add(helper);
   options.lights.activeLightEl = light;
-  options.lights.activeHelperEl = helper;
-  options.lights.intensity = light.intensity;
+  options.lights.activeHelperEl = helper; // options.lights.intensity = light.intensity;
+  // console.log(light);
 }
 
 document.addEventListener('keyup', function (event) {
@@ -328,6 +341,37 @@ document.addEventListener('keyup', function (event) {
       break;
   }
 });
+
+function setObjects() {
+  //MATERIAL
+  materials[0] = new three__WEBPACK_IMPORTED_MODULE_1__["MeshLambertMaterial"]();
+  materials[1] = new three__WEBPACK_IMPORTED_MODULE_1__["MeshPhongMaterial"]();
+  materials[2] = new three__WEBPACK_IMPORTED_MODULE_1__["MeshStandardMaterial"](); //GEOMETRY
+
+  geometries[0] = new three__WEBPACK_IMPORTED_MODULE_1__["BoxGeometry"](100, 100, 100, 10, 10, 10);
+  geometries[1] = new three__WEBPACK_IMPORTED_MODULE_1__["SphereGeometry"](50, 20, 20);
+  geometries[2] = new three__WEBPACK_IMPORTED_MODULE_1__["PlaneGeometry"](10000, 10000, 100, 100);
+
+  for (var i = 0; i < meshes.length; i++) {
+    meshes[i] = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](geometries[i], materials[i]);
+  }
+
+  meshes[0].position.z = 0;
+  meshes[0].position.x = -100;
+  meshes[0].position.y = -50;
+  scene.add(meshes[0]);
+  meshes[1].position.z = 0;
+  meshes[1].position.x = 100;
+  meshes[1].position.y = -50;
+  scene.add(meshes[1]);
+  meshes[2].rotation.x = -90 * (Math.PI / 180);
+  meshes[2].position.y = -100;
+  scene.add(meshes[2]);
+}
+
+var test = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["PointLight"]();
+test.color = 'rgb';
+console.log(test);
 
 /***/ }),
 
