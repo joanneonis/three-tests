@@ -1,0 +1,4 @@
+- Test with download .obj file from three.js meshes
+- Also did this so i can use three for workshop generic modeling
+- Hard part: combining meshes.
+- Three has an build in OBJExporter, to go from geometry to obj data
