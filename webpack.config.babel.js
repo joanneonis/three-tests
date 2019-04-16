@@ -5,7 +5,8 @@ const webpack = require('webpack')
 export default {
     entry: {
         base: path.join(__dirname, 'js/main.js'),
-        download: path.join(__dirname, 'experiments/download/main.js')
+        download: path.join(__dirname, 'experiments/download/main.js'),
+        lights: path.join(__dirname, 'experiments/lights/main.js')
     },
     output: {
         path: path.join(__dirname, 'build'),
