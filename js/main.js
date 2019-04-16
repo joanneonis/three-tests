@@ -38,12 +38,13 @@ function addCubes() {
 
 	//initial offset so does not start in middle.
 	var xOffset = -80;
+	var yOffset = -40;
 
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 3; j++) {
 			var mesh = new THREE.Mesh(geometry, material);
 			mesh.position.x = (xDistance * i) + xOffset;
-			mesh.position.z = (zDistance * j);
+			mesh.position.z = (zDistance * j) + yOffset;
 
 			// save meshes instead of adding to scene (for merging later)
 			meshes[count] = mesh;
