@@ -3,10 +3,13 @@ import path from 'path';
 const webpack = require('webpack')
 
 export default {
-    entry: path.join(__dirname, 'js/main.js'),
+    entry: {
+        base: path.join(__dirname, 'js/main.js'),
+        download: path.join(__dirname, 'experiments/download/main.js')
+    },
     output: {
         path: path.join(__dirname, 'build'),
-        filename: 'main.bundle.js'
+        filename: '[name].bundle.js'
     },
     module: {
         rules: [{
