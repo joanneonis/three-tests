@@ -8,7 +8,8 @@ export default {
         download: path.join(__dirname, 'experiments/download/main.js'),
         lights: path.join(__dirname, 'experiments/lights/main.js'),
         cameras: path.join(__dirname, 'experiments/cameras/main.js'),
-        multipleViews: path.join(__dirname, 'experiments/multiple-views/main.js')
+        multipleViews: path.join(__dirname, 'experiments/multiple-views/main.js'),
+        geometries: path.join(__dirname, 'experiments/geometries/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),

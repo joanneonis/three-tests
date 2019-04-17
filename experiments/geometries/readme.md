@@ -1,0 +1,5 @@
+- double sided with flat shapes
+- center shapes pivotpoint
+- extruding
+- bevels
+- all basic shapes
