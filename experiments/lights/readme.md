@@ -1,2 +1,3 @@
 - try out different types of lights
-- optimised for reuse (light params as classes with generic gui)
+- edit params in gui
+- optimised for reuse (light classes and generic gui)
