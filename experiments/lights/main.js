@@ -51,6 +51,7 @@ function init() {
 
 	var ambient = new THREE.AmbientLight(0xffffff, 0.1);
 	scene.add(ambient);
+	
 	scene.add(new THREE.AxesHelper(10));
 
 	var meshes = createObjects();
