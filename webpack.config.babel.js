@@ -7,7 +7,8 @@ export default {
         base: path.join(__dirname, 'js/main.js'),
         download: path.join(__dirname, 'experiments/download/main.js'),
         lights: path.join(__dirname, 'experiments/lights/main.js'),
-        cameras: path.join(__dirname, 'experiments/cameras/main.js')
+        cameras: path.join(__dirname, 'experiments/cameras/main.js'),
+        multipleViews: path.join(__dirname, 'experiments/multiple-views/main.js')
     },
     output: {
         path: path.join(__dirname, 'build'),

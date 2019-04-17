@@ -13,13 +13,20 @@ import {
 
 var renderer,
 		scene,
-		camera,
 		theCanvas = document.getElementById('gl-canvas');
 
 var gui;
-var activeCameraType = { type : 'PerspectiveCamera' };
-
 var controls;
+
+var cameras = {
+	PerspectiveCamera: null,
+	OrthographicCamera: null,
+	active : 'OrthographicCamera',
+	x: 300,
+	y: 300,
+	z: 300,
+	allAxes: 300,
+};
 
 function init() {
 
@@ -27,8 +34,13 @@ function init() {
 	
 	scene = new THREE.Scene();
 	
-	camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 1000);
-	camera.position.set(0, 0, -300);
+	cameras.PerspectiveCamera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 1000);
+	cameras.PerspectiveCamera.position.set(cameras.x, cameras.y, cameras.z);
+
+	cameras.OrthographicCamera = new THREE.OrthographicCamera(window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 1, 1000);
+	cameras.OrthographicCamera.zoom = 2.8;
+	cameras.OrthographicCamera.updateProjectionMatrix();
+	cameras.OrthographicCamera.position.set(cameras.x, cameras.y, cameras.z);
 	
 	initControls();
 
@@ -53,29 +65,76 @@ function init() {
 }
 
 function onResize() {
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
+	cameras[cameras.active].aspect = window.innerWidth / window.innerHeight;
+	cameras[cameras.active].updateProjectionMatrix();
 
 	renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function render() {
 	// TODO update camera?
-	renderer.render(scene, camera);
+	renderer.render(scene, cameras[cameras.active]);
 }
 
 function initGui() {
 	gui = new dat.GUI();
 	gui.add(
-		activeCameraType,
-		'type',
+		cameras,
+		'active',
 		['OrthographicCamera', 'PerspectiveCamera'] 
 	)
 	.onChange((val) => {
 		// TODO set activeCamera
+		init();
 		render();
-	}
-	);
+	});
+
+	gui.add(
+		cameras,
+		'x',
+		-500, 500
+	)
+	.onChange((val) => {
+		cameras.x = val;
+		cameras[cameras.active].position.x = val;
+		render();
+	});
+	gui.add(
+		cameras,
+		'y',
+		-500, 500
+	)
+	.onChange((val) => {
+		cameras.y = val;
+		cameras[cameras.active].position.y = val;
+		render();
+	});
+	gui.add(
+		cameras,
+		'z',
+		-500, 500
+	)
+	.onChange((val) => {
+		cameras.z = val;
+		cameras[cameras.active].position.z = val;
+		render();
+	});
+
+	gui.add(
+		cameras,
+		'allAxes',
+		-500, 500
+	)
+	.onChange((val) => {
+		cameras.z = val;
+		cameras.y = val;
+		cameras.x = val;
+
+		cameras[cameras.active].position.set(val, val, val);
+		render();
+	});
+
+	
 }
 
 initGui(); 
@@ -93,9 +152,11 @@ function initRenderer() {
 }
 
 function initControls() {
-	controls = new THREE.OrbitControls(camera, renderer.domElement);
+	controls = new THREE.OrbitControls(cameras[cameras.active], renderer.domElement);
 	controls.addEventListener('change', render);
 	controls.minDistance = 0;
 	controls.maxDistance = 700;
 	controls.enablePan = true;
 }
+
+
