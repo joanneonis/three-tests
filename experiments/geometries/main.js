@@ -5,17 +5,21 @@ import 'three/examples/js/controls/OrbitControls';
 
 //?--------------------------------------------------------------------
 //?		Base
-//? 	Original source (for grid): https://github.com/mrdoob/three.js/blob/master/examples/webgl_multiple_elements.html
+//? 	Grid source: https://github.com/mrdoob/three.js/blob/master/examples/webgl_multiple_elements.html
 //?--------------------------------------------------------------------
 
 var canvas;
-
 var scenes = [], renderer;
 
-var textGeom;
 var loader = new THREE.FontLoader();
+
+var textGeom;
 var heartShape;
 
+var template = document.getElementById( "template" ).text;
+var content = document.getElementById( "content" );
+
+// load font before initing shapes
 loader.load( '/helvetiker_bold.typeface.json', function ( font ) {
 	textGeom = {
 		font: font,
@@ -67,49 +71,36 @@ function init() {
 		new THREE.CircleGeometry( .6, 15 ),
 		new THREE.ConeGeometry( .6, 1, 32 ),
 		new THREE.CylinderGeometry( .6, .6, 1, 32 ),
-		// new THREE.DodecahedronBufferGeometry(.6, 10),
-		//ExtrudeBufferGeometry
-		//IcosahedronGeometry
-		//OctahedronGeometry
 		new THREE.LatheBufferGeometry(createLatte()),
-		// new THREE.ParametricGeometry( THREE.ParametricGeometries.klein, 1, 1 )
 		new THREE.PlaneGeometry( 1, 1, 32 ),
 		new THREE.RingBufferGeometry( .3, 1, 10 ),
 		new THREE.ShapeGeometry(heartShape),
 		new THREE.SphereBufferGeometry( .6, 32, 32 ),
-		//TetrahedronGeometry,
 		new THREE.TextGeometry( 'Hoi', textGeom),
 		new THREE.TorusBufferGeometry( .6, .2, 16, 100 ), 
 		new THREE.TorusKnotGeometry( .6, .2, 100, 16 ),
 		new THREE.ExtrudeBufferGeometry( heartShape, extrudeSettings )
-		// tube
-		// wireframe
 	];
-
-	var template = document.getElementById( "template" ).text;
-	var content = document.getElementById( "content" );
-
+	// TODO 
+	// DodecahedronBufferGeometry, IcosahedronGeometry, OctahedronGeometry, ParametricGeometry, TetrahedronGeometry
+	// tube, wireframe
 
 	geometries.forEach(geometry => {
-		THREE.GeometryUtils.center( geometry );
-
 		var scene = new THREE.Scene();
 
-		// make a list item
+		//? Create list item with title
 		var element = document.createElement( "div" );
 		element.className = "list-item";
-		// element.innerHTML = template.replace( '$', i + 1 );
 		element.innerHTML = template.replace( '$', geometry.type );
-
-		// Look up the element that represents the area
-		// we want to render the scene
 		scene.userData.element = element.querySelector( ".scene" );
 		content.appendChild( element );
 
+		//? Camera
 		var camera = new THREE.PerspectiveCamera( 50, 1, 1, 10 );
 		camera.position.set(2, 2, 2);
 		scene.userData.camera = camera;
 
+		//? Controls
 		var controls = new THREE.OrbitControls( scene.userData.camera, scene.userData.element );
 		controls.minDistance = 2;
 		controls.maxDistance = 5;
@@ -117,28 +108,28 @@ function init() {
 		controls.enableZoom = false;
 		scene.userData.controls = controls;
 
+		//? Do the shape things
 		var material = new THREE.MeshStandardMaterial( {
-
 			color: new THREE.Color().setHSL( Math.random(), 1, 0.75 ),
 			roughness: 0.5,
 			metalness: 0,
 			flatShading: true,
 			side: THREE.DoubleSide
-
 		} );
 
+		THREE.GeometryUtils.center( geometry ); // Center geometry first 
 		var mesh = new THREE.Mesh( geometry, material );
 
 		if (geometry.type === 'ShapeGeometry' || geometry.type === 'ExtrudeBufferGeometry') { mesh.rotateZ( THREE.Math.degToRad(180) ); }
-		
 		scene.add( mesh );
 
+		//? Lights
 		scene.add( new THREE.HemisphereLight( 0xaaaaaa, 0x444444 ) );
-
 		var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
 		light.position.set( 1, 1, 1 );
 		scene.add( light );
 
+		//? GO!
 		scenes.push( scene );
 	});
 
@@ -146,31 +137,23 @@ function init() {
 	renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true } );
 	renderer.setClearColor( 0xffffff, 1 );
 	renderer.setPixelRatio( window.devicePixelRatio );
-
 }
 
 function updateSize() {
-
 	var width = canvas.clientWidth;
 	var height = canvas.clientHeight;
 
 	if ( canvas.width !== width || canvas.height !== height ) {
-
 		renderer.setSize( width, height, false );
-
 	}
-
 }
 
 function animate() {
-
 	render();
 	requestAnimationFrame( animate );
-
 }
 
 function render() {
-
 	updateSize();
 
 	canvas.style.transform = `translateY(${window.scrollY}px)`;
@@ -182,9 +165,10 @@ function render() {
 	renderer.setClearColor( 0xe0e0e0 );
 	renderer.setScissorTest( true );
 
+	//? set viewport from boundingbox and render
 	scenes.forEach( function ( scene ) {
 
-		// so something moves
+		// Rotate objects
 		scene.children[ 0 ].rotation.y = Date.now() * 0.001;
 
 		// get the element that is a place holder for where we want to
@@ -196,10 +180,8 @@ function render() {
 
 		// check if it's offscreen. If so skip it
 		if ( rect.bottom < 0 || rect.top > renderer.domElement.clientHeight ||
-			 rect.right < 0 || rect.left > renderer.domElement.clientWidth ) {
-
+			rect.right < 0 || rect.left > renderer.domElement.clientWidth ) {
 			return; // it's off screen
-
 		}
 
 		// set the viewport
@@ -212,14 +194,7 @@ function render() {
 		renderer.setScissor( left, bottom, width, height );
 
 		var camera = scene.userData.camera;
-
-		//camera.aspect = width / height; // not changing in this example
-		//camera.updateProjectionMatrix();
-
-		//scene.userData.controls.update();
-
 		renderer.render( scene, camera );
-
 	} );
 
 }

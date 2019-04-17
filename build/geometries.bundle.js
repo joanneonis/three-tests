@@ -105,15 +105,18 @@ __webpack_require__.r(__webpack_exports__);
 
  //?--------------------------------------------------------------------
 //?		Base
-//? 	Original source (for grid): https://github.com/mrdoob/three.js/blob/master/examples/webgl_multiple_elements.html
+//? 	Grid source: https://github.com/mrdoob/three.js/blob/master/examples/webgl_multiple_elements.html
 //?--------------------------------------------------------------------
 
 var canvas;
 var scenes = [],
     renderer;
-var textGeom;
 var loader = new three__WEBPACK_IMPORTED_MODULE_1__["FontLoader"]();
+var textGeom;
 var heartShape;
+var template = document.getElementById("template").text;
+var content = document.getElementById("content"); // load font before initing shapes
+
 loader.load('/helvetiker_bold.typeface.json', function (font) {
   textGeom = {
     font: font,
@@ -158,38 +161,30 @@ function init() {
     bevelThickness: .2,
     bevelSize: .2
   };
-  var geometries = [new three__WEBPACK_IMPORTED_MODULE_1__["BoxBufferGeometry"](.6, .6, .6), new three__WEBPACK_IMPORTED_MODULE_1__["CircleGeometry"](.6, 15), new three__WEBPACK_IMPORTED_MODULE_1__["ConeGeometry"](.6, 1, 32), new three__WEBPACK_IMPORTED_MODULE_1__["CylinderGeometry"](.6, .6, 1, 32), // new THREE.DodecahedronBufferGeometry(.6, 10),
-  //ExtrudeBufferGeometry
-  //IcosahedronGeometry
-  //OctahedronGeometry
-  new three__WEBPACK_IMPORTED_MODULE_1__["LatheBufferGeometry"](createLatte()), // new THREE.ParametricGeometry( THREE.ParametricGeometries.klein, 1, 1 )
-  new three__WEBPACK_IMPORTED_MODULE_1__["PlaneGeometry"](1, 1, 32), new three__WEBPACK_IMPORTED_MODULE_1__["RingBufferGeometry"](.3, 1, 10), new three__WEBPACK_IMPORTED_MODULE_1__["ShapeGeometry"](heartShape), new three__WEBPACK_IMPORTED_MODULE_1__["SphereBufferGeometry"](.6, 32, 32), //TetrahedronGeometry,
-  new three__WEBPACK_IMPORTED_MODULE_1__["TextGeometry"]('Hoi', textGeom), new three__WEBPACK_IMPORTED_MODULE_1__["TorusBufferGeometry"](.6, .2, 16, 100), new three__WEBPACK_IMPORTED_MODULE_1__["TorusKnotGeometry"](.6, .2, 100, 16), new three__WEBPACK_IMPORTED_MODULE_1__["ExtrudeBufferGeometry"](heartShape, extrudeSettings) // tube
-  // wireframe
-  ];
-  var template = document.getElementById("template").text;
-  var content = document.getElementById("content");
+  var geometries = [new three__WEBPACK_IMPORTED_MODULE_1__["BoxBufferGeometry"](.6, .6, .6), new three__WEBPACK_IMPORTED_MODULE_1__["CircleGeometry"](.6, 15), new three__WEBPACK_IMPORTED_MODULE_1__["ConeGeometry"](.6, 1, 32), new three__WEBPACK_IMPORTED_MODULE_1__["CylinderGeometry"](.6, .6, 1, 32), new three__WEBPACK_IMPORTED_MODULE_1__["LatheBufferGeometry"](createLatte()), new three__WEBPACK_IMPORTED_MODULE_1__["PlaneGeometry"](1, 1, 32), new three__WEBPACK_IMPORTED_MODULE_1__["RingBufferGeometry"](.3, 1, 10), new three__WEBPACK_IMPORTED_MODULE_1__["ShapeGeometry"](heartShape), new three__WEBPACK_IMPORTED_MODULE_1__["SphereBufferGeometry"](.6, 32, 32), new three__WEBPACK_IMPORTED_MODULE_1__["TextGeometry"]('Hoi', textGeom), new three__WEBPACK_IMPORTED_MODULE_1__["TorusBufferGeometry"](.6, .2, 16, 100), new three__WEBPACK_IMPORTED_MODULE_1__["TorusKnotGeometry"](.6, .2, 100, 16), new three__WEBPACK_IMPORTED_MODULE_1__["ExtrudeBufferGeometry"](heartShape, extrudeSettings)]; // TODO 
+  // DodecahedronBufferGeometry, IcosahedronGeometry, OctahedronGeometry, ParametricGeometry, TetrahedronGeometry
+  // tube, wireframe
+
   geometries.forEach(function (geometry) {
-    three__WEBPACK_IMPORTED_MODULE_1__["GeometryUtils"].center(geometry);
-    var scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"](); // make a list item
+    var scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"](); //? Create list item with title
 
     var element = document.createElement("div");
-    element.className = "list-item"; // element.innerHTML = template.replace( '$', i + 1 );
-
-    element.innerHTML = template.replace('$', geometry.type); // Look up the element that represents the area
-    // we want to render the scene
-
+    element.className = "list-item";
+    element.innerHTML = template.replace('$', geometry.type);
     scene.userData.element = element.querySelector(".scene");
-    content.appendChild(element);
+    content.appendChild(element); //? Camera
+
     var camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](50, 1, 1, 10);
     camera.position.set(2, 2, 2);
-    scene.userData.camera = camera;
+    scene.userData.camera = camera; //? Controls
+
     var controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](scene.userData.camera, scene.userData.element);
     controls.minDistance = 2;
     controls.maxDistance = 5;
     controls.enablePan = false;
     controls.enableZoom = false;
-    scene.userData.controls = controls;
+    scene.userData.controls = controls; //? Do the shape things
+
     var material = new three__WEBPACK_IMPORTED_MODULE_1__["MeshStandardMaterial"]({
       color: new three__WEBPACK_IMPORTED_MODULE_1__["Color"]().setHSL(Math.random(), 1, 0.75),
       roughness: 0.5,
@@ -197,17 +192,21 @@ function init() {
       flatShading: true,
       side: three__WEBPACK_IMPORTED_MODULE_1__["DoubleSide"]
     });
+    three__WEBPACK_IMPORTED_MODULE_1__["GeometryUtils"].center(geometry); // Center geometry first 
+
     var mesh = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](geometry, material);
 
     if (geometry.type === 'ShapeGeometry' || geometry.type === 'ExtrudeBufferGeometry') {
       mesh.rotateZ(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(180));
     }
 
-    scene.add(mesh);
+    scene.add(mesh); //? Lights
+
     scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLight"](0xaaaaaa, 0x444444));
     var light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 0.5);
     light.position.set(1, 1, 1);
-    scene.add(light);
+    scene.add(light); //? GO!
+
     scenes.push(scene);
   });
   renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
@@ -239,9 +238,10 @@ function render() {
   renderer.setScissorTest(false);
   renderer.clear();
   renderer.setClearColor(0xe0e0e0);
-  renderer.setScissorTest(true);
+  renderer.setScissorTest(true); //? set viewport from boundingbox and render
+
   scenes.forEach(function (scene) {
-    // so something moves
+    // Rotate objects
     scene.children[0].rotation.y = Date.now() * 0.001; // get the element that is a place holder for where we want to
     // draw the scene
 
@@ -260,10 +260,7 @@ function render() {
     var bottom = renderer.domElement.clientHeight - rect.bottom;
     renderer.setViewport(left, bottom, width, height);
     renderer.setScissor(left, bottom, width, height);
-    var camera = scene.userData.camera; //camera.aspect = width / height; // not changing in this example
-    //camera.updateProjectionMatrix();
-    //scene.userData.controls.update();
-
+    var camera = scene.userData.camera;
     renderer.render(scene, camera);
   });
 }
