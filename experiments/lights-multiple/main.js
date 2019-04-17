@@ -82,7 +82,7 @@ function buildGui() {
 
 	// build settings of params
 	Object.keys(settings).forEach((key) => {
-		if (key === 'color' || key === 'groundColor') {
+		if (key === 'color') {
 			lightsGui.addColor(settings, key).onChange((val) => {
 				activeLight[key].setHex(val);
 				render();
@@ -128,6 +128,7 @@ function setLight() {
 	scene.add(activeLight);
 
 	if (activeLightHelper) { scene.add(activeLightHelper); }
+	
 
 	if (activeLight.shadow) {
 		activeShadowCameraHelper = new THREE.CameraHelper(activeLight.shadow.camera);
@@ -144,21 +145,19 @@ function render() {
 	renderer.render(scene, camera);
 }
 
-function initGui() {
-	gui = new dat.GUI();
-	gui.add(
-		activeLightType,
-		'type',
-		['SpotLight', 'PointLight', 'HemisphereLight', 'DirectionalLight', 'AmbientLight'] 
-	)
-	.onChange((val) => {
-		setlightType(val); 
-		render();
-	}
-	);
+gui = new dat.GUI();
+gui.add(
+	activeLightType,
+	'type',
+	['SpotLight', 'PointLight', 'HemisphereLight', 'DirectionalLight', 'AmbientLight'] 
+)
+.onChange((val) => {
+	setlightType(val); 
+	render();
 }
+);
 
-initGui();
+
 init();
 buildGui();
 render();
@@ -180,7 +179,7 @@ function initControls() {
 	controls.addEventListener('change', render);
 	controls.minDistance = 0;
 	controls.maxDistance = 700;
-	controls.enablePan = true;
+	controls.enablePan = false;
 }
 
 function setlightType(type) {
@@ -203,7 +202,6 @@ function setlightType(type) {
 			activeLight = new THREE.HemisphereLight(0xffffbb, 0x0808dd, 1);
 			activeLightHelper = new THREE.HemisphereLightHelper(activeLight);
 			activeLightSettings = new HemisphereLight;
-			activeLightSettings.params.groundColor = activeLight.color.getHex();
 			break;
 		case 'DirectionalLight':
 			activeLight = new THREE.DirectionalLight(0xffffff, 2.0, 1000);

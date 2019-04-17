@@ -1,0 +1,150 @@
+export class SpotLight { 
+	constructor(config={}){
+		this.position = {x:15, y:40, z:35};
+		this.angle = Math.PI / 4;
+		this.penumbra = 0.05;
+		this.decay = 2;
+		this.distance = 200;
+		this.castShadow = true;
+		this.params = {
+			color: null,
+			intensity: {
+				intensity: 0,
+				min: 0,
+				max: 10
+			},
+			distance: {
+				distance: this.distance,
+				min: 50,
+				max: 200
+			},
+			angle: {
+				angle: 0,
+				min: 0,
+				max: this.angle
+			},
+			penumbra: {
+				penumbra: this.penumbra,
+				min: 0,
+				max: 1
+			},
+			decay: {
+				decay: this.decay,
+				min: 1,
+				max: 2
+			},
+			position: {
+				x: this.position.x,
+				y: this.position.y,
+				z: this.position.z,
+				min: -300,
+				max: 300,
+			}
+		};
+		Object.assign(this,config);
+	}
+}
+
+export class PointLight { 
+	constructor(config={}){
+		this.position = {x:15, y:40, z:35};
+		this.decay = 2;
+		this.distance = 200;
+		this.castShadow = true;
+		this.params = {
+			color: null,
+			intensity: {
+				intensity: 0,
+				min: 0,
+				max: 2
+			},
+			distance: {
+				distance: this.distance,
+				min: 50,
+				max: 200
+			},
+			decay: {
+				decay: this.decay,
+				min: 1,
+				max: 2
+			},
+			position: {
+				x: this.position.x,
+				y: this.position.y,
+				z: this.position.z,
+				min: -300,
+				max: 300,
+			}
+		};
+		Object.assign(this,config);
+	}
+}
+
+export class HemisphereLight {
+	constructor(config={}){
+		this.position = {x:15, y:40, z:35};
+		this.intensity = 1.37;
+		this.params = {
+			color: null,
+			intensity: {
+				intensity: this.intensity,
+				min: 0,
+				max: 2
+			},
+			position: {
+				x: this.position.x,
+				y: this.position.y,
+				z: this.position.z,
+				min: -300,
+				max: 300,
+			}
+		};
+		Object.assign(this,config);
+	}
+}
+
+export class DirectionalLight {
+	constructor(config={}){
+		this.position = {x:15, y:40, z:35};
+		this.intensity = 1.37;
+		this.params = {
+			color: null,
+			intensity: {
+				intensity: this.intensity,
+				min: 0,
+				max: 2
+			},
+			position: {
+				x: this.position.x,
+				y: this.position.y,
+				z: this.position.z,
+				min: -300,
+				max: 300,
+			}
+		};
+		Object.assign(this,config);
+	}
+}
+
+export class AmbientLight {
+	constructor(config={}){
+		this.position = {x:15, y:40, z:35};
+		this.intensity = 1.37;
+		this.params = {
+			color: null,
+			intensity: {
+				intensity: this.intensity,
+				min: 0,
+				max: 2
+			},
+			position: {
+				x: this.position.x,
+				y: this.position.y,
+				z: this.position.z,
+				min: -300,
+				max: 300,
+			}
+		};
+		Object.assign(this,config);
+	}
+}

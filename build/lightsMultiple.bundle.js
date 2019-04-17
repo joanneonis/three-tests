@@ -81,44 +81,123 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/lights/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/lights-multiple/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./experiments/lights/classes/lights.js":
-/*!**********************************************!*\
-  !*** ./experiments/lights/classes/lights.js ***!
-  \**********************************************/
-/*! exports provided: BaseLight, SpotLight, PointLight, HemisphereLight, DirectionalLight, AmbientLight */
+/***/ "./experiments/lights-multiple/classes/lights.js":
+/*!*******************************************************!*\
+  !*** ./experiments/lights-multiple/classes/lights.js ***!
+  \*******************************************************/
+/*! exports provided: SpotLight, PointLight, HemisphereLight, DirectionalLight, AmbientLight */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseLight", function() { return BaseLight; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SpotLight", function() { return SpotLight; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PointLight", function() { return PointLight; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HemisphereLight", function() { return HemisphereLight; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DirectionalLight", function() { return DirectionalLight; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AmbientLight", function() { return AmbientLight; });
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var BaseLight = function BaseLight() {
+var SpotLight = function SpotLight() {
   var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  _classCallCheck(this, BaseLight);
+  _classCallCheck(this, SpotLight);
+
+  this.position = {
+    x: 15,
+    y: 40,
+    z: 35
+  };
+  this.angle = Math.PI / 4;
+  this.penumbra = 0.05;
+  this.decay = 2;
+  this.distance = 200;
+  this.castShadow = true;
+  this.params = {
+    color: null,
+    intensity: {
+      intensity: 0,
+      min: 0,
+      max: 10
+    },
+    distance: {
+      distance: this.distance,
+      min: 50,
+      max: 200
+    },
+    angle: {
+      angle: 0,
+      min: 0,
+      max: this.angle
+    },
+    penumbra: {
+      penumbra: this.penumbra,
+      min: 0,
+      max: 1
+    },
+    decay: {
+      decay: this.decay,
+      min: 1,
+      max: 2
+    },
+    position: {
+      x: this.position.x,
+      y: this.position.y,
+      z: this.position.z,
+      min: -300,
+      max: 300
+    }
+  };
+  Object.assign(this, config);
+};
+var PointLight = function PointLight() {
+  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  _classCallCheck(this, PointLight);
+
+  this.position = {
+    x: 15,
+    y: 40,
+    z: 35
+  };
+  this.decay = 2;
+  this.distance = 200;
+  this.castShadow = true;
+  this.params = {
+    color: null,
+    intensity: {
+      intensity: 0,
+      min: 0,
+      max: 2
+    },
+    distance: {
+      distance: this.distance,
+      min: 50,
+      max: 200
+    },
+    decay: {
+      decay: this.decay,
+      min: 1,
+      max: 2
+    },
+    position: {
+      x: this.position.x,
+      y: this.position.y,
+      z: this.position.z,
+      min: -300,
+      max: 300
+    }
+  };
+  Object.assign(this, config);
+};
+var HemisphereLight = function HemisphereLight() {
+  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  _classCallCheck(this, HemisphereLight);
 
   this.position = {
     x: 15,
@@ -143,142 +222,69 @@ var BaseLight = function BaseLight() {
   };
   Object.assign(this, config);
 };
-var SpotLight =
-/*#__PURE__*/
-function (_BaseLight) {
-  _inherits(SpotLight, _BaseLight);
+var DirectionalLight = function DirectionalLight() {
+  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  function SpotLight() {
-    var _this;
+  _classCallCheck(this, DirectionalLight);
 
-    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    _classCallCheck(this, SpotLight);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SpotLight).call(this, config));
-    _this.angle = Math.PI / 4;
-    _this.penumbra = 0.05;
-    _this.decay = 2;
-    _this.distance = 200;
-    _this.castShadow = true;
-    _this.params.distance = {
-      distance: _this.distance,
-      min: 50,
-      max: 200
-    }, _this.params.angle = {
-      angle: 0,
+  this.position = {
+    x: 15,
+    y: 40,
+    z: 35
+  };
+  this.intensity = 1.37;
+  this.params = {
+    color: null,
+    intensity: {
+      intensity: this.intensity,
       min: 0,
-      max: _this.angle
-    }, _this.params.penumbra = {
-      penumbra: _this.penumbra,
+      max: 2
+    },
+    position: {
+      x: this.position.x,
+      y: this.position.y,
+      z: this.position.z,
+      min: -300,
+      max: 300
+    }
+  };
+  Object.assign(this, config);
+};
+var AmbientLight = function AmbientLight() {
+  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  _classCallCheck(this, AmbientLight);
+
+  this.position = {
+    x: 15,
+    y: 40,
+    z: 35
+  };
+  this.intensity = 1.37;
+  this.params = {
+    color: null,
+    intensity: {
+      intensity: this.intensity,
       min: 0,
-      max: 1
-    }, _this.params.decay = {
-      decay: _this.decay,
-      min: 1,
       max: 2
-    }, Object.assign(_assertThisInitialized(_this), config);
-    return _this;
-  }
-
-  return SpotLight;
-}(BaseLight);
-var PointLight =
-/*#__PURE__*/
-function (_BaseLight2) {
-  _inherits(PointLight, _BaseLight2);
-
-  function PointLight() {
-    var _this2;
-
-    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    _classCallCheck(this, PointLight);
-
-    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(PointLight).call(this, config));
-    _this2.decay = 2;
-    _this2.distance = 200;
-    _this2.castShadow = true;
-    _this2.params.distance = {
-      distance: _this2.distance,
-      min: 50,
-      max: 200
-    }, _this2.params.decay = {
-      decay: _this2.decay,
-      min: 1,
-      max: 2
-    }, Object.assign(_assertThisInitialized(_this2), config);
-    return _this2;
-  }
-
-  return PointLight;
-}(BaseLight);
-var HemisphereLight =
-/*#__PURE__*/
-function (_BaseLight3) {
-  _inherits(HemisphereLight, _BaseLight3);
-
-  function HemisphereLight() {
-    var _this3;
-
-    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    _classCallCheck(this, HemisphereLight);
-
-    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(HemisphereLight).call(this, config));
-    _this3.params.groundColor = {
-      groundColor: null
-    }, Object.assign(_assertThisInitialized(_this3), config);
-    return _this3;
-  }
-
-  return HemisphereLight;
-}(BaseLight);
-var DirectionalLight =
-/*#__PURE__*/
-function (_BaseLight4) {
-  _inherits(DirectionalLight, _BaseLight4);
-
-  function DirectionalLight() {
-    var _this4;
-
-    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    _classCallCheck(this, DirectionalLight);
-
-    _this4 = _possibleConstructorReturn(this, _getPrototypeOf(DirectionalLight).call(this));
-    Object.assign(_assertThisInitialized(_this4), config);
-    return _this4;
-  }
-
-  return DirectionalLight;
-}(BaseLight);
-var AmbientLight =
-/*#__PURE__*/
-function (_BaseLight5) {
-  _inherits(AmbientLight, _BaseLight5);
-
-  function AmbientLight() {
-    var _this5;
-
-    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    _classCallCheck(this, AmbientLight);
-
-    _this5 = _possibleConstructorReturn(this, _getPrototypeOf(AmbientLight).call(this));
-    Object.assign(_assertThisInitialized(_this5), config);
-    return _this5;
-  }
-
-  return AmbientLight;
-}(BaseLight);
+    },
+    position: {
+      x: this.position.x,
+      y: this.position.y,
+      z: this.position.z,
+      min: -300,
+      max: 300
+    }
+  };
+  Object.assign(this, config);
+};
 
 /***/ }),
 
-/***/ "./experiments/lights/js/basicObjects.js":
-/*!***********************************************!*\
-  !*** ./experiments/lights/js/basicObjects.js ***!
-  \***********************************************/
+/***/ "./experiments/lights-multiple/js/basicObjects.js":
+/*!********************************************************!*\
+  !*** ./experiments/lights-multiple/js/basicObjects.js ***!
+  \********************************************************/
 /*! exports provided: createObjects */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -321,10 +327,10 @@ function createObjects() {
 
 /***/ }),
 
-/***/ "./experiments/lights/main.js":
-/*!************************************!*\
-  !*** ./experiments/lights/main.js ***!
-  \************************************/
+/***/ "./experiments/lights-multiple/main.js":
+/*!*********************************************!*\
+  !*** ./experiments/lights-multiple/main.js ***!
+  \*********************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -335,8 +341,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _classes_lights__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./classes/lights */ "./experiments/lights/classes/lights.js");
-/* harmony import */ var _js_basicObjects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/basicObjects */ "./experiments/lights/js/basicObjects.js");
+/* harmony import */ var _classes_lights__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./classes/lights */ "./experiments/lights-multiple/classes/lights.js");
+/* harmony import */ var _js_basicObjects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/basicObjects */ "./experiments/lights-multiple/js/basicObjects.js");
 /* harmony import */ var three_src_helpers_SpotLightHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/src/helpers/SpotLightHelper */ "./node_modules/three/src/helpers/SpotLightHelper.js");
 /* harmony import */ var three_src_helpers_DirectionalLightHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/src/helpers/DirectionalLightHelper */ "./node_modules/three/src/helpers/DirectionalLightHelper.js");
 /* harmony import */ var three_src_helpers_PointLightHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/src/helpers/PointLightHelper */ "./node_modules/three/src/helpers/PointLightHelper.js");
@@ -404,7 +410,7 @@ function buildGui() {
   var settings = activeLightSettings.params; // build settings of params
 
   Object.keys(settings).forEach(function (key) {
-    if (key === 'color' || key === 'groundColor') {
+    if (key === 'color') {
       lightsGui.addColor(settings, key).onChange(function (val) {
         activeLight[key].setHex(val);
         render();
@@ -463,15 +469,11 @@ function render() {
   renderer.render(scene, camera);
 }
 
-function initGui() {
-  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
-  gui.add(activeLightType, 'type', ['SpotLight', 'PointLight', 'HemisphereLight', 'DirectionalLight', 'AmbientLight']).onChange(function (val) {
-    setlightType(val);
-    render();
-  });
-}
-
-initGui();
+gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+gui.add(activeLightType, 'type', ['SpotLight', 'PointLight', 'HemisphereLight', 'DirectionalLight', 'AmbientLight']).onChange(function (val) {
+  setlightType(val);
+  render();
+});
 init();
 buildGui();
 render();
@@ -492,7 +494,7 @@ function initControls() {
   controls.addEventListener('change', render);
   controls.minDistance = 0;
   controls.maxDistance = 700;
-  controls.enablePan = true;
+  controls.enablePan = false;
 }
 
 function setlightType(type) {
@@ -517,7 +519,6 @@ function setlightType(type) {
       activeLight = new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLight"](0xffffbb, 0x0808dd, 1);
       activeLightHelper = new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLightHelper"](activeLight);
       activeLightSettings = new _classes_lights__WEBPACK_IMPORTED_MODULE_3__["HemisphereLight"]();
-      activeLightSettings.params.groundColor = activeLight.color.getHex();
       break;
 
     case 'DirectionalLight':
@@ -19524,4 +19525,4 @@ function arrayMax( array ) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=lights.bundle.js.map
+//# sourceMappingURL=lightsMultiple.bundle.js.map
