@@ -1,3 +1,4 @@
 - try out different types of lights
 - edit params in gui
 - optimised for reuse (light classes and generic gui)
+- visible helpers (light, axes and shadow)
