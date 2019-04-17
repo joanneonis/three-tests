@@ -3,3 +3,4 @@
 - extruding
 - bevels
 - all basic shapes
+- Used grid ideas from three examples, smart part: setting viewports from boundingboxes during animationrequest
