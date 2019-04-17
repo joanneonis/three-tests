@@ -78,7 +78,7 @@ function initGui() {
 	);
 }
 
-initGui();
+initGui(); 
 init();
 render();
 
