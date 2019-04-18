@@ -86,52 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./experiments/lights/js/basicObjects.js":
-/*!***********************************************!*\
-  !*** ./experiments/lights/js/basicObjects.js ***!
-  \***********************************************/
-/*! exports provided: createObjects */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createObjects", function() { return createObjects; });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
-var materials = new Array(3);
-var geometries = new Array(3);
-var meshes = new Array(3);
-
-function createObjects() {
-  var cubeSize = 30; //MATERIAL
-
-  materials[0] = new three__WEBPACK_IMPORTED_MODULE_0__["MeshLambertMaterial"]();
-  materials[1] = new three__WEBPACK_IMPORTED_MODULE_0__["MeshPhongMaterial"]();
-  materials[2] = new three__WEBPACK_IMPORTED_MODULE_0__["MeshStandardMaterial"](); //GEOMETRY
-
-  geometries[0] = new three__WEBPACK_IMPORTED_MODULE_0__["BoxGeometry"](cubeSize, cubeSize, cubeSize, 10, 10, 10);
-  geometries[1] = new three__WEBPACK_IMPORTED_MODULE_0__["SphereGeometry"](cubeSize, 20, 20);
-  geometries[2] = new three__WEBPACK_IMPORTED_MODULE_0__["PlaneGeometry"](10000, 10000, 100, 100);
-
-  for (var i = 0; i < meshes.length; i++) {
-    meshes[i] = new three__WEBPACK_IMPORTED_MODULE_0__["Mesh"](geometries[i], materials[i]);
-  }
-
-  meshes[0].position.x = -50;
-  meshes[0].castShadow = true; // scene.add(meshes[0]);
-
-  meshes[1].position.x = 50;
-  meshes[1].castShadow = true; // scene.add(meshes[1]);
-
-  meshes[2].rotation.x = -90 * (Math.PI / 180);
-  meshes[2].position.y = -cubeSize * 2;
-  meshes[2].receiveShadow = true; // scene.add(meshes[2]);
-
-  return meshes;
-}
-
-/***/ }),
-
 /***/ "./experiments/materials/main.js":
 /*!***************************************!*\
   !*** ./experiments/materials/main.js ***!
@@ -146,39 +100,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _lights_js_basicObjects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lights/js/basicObjects */ "./experiments/lights/js/basicObjects.js");
 /* eslint-disable no-unused-vars */
-
 
 
  //?--------------------------------------------------------------------
 //?		Base
+//? 	Earth source: http://blog.mastermaps.com/2013/09/creating-webgl-earth-with-threejs.html
 //?--------------------------------------------------------------------
 
 var renderer,
     scene,
     camera,
+    controls,
     theCanvas = document.getElementById('gl-canvas');
+var radius = 0.5,
+    segments = 32,
+    rotation = 6;
+var sphere, clouds, stars;
+var worldTexture, elevationTexture, waterTexture, starsTexture, cloudTexture;
 var gui;
-var controls;
+var materialSettings = {
+  rotationSpeed: 0,
+  world: {
+    bumpScale: 0.005,
+    specular: new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('grey'),
+    shininess: 3,
+    needsUpdate: true
+  },
+  stars: {
+    side: three__WEBPACK_IMPORTED_MODULE_1__["BackSide"],
+    needsUpdate: true
+  },
+  clouds: {
+    transparent: true,
+    needsUpdate: true
+  }
+};
 
 function init() {
+  loadTextures();
   initRenderer();
   scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
-  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](35, window.innerWidth / window.innerHeight, 1, 1000);
-  camera.position.set(0, 0, -300);
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](45, window.innerWidth / window.innerHeight, 0.01, 1000);
+  camera.position.z = 1.5;
   initControls();
-  var ambient = new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0xffffff, 0.1);
-  scene.add(ambient);
-  var meshes = Object(_lights_js_basicObjects__WEBPACK_IMPORTED_MODULE_3__["createObjects"])();
+  var light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 1);
+  light.position.set(5, 3, 5);
+  scene.add(light);
+  sphere = createSphere(radius, segments);
+  sphere.rotation.y = rotation;
+  scene.add(sphere);
+  clouds = createClouds(radius, segments);
+  clouds.rotation.y = rotation;
+  scene.add(clouds);
+  stars = createStars(90, 64);
+  scene.add(stars); // if (sphere) { controls.target.copy(sphere); }
+  // controls.update();
 
-  for (var i = 0; i < meshes.length; i++) {
-    scene.add(meshes[i]);
-  } // mesh.castShadow = true;
-
-
-  controls.target.copy(meshes[0].position);
-  controls.update();
   window.addEventListener('resize', onResize, false);
 }
 
@@ -189,25 +167,35 @@ function onResize() {
 }
 
 function render() {
+  controls.update();
+  sphere.rotation.y += materialSettings.rotationSpeed;
+  clouds.rotation.y += materialSettings.rotationSpeed;
+  requestAnimationFrame(render);
   renderer.render(scene, camera);
 }
 
 function initGui() {
-  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"](); // gui.add(
-  // 	????,
-  // 	'type',
-  // 	['??', '??'] 
-  // )
-  // .onChange((val) => {
-  // 	setlightType(val); 
-  // 	render();
-  // }
-  // );
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+  gui.add(materialSettings, 'rotationSpeed', 0, 0.01);
+  gui.addFolder('World');
+  gui.add(materialSettings.world, 'bumpScale', 0, 0.1).onChange(function (val) {
+    sphere.material.bumpScale = val;
+    materialSettings.world.bumpScale = val;
+  });
+  gui.add(materialSettings.world, 'shininess', 0, 50).onChange(function (val) {
+    sphere.material.shininess = val;
+    materialSettings.world.shininess = val;
+  });
+  gui.addColor(materialSettings.world, 'specular').onChange(function (val) {
+    console.log("rgb(".concat(val.r, ",").concat(val.g, ", ").concat(val.b, ")"));
+    sphere.material.specular = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]("rgb(".concat(Math.round(val.r), ",").concat(Math.round(val.g), ", ").concat(Math.round(val.b), ")")); // materialSettings.world.specular = val;
+    // console.log(materialSettings.world);
+  });
 }
 
-initGui();
 init();
 render();
+initGui();
 
 function initRenderer() {
   renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
@@ -220,12 +208,50 @@ function initRenderer() {
   renderer.shadowMap.type = three__WEBPACK_IMPORTED_MODULE_1__["PCFSoftShadowMap"];
 }
 
+function createSphere(radius, segments) {
+  return new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](new three__WEBPACK_IMPORTED_MODULE_1__["SphereGeometry"](radius, segments, segments), new three__WEBPACK_IMPORTED_MODULE_1__["MeshPhongMaterial"](materialSettings.world));
+}
+
+function removeSphere() {
+  scene.remove(sphere); // TODO material visible false?
+}
+
+function createClouds(radius, segments) {
+  return new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](new three__WEBPACK_IMPORTED_MODULE_1__["SphereGeometry"](radius + 0.003, segments, segments), new three__WEBPACK_IMPORTED_MODULE_1__["MeshPhongMaterial"](materialSettings.clouds));
+}
+
+function removeClouds() {
+  scene.remove(clouds);
+}
+
+function createStars(radius, segments) {
+  return new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](new three__WEBPACK_IMPORTED_MODULE_1__["SphereGeometry"](radius, segments, segments), new three__WEBPACK_IMPORTED_MODULE_1__["MeshBasicMaterial"](materialSettings.stars));
+}
+
+function removeStars() {
+  scene.remove(stars);
+}
+
+function loadTextures() {
+  worldTexture = new three__WEBPACK_IMPORTED_MODULE_1__["TextureLoader"]().load('img/2_no_clouds_4k.jpg'); // keep in memory
+
+  materialSettings.world.map = worldTexture;
+  elevationTexture = new three__WEBPACK_IMPORTED_MODULE_1__["TextureLoader"]().load('img/elev_bump_4k.jpg');
+  materialSettings.world.bumpMap = elevationTexture;
+  waterTexture = new three__WEBPACK_IMPORTED_MODULE_1__["TextureLoader"]().load('img/water_4k.png');
+  materialSettings.world.specularMap = waterTexture;
+  starsTexture = new three__WEBPACK_IMPORTED_MODULE_1__["TextureLoader"]().load('img/galaxy_starfield.png');
+  materialSettings.stars.map = starsTexture;
+  cloudTexture = new three__WEBPACK_IMPORTED_MODULE_1__["TextureLoader"]().load('img/fair_clouds_4k.png');
+  materialSettings.clouds.map = cloudTexture;
+}
+
 function initControls() {
-  controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement);
-  controls.addEventListener('change', render);
+  controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement); //? NO trackball for gui issues
+  // controls.addEventListener('change', render); //? needed if theres no loop going on
+
   controls.minDistance = 0;
-  controls.maxDistance = 700;
-  controls.enablePan = true;
+  controls.maxDistance = 700; // controls.enablePan = true;
 }
 
 /***/ }),
