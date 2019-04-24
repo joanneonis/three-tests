@@ -144,13 +144,13 @@ var composer;
 function init() {
   initRenderer();
   scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
-  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](70, window.innerWidth / window.innerHeight, 1, 1000);
-  camera.position.z = 3;
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](7, window.innerWidth / window.innerHeight, 1, 1000);
+  camera.position.z = 10;
   initControls();
-  var light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 1);
+  var light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, .1);
   light.position.set(5, 3, 5);
   scene.add(light);
-  scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLight"](0xffffbb, 0x080820, 1));
+  scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLight"](0xffffbb, 0x080820, .1));
   scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0x404040)); // scene.background = new THREE.Color('#f9f9f9');
 
   bloomy();
@@ -210,12 +210,21 @@ function modelLoaders() {
   }; // THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
 
-  materials = new three__WEBPACK_IMPORTED_MODULE_1__["MeshNormalMaterial"](); // load a resource
+  materials = new three__WEBPACK_IMPORTED_MODULE_1__["MeshStandardMaterial"]({
+    wireframe: true
+  });
+  materials.color = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#00E3BA'); // load a resource
 
   var loader = new three__WEBPACK_IMPORTED_MODULE_1__["OBJLoader"]();
   loader.load( // resource URL
   './models/rocket/spaceship.obj', // called when resource is loaded
   function (object) {
+    object.traverse(function (child) {
+      if (child instanceof three__WEBPACK_IMPORTED_MODULE_1__["Mesh"]) {
+        child.material = materials;
+      }
+    });
+    rotateObject(object, 0, 120, 0);
     scene.add(object);
   }, // called when loading is in progresses
   function (xhr) {
@@ -239,8 +248,8 @@ function bloomy() {
   var renderScene = new three__WEBPACK_IMPORTED_MODULE_1__["RenderPass"](scene, camera);
   var bloomPass = new three__WEBPACK_IMPORTED_MODULE_1__["UnrealBloomPass"](new three__WEBPACK_IMPORTED_MODULE_1__["Vector2"](window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
   bloomPass.threshold = 0;
-  bloomPass.strength = 2;
-  bloomPass.radius = 0.58;
+  bloomPass.strength = 5;
+  bloomPass.radius = 0.98;
   composer = new three__WEBPACK_IMPORTED_MODULE_1__["EffectComposer"](renderer);
   composer.setSize(window.innerWidth, window.innerHeight);
   composer.addPass(renderScene);

@@ -32,16 +32,16 @@ function init() {
 	
 	scene = new THREE.Scene();
 	
-	camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-	camera.position.z = 3;
+	camera = new THREE.PerspectiveCamera(7, window.innerWidth / window.innerHeight, 1, 1000);
+	camera.position.z = 10;
 	
 	initControls();
 	
-	var light = new THREE.DirectionalLight(0xffffff, 1);
+	var light = new THREE.DirectionalLight(0xffffff, .1);
 	light.position.set(5,3,5);
 	scene.add(light);
 
-	scene.add(new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 ))
+	scene.add(new THREE.HemisphereLight( 0xffffbb, 0x080820, .1 ))
 
 	scene.add( new THREE.AmbientLight( 0x404040 ) );
 	// scene.background = new THREE.Color('#f9f9f9');
@@ -118,7 +118,8 @@ function modelLoaders() {
 	// THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
 
-	materials = new THREE.MeshNormalMaterial();
+	materials = new THREE.MeshStandardMaterial({wireframe: true});
+	materials.color = new THREE.Color('#00E3BA');
 
 	// load a resource
 	var loader = new THREE.OBJLoader();
@@ -129,6 +130,17 @@ function modelLoaders() {
 		// called when resource is loaded
 		function ( object ) {
 
+			object.traverse( function ( child ) {
+
+					if ( child instanceof THREE.Mesh ) {
+
+							child.material = materials;
+
+					}
+
+			} );
+			
+			rotateObject(object, 0, 120, 0);
 			scene.add( object );
 
 		},
@@ -158,8 +170,8 @@ function bloomy() {
 
 	var bloomPass = new THREE.UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
 	bloomPass.threshold = 0;
-	bloomPass.strength = 2;
-	bloomPass.radius = 0.58;
+	bloomPass.strength = 5;
+	bloomPass.radius = 0.98;
 
 	composer = new THREE.EffectComposer( renderer );
 	composer.setSize( window.innerWidth, window.innerHeight );
