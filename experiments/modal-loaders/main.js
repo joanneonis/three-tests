@@ -25,13 +25,18 @@ function init() {
 	scene = new THREE.Scene();
 	
 	camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-	camera.position.z = 50;
+	camera.position.z = 3;
 	
 	initControls();
 	
 	var light = new THREE.DirectionalLight(0xffffff, 1);
 	light.position.set(5,3,5);
 	scene.add(light);
+
+	scene.add(new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 ))
+
+	scene.add( new THREE.AmbientLight( 0x404040 ) );
+	scene.background = new THREE.Color('#f9f9f9');
 
 	modelLoaders();
 // TODO
@@ -101,21 +106,31 @@ function modelLoaders() {
 
 	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
+	// model source: https://poly.google.com/view/63bZ3bfzQcq
 	new THREE.MTLLoader()
-		.setPath( './models/plant/' )
-		.load( 'plant.mtl', function ( materials ) {
+		.setPath( './models/robot/' )
+		.load( 'robot.mtl', function ( materials ) {
 
 			materials.preload();
 
 			new THREE.OBJLoader()
 				.setMaterials( materials )
-				.setPath( './models/plant/' )
-				.load( 'plant.obj', function ( object ) {
+				.setPath( './models/robot/' )
+				.load( 'robot.obj', function ( object ) {
 
 					object.position.y = 0;
+
+					rotateObject(object, 15, 220, 0);
+
 					scene.add( object );
 
 				}, onProgress, onError );
 
 		} );
+}
+
+function rotateObject(object, degreeX = 0, degreeY = 0, degreeZ = 0) {
+  object.rotateX(THREE.Math.degToRad(degreeX));
+  object.rotateY(THREE.Math.degToRad(degreeY));
+  object.rotateZ(THREE.Math.degToRad(degreeZ));
 }

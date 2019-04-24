@@ -128,11 +128,14 @@ function init() {
   initRenderer();
   scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
   camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](70, window.innerWidth / window.innerHeight, 1, 1000);
-  camera.position.z = 50;
+  camera.position.z = 3;
   initControls();
   var light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 1);
   light.position.set(5, 3, 5);
   scene.add(light);
+  scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLight"](0xffffbb, 0x080820, 1));
+  scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0x404040));
+  scene.background = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#f9f9f9');
   modelLoaders(); // TODO
 
   window.addEventListener('resize', onResize, false);
@@ -187,14 +190,25 @@ function modelLoaders() {
     console.log(e);
   };
 
-  three__WEBPACK_IMPORTED_MODULE_1__["Loader"].Handlers.add(/\.dds$/i, new three__WEBPACK_IMPORTED_MODULE_1__["DDSLoader"]());
-  new three__WEBPACK_IMPORTED_MODULE_1__["MTLLoader"]().setPath('./models/plant/').load('plant.mtl', function (materials) {
+  three__WEBPACK_IMPORTED_MODULE_1__["Loader"].Handlers.add(/\.dds$/i, new three__WEBPACK_IMPORTED_MODULE_1__["DDSLoader"]()); // model source: https://poly.google.com/view/63bZ3bfzQcq
+
+  new three__WEBPACK_IMPORTED_MODULE_1__["MTLLoader"]().setPath('./models/robot/').load('robot.mtl', function (materials) {
     materials.preload();
-    new three__WEBPACK_IMPORTED_MODULE_1__["OBJLoader"]().setMaterials(materials).setPath('./models/plant/').load('plant.obj', function (object) {
+    new three__WEBPACK_IMPORTED_MODULE_1__["OBJLoader"]().setMaterials(materials).setPath('./models/robot/').load('robot.obj', function (object) {
       object.position.y = 0;
+      rotateObject(object, 15, 220, 0);
       scene.add(object);
     }, onProgress, onError);
   });
+}
+
+function rotateObject(object) {
+  var degreeX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var degreeY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var degreeZ = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+  object.rotateX(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeX));
+  object.rotateY(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeY));
+  object.rotateZ(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeZ));
 }
 
 /***/ }),
