@@ -1,2 +1,3 @@
 - postprocessing bloom effect
 - https://threejs.org/examples/?q=blo#webgl_postprocessing_unreal_bloom 
+- wireframes
