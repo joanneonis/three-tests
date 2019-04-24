@@ -134,29 +134,90 @@ var settings = {
   shapeColor: "rgb(65,65,65)",
   speed: 0.00001,
   transformIntencity: 10,
-  transformScale: 0,
+  transformScale: 10.0,
   variant: 0
 };
 var params = {
+  bgColor: {
+    bgColor: "rgb(65,65,65)",
+    type: 'color',
+    update: function update(e) {
+      scene.background = new three__WEBPACK_IMPORTED_MODULE_1__["Color"](e);
+    }
+  },
+  dotColor: {
+    dotColor: "rgb(65,65,65)",
+    type: 'color',
+    uniform: true,
+    update: function update(e) {
+      material.uniforms.dotColor.value = new three__WEBPACK_IMPORTED_MODULE_1__["Color"](e);
+    }
+  },
   speed: {
     speed: 0.00001,
     min: 0.000001,
-    max: 0.001
+    max: 0.001,
+    uniform: true
   },
   dotAmount: {
     dotAmount: 80,
     min: 0,
-    max: 150
+    max: 150,
+    uniform: true,
+    update: function update(e) {
+      material.uniforms.amount.value = params.dotAmount.dotAmount;
+    }
   },
   fogIntencity: {
     fogIntencity: 55,
     min: 10,
-    max: 150
+    max: 150,
+    update: function update(e) {
+      scene.fog.far = e;
+    }
   },
   dotSize: {
     dotSize: 0.2,
+    min: 0.02,
+    max: 0.5,
+    uniform: true,
+    update: function update(e) {
+      material.uniforms.radius1.value = e;
+      material.uniforms.radius2.value = e;
+    }
+  },
+  shapeColor: {
+    shapeColor: "rgb(65,65,65)",
+    type: 'color',
+    uniform: true,
+    update: function update(e) {
+      material.uniforms.shapeColor.value = new three__WEBPACK_IMPORTED_MODULE_1__["Color"](e);
+    }
+  },
+  transformIntencity: {
+    transformIntencity: 10,
     min: 0,
-    max: 3
+    max: 50,
+    uniform: true,
+    update: function update(e) {
+      material.uniforms.transformIntencity.value = e;
+    }
+  },
+  transformScale: {
+    transformScale: 10.0,
+    min: -1000,
+    max: 1000,
+    uniform: true,
+    update: function update(e) {
+      material.uniforms.transformScale.value = e;
+    }
+  },
+  fogColor: {
+    fogColor: "rgb(65,65,65)",
+    type: 'color',
+    update: function update(e) {
+      scene.fog.color = new three__WEBPACK_IMPORTED_MODULE_1__["Color"](e);
+    }
   }
 };
 var start = Date.now();
@@ -171,7 +232,7 @@ function init() {
   light.position.set(5, 3, 5);
   scene.add(light); // fog
 
-  var fogColor = settings.bgColor;
+  var fogColor = params.fogColor.fogColor;
   scene.fog = new three__WEBPACK_IMPORTED_MODULE_1__["Fog"](fogColor, 0, settings.fogIntencity);
   material = materialGeomitry(); // init sphere with materialoptions
 
@@ -192,10 +253,6 @@ function onResize() {
 function render() {
   controls.update();
   material.uniforms.time.value = params.speed.speed * (Date.now() - start);
-  material.uniforms.radius1.value = params.dotSize.dotSize;
-  material.uniforms.radius2.value = params.dotSize.dotSize;
-  material.uniforms.amount.value = params.dotAmount.dotAmount;
-  scene.fog.far = params.fogIntencity.fogIntencity;
   requestAnimationFrame(render);
   renderer.render(scene, camera);
 }
@@ -203,7 +260,15 @@ function render() {
 function initGui() {
   gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
   Object.keys(params).forEach(function (key) {
-    gui.add(params[key], key, params[key].min, params[key].max);
+    if (params[key].type === 'color') {
+      gui.addColor(params[key], key).onChange(function (e) {
+        params[key].update(e);
+      });
+    } else {
+      gui.add(params[key], key, params[key].min, params[key].max).onChange(function (e) {
+        params[key].update(e);
+      });
+    }
   }); // TODO
   // Object.keys(params).forEach((key) => {
   // 	if (key === 'color' || key === 'groundColor') {
