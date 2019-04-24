@@ -9,7 +9,8 @@ export default {
         lights: path.join(__dirname, 'experiments/lights/main.js'),
         cameras: path.join(__dirname, 'experiments/cameras/main.js'),
         multipleViews: path.join(__dirname, 'experiments/multiple-views/main.js'),
-        materials: path.join(__dirname, 'experiments/materials/main.js')
+        materials: path.join(__dirname, 'experiments/materials/main.js'),
+        shaders: path.join(__dirname, 'experiments/shaders/main.js')
     },
     output: {
         path: path.join(__dirname, 'build'),
