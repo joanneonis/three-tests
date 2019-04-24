@@ -12,6 +12,7 @@ export default {
         materials: path.join(__dirname, 'experiments/materials/main.js'),
         shaders: path.join(__dirname, 'experiments/shaders/main.js'),
         modalloaders: path.join(__dirname, 'experiments/modal-loaders/main.js'),
+        bloom: path.join(__dirname, 'experiments/bloom/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),
