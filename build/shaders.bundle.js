@@ -114,6 +114,7 @@ var renderer,
     controls,
     theCanvas = document.getElementById('gl-canvas');
 var gui;
+var material;
 var settings = {
   bgColor: "rgb(65,65,65)",
   canvasHeight: "window",
@@ -123,7 +124,7 @@ var settings = {
   dotAmount: 80,
   dotColor: "rgb(0,0,0)",
   dotSize: 0.2,
-  fogIntencity: 350,
+  fogIntencity: 55,
   opacity: 1,
   position: {
     x: 0,
@@ -135,6 +136,28 @@ var settings = {
   transformIntencity: 10,
   transformScale: 0,
   variant: 0
+};
+var params = {
+  speed: {
+    speed: 0.00001,
+    min: 0.000001,
+    max: 0.001
+  },
+  dotAmount: {
+    dotAmount: 80,
+    min: 0,
+    max: 150
+  },
+  fogIntencity: {
+    fogIntencity: 55,
+    min: 10,
+    max: 150
+  },
+  dotSize: {
+    dotSize: 0.2,
+    min: 0,
+    max: 3
+  }
 };
 var start = Date.now();
 
@@ -148,19 +171,15 @@ function init() {
   light.position.set(5, 3, 5);
   scene.add(light); // fog
 
-  var fogColor = 'rgb(65,65,65)';
+  var fogColor = settings.bgColor;
   scene.fog = new three__WEBPACK_IMPORTED_MODULE_1__["Fog"](fogColor, 0, settings.fogIntencity);
-  scene.userData.fog = scene.fog;
-  var material = materialGeomitry(scene); // init sphere with materialoptions
+  material = materialGeomitry(); // init sphere with materialoptions
 
   var mesh = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](new three__WEBPACK_IMPORTED_MODULE_1__["IcosahedronGeometry"](20, 4), material);
-  scene.userData.material = material;
-  scene.userData.material.userData = {
-    speedSettings: settings.speed
-  };
   scene.add(mesh);
   mesh.position.set(settings.position.x, settings.position.y, settings.position.z);
   rotateObject(mesh, -10, 160, 10);
+  scene.background = new three__WEBPACK_IMPORTED_MODULE_1__["Color"](settings.bgColor);
   window.addEventListener('resize', onResize, false);
 }
 
@@ -172,13 +191,33 @@ function onResize() {
 
 function render() {
   controls.update();
-  scene.userData.material.uniforms.time.value = scene.userData.material.userData.speedSettings * (Date.now() - start);
+  material.uniforms.time.value = params.speed.speed * (Date.now() - start);
+  material.uniforms.radius1.value = params.dotSize.dotSize;
+  material.uniforms.radius2.value = params.dotSize.dotSize;
+  material.uniforms.amount.value = params.dotAmount.dotAmount;
+  scene.fog.far = params.fogIntencity.fogIntencity;
   requestAnimationFrame(render);
   renderer.render(scene, camera);
 }
 
 function initGui() {
   gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+  Object.keys(params).forEach(function (key) {
+    gui.add(params[key], key, params[key].min, params[key].max);
+  }); // TODO
+  // Object.keys(params).forEach((key) => {
+  // 	if (key === 'color' || key === 'groundColor') {
+  // 		gui.addColor(params, key).onChange((val) => {
+  // 			// activeLight[key].setHex(val);
+  // 			render();
+  // 		});
+  // 	} else if(key === 'position') {
+  // 		//
+  // 	} else {
+  // 		// console.log(key, params[key]);
+  // 		gui.add(params[key], key, params[key].min, params[key].max);
+  // 	}
+  // });
 }
 
 init();
@@ -202,7 +241,7 @@ function initControls() {
   controls.maxDistance = 700; // controls.enablePan = true;
 }
 
-function materialGeomitry(scene) {
+function materialGeomitry() {
   var material = new three__WEBPACK_IMPORTED_MODULE_1__["ShaderMaterial"]({
     uniforms: {
       transformScale: {
@@ -219,15 +258,15 @@ function materialGeomitry(scene) {
       },
       radius1: {
         type: 'f',
-        value: settings.dotSize
+        value: params.dotSize.dotSize
       },
       radius2: {
         type: 'f',
-        value: settings.dotSize
+        value: params.dotSize.dotSize
       },
       amount: {
         type: 'f',
-        value: settings.dotAmount
+        value: params.dotAmount.dotAmount
       },
       time: {
         type: 'f',
@@ -262,6 +301,7 @@ function materialGeomitry(scene) {
   material.uniforms.time.value = speedFactor * (Date.now() - start); // enable transparency in the material
 
   material.transparent = true;
+  material.needsUpdate = true;
   return material;
 }
 
