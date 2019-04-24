@@ -1,0 +1,3 @@
+- load obj + mtl file 
+- see progress in console
+- source: three examples obj loader, and three mtl loader
