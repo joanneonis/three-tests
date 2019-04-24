@@ -18,28 +18,33 @@ var gui;
 
 let material;
 
-const settings = {
-	bgColor: "rgb(65,65,65)",
-	canvasHeight: "window",
-	canvasWidth: "window",
-	container: "js-webgl-container-1",
-	customBoundingBox: null,
-	dotAmount: 80,
-	dotColor: "rgb(0,0,0)",
-	dotSize: 0.2,
-	fogIntencity: 55,
-	opacity: 1,
-	position: {
-		x: 0,
-		y: 0,
-		z: 0,
+let presets = {
+	type: 'dots',
+	dots: {
+		bgColor: "rgb(65,65,65)",
+		dotColor: "rgb(0,0,0)",
+		speed: 0.00001,
+		dotAmount: 80,
+		fogIntencity: 55,
+		dotSize: 0.2,
+		shapeColor: "rgb(65,65,65)",
+		transformIntencity: 10,
+		transformScale: 10.0,
+		fogColor: "rgb(65,65,65)",
 	},
-	shapeColor: "rgb(65,65,65)",
-	speed: 0.00001,
-	transformIntencity: 10,
-	transformScale: 10.0,
-	variant: 0,
-};
+	shade: {
+		bgColor: "rgb(53,133,190)",
+		dotColor: "rgb(53,133,190)",
+		speed: 0.000086,
+		dotAmount: 115,
+		fogIntencity: 150,
+		dotSize: 0.18,
+		shapeColor: "rgb(53,133,190)",
+		transformIntencity: 20,
+		transformScale: 0,
+		fogColor: "rgb(148,0,255)",
+	}
+}
 
 let params = {
 	bgColor: {
@@ -50,7 +55,7 @@ let params = {
 		},
 	},
 	dotColor: {
-		dotColor: "rgb(65,65,65)",
+		dotColor: "rgb(0,0,0)",
 		type: 'color',
 		uniform: true,
 		update: function(e) {
@@ -69,7 +74,7 @@ let params = {
 		max: 150,
 		uniform: true,
 		update: function(e) {
-			material.uniforms.amount.value = params.dotAmount.dotAmount;
+			material.uniforms.amount.value = e;
 		}
 	},
 	fogIntencity: {
@@ -146,7 +151,7 @@ function init() {
 
 	// fog
 	const fogColor = params.fogColor.fogColor;
-  scene.fog = new THREE.Fog(fogColor, 0, settings.fogIntencity);
+  scene.fog = new THREE.Fog(fogColor, 0, params.fogIntencity.fogIntencity);
 
 	material = materialGeomitry();
 
@@ -157,10 +162,10 @@ function init() {
   );
 	
 	scene.add(mesh);
-	mesh.position.set(settings.position.x, settings.position.y, settings.position.z);
+	mesh.position.set(0, 0, 0);
 	rotateObject(mesh, -10, 160, 10);
 	
-	scene.background = new THREE.Color( settings.bgColor);
+	scene.background = new THREE.Color( params.bgColor.bgColor);
 	window.addEventListener('resize', onResize, false);
 }
 
@@ -183,32 +188,28 @@ function render() {
 function initGui() {
 	gui = new dat.GUI();
 
+	gui.add(
+		presets,
+		'type',
+		['dots', 'shade'] 
+	)
+	.onChange((val) => {
+		updatePresets(val); 
+	});
+
 	Object.keys(params).forEach((key) => {		
 		if (params[key].type === 'color') {
 			gui.addColor(params[key], key).onChange((e) => {
 				params[key].update(e);
 			}); 
+		} else if(key === 'speed') {
+			gui.add(params[key], key, params[key].min, params[key].max);
 		} else {
 			gui.add(params[key], key, params[key].min, params[key].max).onChange((e) => {
 				params[key].update(e);
 			});
 		}
 	});
-	
-	// TODO
-	// Object.keys(params).forEach((key) => {
-	// 	if (key === 'color' || key === 'groundColor') {
-	// 		gui.addColor(params, key).onChange((val) => {
-	// 			// activeLight[key].setHex(val);
-	// 			render();
-	// 		});
-	// 	} else if(key === 'position') {
-	// 		//
-	// 	} else {
-	// 		// console.log(key, params[key]);
-	// 		gui.add(params[key], key, params[key].min, params[key].max);
-	// 	}
-	// });
 }
 
 
@@ -240,15 +241,15 @@ function materialGeomitry() {
     uniforms: {
       transformScale: {
         type: 'f',
-        value: settings.transformScale,
+        value: params.transformScale.transformScale,
       },
       transformIntencity: {
         type: 'f',
-        value: settings.transformIntencity,
+        value: params.transformIntencity.transformIntencity,
       },
       opacity: {
         type: 'f',
-        value: settings.opacity,
+        value: 1,
       },
       radius1: {
         type: 'f',
@@ -280,11 +281,11 @@ function materialGeomitry() {
       },
       dotColor: {
         type: 'c',
-        value: new THREE.Color(settings.dotColor),
+        value: new THREE.Color(params.dotColor.dotColor),
       },
       shapeColor: {
         type: 'c',
-        value: new THREE.Color(settings.shapeColor),
+        value: new THREE.Color(params.shapeColor.shapeColor),
       },
     },
     vertexShader: document.getElementById('vertexShader').textContent,
@@ -306,4 +307,16 @@ function rotateObject(object, degreeX = 0, degreeY = 0, degreeZ = 0) {
   object.rotateX(THREE.Math.degToRad(degreeX));
   object.rotateY(THREE.Math.degToRad(degreeY));
   object.rotateZ(THREE.Math.degToRad(degreeZ));
+}
+
+function updatePresets(e) {
+	Object.keys(presets[e]).forEach((key) => {	
+		if(key === 'speed') {
+			params.speed.speed = presets[e][key]; 
+		} else {
+			params[key][key] = presets[e][key];
+			params[key].update(presets[e][key]);
+			gui.updateDisplay();
+		}
+	});
 }
