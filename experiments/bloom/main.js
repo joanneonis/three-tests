@@ -27,6 +27,10 @@ var gui;
 var materials;
 var composer;
 
+var rotation = 0;
+var rotationSpeed = 0.009;
+var spaceShip;
+
 function init() {
 	initRenderer();
 	
@@ -64,6 +68,10 @@ function onResize() {
 
 function render() {
 	controls.update();
+
+	if (spaceShip) {
+		spaceShip.rotation.y += rotationSpeed;
+	}
 
 	requestAnimationFrame(render);
 	renderer.render(scene, camera);
@@ -140,8 +148,10 @@ function modelLoaders() {
 
 			} );
 			
-			rotateObject(object, 0, 120, 0);
-			scene.add( object );
+			rotateObject(object, 20, 0, 0);
+
+			spaceShip = object;
+			scene.add( spaceShip );
 
 		},
 		// called when loading is in progresses
