@@ -6,9 +6,8 @@ var meshes = new Array(3);
 
 import * as THREE from 'three';
 
-export function createObjects() {
-	var cubeSize = 30;
-
+export function createObjects(bottom) {
+	let cubeSize = 30;
 	//MATERIAL
 	materials[0] = new THREE.MeshLambertMaterial();
 	materials[1] = new THREE.MeshPhongMaterial();
@@ -34,7 +33,7 @@ export function createObjects() {
 
 
 	meshes[2].rotation.x = -90 * (Math.PI / 180);
-	meshes[2].position.y = - cubeSize * 2;
+	meshes[2].position.y = - bottom * 2;
 	meshes[2].receiveShadow = true;
 	// scene.add(meshes[2]);
 

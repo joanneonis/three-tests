@@ -58,18 +58,10 @@ function init() {
 	
 	scene.add(new THREE.AxesHelper(10));
 
-	var meshes = createObjects();
+	var meshes = createObjects(0);
 	for(let i = 2; i < meshes.length; i++) {
 		scene.add(meshes[i]);
 	}
-
-	// ambulanceMesh = loadModel('Ambulance');
-	// console.log(ambulanceMesh);
-	// scene.add(ambulanceMesh);
-
-	test();
-	// mesh.castShadow = true;
-	// controls.target.copy(meshes[0].position);
 
 	window.addEventListener('resize', onResize, false);
 
@@ -81,10 +73,6 @@ function init() {
 	buildGui(scene);
 }
 
-async function test() {
-	let hoi = await loadModel('Ambulance');
-	return hoi;
-}
 
 function onResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
@@ -92,8 +80,14 @@ function onResize() {
 
 	renderer.setSize(window.innerWidth, window.innerHeight);
 }
- 
 
+loadModel('Ambulance').then((a) => {
+	console.log(a);
+	a.position.y = 3;
+	a.castShadow = true;
+	controls.target.copy(a.position);
+	scene.add( a );
+});
 
 function render() {
 	controls.update();
