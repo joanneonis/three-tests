@@ -1,8 +1,8 @@
 
 export class BaseLight {
 	constructor(config={}) {
-		this.position = {x:15, y:40, z:35};
-		this.intensity = 1.37;
+		this.position = {x:70, y:50, z:100};
+		this.intensity = 1;
 		this.params = {
 			color: null,
 			intensity: {

@@ -111,7 +111,7 @@ export function setlightType(type, scene) {
 			scene.userData.activeLightSettings.GuiSettings = new PointLight;
 			break;
 		case 'HemisphereLight':
-			scene.userData.activeLightSettings.light = new THREE.HemisphereLight(0xffffbb, 0x0808dd, 1);
+			scene.userData.activeLightSettings.light = new THREE.HemisphereLight(new THREE.Color("rgb(255, 255, 255)"), new THREE.Color("rgb(0, 0, 0)"), 1);
 			scene.userData.activeLightSettings.Helper = new THREE.HemisphereLightHelper(scene.userData.activeLightSettings.light);
 			scene.userData.activeLightSettings.GuiSettings = new HemisphereLight;
 			scene.userData.activeLightSettings.GuiSettings.params.groundColor = scene.userData.activeLightSettings.light.color.getHex();

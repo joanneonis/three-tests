@@ -100,21 +100,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _helpers_classes_lights__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helpers/classes/lights */ "./helpers/classes/lights.js");
-/* harmony import */ var _helpers_functions_basic_objects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helpers/functions/basic-objects */ "./helpers/functions/basic-objects.js");
-/* harmony import */ var three_src_helpers_SpotLightHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/src/helpers/SpotLightHelper */ "./node_modules/three/src/helpers/SpotLightHelper.js");
-/* harmony import */ var three_src_helpers_DirectionalLightHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/src/helpers/DirectionalLightHelper */ "./node_modules/three/src/helpers/DirectionalLightHelper.js");
-/* harmony import */ var three_src_helpers_PointLightHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/src/helpers/PointLightHelper */ "./node_modules/three/src/helpers/PointLightHelper.js");
-/* harmony import */ var three_src_helpers_HemisphereLightHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! three/src/helpers/HemisphereLightHelper */ "./node_modules/three/src/helpers/HemisphereLightHelper.js");
-/* harmony import */ var _helpers_functions_load_model__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../helpers/functions/load-model */ "./helpers/functions/load-model.js");
-/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
+/* harmony import */ var _helpers_functions_basic_objects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helpers/functions/basic-objects */ "./helpers/functions/basic-objects.js");
+/* harmony import */ var _helpers_functions_load_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helpers/functions/load-model */ "./helpers/functions/load-model.js");
+/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
 /* eslint-disable no-unused-vars */
-
-
-
-
- // helpers
-
 
 
 
@@ -128,7 +117,12 @@ var renderer,
     scene,
     camera,
     theCanvas = document.getElementById('gl-canvas');
-var gui; // TODO !as import 
+var gui;
+var cameraPos = {
+  x: 58,
+  y: 36,
+  z: 36
+}; // TODO !as import 
 
 var activeLightSettings = {
   type: 'Spotlight'
@@ -140,13 +134,11 @@ var ambulanceMesh;
 function init() {
   initRenderer();
   scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
-  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](35, window.innerWidth / window.innerHeight, 1, 1000);
-  camera.position.set(0, 0, -300);
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000);
+  camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
   initControls();
-  var ambient = new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0xffffff, 0.1);
-  scene.add(ambient);
   scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AxesHelper"](10));
-  var meshes = Object(_helpers_functions_basic_objects__WEBPACK_IMPORTED_MODULE_4__["createObjects"])(0);
+  var meshes = Object(_helpers_functions_basic_objects__WEBPACK_IMPORTED_MODULE_3__["createObjects"])(0);
 
   for (var i = 2; i < meshes.length; i++) {
     scene.add(meshes[i]);
@@ -155,9 +147,9 @@ function init() {
   window.addEventListener('resize', onResize, false);
   scene.userData.activeLightSettings = activeLightSettings;
   scene.userData.gui = gui;
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_10__["setlightType"])('SpotLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_10__["changeLightType"])('SpotLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_10__["buildGui"])(scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["setlightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["changeLightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["buildGui"])(scene);
 }
 
 function onResize() {
@@ -166,14 +158,6 @@ function onResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-Object(_helpers_functions_load_model__WEBPACK_IMPORTED_MODULE_9__["loadModel"])('Ambulance').then(function (a) {
-  console.log(a);
-  a.position.y = 3;
-  a.castShadow = true;
-  controls.target.copy(a.position);
-  scene.add(a);
-});
-
 function render() {
   controls.update();
   requestAnimationFrame(render);
@@ -181,12 +165,22 @@ function render() {
 }
 
 function initGui() {
-  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"](); // gui.add(cameraPos, 'x', -1000, 1000).onChange((val) => { camera.position.x = val });
+  // gui.add(cameraPos, 'y', -1000, 1000).onChange((val) => { camera.position.y = val });
+  // gui.add(cameraPos, 'z', -1000, 1000).onChange((val) => { camera.position.z = val });
 }
 
 initGui();
 init();
-render();
+Object(_helpers_functions_load_model__WEBPACK_IMPORTED_MODULE_4__["loadModel"])('Ambulance').then(function (a) {
+  a.matrixWorldNeedsUpdate = true; // a.position.y = 3;
+
+  a.children[0].castShadow = true; // only works when is single mesh
+
+  scene.add(a);
+  scene.userData.ambulanceMesh = a;
+  render();
+});
 
 function initRenderer() {
   renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
@@ -244,11 +238,11 @@ var BaseLight = function BaseLight() {
   _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_4___default()(this, BaseLight);
 
   this.position = {
-    x: 15,
-    y: 40,
-    z: 35
+    x: 70,
+    y: 50,
+    z: 100
   };
-  this.intensity = 1.37;
+  this.intensity = 1;
   this.params = {
     color: null,
     intensity: {
@@ -558,7 +552,7 @@ function setlightType(type, scene) {
       break;
 
     case 'HemisphereLight':
-      scene.userData.activeLightSettings.light = new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLight"](0xffffbb, 0x0808dd, 1);
+      scene.userData.activeLightSettings.light = new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLight"](new three__WEBPACK_IMPORTED_MODULE_1__["Color"]("rgb(255, 255, 255)"), new three__WEBPACK_IMPORTED_MODULE_1__["Color"]("rgb(0, 0, 0)"), 1);
       scene.userData.activeLightSettings.Helper = new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLightHelper"](scene.userData.activeLightSettings.light);
       scene.userData.activeLightSettings.GuiSettings = new _helpers_classes_lights__WEBPACK_IMPORTED_MODULE_2__["HemisphereLight"]();
       scene.userData.activeLightSettings.GuiSettings.params.groundColor = scene.userData.activeLightSettings.light.color.getHex();
