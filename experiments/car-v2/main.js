@@ -7,9 +7,11 @@ import {
 	createObjects
 } from '../../helpers/functions/basic-objects';
 
-import { loadModel } from '../../helpers/functions/load-model';
+
+import 'three/examples/js/loaders/GLTFLoader';
+// import { loadModel } from '../../helpers/functions/load-model';
 import { setlightType, buildGui, changeLightType } from '../../helpers/functions/lights';
-import { SpotLight } from '../../helpers/classes/lights';
+// import { SpotLight } from '../../helpers/classes/lights';
 
 //?--------------------------------------------------------------------
 //?		Base
@@ -24,14 +26,19 @@ var gui;
 var cameraPos = {x: 58, y: 36, z: 36};
 
 var controls;
+let animation;
 
+let mixer;
+
+let sceneTest;
+
+var clock = new THREE.Clock();
 
 function init() {
 
 	initRenderer();
-	
+
 	scene = new THREE.Scene();
-	
 	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
 	camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
 	
@@ -41,8 +48,8 @@ function init() {
 
 	let bgColor = new THREE.Color('#a3e1fe');
 
-	var meshes = createObjects(0);
-	for(let i = 2; i < meshes.length; i++) {
+	var meshes = createObjects();
+	for(let i = 0; i < meshes.length; i++) {
 		meshes[i].material.color = bgColor;
 		scene.add(meshes[i]);
 	}
@@ -68,11 +75,13 @@ function onResize() {
 }
 
 function render() {
-	controls.update();
+	// controls.update();
 
 	requestAnimationFrame(render);
 	renderer.render(scene, camera);
 
+	var dt = clock.getDelta()
+	// mixer.update(dt);
 }
 
 function initGui() {
@@ -81,6 +90,7 @@ function initGui() {
 
 initGui();
 init();
+render();
 
 function initRenderer() {
 	renderer = new THREE.WebGLRenderer({
@@ -98,4 +108,18 @@ function initControls() {
 	controls.minDistance = 0;
 	controls.maxDistance = 700;
 	controls.enableKeys = false;
+}
+
+function test() {
+	var loader = new THREE.GLTFLoader();
+	loader.load('test2.glb', function (gltf) {
+		console.log(gltf);
+		// console.log(gltf.animations[0]);
+
+		// var model = gltf.scene;
+		// var mixer = new THREE.AnimationMixer(model);
+		// var clip1 = gltf.animations[0];
+		// var action1 = mixer.clipAction(clip1);
+		// action1.play();
+	});
 }
