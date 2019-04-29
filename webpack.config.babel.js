@@ -14,6 +14,7 @@ export default {
         modalloaders: path.join(__dirname, 'basics/modal-loaders/main.js'),
         bloom: path.join(__dirname, 'basics/bloom/main.js'),
         car: path.join(__dirname, 'experiments/car/main.js'),
+        car2: path.join(__dirname, 'experiments/car-v2/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),

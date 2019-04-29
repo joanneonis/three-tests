@@ -9,6 +9,7 @@ import {
 
 import { loadModel } from '../../helpers/functions/load-model';
 import { setlightType, buildGui, changeLightType } from '../../helpers/functions/lights';
+import { SpotLight } from '../../helpers/classes/lights';
 
 //?--------------------------------------------------------------------
 //?		Base
@@ -50,10 +51,15 @@ function init() {
 	
 	scene.add(new THREE.AxesHelper(10));
 
+	let bgColor = new THREE.Color('#a3e1fe');
+
 	var meshes = createObjects(0);
 	for(let i = 2; i < meshes.length; i++) {
+		meshes[i].material.color = bgColor;
 		scene.add(meshes[i]);
 	}
+
+	scene.background = bgColor;
 
 	window.addEventListener('resize', onResize, false);
 
@@ -118,6 +124,11 @@ loadModel('Ambulance').then((a) => {
 	scene.userData.ambulanceMesh = a;
 	scene.userData.ambulanceMesh.userData = ambulanceInit;
 
+	console.log(a);
+	// var modifier = new ModifierStack(scene.userData.ambulanceMesh);
+	// var bend = new Bend(0, 0, 70);
+	// modifier.addModifier(bend);
+
 	render();
 });
 
@@ -146,7 +157,7 @@ function initControls() {
 	controls = new THREE.OrbitControls(camera, renderer.domElement);
 	controls.minDistance = 0;
 	controls.maxDistance = 700;
-	// controls.enablePan = true;
+	controls.enableKeys = false;
 }
 
 function updatePosition(obj){
@@ -168,8 +179,6 @@ function updatePosition(obj){
 		obj.userData.x -= Math.abs(obj.userData.vx);
 		obj.position.z -= Math.abs(obj.userData.vx);
 	}
-
-	console.log( obj.userData.vx);
 }
 
 function applyFriction(obj){

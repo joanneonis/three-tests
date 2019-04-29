@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/car/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/car-v2/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./experiments/car/main.js":
-/*!*********************************!*\
-  !*** ./experiments/car/main.js ***!
-  \*********************************/
+/***/ "./experiments/car-v2/main.js":
+/*!************************************!*\
+  !*** ./experiments/car-v2/main.js ***!
+  \************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -124,22 +124,8 @@ var cameraPos = {
   x: 58,
   y: 36,
   z: 36
-}; // TODO !as import 
-// let activeLightSettings = { type: 'Spotlight' };
-// TODO end
-
-var controls;
-var ambulanceInit = {
-  x: 0,
-  y: 0,
-  vx: 0,
-  vy: 0,
-  ax: 0,
-  ay: 0,
-  r: 0,
-  direction: null
 };
-var friction = 0.97;
+var controls;
 
 function init() {
   initRenderer();
@@ -177,56 +163,14 @@ function render() {
   controls.update();
   requestAnimationFrame(render);
   renderer.render(scene, camera);
-
-  if (activeKey === 'ArrowUp') {
-    scene.userData.ambulanceMesh.userData.direction = 'forwards';
-    scene.userData.ambulanceMesh.userData.ax = Math.cos(0) * 0.05;
-    scene.userData.ambulanceMesh.userData.ay = Math.sin(0) * 0.05;
-  }
-
-  if (activeKey === 'ArrowDown') {
-    scene.userData.ambulanceMesh.userData.direction = 'backwards';
-    scene.userData.ambulanceMesh.userData.ax = Math.cos(0) * 0.05;
-    scene.userData.ambulanceMesh.userData.ay = Math.sin(0) * 0.05;
-  }
-
-  if (activeKey === null) {
-    scene.userData.ambulanceMesh.userData.ax = 0;
-    scene.userData.ambulanceMesh.userData.ay = 0;
-  }
-
-  updatePosition(scene.userData.ambulanceMesh);
 }
 
 function initGui() {
-  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"](); // gui.add(cameraPos, 'x', -1000, 1000).onChange((val) => { camera.position.x = val });
-  // gui.add(cameraPos, 'y', -1000, 1000).onChange((val) => { camera.position.y = val });
-  // gui.add(cameraPos, 'z', -1000, 1000).onChange((val) => { camera.position.z = val });
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
 }
 
 initGui();
 init();
-Object(_helpers_functions_load_model__WEBPACK_IMPORTED_MODULE_4__["loadModel"])('Ambulance').then(function (a) {
-  a.matrixWorldNeedsUpdate = true; // a.position.y = 3;
-
-  a.children[0].castShadow = true; // only works when is single mesh
-
-  scene.add(a);
-  scene.userData.ambulanceMesh = a;
-  scene.userData.ambulanceMesh.userData = ambulanceInit;
-  console.log(a); // var modifier = new ModifierStack(scene.userData.ambulanceMesh);
-  // var bend = new Bend(0, 0, 70);
-  // modifier.addModifier(bend);
-
-  render();
-});
-var activeKey;
-document.addEventListener('keydown', function (e) {
-  activeKey = e.code;
-});
-document.addEventListener('keyup', function (e) {
-  activeKey = null;
-});
 
 function initRenderer() {
   renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
@@ -245,44 +189,6 @@ function initControls() {
   controls.maxDistance = 700;
   controls.enableKeys = false;
 }
-
-function updatePosition(obj) {
-  //update velocity
-  if (scene.userData.ambulanceMesh.userData.direction === 'forwards') {
-    obj.userData.vx += obj.userData.ax;
-    obj.userData.vy += obj.userData.ay;
-  } else if (scene.userData.ambulanceMesh.userData.direction === 'backwards') {
-    obj.userData.vx -= Math.abs(obj.userData.ax);
-    obj.userData.vy -= Math.abs(obj.userData.ay);
-  }
-
-  applyFriction(obj);
-
-  if (scene.userData.ambulanceMesh.userData.direction === 'forwards') {
-    obj.userData.x += obj.userData.vx;
-    obj.position.z += obj.userData.vx;
-  } else if (scene.userData.ambulanceMesh.userData.direction === 'backwards') {
-    obj.userData.x -= Math.abs(obj.userData.vx);
-    obj.position.z -= Math.abs(obj.userData.vx);
-  }
-}
-
-function applyFriction(obj) {
-  obj.userData.vx *= friction;
-  obj.userData.vy *= friction;
-} // document.addEventListener('keydown', function(event){
-// 	if(event.keyCode === 87) {
-// 		// ambulanceTranslates[0] += 1;
-// 		// scene.userData.ambulanceMesh.position.x += .1;
-// 		// scene.userData.ambulanceMesh.updateMatrix();
-// 		// scene.userData.ambulanceMesh.translateZ(1);
-// 		// scene.userData.ambulanceMesh.userData.ax = Math.cos(spaceship.r) * 0.05;
-// 		updatePosition(scene.userData.ambulanceMesh);
-// 	}
-// 	if(event.keyCode === 83) {
-// 		// ambulanceTranslates[0] -= 1;
-// 	}
-// } );
 
 /***/ }),
 
@@ -21532,4 +21438,4 @@ function arrayMax( array ) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=car.bundle.js.map
+//# sourceMappingURL=car2.bundle.js.map
