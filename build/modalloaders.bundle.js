@@ -114,7 +114,6 @@ __webpack_require__.r(__webpack_exports__);
 
  //?--------------------------------------------------------------------
 //?		Base
-//? 	Earth source: http://blog.mastermaps.com/2013/09/creating-webgl-earth-with-threejs.html
 //?--------------------------------------------------------------------
 
 var renderer,

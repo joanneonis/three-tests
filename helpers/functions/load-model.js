@@ -3,21 +3,19 @@ import 'three/examples/js/loaders/DDSLoader';
 import 'three/examples/js/loaders/MTLLoader';
 import 'three/examples/js/loaders/OBJLoader';
 
-export function loadModel(path, scene) {
-
+export async function loadModel(path) {
 	var onProgress = function ( xhr ) {
 
 		if ( xhr.lengthComputable ) {
 
 			var percentComplete = xhr.loaded / xhr.total * 100;
 			console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
-
 		}
 
 	};
 
 	var onError = function (e) {
-		console.log(e);
+		console.log('error loading', e);
 	};
 
 	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
@@ -29,8 +27,6 @@ export function loadModel(path, scene) {
 
 			materials.preload();
 
-			console.log(materials);
-
 			new THREE.OBJLoader()
 				.setMaterials( materials )
 				.setPath( './models/' )
@@ -38,12 +34,13 @@ export function loadModel(path, scene) {
 
 					object.position.y = 0;
 
-					scene.add( object );
+					// !
 
 				}, onProgress, onError );
 
 		} );
 }
+
 
 // let mtl_loader;
 
