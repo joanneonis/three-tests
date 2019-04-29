@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/download/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./basics/download/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./experiments/download/main.js":
-/*!**************************************!*\
-  !*** ./experiments/download/main.js ***!
-  \**************************************/
+/***/ "./basics/download/main.js":
+/*!*********************************!*\
+  !*** ./basics/download/main.js ***!
+  \*********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

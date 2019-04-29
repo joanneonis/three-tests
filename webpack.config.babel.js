@@ -5,14 +5,14 @@ const webpack = require('webpack')
 export default {
     entry: {
         base: path.join(__dirname, 'js/main.js'),
-        download: path.join(__dirname, 'experiments/download/main.js'),
-        lights: path.join(__dirname, 'experiments/lights/main.js'),
-        cameras: path.join(__dirname, 'experiments/cameras/main.js'),
-        multipleViews: path.join(__dirname, 'experiments/multiple-views/main.js'),
-        materials: path.join(__dirname, 'experiments/materials/main.js'),
-        shaders: path.join(__dirname, 'experiments/shaders/main.js'),
-        modalloaders: path.join(__dirname, 'experiments/modal-loaders/main.js'),
-        bloom: path.join(__dirname, 'experiments/bloom/main.js'),
+        download: path.join(__dirname, 'basics/download/main.js'),
+        lights: path.join(__dirname, 'basics/lights/main.js'),
+        cameras: path.join(__dirname, 'basics/cameras/main.js'),
+        multipleViews: path.join(__dirname, 'basics/multiple-views/main.js'),
+        materials: path.join(__dirname, 'basics/materials/main.js'),
+        shaders: path.join(__dirname, 'basics/shaders/main.js'),
+        modalloaders: path.join(__dirname, 'basics/modal-loaders/main.js'),
+        bloom: path.join(__dirname, 'basics/bloom/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),

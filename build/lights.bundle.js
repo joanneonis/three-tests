@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/lights/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./basics/lights/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./experiments/lights/classes/lights.js":
-/*!**********************************************!*\
-  !*** ./experiments/lights/classes/lights.js ***!
-  \**********************************************/
+/***/ "./basics/lights/classes/lights.js":
+/*!*****************************************!*\
+  !*** ./basics/lights/classes/lights.js ***!
+  \*****************************************/
 /*! exports provided: BaseLight, SpotLight, PointLight, HemisphereLight, DirectionalLight, AmbientLight */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -275,10 +275,10 @@ function (_BaseLight5) {
 
 /***/ }),
 
-/***/ "./experiments/lights/js/basicObjects.js":
-/*!***********************************************!*\
-  !*** ./experiments/lights/js/basicObjects.js ***!
-  \***********************************************/
+/***/ "./basics/lights/js/basicObjects.js":
+/*!******************************************!*\
+  !*** ./basics/lights/js/basicObjects.js ***!
+  \******************************************/
 /*! exports provided: createObjects */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -321,10 +321,10 @@ function createObjects() {
 
 /***/ }),
 
-/***/ "./experiments/lights/main.js":
-/*!************************************!*\
-  !*** ./experiments/lights/main.js ***!
-  \************************************/
+/***/ "./basics/lights/main.js":
+/*!*******************************!*\
+  !*** ./basics/lights/main.js ***!
+  \*******************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -335,8 +335,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _classes_lights__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./classes/lights */ "./experiments/lights/classes/lights.js");
-/* harmony import */ var _js_basicObjects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/basicObjects */ "./experiments/lights/js/basicObjects.js");
+/* harmony import */ var _classes_lights__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./classes/lights */ "./basics/lights/classes/lights.js");
+/* harmony import */ var _js_basicObjects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/basicObjects */ "./basics/lights/js/basicObjects.js");
 /* harmony import */ var three_src_helpers_SpotLightHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/src/helpers/SpotLightHelper */ "./node_modules/three/src/helpers/SpotLightHelper.js");
 /* harmony import */ var three_src_helpers_DirectionalLightHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/src/helpers/DirectionalLightHelper */ "./node_modules/three/src/helpers/DirectionalLightHelper.js");
 /* harmony import */ var three_src_helpers_PointLightHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/src/helpers/PointLightHelper */ "./node_modules/three/src/helpers/PointLightHelper.js");

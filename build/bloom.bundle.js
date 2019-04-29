@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/bloom/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./basics/bloom/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./experiments/bloom/main.js":
-/*!***********************************!*\
-  !*** ./experiments/bloom/main.js ***!
-  \***********************************/
+/***/ "./basics/bloom/main.js":
+/*!******************************!*\
+  !*** ./basics/bloom/main.js ***!
+  \******************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

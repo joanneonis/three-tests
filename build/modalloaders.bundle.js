@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/modal-loaders/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./basics/modal-loaders/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./experiments/modal-loaders/main.js":
-/*!*******************************************!*\
-  !*** ./experiments/modal-loaders/main.js ***!
-  \*******************************************/
+/***/ "./basics/modal-loaders/main.js":
+/*!**************************************!*\
+  !*** ./basics/modal-loaders/main.js ***!
+  \**************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/shaders/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./basics/shaders/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./experiments/shaders/main.js":
-/*!*************************************!*\
-  !*** ./experiments/shaders/main.js ***!
-  \*************************************/
+/***/ "./basics/shaders/main.js":
+/*!********************************!*\
+  !*** ./basics/shaders/main.js ***!
+  \********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

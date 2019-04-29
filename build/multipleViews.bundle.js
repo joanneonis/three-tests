@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/multiple-views/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./basics/multiple-views/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./experiments/lights/js/basicObjects.js":
-/*!***********************************************!*\
-  !*** ./experiments/lights/js/basicObjects.js ***!
-  \***********************************************/
+/***/ "./basics/lights/js/basicObjects.js":
+/*!******************************************!*\
+  !*** ./basics/lights/js/basicObjects.js ***!
+  \******************************************/
 /*! exports provided: createObjects */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -132,10 +132,10 @@ function createObjects() {
 
 /***/ }),
 
-/***/ "./experiments/multiple-views/main.js":
-/*!********************************************!*\
-  !*** ./experiments/multiple-views/main.js ***!
-  \********************************************/
+/***/ "./basics/multiple-views/main.js":
+/*!***************************************!*\
+  !*** ./basics/multiple-views/main.js ***!
+  \***************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -145,7 +145,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lights_js_basicObjects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lights/js/basicObjects */ "./experiments/lights/js/basicObjects.js");
+/* harmony import */ var _lights_js_basicObjects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lights/js/basicObjects */ "./basics/lights/js/basicObjects.js");
 /* eslint-disable no-unused-vars */
 
 
