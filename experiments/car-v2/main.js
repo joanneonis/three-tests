@@ -116,61 +116,22 @@ function initControls() {
 
 function test() {
 	var loader = new THREE.GLTFLoader();
-	loader.load('v0-MDD-2.glb', function (gltf) {
-	
-		// mixer = new THREE.AnimationMixer( mesh );
-		// mixer.clipAction( gltf.animations[ 0 ] ).setDuration( 1 ).play();
-		
-		// console.log(gltf.animations[0]);
 
+	loader.load('v0-MDD-2.glb', function (gltf) {
 		var model = gltf.scene;
 		mixer = new THREE.AnimationMixer(model);
-		// var clip1 = gltf.animations[0];
-		// gltf.animations[1] = THREE.AnimationClipCreator.CreatePulsationAnimation(10, .8);
-
-		// var track1 = gltf.animations[0].tracks[0].clone();
-		// track1.values = track1.values.slice(0, 40);
-		// track1.times = track1.times.slice(0, 40);
 		
-		var sceneLength = gltf.animations[0].duration;
-		var frameDuration = sceneLength / 160;
+		var clips = ['forwards', 'backwards', 'right', 'left'];
+		var stepLength = 40;
+		var actions = new Array(4);
 
-		var animationBase = gltf.animations[0].tracks[0].clone();
-		var animationBase2 = gltf.animations[0].tracks[0].clone();
+		for (let i = 0; i < clips.length; i++) {
+			actions[i] = mixer.clipAction(
+				createAction(i, clips[i], gltf.animations[0], stepLength)
+			);
+		}
 
-		console.log();
-		var clip1test = new THREE.AnimationClip( 'forwards', sceneLength / 4, [  animationBase.trim(frameDuration, frameDuration * 40) ] );
-		var clip2test = new THREE.AnimationClip( 'backwards', sceneLength / 4, [  animationBase2.trim(frameDuration + frameDuration * 40, frameDuration * 80).shift( -(frameDuration + frameDuration * 40) ) ] );
-
-		console.log('trimthis', clip2test);
-		// clip2test.duration = sceneLength / 4;
-		// gltf.animations[3] = new THREE.AnimationClip( 'right', sceneLength / 4, [  animationBase.clone().trim(frameDuration + frameDuration * 80, frameDuration * 120) ] );
-		// gltf.animations[4] = new THREE.AnimationClip( 'left', sceneLength / 4, [  animationBase.clone().trim(frameDuration + frameDuration * 120, frameDuration * 160) ] );
-
-		var action1 = mixer.clipAction(clip1test);
-		var action2 = mixer.clipAction(clip2test);
-		// var action3 = mixer.clipAction(gltf.animations[2]);
-		// var action4 = mixer.clipAction(gltf.animations[3]);
-		// var action5 = mixer.clipAction(gltf.animations[4]);
-
-
-		// var track2 = gltf.animations[0].tracks[0].clone();
-		// track2.values = track2.values.slice(40, 80);
-		// track2.times = track2.times.slice(40, 80);
-
-		// var track3 = gltf.animations[0].tracks[0].clone();
-		// track3.values = track3.values.slice(80, 120);
-		// track3.times = track3.times.slice(80, 120);
-
-		// gltf.animations[0].tracks.push(track1, track2, track3);
-
-		// gltf.animations[0].tracks[0] = gltf.animations[0].tracks[0].trim(0,4);
-
-		// action1.play();
-		action1.play();
-
-		console.log(frameDuration * 10, gltf);
-
+		actions[2].play();
 
 		scene.add( model );
 	});
@@ -180,6 +141,27 @@ function test() {
 // 	console.log('a', a);
 // } );
 
-function createAction() {
+function createAction(index, name, animation, step) {
+	let baseTrack = animation.tracks[0];
+	let sceneLength = animation.duration;
+	let frameDuration = sceneLength / 160;
+	let i = index + 1;
+	let skipStep = i * step;
+	let prevSkipStep = index * step;
 
+	let track = baseTrack.clone().trim(frameDuration + (frameDuration * prevSkipStep), skipStep);
+	
+	if (index > 0) {
+		track.shift(-(frameDuration + frameDuration * prevSkipStep));
+	}
+
+	let clip = new THREE.AnimationClip( 
+		name, 
+		sceneLength / 4, 
+		[  
+			track
+		] 
+	);
+
+	return clip;
 }
