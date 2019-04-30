@@ -8,7 +8,6 @@ import 'three/examples/js/loaders/OBJLoader';
 
 //?--------------------------------------------------------------------
 //?		Base
-//? 	Earth source: http://blog.mastermaps.com/2013/09/creating-webgl-earth-with-threejs.html
 //?--------------------------------------------------------------------
 
 let renderer,
