@@ -78,7 +78,7 @@ function init() {
 	initControls();
 
 	
-	scene.add(new THREE.AxesHelper(10));
+	// scene.add(new THREE.AxesHelper(10));
 
 	let bgColor = new THREE.Color('#a3e1fe');
 

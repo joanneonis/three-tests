@@ -178,8 +178,8 @@ function init() {
   scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
   camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000);
   camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
-  initControls();
-  scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AxesHelper"](10));
+  initControls(); // scene.add(new THREE.AxesHelper(10));
+
   var bgColor = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#a3e1fe');
   scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"]());
   scene.background = bgColor;
