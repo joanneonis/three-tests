@@ -151,9 +151,12 @@ var tractor = {
       rotateObject(tractorObj.parent, 0, rotation, 0);
       tractorObj.parent.translateZ(this.vx);
       wheelObjects[0].rotation.x += three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vx) * 10;
-      wheelObjects[1].rotation.x += three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vx) * 10; // wheelObjects[2].rotation.z = (THREE.Math.degToRad(this.vx) * 100); //? holy
+      wheelObjects[1].rotation.x += three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vx) * 10; // ?
 
-      wheelObjects[2].rotation.x += three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vx) * 10;
+      var newX = wheelObjects[2].rotation.x + three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vx) * 10;
+      var newZ = three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(-this.vr) * 5;
+      wheelObjects[2].rotation.x = newX;
+      wheelObjects[2].rotation.z = newZ;
 
       if (Math.abs(this.vx) > blobbyMinSpeed) {
         tractorObj.morphTargetInfluences[0] = this.vx;
@@ -342,6 +345,43 @@ function rotateObject(object) {
   object.rotateX(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeX));
   object.rotateY(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeY));
   object.rotateZ(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeZ));
+} // Rotate an object around an arbitrary axis in object space
+
+
+var rotObjectMatrix;
+
+function rotateAroundObjectAxis(object, axis, radians) {
+  rotObjectMatrix = new three__WEBPACK_IMPORTED_MODULE_1__["Matrix4"]();
+  rotObjectMatrix.makeRotationAxis(axis.normalize(), radians); // old code for Three.JS pre r54:
+  // object.matrix.multiplySelf(rotObjectMatrix);      // post-multiply
+  // new code for Three.JS r55+:
+
+  object.matrix.multiply(rotObjectMatrix); // old code for Three.js pre r49:
+  // object.rotation.getRotationFromMatrix(object.matrix, object.scale);
+  // old code for Three.js r50-r58:
+  // object.rotation.setEulerFromRotationMatrix(object.matrix);
+  // new code for Three.js r59+:
+
+  object.rotation.setFromRotationMatrix(object.matrix);
+}
+
+var rotWorldMatrix; // Rotate an object around an arbitrary axis in world space       
+
+function rotateAroundWorldAxis(object, axis, radians) {
+  rotWorldMatrix = new three__WEBPACK_IMPORTED_MODULE_1__["Matrix4"]();
+  rotWorldMatrix.makeRotationAxis(axis.normalize(), radians); // old code for Three.JS pre r54:
+  //  rotWorldMatrix.multiply(object.matrix);
+  // new code for Three.JS r55+:
+
+  rotWorldMatrix.multiply(object.matrix); // pre-multiply
+
+  object.matrix = rotWorldMatrix; // old code for Three.js pre r49:
+  // object.rotation.getRotationFromMatrix(object.matrix, object.scale);
+  // old code for Three.js pre r59:
+  // object.rotation.setEulerFromRotationMatrix(object.matrix);
+  // code for r59+:
+
+  object.rotation.setFromRotationMatrix(object.matrix);
 }
 
 /***/ }),
