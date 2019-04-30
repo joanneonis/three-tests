@@ -134,6 +134,9 @@ var animation;
 var mixer;
 var sceneTest;
 var clock = new three__WEBPACK_IMPORTED_MODULE_1__["Clock"]();
+var actions = new Array(4);
+var animationSettings = new Array(4);
+var currentlyPlaying = 0;
 
 function init() {
   initRenderer();
@@ -212,19 +215,31 @@ function test() {
     mixer = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationMixer"](model);
     var clips = ['forwards', 'backwards', 'right', 'left'];
     var stepLength = 40;
-    var actions = new Array(4);
 
     for (var i = 0; i < clips.length; i++) {
-      actions[i] = mixer.clipAction(createAction(i, clips[i], gltf.animations[0], stepLength));
+      animationSettings[i] = {
+        name: clips[i],
+        time: 0,
+        weight: 0
+      };
+      animationSettings[i].action = mixer.clipAction(createAction(i, clips[i], gltf.animations[0], stepLength)); // animationSettings[i].action.repetitions = 1;
+
+      animationSettings[i].action.play();
+      animationSettings[i].action.setEffectiveWeight(0); // .setEffectiveTimeScale(0)
+      // .fadeIn( duration )
     }
 
-    actions[2].play();
+    console.log(animationSettings[0].action); // animationSettings[currentlyPlaying].action.play();
+    // mixer.addEventListener('finished', () => {
+    // 	if (currentlyPlaying === clips.length - 1) { return; }
+    // 	animationSettings[currentlyPlaying].action.stop();
+    // 	currentlyPlaying ++;
+    // 	animationSettings[currentlyPlaying].action.play();
+    // });
+
     scene.add(model);
   });
-} // mixer.addEventListener( 'loop', (a) => {
-// 	console.log('a', a);
-// } );
-
+}
 
 function createAction(index, name, animation, step) {
   var baseTrack = animation.tracks[0];
@@ -240,6 +255,9 @@ function createAction(index, name, animation, step) {
   }
 
   var clip = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationClip"](name, sceneLength / 4, [track]);
+  gui.add(animationSettings[index], 'weight', 0, 1).onChange(function (val) {
+    animationSettings[index].action.setEffectiveWeight(val);
+  });
   return clip;
 }
 

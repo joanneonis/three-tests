@@ -36,6 +36,9 @@ let mixer;
 let sceneTest;
 
 var clock = new THREE.Clock();
+var actions = new Array(4);
+let animationSettings = new Array(4);
+let currentlyPlaying = 0;
 
 function init() {
 
@@ -84,7 +87,9 @@ function render() {
 	renderer.render(scene, camera);
 
 	var dt = clock.getDelta()
-	if (mixer) { mixer.update(dt); }
+	if (mixer) { 
+		mixer.update(dt);
+	}
 }
 
 function initGui() {
@@ -123,23 +128,32 @@ function test() {
 		
 		var clips = ['forwards', 'backwards', 'right', 'left'];
 		var stepLength = 40;
-		var actions = new Array(4);
 
 		for (let i = 0; i < clips.length; i++) {
-			actions[i] = mixer.clipAction(
+			animationSettings[i] = { name: clips[i], time: 0, weight: 0 };
+			animationSettings[i].action = mixer.clipAction(
 				createAction(i, clips[i], gltf.animations[0], stepLength)
 			);
-		}
+			// animationSettings[i].action.repetitions = 1;
 
-		actions[2].play();
+			animationSettings[i].action.play();
+			animationSettings[i].action.setEffectiveWeight(0);
+			// .setEffectiveTimeScale(0)
+			// .fadeIn( duration )
+		}
+		
+		// animationSettings[currentlyPlaying].action.play();
+
+		// mixer.addEventListener('finished', () => {
+		// 	if (currentlyPlaying === clips.length - 1) { return; }
+		// 	animationSettings[currentlyPlaying].action.stop();
+		// 	currentlyPlaying ++;
+		// 	animationSettings[currentlyPlaying].action.play();
+		// });
 
 		scene.add( model );
 	});
 }
-
-// mixer.addEventListener( 'loop', (a) => {
-// 	console.log('a', a);
-// } );
 
 function createAction(index, name, animation, step) {
 	let baseTrack = animation.tracks[0];
@@ -162,6 +176,10 @@ function createAction(index, name, animation, step) {
 			track
 		] 
 	);
+
+	gui.add(animationSettings[index], 'weight', 0, 1).onChange((val) => {
+		animationSettings[index].action.setEffectiveWeight(val);
+	});
 
 	return clip;
 }
