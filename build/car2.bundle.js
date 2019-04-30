@@ -219,7 +219,7 @@ function test() {
     var track1 = gltf.animations[0].tracks[0].clone(); // track1.values = track1.values.slice(0, 40);
     // track1.times = track1.times.slice(0, 40);
 
-    gltf.animations[2] = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationClip"]('test', 1, [track1.trim(0, 2)]);
+    gltf.animations[2] = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationClip"]('test', 1, [track1.trim(0.1, 2)]);
     var action1 = mixer.clipAction(clip1).setDuration(10);
     var action2 = mixer.clipAction(gltf.animations[1]);
     var action3 = mixer.clipAction(gltf.animations[2]); // var track2 = gltf.animations[0].tracks[0].clone();
@@ -232,10 +232,14 @@ function test() {
     // gltf.animations[0].tracks[0] = gltf.animations[0].tracks[0].trim(0,4);
     // action1.play();
 
+    action3.repetitions = 2;
     action3.play();
+    console.log(action2.repetitions = 2);
     scene.add(model);
   });
-}
+} // mixer.addEventListener( 'loop', (a) => {
+// 	console.log('a', a);
+// } );
 
 /***/ }),
 
