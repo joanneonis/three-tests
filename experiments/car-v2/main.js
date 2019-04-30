@@ -81,7 +81,7 @@ function render() {
 	renderer.render(scene, camera);
 
 	var dt = clock.getDelta()
-	// mixer.update(dt);
+	if (mixer) { mixer.update(dt); }
 }
 
 function initGui() {
@@ -91,6 +91,7 @@ function initGui() {
 initGui();
 init();
 render();
+test();
 
 function initRenderer() {
 	renderer = new THREE.WebGLRenderer({
@@ -112,14 +113,20 @@ function initControls() {
 
 function test() {
 	var loader = new THREE.GLTFLoader();
-	loader.load('test2.glb', function (gltf) {
-		console.log(gltf);
+	loader.load('boltransform-working.glb', function (gltf) {
+		console.log(gltf.animations.length, gltf);
+
+		// mixer = new THREE.AnimationMixer( mesh );
+		// mixer.clipAction( gltf.animations[ 0 ] ).setDuration( 1 ).play();
+		
 		// console.log(gltf.animations[0]);
 
-		// var model = gltf.scene;
-		// var mixer = new THREE.AnimationMixer(model);
-		// var clip1 = gltf.animations[0];
-		// var action1 = mixer.clipAction(clip1);
-		// action1.play();
+		var model = gltf.scene;
+		mixer = new THREE.AnimationMixer(model);
+		var clip1 = gltf.animations[0];
+		var action1 = mixer.clipAction(clip1);
+		action1.play();
+
+		scene.add( model );
 	});
 }

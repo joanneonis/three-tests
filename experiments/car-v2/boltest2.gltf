@@ -1,0 +1,31 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v0.9.4",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "name" : "Lattice",
+            "scale" : [
+                0.7391822338104248,
+                0.6391822099685669,
+                0.6591822504997253
+            ]
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 0,
+            "uri" : "data:application/octet-stream;base64,"
+        }
+    ]
+}

@@ -168,7 +168,11 @@ function render() {
   // controls.update();
   requestAnimationFrame(render);
   renderer.render(scene, camera);
-  var dt = clock.getDelta(); // mixer.update(dt);
+  var dt = clock.getDelta();
+
+  if (mixer) {
+    mixer.update(dt);
+  }
 }
 
 function initGui() {
@@ -178,6 +182,7 @@ function initGui() {
 initGui();
 init();
 render();
+test();
 
 function initRenderer() {
   renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
@@ -199,13 +204,17 @@ function initControls() {
 
 function test() {
   var loader = new three__WEBPACK_IMPORTED_MODULE_1__["GLTFLoader"]();
-  loader.load('test2.glb', function (gltf) {
-    console.log(gltf); // console.log(gltf.animations[0]);
-    // var model = gltf.scene;
-    // var mixer = new THREE.AnimationMixer(model);
-    // var clip1 = gltf.animations[0];
-    // var action1 = mixer.clipAction(clip1);
-    // action1.play();
+  loader.load('boltransform-working.glb', function (gltf) {
+    console.log(gltf.animations.length, gltf); // mixer = new THREE.AnimationMixer( mesh );
+    // mixer.clipAction( gltf.animations[ 0 ] ).setDuration( 1 ).play();
+    // console.log(gltf.animations[0]);
+
+    var model = gltf.scene;
+    mixer = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationMixer"](model);
+    var clip1 = gltf.animations[0];
+    var action1 = mixer.clipAction(clip1);
+    action1.play();
+    scene.add(model);
   });
 }
 
