@@ -227,15 +227,14 @@ function test() {
       animationSettings[i].action.play();
       animationSettings[i].action.setEffectiveWeight(0); // .setEffectiveTimeScale(0)
       // .fadeIn( duration )
-    }
-
-    console.log(animationSettings[0].action); // animationSettings[currentlyPlaying].action.play();
+    } // animationSettings[currentlyPlaying].action.play();
     // mixer.addEventListener('finished', () => {
     // 	if (currentlyPlaying === clips.length - 1) { return; }
     // 	animationSettings[currentlyPlaying].action.stop();
     // 	currentlyPlaying ++;
     // 	animationSettings[currentlyPlaying].action.play();
     // });
+
 
     scene.add(model);
   });
