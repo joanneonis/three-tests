@@ -34,7 +34,7 @@ var tractor = {
 	sr: 0, r: 0,
 	update: function(){
 		if (tractorObj) {
-			this.vx = THREE.Math.clamp(this.vx, -1.0, 1.0);
+			this.vx = THREE.Math.clamp(this.vx, -1.0, 1.0); //float (-1) otherwise it will see it as a boolean
 			this.vy = THREE.Math.clamp(this.vy, -1.0, 1.0);
 			this.vr = THREE.Math.clamp(this.vr, -10.0, 10.0);
 
@@ -46,14 +46,14 @@ var tractor = {
 			wheelObjects[0].rotation.x += (THREE.Math.degToRad(this.vx) * 10);
 			wheelObjects[1].rotation.x += (THREE.Math.degToRad(this.vx) * 10);
 			
-			// ?
-			var newX = wheelObjects[2].rotation.x + (THREE.Math.degToRad(this.vx) * 10);
-			var newZ = THREE.Math.degToRad(-this.vr) * 5
-
-			wheelObjects[2].rotation.x = newX;
-			wheelObjects[2].rotation.z = newZ;
-
-
+			var smallerVr = THREE.Math.clamp(this.vr, -1.0, 1.0);
+			var newX = THREE.Math.degToRad(this.x) * 10; // Rolling
+			var newY = THREE.Math.degToRad(this.vr) * 2; // Steering
+			
+			// XZY (fix the gimbal problem  =)
+			var euler = new THREE.Euler( newX, newY, 0, 'YXZ' );
+			wheelObjects[2].setRotationFromEuler(euler);
+		
 			if (Math.abs(this.vx) > blobbyMinSpeed) {
 				tractorObj.morphTargetInfluences[0] = this.vx;
 				tractorObj.morphTargetInfluences[2] = this.vr * 0.1;

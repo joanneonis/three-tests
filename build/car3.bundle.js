@@ -143,7 +143,8 @@ var tractor = {
   r: 0,
   update: function update() {
     if (tractorObj) {
-      this.vx = three__WEBPACK_IMPORTED_MODULE_1__["Math"].clamp(this.vx, -1.0, 1.0);
+      this.vx = three__WEBPACK_IMPORTED_MODULE_1__["Math"].clamp(this.vx, -1.0, 1.0); //float (-1) otherwise it will see it as a boolean
+
       this.vy = three__WEBPACK_IMPORTED_MODULE_1__["Math"].clamp(this.vy, -1.0, 1.0);
       this.vr = three__WEBPACK_IMPORTED_MODULE_1__["Math"].clamp(this.vr, -10.0, 10.0);
       var rotation = three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vr) * 10; // !
@@ -151,12 +152,15 @@ var tractor = {
       rotateObject(tractorObj.parent, 0, rotation, 0);
       tractorObj.parent.translateZ(this.vx);
       wheelObjects[0].rotation.x += three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vx) * 10;
-      wheelObjects[1].rotation.x += three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vx) * 10; // ?
+      wheelObjects[1].rotation.x += three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vx) * 10;
+      var smallerVr = three__WEBPACK_IMPORTED_MODULE_1__["Math"].clamp(this.vr, -1.0, 1.0);
+      var newX = three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.x) * 10; // Rolling
 
-      var newX = wheelObjects[2].rotation.x + three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vx) * 10;
-      var newZ = three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(-this.vr) * 5;
-      wheelObjects[2].rotation.x = newX;
-      wheelObjects[2].rotation.z = newZ;
+      var newY = three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vr) * 2; // Steering
+      // XZY (fix the gimbal problem  =)
+
+      var euler = new three__WEBPACK_IMPORTED_MODULE_1__["Euler"](newX, newY, 0, 'YXZ');
+      wheelObjects[2].setRotationFromEuler(euler);
 
       if (Math.abs(this.vx) > blobbyMinSpeed) {
         tractorObj.morphTargetInfluences[0] = this.vx;
