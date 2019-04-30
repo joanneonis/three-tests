@@ -103,8 +103,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_functions_basic_objects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helpers/functions/basic-objects */ "./helpers/functions/basic-objects.js");
 /* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
 /* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
+/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/examples/js/AnimationClipCreator */ "./node_modules/three/examples/js/AnimationClipCreator.js");
+/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
 /* eslint-disable no-unused-vars */
+
 
 
 
@@ -153,9 +156,9 @@ function init() {
     type: 'Spotlight'
   };
   scene.userData.gui = gui;
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["setlightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["changeLightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["buildGui"])(scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["setlightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["changeLightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["buildGui"])(scene);
 }
 
 function onResize() {
@@ -204,7 +207,7 @@ function initControls() {
 
 function test() {
   var loader = new three__WEBPACK_IMPORTED_MODULE_1__["GLTFLoader"]();
-  loader.load('boltransform-working.glb', function (gltf) {
+  loader.load('v0-MDD-2.glb', function (gltf) {
     console.log(gltf.animations.length, gltf); // mixer = new THREE.AnimationMixer( mesh );
     // mixer.clipAction( gltf.animations[ 0 ] ).setDuration( 1 ).play();
     // console.log(gltf.animations[0]);
@@ -212,8 +215,24 @@ function test() {
     var model = gltf.scene;
     mixer = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationMixer"](model);
     var clip1 = gltf.animations[0];
-    var action1 = mixer.clipAction(clip1);
-    action1.play();
+    gltf.animations[1] = three__WEBPACK_IMPORTED_MODULE_1__["AnimationClipCreator"].CreatePulsationAnimation(10, .8);
+    var track1 = gltf.animations[0].tracks[0].clone(); // track1.values = track1.values.slice(0, 40);
+    // track1.times = track1.times.slice(0, 40);
+
+    gltf.animations[2] = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationClip"]('test', 1, [track1.trim(0, 2)]);
+    var action1 = mixer.clipAction(clip1).setDuration(10);
+    var action2 = mixer.clipAction(gltf.animations[1]);
+    var action3 = mixer.clipAction(gltf.animations[2]); // var track2 = gltf.animations[0].tracks[0].clone();
+    // track2.values = track2.values.slice(40, 80);
+    // track2.times = track2.times.slice(40, 80);
+    // var track3 = gltf.animations[0].tracks[0].clone();
+    // track3.values = track3.values.slice(80, 120);
+    // track3.times = track3.times.slice(80, 120);
+    // gltf.animations[0].tracks.push(track1, track2, track3);
+    // gltf.animations[0].tracks[0] = gltf.animations[0].tracks[0].trim(0,4);
+    // action1.play();
+
+    action3.play();
     scene.add(model);
   });
 }
@@ -4281,6 +4300,132 @@ k.BinaryTextureLoader=function(a){console.warn("THREE.BinaryTextureLoader has be
 return a.center()}};k.Projector=function(){console.error("THREE.Projector has been moved to /examples/js/renderers/Projector.js.");this.projectVector=function(a,b){console.warn("THREE.Projector: .projectVector() is now vector.project().");a.project(b)};this.unprojectVector=function(a,b){console.warn("THREE.Projector: .unprojectVector() is now vector.unproject().");a.unproject(b)};this.pickingRay=function(){console.error("THREE.Projector: .pickingRay() is now raycaster.setFromCamera().")}};k.CanvasRenderer=
 function(){console.error("THREE.CanvasRenderer has been removed")};k.JSONLoader=function(){console.error("THREE.JSONLoader has been removed.")};k.SceneUtils={createMultiMaterialObject:function(){console.error("THREE.SceneUtils has been moved to /examples/js/utils/SceneUtils.js")},detach:function(){console.error("THREE.SceneUtils has been moved to /examples/js/utils/SceneUtils.js")},attach:function(){console.error("THREE.SceneUtils has been moved to /examples/js/utils/SceneUtils.js")}};k.LensFlare=
 function(){console.error("THREE.LensFlare has been moved to /examples/js/objects/Lensflare.js")};Object.defineProperty(k,"__esModule",{value:!0})});
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js")))
+
+/***/ }),
+
+/***/ "./node_modules/three/examples/js/AnimationClipCreator.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/three/examples/js/AnimationClipCreator.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(THREE) {/**
+ *
+ * Creator of typical test AnimationClips / KeyframeTracks
+ *
+ * @author Ben Houston / http://clara.io/
+ * @author David Sarno / http://lighthaus.us/
+ */
+
+THREE.AnimationClipCreator = function () {};
+
+THREE.AnimationClipCreator.CreateRotationAnimation = function ( period, axis ) {
+
+	var times = [ 0, period ], values = [ 0, 360 ];
+
+	axis = axis || 'x';
+	var trackName = '.rotation[' + axis + ']';
+
+	var track = new THREE.NumberKeyframeTrack( trackName, times, values );
+
+	return new THREE.AnimationClip( null, period, [ track ] );
+
+};
+
+THREE.AnimationClipCreator.CreateScaleAxisAnimation = function ( period, axis ) {
+
+	var times = [ 0, period ], values = [ 0, 1 ];
+
+	axis = axis || 'x';
+	var trackName = '.scale[' + axis + ']';
+
+	var track = new THREE.NumberKeyframeTrack( trackName, times, values );
+
+	return new THREE.AnimationClip( null, period, [ track ] );
+
+};
+
+THREE.AnimationClipCreator.CreateShakeAnimation = function ( duration, shakeScale ) {
+
+	var times = [], values = [], tmp = new THREE.Vector3();
+
+	for ( var i = 0; i < duration * 10; i ++ ) {
+
+		times.push( i / 10 );
+
+		tmp.set( Math.random() * 2.0 - 1.0, Math.random() * 2.0 - 1.0, Math.random() * 2.0 - 1.0 ).
+			multiply( shakeScale ).
+			toArray( values, values.length );
+
+	}
+
+	var trackName = '.position';
+
+	var track = new THREE.VectorKeyframeTrack( trackName, times, values );
+
+	return new THREE.AnimationClip( null, duration, [ track ] );
+
+};
+
+
+THREE.AnimationClipCreator.CreatePulsationAnimation = function ( duration, pulseScale ) {
+
+	var times = [], values = [], tmp = new THREE.Vector3();
+
+	for ( var i = 0; i < duration * 10; i ++ ) {
+
+		times.push( i / 10 );
+
+		var scaleFactor = Math.random() * pulseScale;
+		tmp.set( scaleFactor, scaleFactor, scaleFactor ).
+			toArray( values, values.length );
+
+	}
+
+	var trackName = '.scale';
+
+	var track = new THREE.VectorKeyframeTrack( trackName, times, values );
+
+	return new THREE.AnimationClip( null, duration, [ track ] );
+
+};
+
+
+THREE.AnimationClipCreator.CreateVisibilityAnimation = function ( duration ) {
+
+	var times = [ 0, duration / 2, duration ], values = [ true, false, true ];
+
+	var trackName = '.visible';
+
+	var track = new THREE.BooleanKeyframeTrack( trackName, times, values );
+
+	return new THREE.AnimationClip( null, duration, [ track ] );
+
+};
+
+
+THREE.AnimationClipCreator.CreateMaterialColorAnimation = function ( duration, colors ) {
+
+	var times = [], values = [],
+		timeStep = duration / colors.length;
+
+	for ( var i = 0; i <= colors.length; i ++ ) {
+
+		times.push( i * timeStep );
+		values.push( colors[ i % colors.length ] );
+
+	}
+
+	var trackName = '.material[0].color';
+
+	var track = new THREE.ColorKeyframeTrack( trackName, times, values );
+
+	return new THREE.AnimationClip( null, duration, [ track ] );
+
+};
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js")))
 

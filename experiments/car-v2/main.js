@@ -9,6 +9,9 @@ import {
 
 
 import 'three/examples/js/loaders/GLTFLoader';
+
+import 'three/examples/js/AnimationClipCreator';
+
 // import { loadModel } from '../../helpers/functions/load-model';
 import { setlightType, buildGui, changeLightType } from '../../helpers/functions/lights';
 // import { SpotLight } from '../../helpers/classes/lights';
@@ -113,8 +116,10 @@ function initControls() {
 
 function test() {
 	var loader = new THREE.GLTFLoader();
-	loader.load('boltransform-working.glb', function (gltf) {
+	loader.load('v0-MDD-2.glb', function (gltf) {
 		console.log(gltf.animations.length, gltf);
+
+
 
 		// mixer = new THREE.AnimationMixer( mesh );
 		// mixer.clipAction( gltf.animations[ 0 ] ).setDuration( 1 ).play();
@@ -124,8 +129,32 @@ function test() {
 		var model = gltf.scene;
 		mixer = new THREE.AnimationMixer(model);
 		var clip1 = gltf.animations[0];
-		var action1 = mixer.clipAction(clip1);
-		action1.play();
+		gltf.animations[1] = THREE.AnimationClipCreator.CreatePulsationAnimation(10, .8);
+
+		var track1 = gltf.animations[0].tracks[0].clone();
+		// track1.values = track1.values.slice(0, 40);
+		// track1.times = track1.times.slice(0, 40);
+		gltf.animations[2] = new THREE.AnimationClip( 'test', 1, [ track1.trim(0, 2) ] );
+
+		var action1 = mixer.clipAction(clip1).setDuration( 10 );
+		var action2 = mixer.clipAction(gltf.animations[1]);
+		var action3 = mixer.clipAction(gltf.animations[2]);
+
+
+		// var track2 = gltf.animations[0].tracks[0].clone();
+		// track2.values = track2.values.slice(40, 80);
+		// track2.times = track2.times.slice(40, 80);
+
+		// var track3 = gltf.animations[0].tracks[0].clone();
+		// track3.values = track3.values.slice(80, 120);
+		// track3.times = track3.times.slice(80, 120);
+
+		// gltf.animations[0].tracks.push(track1, track2, track3);
+
+		// gltf.animations[0].tracks[0] = gltf.animations[0].tracks[0].trim(0,4);
+
+		// action1.play();
+		action3.play();
 
 		scene.add( model );
 	});
