@@ -132,7 +132,7 @@ function initControls() {
 function loadModelThingies() {
 	var loader = new THREE.GLTFLoader();
 
-	loader.load('trekker-morph-5.glb', function (gltf) {
+	loader.load('trekker-morph-1-multipart.glb', function (gltf) {
 		var model = gltf.scene;
 
 		

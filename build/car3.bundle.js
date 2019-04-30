@@ -225,7 +225,7 @@ function initControls() {
 
 function loadModelThingies() {
   var loader = new three__WEBPACK_IMPORTED_MODULE_1__["GLTFLoader"]();
-  loader.load('trekker-morph-5.glb', function (gltf) {
+  loader.load('trekker-morph-1-multipart.glb', function (gltf) {
     var model = gltf.scene;
     tractorObj = model.children[0];
     scene.userData.model = tractorObj;
