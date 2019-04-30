@@ -100,22 +100,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _helpers_functions_basic_objects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helpers/functions/basic-objects */ "./helpers/functions/basic-objects.js");
-/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
-/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/examples/js/AnimationClipCreator */ "./node_modules/three/examples/js/AnimationClipCreator.js");
-/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
+/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
+/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/examples/js/AnimationClipCreator */ "./node_modules/three/examples/js/AnimationClipCreator.js");
+/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
 /* eslint-disable no-unused-vars */
 
 
 
 
 
- // import { loadModel } from '../../helpers/functions/load-model';
-
- // import { SpotLight } from '../../helpers/classes/lights';
-//?--------------------------------------------------------------------
+ //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
 
@@ -130,13 +126,41 @@ var cameraPos = {
   z: 36
 };
 var controls;
-var animation;
-var mixer;
-var sceneTest;
-var clock = new three__WEBPACK_IMPORTED_MODULE_1__["Clock"]();
-var actions = new Array(4);
-var animationSettings = new Array(4);
-var currentlyPlaying = 0;
+var tractorObj;
+var blobbyMinSpeed = 0.1; //? test
+
+var tractor = {
+  x: 0,
+  y: 0,
+  vx: 0,
+  vy: 0,
+  ax: 0,
+  ay: 0,
+  vr: 0,
+  ar: 0,
+  sr: 0,
+  r: 0,
+  update: function update() {
+    if (scene.userData.model) {
+      scene.userData.model.updateMatrix();
+      scene.userData.model.position.z = this.x;
+      scene.userData.model.position.x = this.y;
+      scene.userData.model.rotation.z = three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.r);
+      var currentDirection = Math.sign(this.vx);
+
+      if (currentDirection !== 0 && Math.abs(this.vx) > blobbyMinSpeed) {
+        tractorObj.morphTargetInfluences[0] = this.vx * 2;
+      }
+
+      if (currentDirection !== 0 && Math.abs(this.vr) > blobbyMinSpeed) {
+        tractorObj.morphTargetInfluences[2] = this.vr / 5;
+      }
+    }
+  }
+};
+var friction = 0.9;
+var rFriction = 0.7;
+var keys = []; //? end
 
 function init() {
   initRenderer();
@@ -145,21 +169,17 @@ function init() {
   camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
   initControls();
   scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AxesHelper"](10));
-  var bgColor = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#a3e1fe'); // var meshes = createObjects();
-  // for(let i = 2; i < meshes.length; i++) {
-  // 	meshes[i].material.color = bgColor;
-  // 	scene.add(meshes[i]);
-  // }
-
+  var bgColor = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#a3e1fe');
+  scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"]());
   scene.background = bgColor;
   window.addEventListener('resize', onResize, false);
   scene.userData.activeLightSettings = {
     type: 'Spotlight'
   };
   scene.userData.gui = gui;
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["setlightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["changeLightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["buildGui"])(scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["setlightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["changeLightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["buildGui"])(scene);
 }
 
 function onResize() {
@@ -172,15 +192,12 @@ function render() {
   // controls.update();
   requestAnimationFrame(render);
   renderer.render(scene, camera);
-  var dt = clock.getDelta();
-
-  if (mixer) {
-    mixer.update(dt);
-  }
+  posCalcs();
 }
 
 function initGui() {
   gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+  initCameraGui();
 }
 
 initGui();
@@ -210,16 +227,82 @@ function loadModelThingies() {
   var loader = new three__WEBPACK_IMPORTED_MODULE_1__["GLTFLoader"]();
   loader.load('trekker-morph-5.glb', function (gltf) {
     var model = gltf.scene;
-    var face = model.children[0];
-    var expressions = Object.keys(face.morphTargetDictionary);
-    var expressionFolder = gui.addFolder('Expressions');
+    tractorObj = model.children[0];
+    scene.userData.model = tractorObj;
+    var expressions = Object.keys(tractorObj.morphTargetDictionary);
+    var expressionFolder = gui.addFolder('Blob');
 
     for (var i = 0; i < expressions.length; i++) {
-      expressionFolder.add(face.morphTargetInfluences, i, 0, 1, 0.01).name(expressions[i]);
+      expressionFolder.add(tractorObj.morphTargetInfluences, i, 0, 1, 0.01).name(expressions[i]);
     }
 
     scene.add(model);
   });
+}
+
+function initCameraGui() {
+  var cameraFolder = gui.addFolder('Camera');
+  cameraFolder.add(cameraPos, 'x', -100, 100).onChange(function (val) {
+    camera.position.x = val;
+  });
+  cameraFolder.add(cameraPos, 'y', -100, 100).onChange(function (val) {
+    camera.position.y = val;
+  });
+  cameraFolder.add(cameraPos, 'z', -100, 100).onChange(function (val) {
+    camera.position.z = val;
+  });
+}
+
+function posCalcs() {
+  if (keys[37]) {
+    tractor.ar -= 0.05;
+    tractor.sr -= 0.05;
+  } else if (keys[39]) {
+    tractor.ar += 0.05;
+    tractor.sr += 0.05;
+  } else {
+    tractor.ar = 0;
+  } //thrust
+
+
+  if (keys[38]) {
+    tractor.ax = Math.cos(tractor.sr) * 0.05;
+    tractor.ay = Math.sin(tractor.sr) * 0.05;
+  } else if (keys[40]) {
+    tractor.ax = Math.cos(tractor.sr) * -0.05;
+    tractor.ay = Math.sin(tractor.sr) * -0.05;
+  } else {
+    tractor.ax = 0;
+    tractor.ay = 0;
+  }
+
+  updatePosition(tractor);
+  tractor.update();
+}
+
+document.addEventListener('keydown', function (e) {
+  keys[e.which] = true;
+});
+document.addEventListener('keyup', function (e) {
+  keys[e.which] = false;
+});
+
+function applyFriction(obj) {
+  obj.vx *= friction;
+  obj.vy *= friction;
+  obj.vr *= rFriction;
+}
+
+function updatePosition(obj) {
+  //update velocity
+  obj.vx += obj.ax;
+  obj.vy += obj.ay;
+  obj.vr += obj.ar;
+  applyFriction(obj); //update position
+
+  obj.x += obj.vx;
+  obj.y += obj.vy;
+  obj.r += obj.vr;
 }
 
 /***/ }),
@@ -411,52 +494,6 @@ function (_BaseLight5) {
 
   return AmbientLight;
 }(BaseLight);
-
-/***/ }),
-
-/***/ "./helpers/functions/basic-objects.js":
-/*!********************************************!*\
-  !*** ./helpers/functions/basic-objects.js ***!
-  \********************************************/
-/*! exports provided: createObjects */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createObjects", function() { return createObjects; });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
-var materials = new Array(3);
-var geometries = new Array(3);
-var meshes = new Array(3);
-
-function createObjects(bottom) {
-  var cubeSize = 30; //MATERIAL
-
-  materials[0] = new three__WEBPACK_IMPORTED_MODULE_0__["MeshLambertMaterial"]();
-  materials[1] = new three__WEBPACK_IMPORTED_MODULE_0__["MeshPhongMaterial"]();
-  materials[2] = new three__WEBPACK_IMPORTED_MODULE_0__["MeshStandardMaterial"](); //GEOMETRY
-
-  geometries[0] = new three__WEBPACK_IMPORTED_MODULE_0__["BoxGeometry"](cubeSize, cubeSize, cubeSize, 10, 10, 10);
-  geometries[1] = new three__WEBPACK_IMPORTED_MODULE_0__["SphereGeometry"](cubeSize, 20, 20);
-  geometries[2] = new three__WEBPACK_IMPORTED_MODULE_0__["PlaneGeometry"](10000, 10000, 100, 100);
-
-  for (var i = 0; i < meshes.length; i++) {
-    meshes[i] = new three__WEBPACK_IMPORTED_MODULE_0__["Mesh"](geometries[i], materials[i]);
-  }
-
-  meshes[0].position.x = -50;
-  meshes[0].castShadow = true; // scene.add(meshes[0]);
-
-  meshes[1].position.x = 50;
-  meshes[1].castShadow = true; // scene.add(meshes[1]);
-
-  meshes[2].rotation.x = -90 * (Math.PI / 180);
-  meshes[2].position.y = -bottom * 2;
-  meshes[2].receiveShadow = true; // scene.add(meshes[2]);
-
-  return meshes;
-}
 
 /***/ }),
 

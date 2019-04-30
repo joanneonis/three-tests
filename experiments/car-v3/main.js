@@ -1,20 +1,12 @@
 /* eslint-disable no-unused-vars */
 import * as dat from 'dat.gui';
 import * as THREE from 'three';
+
 import 'three/examples/js/controls/OrbitControls';
-
-import {
-	createObjects
-} from '../../helpers/functions/basic-objects';
-
-
 import 'three/examples/js/loaders/GLTFLoader';
-
 import 'three/examples/js/AnimationClipCreator';
 
-// import { loadModel } from '../../helpers/functions/load-model';
 import { setlightType, buildGui, changeLightType } from '../../helpers/functions/lights';
-// import { SpotLight } from '../../helpers/classes/lights';
 
 //?--------------------------------------------------------------------
 //?		Base
@@ -29,16 +21,40 @@ var gui;
 var cameraPos = {x: 58, y: 36, z: 36};
 
 var controls;
-let animation;
+var tractorObj;
 
-let mixer;
+var blobbyMinSpeed = 0.1;
+//? test
+var tractor = {
+	x: 0, y: 0,
+	vx: 0, vy: 0,
+	ax: 0, ay: 0,
+	vr: 0, ar:0,
+	sr: 0, r: 0,
+	update: function(){
+		if (scene.userData.model) {
+			scene.userData.model.updateMatrix();
+			scene.userData.model.position.z = this.x;
+			scene.userData.model.position.x = this.y;
+			scene.userData.model.rotation.z = (THREE.Math.degToRad(this.r));
 
-let sceneTest;
+			let currentDirection = Math.sign(this.vx);
+			
+			if (currentDirection !== 0 && Math.abs(this.vx) > blobbyMinSpeed) {
+				tractorObj.morphTargetInfluences[0] = this.vx * 2;
+			}
 
-var clock = new THREE.Clock();
-var actions = new Array(4);
-let animationSettings = new Array(4);
-let currentlyPlaying = 0;
+			if (currentDirection !== 0 && Math.abs(this.vr) > blobbyMinSpeed) {
+				tractorObj.morphTargetInfluences[2] = this.vr / 5;
+			}
+		}
+	}
+};
+
+var friction = 0.9;
+var rFriction = 0.7;
+var keys = [];
+//? end
 
 function init() {
 
@@ -54,11 +70,7 @@ function init() {
 
 	let bgColor = new THREE.Color('#a3e1fe');
 
-	// var meshes = createObjects();
-	// for(let i = 2; i < meshes.length; i++) {
-	// 	meshes[i].material.color = bgColor;
-	// 	scene.add(meshes[i]);
-	// }
+	scene.add(new THREE.AmbientLight());
 
 	scene.background = bgColor;
 
@@ -86,14 +98,12 @@ function render() {
 	requestAnimationFrame(render);
 	renderer.render(scene, camera);
 
-	var dt = clock.getDelta()
-	if (mixer) { 
-		mixer.update(dt);
-	}
+	posCalcs();
 }
 
 function initGui() {
 	gui = new dat.GUI();
+	initCameraGui();
 }
 
 initGui();
@@ -126,13 +136,76 @@ function loadModelThingies() {
 		var model = gltf.scene;
 
 		
-		var face = model.children[0];
-		var expressions = Object.keys( face.morphTargetDictionary );
-		var expressionFolder = gui.addFolder('Expressions');
+		tractorObj = model.children[0];
+
+		scene.userData.model = tractorObj;
+		var expressions = Object.keys( tractorObj.morphTargetDictionary );
+		var expressionFolder = gui.addFolder('Blob');
 		for ( var i = 0; i < expressions.length; i++ ) {
-			expressionFolder.add( face.morphTargetInfluences, i, 0, 1, 0.01 ).name( expressions[ i ] );
+			expressionFolder.add( tractorObj.morphTargetInfluences, i, 0, 1, 0.01 ).name( expressions[ i ] );
 		}
 
 		scene.add( model );
 	});
+}
+
+function initCameraGui() {
+	var cameraFolder = gui.addFolder('Camera');
+	cameraFolder.add(cameraPos, 'x', -100, 100).onChange((val) => { camera.position.x = val });
+	cameraFolder.add(cameraPos, 'y', -100, 100).onChange((val) => { camera.position.y = val });
+	cameraFolder.add(cameraPos, 'z', -100, 100).onChange((val) => { camera.position.z = val });
+}
+
+function posCalcs() {
+	if (keys[37]) {
+		tractor.ar -= 0.05;
+		tractor.sr -= 0.05;
+	} else if (keys[39]) {
+		tractor.ar += 0.05;
+		tractor.sr += 0.05;
+	} else {
+		tractor.ar = 0;
+	}
+
+	//thrust
+	if(keys[38]){
+		tractor.ax = Math.cos(tractor.sr) * 0.05;
+		tractor.ay = Math.sin(tractor.sr) * 0.05;
+	} else if(keys[40]) {
+		tractor.ax = Math.cos(tractor.sr) * -0.05;
+		tractor.ay = Math.sin(tractor.sr) * -0.05;
+	} else {
+		tractor.ax = 0;
+		tractor.ay = 0;
+	}
+
+	updatePosition(tractor);
+	tractor.update();
+}
+
+document.addEventListener('keydown', function(e){
+	keys[e.which] = true;
+});
+document.addEventListener('keyup', function(e){
+	keys[e.which] = false;
+});
+
+function applyFriction(obj){
+	obj.vx *= friction;
+	obj.vy *= friction;
+	obj.vr *= rFriction;
+}
+
+function updatePosition(obj){
+	//update velocity
+	obj.vx += obj.ax;
+	obj.vy += obj.ay;
+	obj.vr += obj.ar;
+	
+	applyFriction(obj);
+	
+	//update position
+	obj.x += obj.vx;
+	obj.y += obj.vy;
+	obj.r += obj.vr;
 }
