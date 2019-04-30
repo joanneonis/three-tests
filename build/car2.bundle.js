@@ -208,21 +208,32 @@ function initControls() {
 function test() {
   var loader = new three__WEBPACK_IMPORTED_MODULE_1__["GLTFLoader"]();
   loader.load('v0-MDD-2.glb', function (gltf) {
-    console.log(gltf.animations.length, gltf); // mixer = new THREE.AnimationMixer( mesh );
+    // mixer = new THREE.AnimationMixer( mesh );
     // mixer.clipAction( gltf.animations[ 0 ] ).setDuration( 1 ).play();
     // console.log(gltf.animations[0]);
-
     var model = gltf.scene;
-    mixer = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationMixer"](model);
-    var clip1 = gltf.animations[0];
-    gltf.animations[1] = three__WEBPACK_IMPORTED_MODULE_1__["AnimationClipCreator"].CreatePulsationAnimation(10, .8);
-    var track1 = gltf.animations[0].tracks[0].clone(); // track1.values = track1.values.slice(0, 40);
+    mixer = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationMixer"](model); // var clip1 = gltf.animations[0];
+    // gltf.animations[1] = THREE.AnimationClipCreator.CreatePulsationAnimation(10, .8);
+    // var track1 = gltf.animations[0].tracks[0].clone();
+    // track1.values = track1.values.slice(0, 40);
     // track1.times = track1.times.slice(0, 40);
 
-    gltf.animations[2] = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationClip"]('test', 1, [track1.trim(0.1, 2)]);
-    var action1 = mixer.clipAction(clip1).setDuration(10);
-    var action2 = mixer.clipAction(gltf.animations[1]);
-    var action3 = mixer.clipAction(gltf.animations[2]); // var track2 = gltf.animations[0].tracks[0].clone();
+    var sceneLength = gltf.animations[0].duration;
+    var frameDuration = sceneLength / 160;
+    var animationBase = gltf.animations[0].tracks[0].clone();
+    var animationBase2 = gltf.animations[0].tracks[0].clone();
+    console.log();
+    var clip1test = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationClip"]('forwards', sceneLength / 4, [animationBase.trim(frameDuration, frameDuration * 40)]);
+    var clip2test = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationClip"]('backwards', sceneLength / 4, [animationBase2.trim(frameDuration + frameDuration * 40, frameDuration * 80).shift(-(frameDuration + frameDuration * 40))]);
+    console.log('trimthis', clip2test); // clip2test.duration = sceneLength / 4;
+    // gltf.animations[3] = new THREE.AnimationClip( 'right', sceneLength / 4, [  animationBase.clone().trim(frameDuration + frameDuration * 80, frameDuration * 120) ] );
+    // gltf.animations[4] = new THREE.AnimationClip( 'left', sceneLength / 4, [  animationBase.clone().trim(frameDuration + frameDuration * 120, frameDuration * 160) ] );
+
+    var action1 = mixer.clipAction(clip1test);
+    var action2 = mixer.clipAction(clip2test); // var action3 = mixer.clipAction(gltf.animations[2]);
+    // var action4 = mixer.clipAction(gltf.animations[3]);
+    // var action5 = mixer.clipAction(gltf.animations[4]);
+    // var track2 = gltf.animations[0].tracks[0].clone();
     // track2.values = track2.values.slice(40, 80);
     // track2.times = track2.times.slice(40, 80);
     // var track3 = gltf.animations[0].tracks[0].clone();
@@ -232,14 +243,16 @@ function test() {
     // gltf.animations[0].tracks[0] = gltf.animations[0].tracks[0].trim(0,4);
     // action1.play();
 
-    action3.repetitions = 2;
-    action3.play();
-    console.log(action2.repetitions = 2);
+    action1.play();
+    console.log(frameDuration * 10, gltf);
     scene.add(model);
   });
 } // mixer.addEventListener( 'loop', (a) => {
 // 	console.log('a', a);
 // } );
+
+
+function createAction() {}
 
 /***/ }),
 
