@@ -34,36 +34,31 @@ var tractor = {
 	sr: 0, r: 0,
 	update: function(){
 		if (tractorObj) {
-			// tractorObj.updateMatrix();
+			this.vx = THREE.Math.clamp(this.vx, -1.0, 1.0);
+			this.vy = THREE.Math.clamp(this.vy, -1.0, 1.0);
+			this.vr = THREE.Math.clamp(this.vr, -10.0, 10.0);
 
-			// console.log(tractorObj);
-			tractorObj.parent.position.z = this.x;
-			// tractorObj.parent.position.x = this.y;
-			tractorObj.rotation.z = (THREE.Math.degToRad(this.r));
-
-			let currentDirection = Math.sign(this.vx);
+			let rotation = THREE.Math.degToRad(this.vr) * 10; // !
 			
-			wheelObjects[0].rotation.x = (THREE.Math.degToRad(this.x) * 10);
-			wheelObjects[1].rotation.x = (THREE.Math.degToRad(this.x) * 10);
-			wheelObjects[2].rotation.x = (THREE.Math.degToRad(this.x) * 10);
+			rotateObject(tractorObj.parent, 0, rotation, 0);
+			tractorObj.parent.translateZ(this.vx);
+			
+			wheelObjects[0].rotation.x += (THREE.Math.degToRad(this.vx) * 10);
+			wheelObjects[1].rotation.x += (THREE.Math.degToRad(this.vx) * 10);
+			
+			// wheelObjects[2].rotation.z = (THREE.Math.degToRad(this.vx) * 100); //? holy
+			wheelObjects[2].rotation.x += (THREE.Math.degToRad(this.vx) * 10);
 
-			if (currentDirection !== 0 && Math.abs(this.vx) > blobbyMinSpeed) {
-				tractorObj.morphTargetInfluences[0] = this.vx * 2;
-				// wheelObjects[2].morphTargetInfluences[0] = this.vx * 2;
-				// wheelObjects[0].morphTargetInfluences[0] = this.vx * 2;
-				// wheelObjects[1].morphTargetInfluences[0] = this.vx * 2;
+			if (Math.abs(this.vx) > blobbyMinSpeed) {
+				tractorObj.morphTargetInfluences[0] = this.vx;
+				tractorObj.morphTargetInfluences[2] = this.vr * 0.1;
 			}
-
-			if (currentDirection !== 0 && Math.abs(this.vr) > blobbyMinSpeed) {
-				tractorObj.morphTargetInfluences[2] = this.vr / 3;
-			}
-		
 		}
 	}
 };
 
 var friction = 0.9;
-var rFriction = 0.7;
+var rFriction = 0.9;
 var keys = [];
 //? end
 
@@ -76,6 +71,7 @@ function init() {
 	camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
 	
 	initControls();
+
 	
 	scene.add(new THREE.AxesHelper(10));
 
@@ -152,13 +148,14 @@ function loadModelThingies() {
 
 		// plaeObj(wheelObjects[2]);
 		resetWheel();
+		plaeObj(wheelObjects[2]);
 		
 		var expressions = Object.keys( tractorObj.morphTargetDictionary );
 		var expressionFolder = gui.addFolder('Blob');
 		for ( var i = 0; i < expressions.length; i++ ) {
 			expressionFolder.add( tractorObj.morphTargetInfluences, i, 0, 1, 0.01 ).name( expressions[ i ] );
 		}
-
+		tractorObj.userData.velocity = 0;
 		scene.add( model );
 	});
 }
@@ -172,22 +169,26 @@ function initCameraGui() {
 
 function posCalcs() {
 	if (keys[37]) {
-		tractor.ar -= 0.05;
-		tractor.sr -= 0.05;
-	} else if (keys[39]) {
 		tractor.ar += 0.05;
 		tractor.sr += 0.05;
+	} else if (keys[39]) {
+		tractor.ar -= 0.05;
+		tractor.sr -= 0.05;
 	} else {
 		tractor.ar = 0;
 	}
 
 	//thrust
 	if(keys[38]){
-		tractor.ax = Math.cos(tractor.sr) * 0.05;
-		tractor.ay = Math.sin(tractor.sr) * 0.05;
+		// tractor.ax = Math.cos(tractor.sr) * 0.05;
+		// tractor.ay = Math.sin(tractor.sr) * 0.05;
+		tractor.ax += 0.005;
+		tractor.ay += 0.005;
 	} else if(keys[40]) {
-		tractor.ax = Math.cos(tractor.sr) * -0.05;
-		tractor.ay = Math.sin(tractor.sr) * -0.05;
+		tractor.ax -= 0.005;
+		tractor.ay -= 0.005;
+		// tractor.ax = Math.cos(tractor.sr) * -0.05;
+		// tractor.ay = Math.sin(tractor.sr) * -0.05;
 	} else {
 		tractor.ax = 0;
 		tractor.ay = 0;
@@ -229,6 +230,9 @@ function plaeObj(object) {
 	objFolder.add(object.position, 'x', -10, 10, .3);
 	objFolder.add(object.position, 'y', -10, 10, .3);
 	objFolder.add(object.position, 'z', -10, 10, .3);
+	objFolder.add(object.rotation, 'x', -10, 10, .3);
+	objFolder.add(object.rotation, 'y', -10, 10, .3);
+	objFolder.add(object.rotation, 'z', -10, 10, .3);
 }
 
 function resetWheel() {
@@ -240,3 +244,10 @@ function resetWheel() {
 	wheelObjects[1].position.set(-3.6, 3.9, -5.4);
 	wheelObjects[2].position.set(0, 2.1, 4.5);
 }
+
+
+function rotateObject(object, degreeX = 0, degreeY = 0, degreeZ = 0) {
+  object.rotateX(THREE.Math.degToRad(degreeX));
+  object.rotateY(THREE.Math.degToRad(degreeY));
+	object.rotateZ(THREE.Math.degToRad(degreeZ));
+} 
