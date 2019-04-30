@@ -22,6 +22,7 @@ var cameraPos = {x: 58, y: 36, z: 36};
 
 var controls;
 var tractorObj;
+var wheelObjects;
 
 var blobbyMinSpeed = 0.1;
 //? test
@@ -32,11 +33,17 @@ var tractor = {
 	vr: 0, ar:0,
 	sr: 0, r: 0,
 	update: function(){
-		if (scene.userData.model) {
-			scene.userData.model.updateMatrix();
-			scene.userData.model.position.z = this.x;
-			scene.userData.model.position.x = this.y;
-			scene.userData.model.rotation.z = (THREE.Math.degToRad(this.r));
+		if (tractorObj) {
+			// tractorObj.updateMatrix();
+
+			// console.log(tractorObj);
+			tractorObj.parent.position.z = this.x;
+			// tractorObj.parent.position.x = this.y;
+			tractorObj.rotation.z = (THREE.Math.degToRad(this.r));
+
+			wheelObjects[0].rotation.x = (THREE.Math.degToRad(this.x) * 10);
+			wheelObjects[1].rotation.x = (THREE.Math.degToRad(this.x) * 10);
+			wheelObjects[2].rotation.x = (THREE.Math.degToRad(this.x) * 10);
 
 			let currentDirection = Math.sign(this.vx);
 			
@@ -45,7 +52,7 @@ var tractor = {
 			}
 
 			if (currentDirection !== 0 && Math.abs(this.vr) > blobbyMinSpeed) {
-				tractorObj.morphTargetInfluences[2] = this.vr / 5;
+				tractorObj.morphTargetInfluences[2] = this.vr / 3;
 			}
 		}
 	}
@@ -137,8 +144,18 @@ function loadModelThingies() {
 
 		
 		tractorObj = model.children[0];
+		wheelObjects = [model.children[1], model.children[2], model.children[3]];
 
-		scene.userData.model = tractorObj;
+		wheelObjects[0].geometry.center();
+		wheelObjects[1].geometry.center();
+		wheelObjects[2].geometry.center();
+
+		wheelObjects[0].position.set(3.6, 3.4, -4.8);
+		wheelObjects[1].position.set(-3.6, 3.9, -5.4);
+		wheelObjects[2].position.set(0, 2.1, 4.5);
+
+		// plaeObj(wheelObjects[2]);
+		
 		var expressions = Object.keys( tractorObj.morphTargetDictionary );
 		var expressionFolder = gui.addFolder('Blob');
 		for ( var i = 0; i < expressions.length; i++ ) {
@@ -208,4 +225,11 @@ function updatePosition(obj){
 	obj.x += obj.vx;
 	obj.y += obj.vy;
 	obj.r += obj.vr;
+}
+
+function plaeObj(object) {
+	var objFolder = gui.addFolder('place');
+	objFolder.add(object.position, 'x', -10, 10, .3);
+	objFolder.add(object.position, 'y', -10, 10, .3);
+	objFolder.add(object.position, 'z', -10, 10, .3);
 }
