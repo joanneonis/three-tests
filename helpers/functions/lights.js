@@ -52,7 +52,7 @@ export function buildGui(scene) {
 		});
 	}
 
-	scene.userData.lightsGui.open();
+	// scene.userData.lightsGui.open();
 }
 
 export function createGuiSetting(scene, setting, name, key) {

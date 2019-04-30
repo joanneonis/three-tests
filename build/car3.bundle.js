@@ -145,13 +145,11 @@ function init() {
   camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
   initControls();
   scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AxesHelper"](10));
-  var bgColor = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#a3e1fe');
-  var meshes = Object(_helpers_functions_basic_objects__WEBPACK_IMPORTED_MODULE_3__["createObjects"])();
-
-  for (var i = 0; i < meshes.length; i++) {
-    meshes[i].material.color = bgColor;
-    scene.add(meshes[i]);
-  }
+  var bgColor = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#a3e1fe'); // var meshes = createObjects();
+  // for(let i = 2; i < meshes.length; i++) {
+  // 	meshes[i].material.color = bgColor;
+  // 	scene.add(meshes[i]);
+  // }
 
   scene.background = bgColor;
   window.addEventListener('resize', onResize, false);
@@ -521,9 +519,8 @@ function buildGui(scene) {
         createGuiSetting(scene, settings[key], key, key, scene.userData.activeLightSettings);
       }
     });
-  }
+  } // scene.userData.lightsGui.open();
 
-  scene.userData.lightsGui.open();
 }
 function createGuiSetting(scene, setting, name, key) {
   scene.userData.lightsGui.add(setting, name, setting.min, setting.max).onChange(function (val) {

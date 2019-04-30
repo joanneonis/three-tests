@@ -557,9 +557,8 @@ function buildGui(scene) {
         createGuiSetting(scene, settings[key], key, key, scene.userData.activeLightSettings);
       }
     });
-  }
+  } // scene.userData.lightsGui.open();
 
-  scene.userData.lightsGui.open();
 }
 function createGuiSetting(scene, setting, name, key) {
   scene.userData.lightsGui.add(setting, name, setting.min, setting.max).onChange(function (val) {

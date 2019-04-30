@@ -54,11 +54,11 @@ function init() {
 
 	let bgColor = new THREE.Color('#a3e1fe');
 
-	var meshes = createObjects();
-	for(let i = 0; i < meshes.length; i++) {
-		meshes[i].material.color = bgColor;
-		scene.add(meshes[i]);
-	}
+	// var meshes = createObjects();
+	// for(let i = 2; i < meshes.length; i++) {
+	// 	meshes[i].material.color = bgColor;
+	// 	scene.add(meshes[i]);
+	// }
 
 	scene.background = bgColor;
 
