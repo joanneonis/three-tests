@@ -41,19 +41,23 @@ var tractor = {
 			// tractorObj.parent.position.x = this.y;
 			tractorObj.rotation.z = (THREE.Math.degToRad(this.r));
 
+			let currentDirection = Math.sign(this.vx);
+			
 			wheelObjects[0].rotation.x = (THREE.Math.degToRad(this.x) * 10);
 			wheelObjects[1].rotation.x = (THREE.Math.degToRad(this.x) * 10);
 			wheelObjects[2].rotation.x = (THREE.Math.degToRad(this.x) * 10);
 
-			let currentDirection = Math.sign(this.vx);
-			
 			if (currentDirection !== 0 && Math.abs(this.vx) > blobbyMinSpeed) {
 				tractorObj.morphTargetInfluences[0] = this.vx * 2;
+				// wheelObjects[2].morphTargetInfluences[0] = this.vx * 2;
+				// wheelObjects[0].morphTargetInfluences[0] = this.vx * 2;
+				// wheelObjects[1].morphTargetInfluences[0] = this.vx * 2;
 			}
 
 			if (currentDirection !== 0 && Math.abs(this.vr) > blobbyMinSpeed) {
 				tractorObj.morphTargetInfluences[2] = this.vr / 3;
 			}
+		
 		}
 	}
 };
@@ -146,15 +150,8 @@ function loadModelThingies() {
 		tractorObj = model.children[0];
 		wheelObjects = [model.children[1], model.children[2], model.children[3]];
 
-		wheelObjects[0].geometry.center();
-		wheelObjects[1].geometry.center();
-		wheelObjects[2].geometry.center();
-
-		wheelObjects[0].position.set(3.6, 3.4, -4.8);
-		wheelObjects[1].position.set(-3.6, 3.9, -5.4);
-		wheelObjects[2].position.set(0, 2.1, 4.5);
-
 		// plaeObj(wheelObjects[2]);
+		resetWheel();
 		
 		var expressions = Object.keys( tractorObj.morphTargetDictionary );
 		var expressionFolder = gui.addFolder('Blob');
@@ -232,4 +229,14 @@ function plaeObj(object) {
 	objFolder.add(object.position, 'x', -10, 10, .3);
 	objFolder.add(object.position, 'y', -10, 10, .3);
 	objFolder.add(object.position, 'z', -10, 10, .3);
+}
+
+function resetWheel() {
+	wheelObjects[0].geometry.center();
+	wheelObjects[1].geometry.center();
+	wheelObjects[2].geometry.center();
+	
+	wheelObjects[0].position.set(3.6, 3.4, -4.8);
+	wheelObjects[1].position.set(-3.6, 3.9, -5.4);
+	wheelObjects[2].position.set(0, 2.1, 4.5);
 }
