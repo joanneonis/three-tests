@@ -5,11 +5,11 @@ import 'three/examples/js/controls/OrbitControls';
 
 import {
 	createObjects
-} from '../../helpers/functions/basic-objects';
+} from '../../../helpers/functions/basic-objects';
 
-import { loadModel } from '../../helpers/functions/load-model';
-import { setlightType, buildGui, changeLightType } from '../../helpers/functions/lights';
-import { SpotLight } from '../../helpers/classes/lights';
+import { loadModel } from '../../../helpers/functions/load-model';
+import { setlightType, buildGui, changeLightType } from '../../../helpers/functions/lights';
+import { SpotLight } from '../../../helpers/classes/lights';
 
 //?--------------------------------------------------------------------
 //?		Base

@@ -5,7 +5,7 @@ import 'three/examples/js/controls/OrbitControls';
 
 import {
 	createObjects
-} from '../../helpers/functions/basic-objects';
+} from '../../../helpers/functions/basic-objects';
 
 
 import 'three/examples/js/loaders/GLTFLoader';
@@ -13,7 +13,7 @@ import 'three/examples/js/loaders/GLTFLoader';
 import 'three/examples/js/AnimationClipCreator';
 
 // import { loadModel } from '../../helpers/functions/load-model';
-import { setlightType, buildGui, changeLightType } from '../../helpers/functions/lights';
+import { setlightType, buildGui, changeLightType } from '../../../helpers/functions/lights';
 // import { SpotLight } from '../../helpers/classes/lights';
 
 //?--------------------------------------------------------------------
