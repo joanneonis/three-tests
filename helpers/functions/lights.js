@@ -68,7 +68,7 @@ export function createGuiSetting(scene, setting, name, key) {
 			}
 			// render(); //!idk
 
-			console.log(scene.userData.activeLightSettings.light);
+			// console.log(scene.userData.activeLightSettings.light);
 		}
 	);
 }

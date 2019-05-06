@@ -569,9 +569,8 @@ function createGuiSetting(scene, setting, name, key) {
     } else {
       scene.userData.activeLightSettings.light[key] = val;
     } // render(); //!idk
+    // console.log(scene.userData.activeLightSettings.light);
 
-
-    console.log(scene.userData.activeLightSettings.light);
   });
 }
 function setLight(scene) {
