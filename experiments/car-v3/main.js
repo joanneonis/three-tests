@@ -13,6 +13,13 @@ import { setlightType, buildGui, changeLightType } from '../../helpers/functions
 
 Prism.highlightAll();
 
+var panelToggle = document.querySelector('.panel-toggle');
+var body = document.querySelector('body');
+
+panelToggle.onclick = function() {
+	body.classList.toggle('panel-open');
+}
+
 //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
