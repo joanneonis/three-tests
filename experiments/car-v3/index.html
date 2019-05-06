@@ -8,7 +8,8 @@
 	<style>
     body { margin: 0; width: 100%; height: 100vh; overflow: hidden; }
     canvas { width: 100%; height: 100%; }
-  </style>
+	</style>
+	<!-- <link href="../../node_modules/prismjs/themes/prism-dark.css" rel="stylesheet" /> -->
 </head>
 <body>
 	<canvas id="gl-canvas"></canvas>
@@ -36,6 +37,34 @@
 
 			<h3>Proces</h3>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam inventore deserunt iusto rerum deleniti. Repellendus laboriosam placeat omnis dolore ea, assumenda eum corporis quaerat voluptate dolores error fugit fugiat repudiandae?</p>
+			<pre>
+				<code class="language-js">	
+	this.vx = THREE.Math.clamp(this.vx, -1.0, 1.0); //float (-1) otherwise it will see it as a boolean
+	this.vy = THREE.Math.clamp(this.vy, -1.0, 1.0);
+	this.vr = THREE.Math.clamp(this.vr, -10.0, 10.0);
+
+	let rotation = THREE.Math.degToRad(this.vr) * 10; // !
+
+	rotateObject(tractorObj.parent, 0, rotation, 0);
+	tractorObj.parent.translateZ(this.vx);
+
+	wheelObjects[0].rotation.x += (THREE.Math.degToRad(this.vx) * 10);
+	wheelObjects[1].rotation.x += (THREE.Math.degToRad(this.vx) * 10);
+
+	var smallerVr = THREE.Math.clamp(this.vr, -1.0, 1.0);
+	var newX = THREE.Math.degToRad(this.x) * 10; // Rolling
+	var newY = THREE.Math.degToRad(this.vr) * 2; // Steering
+
+	// XZY (fix the gimbal problem  =)
+	var euler = new THREE.Euler( newX, newY, 0, 'YXZ' );
+	wheelObjects[2].setRotationFromEuler(euler);
+
+	if (Math.abs(this.vx) > blobbyMinSpeed) {
+		tractorObj.morphTargetInfluences[0] = this.vx;
+		tractorObj.morphTargetInfluences[2] = this.vr * 0.1;
+	}
+				</code>
+			</pre>
 		</div>
 	</section>
 	<script src="./../../build/car3.bundle.js"></script>

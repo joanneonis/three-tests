@@ -127,16 +127,26 @@ if(false) {}
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_base_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/base.scss */ "./assets/base.scss");
 /* harmony import */ var _assets_base_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_base_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var dat_gui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dat.gui */ "./node_modules/dat.gui/build/dat.gui.module.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
-/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
-/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/examples/js/AnimationClipCreator */ "./node_modules/three/examples/js/AnimationClipCreator.js");
-/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
+/* harmony import */ var prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prismjs/components/prism-core */ "./node_modules/prismjs/components/prism-core.js");
+/* harmony import */ var prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prismjs/components/prism-clike */ "./node_modules/prismjs/components/prism-clike.js");
+/* harmony import */ var prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prismjs/components/prism-javascript */ "./node_modules/prismjs/components/prism-javascript.js");
+/* harmony import */ var prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prismjs/components/prism-css */ "./node_modules/prismjs/components/prism-css.js");
+/* harmony import */ var prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prismjs/components/prism-markup */ "./node_modules/prismjs/components/prism-markup.js");
+/* harmony import */ var prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var dat_gui__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dat.gui */ "./node_modules/dat.gui/build/dat.gui.module.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
+/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
+/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! three/examples/js/AnimationClipCreator */ "./node_modules/three/examples/js/AnimationClipCreator.js");
+/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
 /* eslint-disable no-unused-vars */
 
 
@@ -144,7 +154,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- //?--------------------------------------------------------------------
+
+
+
+
+
+
+prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1___default.a.highlightAll(); //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
 
@@ -176,23 +192,23 @@ var tractor = {
   r: 0,
   update: function update() {
     if (tractorObj) {
-      this.vx = three__WEBPACK_IMPORTED_MODULE_2__["Math"].clamp(this.vx, -1.0, 1.0); //float (-1) otherwise it will see it as a boolean
+      this.vx = three__WEBPACK_IMPORTED_MODULE_7__["Math"].clamp(this.vx, -1.0, 1.0); //float (-1) otherwise it will see it as a boolean
 
-      this.vy = three__WEBPACK_IMPORTED_MODULE_2__["Math"].clamp(this.vy, -1.0, 1.0);
-      this.vr = three__WEBPACK_IMPORTED_MODULE_2__["Math"].clamp(this.vr, -10.0, 10.0);
-      var rotation = three__WEBPACK_IMPORTED_MODULE_2__["Math"].degToRad(this.vr) * 10; // !
+      this.vy = three__WEBPACK_IMPORTED_MODULE_7__["Math"].clamp(this.vy, -1.0, 1.0);
+      this.vr = three__WEBPACK_IMPORTED_MODULE_7__["Math"].clamp(this.vr, -10.0, 10.0);
+      var rotation = three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.vr) * 10; // !
 
       rotateObject(tractorObj.parent, 0, rotation, 0);
       tractorObj.parent.translateZ(this.vx);
-      wheelObjects[0].rotation.x += three__WEBPACK_IMPORTED_MODULE_2__["Math"].degToRad(this.vx) * 10;
-      wheelObjects[1].rotation.x += three__WEBPACK_IMPORTED_MODULE_2__["Math"].degToRad(this.vx) * 10;
-      var smallerVr = three__WEBPACK_IMPORTED_MODULE_2__["Math"].clamp(this.vr, -1.0, 1.0);
-      var newX = three__WEBPACK_IMPORTED_MODULE_2__["Math"].degToRad(this.x) * 10; // Rolling
+      wheelObjects[0].rotation.x += three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.vx) * 10;
+      wheelObjects[1].rotation.x += three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.vx) * 10;
+      var smallerVr = three__WEBPACK_IMPORTED_MODULE_7__["Math"].clamp(this.vr, -1.0, 1.0);
+      var newX = three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.x) * 10; // Rolling
 
-      var newY = three__WEBPACK_IMPORTED_MODULE_2__["Math"].degToRad(this.vr) * 2; // Steering
+      var newY = three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.vr) * 2; // Steering
       // XZY (fix the gimbal problem  =)
 
-      var euler = new three__WEBPACK_IMPORTED_MODULE_2__["Euler"](newX, newY, 0, 'YXZ');
+      var euler = new three__WEBPACK_IMPORTED_MODULE_7__["Euler"](newX, newY, 0, 'YXZ');
       wheelObjects[2].setRotationFromEuler(euler);
 
       if (Math.abs(this.vx) > blobbyMinSpeed) {
@@ -208,22 +224,22 @@ var keys = []; //? end
 
 function init() {
   initRenderer();
-  scene = new three__WEBPACK_IMPORTED_MODULE_2__["Scene"]();
-  camera = new three__WEBPACK_IMPORTED_MODULE_2__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000);
+  scene = new three__WEBPACK_IMPORTED_MODULE_7__["Scene"]();
+  camera = new three__WEBPACK_IMPORTED_MODULE_7__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000);
   camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
   initControls(); // scene.add(new THREE.AxesHelper(10));
 
-  var bgColor = new three__WEBPACK_IMPORTED_MODULE_2__["Color"]('#a3e1fe');
-  scene.add(new three__WEBPACK_IMPORTED_MODULE_2__["AmbientLight"]());
+  var bgColor = new three__WEBPACK_IMPORTED_MODULE_7__["Color"]('#a3e1fe');
+  scene.add(new three__WEBPACK_IMPORTED_MODULE_7__["AmbientLight"]());
   scene.background = bgColor;
   window.addEventListener('resize', onResize, false);
   scene.userData.activeLightSettings = {
     type: 'Spotlight'
   };
   scene.userData.gui = gui;
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["setlightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["changeLightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["buildGui"])(scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["setlightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["changeLightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["buildGui"])(scene);
 }
 
 function onResize() {
@@ -240,7 +256,7 @@ function render() {
 }
 
 function initGui() {
-  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_1__["GUI"]();
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_6__["GUI"]();
   initCameraGui();
 }
 
@@ -250,25 +266,25 @@ render();
 loadModelThingies();
 
 function initRenderer() {
-  renderer = new three__WEBPACK_IMPORTED_MODULE_2__["WebGLRenderer"]({
+  renderer = new three__WEBPACK_IMPORTED_MODULE_7__["WebGLRenderer"]({
     canvas: theCanvas,
     antialias: true
   });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = three__WEBPACK_IMPORTED_MODULE_2__["PCFSoftShadowMap"];
+  renderer.shadowMap.type = three__WEBPACK_IMPORTED_MODULE_7__["PCFSoftShadowMap"];
 }
 
 function initControls() {
-  controls = new three__WEBPACK_IMPORTED_MODULE_2__["OrbitControls"](camera, renderer.domElement);
+  controls = new three__WEBPACK_IMPORTED_MODULE_7__["OrbitControls"](camera, renderer.domElement);
   controls.minDistance = 0;
   controls.maxDistance = 700;
   controls.enableKeys = false;
 }
 
 function loadModelThingies() {
-  var loader = new three__WEBPACK_IMPORTED_MODULE_2__["GLTFLoader"]();
+  var loader = new three__WEBPACK_IMPORTED_MODULE_7__["GLTFLoader"]();
   loader.load('trekker-morph-1-multipart.glb', function (gltf) {
     var model = gltf.scene;
     tractorObj = model.children[0];
@@ -379,16 +395,16 @@ function rotateObject(object) {
   var degreeX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var degreeY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
   var degreeZ = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-  object.rotateX(three__WEBPACK_IMPORTED_MODULE_2__["Math"].degToRad(degreeX));
-  object.rotateY(three__WEBPACK_IMPORTED_MODULE_2__["Math"].degToRad(degreeY));
-  object.rotateZ(three__WEBPACK_IMPORTED_MODULE_2__["Math"].degToRad(degreeZ));
+  object.rotateX(three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(degreeX));
+  object.rotateY(three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(degreeY));
+  object.rotateZ(three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(degreeZ));
 } // Rotate an object around an arbitrary axis in object space
 
 
 var rotObjectMatrix;
 
 function rotateAroundObjectAxis(object, axis, radians) {
-  rotObjectMatrix = new three__WEBPACK_IMPORTED_MODULE_2__["Matrix4"]();
+  rotObjectMatrix = new three__WEBPACK_IMPORTED_MODULE_7__["Matrix4"]();
   rotObjectMatrix.makeRotationAxis(axis.normalize(), radians); // old code for Three.JS pre r54:
   // object.matrix.multiplySelf(rotObjectMatrix);      // post-multiply
   // new code for Three.JS r55+:
@@ -405,7 +421,7 @@ function rotateAroundObjectAxis(object, axis, radians) {
 var rotWorldMatrix; // Rotate an object around an arbitrary axis in world space       
 
 function rotateAroundWorldAxis(object, axis, radians) {
-  rotWorldMatrix = new three__WEBPACK_IMPORTED_MODULE_2__["Matrix4"]();
+  rotWorldMatrix = new three__WEBPACK_IMPORTED_MODULE_7__["Matrix4"]();
   rotWorldMatrix.makeRotationAxis(axis.normalize(), radians); // old code for Three.JS pre r54:
   //  rotWorldMatrix.multiply(object.matrix);
   // new code for Three.JS r55+:
@@ -916,7 +932,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/di
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i);", ""]);
 
 // Module
-exports.push([module.i, "body {\n  font-family: 'Lato', sans-serif; }\n\n* {\n  box-sizing: border-box; }\n\n.info-panel {\n  max-width: 60vw;\n  width: 100%;\n  position: absolute;\n  z-index: 999;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  background: #fff;\n  padding: 100px; }\n", ""]);
+exports.push([module.i, "body {\n  font-family: 'Lato', sans-serif; }\n\n* {\n  box-sizing: border-box; }\n\n.info-panel {\n  max-width: 60vw;\n  width: 100%;\n  position: absolute;\n  z-index: 999;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  background: #fff;\n  padding: 100px; }\n\n/*\n\nName:       Base16 harmonic16 Dark\nAuthor:     Jannik Siebert (https://github.com/janniks)\n\nPrism template by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/prism/)\nOriginal Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)\n\n*/\ncode[class*=\"language-\"],\npre[class*=\"language-\"] {\n  font-family: Consolas, Menlo, Monaco, \"Andale Mono WT\", \"Andale Mono\", \"Lucida Console\", \"Lucida Sans Typewriter\", \"DejaVu Sans Mono\", \"Bitstream Vera Sans Mono\", \"Liberation Mono\", \"Nimbus Mono L\", \"Courier New\", Courier, monospace;\n  font-size: 14px;\n  line-height: 1.375;\n  direction: ltr;\n  text-align: left;\n  white-space: pre;\n  word-spacing: normal;\n  word-break: normal;\n  -moz-tab-size: 4;\n  -o-tab-size: 4;\n  tab-size: 4;\n  -webkit-hyphens: none;\n  -ms-hyphens: none;\n  hyphens: none;\n  background: #0b1c2c;\n  color: #cbd6e2; }\n\npre[class*=\"language-\"]::-moz-selection, pre[class*=\"language-\"] ::-moz-selection,\ncode[class*=\"language-\"]::-moz-selection, code[class*=\"language-\"] ::-moz-selection {\n  text-shadow: none;\n  background: #aabcce; }\n\npre[class*=\"language-\"]::selection, pre[class*=\"language-\"] ::selection,\ncode[class*=\"language-\"]::selection, code[class*=\"language-\"] ::selection {\n  text-shadow: none;\n  background: #aabcce; }\n\n/* Code blocks */\npre[class*=\"language-\"] {\n  padding: 1em;\n  margin: .5em 0;\n  overflow: auto; }\n\n/* Inline code */\n:not(pre) > code[class*=\"language-\"] {\n  padding: .1em;\n  border-radius: .3em; }\n\n.token.comment,\n.token.prolog,\n.token.doctype,\n.token.cdata {\n  color: #627e99; }\n\n.token.punctuation {\n  color: #cbd6e2; }\n\n.token.namespace {\n  opacity: .7; }\n\n.token.operator,\n.token.boolean,\n.token.number {\n  color: #bfbf56; }\n\n.token.property {\n  color: #8bbf56; }\n\n.token.tag {\n  color: #8b56bf; }\n\n.token.string {\n  color: #568bbf; }\n\n.token.selector {\n  color: #bf568b; }\n\n.token.attr-name {\n  color: #bfbf56; }\n\n.token.entity,\n.token.url,\n.language-css .token.string,\n.style .token.string {\n  color: #568bbf; }\n\n.token.attr-value,\n.token.keyword,\n.token.control,\n.token.directive,\n.token.unit {\n  color: #56bf8b; }\n\n.token.statement,\n.token.regex,\n.token.atrule {\n  color: #568bbf; }\n\n.token.placeholder,\n.token.variable {\n  color: #8b56bf; }\n\n.token.deleted {\n  text-decoration: line-through; }\n\n.token.inserted {\n  border-bottom: 1px dotted #f7f9fb;\n  text-decoration: none; }\n\n.token.italic {\n  font-style: italic; }\n\n.token.important,\n.token.bold {\n  font-weight: bold; }\n\n.token.important {\n  color: #bf8b56; }\n\n.token.entity {\n  cursor: help; }\n\npre > code.highlight {\n  outline: 0.4em solid #bf8b56;\n  outline-offset: .4em; }\n\n.line-numbers .line-numbers-rows {\n  border-right-color: #223b54 !important; }\n\n.line-numbers-rows > span:before {\n  color: #405c79 !important; }\n\n.line-highlight {\n  background: rgba(247, 249, 251, 0.2) !important;\n  background: -webkit-linear-gradient(left, rgba(247, 249, 251, 0.2) 70%, rgba(247, 249, 251, 0)) !important;\n  background: linear-gradient(to right, rgba(247, 249, 251, 0.2) 70%, rgba(247, 249, 251, 0)) !important; }\n", ""]);
 
 
 
@@ -3555,6 +3571,882 @@ var index = {
 
 /* harmony default export */ __webpack_exports__["default"] = (index);
 //# sourceMappingURL=dat.gui.module.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/prismjs/components/prism-clike.js":
+/*!********************************************************!*\
+  !*** ./node_modules/prismjs/components/prism-clike.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+Prism.languages.clike = {
+	'comment': [
+		{
+			pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,
+			lookbehind: true
+		},
+		{
+			pattern: /(^|[^\\:])\/\/.*/,
+			lookbehind: true,
+			greedy: true
+		}
+	],
+	'string': {
+		pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
+		greedy: true
+	},
+	'class-name': {
+		pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[\w.\\]+/i,
+		lookbehind: true,
+		inside: {
+			punctuation: /[.\\]/
+		}
+	},
+	'keyword': /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+	'boolean': /\b(?:true|false)\b/,
+	'function': /\w+(?=\()/,
+	'number': /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,
+	'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
+	'punctuation': /[{}[\];(),.:]/
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/prismjs/components/prism-core.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/prismjs/components/prism-core.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var _self = (typeof window !== 'undefined')
+	? window   // if in browser
+	: (
+		(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope)
+		? self // if in worker
+		: {}   // if in node js
+	);
+
+/**
+ * Prism: Lightweight, robust, elegant syntax highlighting
+ * MIT license http://www.opensource.org/licenses/mit-license.php/
+ * @author Lea Verou http://lea.verou.me
+ */
+
+var Prism = (function (_self){
+
+// Private helper vars
+var lang = /\blang(?:uage)?-([\w-]+)\b/i;
+var uniqueId = 0;
+
+var _ = {
+	manual: _self.Prism && _self.Prism.manual,
+	disableWorkerMessageHandler: _self.Prism && _self.Prism.disableWorkerMessageHandler,
+	util: {
+		encode: function (tokens) {
+			if (tokens instanceof Token) {
+				return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
+			} else if (Array.isArray(tokens)) {
+				return tokens.map(_.util.encode);
+			} else {
+				return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
+			}
+		},
+
+		type: function (o) {
+			return Object.prototype.toString.call(o).slice(8, -1);
+		},
+
+		objId: function (obj) {
+			if (!obj['__id']) {
+				Object.defineProperty(obj, '__id', { value: ++uniqueId });
+			}
+			return obj['__id'];
+		},
+
+		// Deep clone a language definition (e.g. to extend it)
+		clone: function deepClone(o, visited) {
+			var clone, id, type = _.util.type(o);
+			visited = visited || {};
+
+			switch (type) {
+				case 'Object':
+					id = _.util.objId(o);
+					if (visited[id]) {
+						return visited[id];
+					}
+					clone = {};
+					visited[id] = clone;
+
+					for (var key in o) {
+						if (o.hasOwnProperty(key)) {
+							clone[key] = deepClone(o[key], visited);
+						}
+					}
+
+					return clone;
+
+				case 'Array':
+					id = _.util.objId(o);
+					if (visited[id]) {
+						return visited[id];
+					}
+					clone = [];
+					visited[id] = clone;
+
+					o.forEach(function (v, i) {
+						clone[i] = deepClone(v, visited);
+					});
+
+					return clone;
+
+				default:
+					return o;
+			}
+		}
+	},
+
+	languages: {
+		extend: function (id, redef) {
+			var lang = _.util.clone(_.languages[id]);
+
+			for (var key in redef) {
+				lang[key] = redef[key];
+			}
+
+			return lang;
+		},
+
+		/**
+		 * Insert a token before another token in a language literal
+		 * As this needs to recreate the object (we cannot actually insert before keys in object literals),
+		 * we cannot just provide an object, we need an object and a key.
+		 * @param inside The key (or language id) of the parent
+		 * @param before The key to insert before.
+		 * @param insert Object with the key/value pairs to insert
+		 * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
+		 */
+		insertBefore: function (inside, before, insert, root) {
+			root = root || _.languages;
+			var grammar = root[inside];
+			var ret = {};
+
+			for (var token in grammar) {
+				if (grammar.hasOwnProperty(token)) {
+
+					if (token == before) {
+						for (var newToken in insert) {
+							if (insert.hasOwnProperty(newToken)) {
+								ret[newToken] = insert[newToken];
+							}
+						}
+					}
+
+					// Do not insert token which also occur in insert. See #1525
+					if (!insert.hasOwnProperty(token)) {
+						ret[token] = grammar[token];
+					}
+				}
+			}
+
+			var old = root[inside];
+			root[inside] = ret;
+
+			// Update references in other language definitions
+			_.languages.DFS(_.languages, function(key, value) {
+				if (value === old && key != inside) {
+					this[key] = ret;
+				}
+			});
+
+			return ret;
+		},
+
+		// Traverse a language definition with Depth First Search
+		DFS: function DFS(o, callback, type, visited) {
+			visited = visited || {};
+
+			var objId = _.util.objId;
+
+			for (var i in o) {
+				if (o.hasOwnProperty(i)) {
+					callback.call(o, i, o[i], type || i);
+
+					var property = o[i],
+					    propertyType = _.util.type(property);
+
+					if (propertyType === 'Object' && !visited[objId(property)]) {
+						visited[objId(property)] = true;
+						DFS(property, callback, null, visited);
+					}
+					else if (propertyType === 'Array' && !visited[objId(property)]) {
+						visited[objId(property)] = true;
+						DFS(property, callback, i, visited);
+					}
+				}
+			}
+		}
+	},
+	plugins: {},
+
+	highlightAll: function(async, callback) {
+		_.highlightAllUnder(document, async, callback);
+	},
+
+	highlightAllUnder: function(container, async, callback) {
+		var env = {
+			callback: callback,
+			selector: 'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'
+		};
+
+		_.hooks.run("before-highlightall", env);
+
+		var elements = env.elements || container.querySelectorAll(env.selector);
+
+		for (var i=0, element; element = elements[i++];) {
+			_.highlightElement(element, async === true, env.callback);
+		}
+	},
+
+	highlightElement: function(element, async, callback) {
+		// Find language
+		var language, grammar, parent = element;
+
+		while (parent && !lang.test(parent.className)) {
+			parent = parent.parentNode;
+		}
+
+		if (parent) {
+			language = (parent.className.match(lang) || [,''])[1].toLowerCase();
+			grammar = _.languages[language];
+		}
+
+		// Set language on the element, if not present
+		element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+
+		if (element.parentNode) {
+			// Set language on the parent, for styling
+			parent = element.parentNode;
+
+			if (/pre/i.test(parent.nodeName)) {
+				parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+			}
+		}
+
+		var code = element.textContent;
+
+		var env = {
+			element: element,
+			language: language,
+			grammar: grammar,
+			code: code
+		};
+
+		var insertHighlightedCode = function (highlightedCode) {
+			env.highlightedCode = highlightedCode;
+
+			_.hooks.run('before-insert', env);
+
+			env.element.innerHTML = env.highlightedCode;
+
+			_.hooks.run('after-highlight', env);
+			_.hooks.run('complete', env);
+			callback && callback.call(env.element);
+		}
+
+		_.hooks.run('before-sanity-check', env);
+
+		if (!env.code) {
+			_.hooks.run('complete', env);
+			return;
+		}
+
+		_.hooks.run('before-highlight', env);
+
+		if (!env.grammar) {
+			insertHighlightedCode(_.util.encode(env.code));
+			return;
+		}
+
+		if (async && _self.Worker) {
+			var worker = new Worker(_.filename);
+
+			worker.onmessage = function(evt) {
+				insertHighlightedCode(evt.data);
+			};
+
+			worker.postMessage(JSON.stringify({
+				language: env.language,
+				code: env.code,
+				immediateClose: true
+			}));
+		}
+		else {
+			insertHighlightedCode(_.highlight(env.code, env.grammar, env.language));
+		}
+	},
+
+	highlight: function (text, grammar, language) {
+		var env = {
+			code: text,
+			grammar: grammar,
+			language: language
+		};
+		_.hooks.run('before-tokenize', env);
+		env.tokens = _.tokenize(env.code, env.grammar);
+		_.hooks.run('after-tokenize', env);
+		return Token.stringify(_.util.encode(env.tokens), env.language);
+	},
+
+	matchGrammar: function (text, strarr, grammar, index, startPos, oneshot, target) {
+		for (var token in grammar) {
+			if(!grammar.hasOwnProperty(token) || !grammar[token]) {
+				continue;
+			}
+
+			if (token == target) {
+				return;
+			}
+
+			var patterns = grammar[token];
+			patterns = (_.util.type(patterns) === "Array") ? patterns : [patterns];
+
+			for (var j = 0; j < patterns.length; ++j) {
+				var pattern = patterns[j],
+					inside = pattern.inside,
+					lookbehind = !!pattern.lookbehind,
+					greedy = !!pattern.greedy,
+					lookbehindLength = 0,
+					alias = pattern.alias;
+
+				if (greedy && !pattern.pattern.global) {
+					// Without the global flag, lastIndex won't work
+					var flags = pattern.pattern.toString().match(/[imuy]*$/)[0];
+					pattern.pattern = RegExp(pattern.pattern.source, flags + "g");
+				}
+
+				pattern = pattern.pattern || pattern;
+
+				// Don’t cache length as it changes during the loop
+				for (var i = index, pos = startPos; i < strarr.length; pos += strarr[i].length, ++i) {
+
+					var str = strarr[i];
+
+					if (strarr.length > text.length) {
+						// Something went terribly wrong, ABORT, ABORT!
+						return;
+					}
+
+					if (str instanceof Token) {
+						continue;
+					}
+
+					if (greedy && i != strarr.length - 1) {
+						pattern.lastIndex = pos;
+						var match = pattern.exec(text);
+						if (!match) {
+							break;
+						}
+
+						var from = match.index + (lookbehind ? match[1].length : 0),
+						    to = match.index + match[0].length,
+						    k = i,
+						    p = pos;
+
+						for (var len = strarr.length; k < len && (p < to || (!strarr[k].type && !strarr[k - 1].greedy)); ++k) {
+							p += strarr[k].length;
+							// Move the index i to the element in strarr that is closest to from
+							if (from >= p) {
+								++i;
+								pos = p;
+							}
+						}
+
+						// If strarr[i] is a Token, then the match starts inside another Token, which is invalid
+						if (strarr[i] instanceof Token) {
+							continue;
+						}
+
+						// Number of tokens to delete and replace with the new match
+						delNum = k - i;
+						str = text.slice(pos, p);
+						match.index -= pos;
+					} else {
+						pattern.lastIndex = 0;
+
+						var match = pattern.exec(str),
+							delNum = 1;
+					}
+
+					if (!match) {
+						if (oneshot) {
+							break;
+						}
+
+						continue;
+					}
+
+					if(lookbehind) {
+						lookbehindLength = match[1] ? match[1].length : 0;
+					}
+
+					var from = match.index + lookbehindLength,
+					    match = match[0].slice(lookbehindLength),
+					    to = from + match.length,
+					    before = str.slice(0, from),
+					    after = str.slice(to);
+
+					var args = [i, delNum];
+
+					if (before) {
+						++i;
+						pos += before.length;
+						args.push(before);
+					}
+
+					var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias, match, greedy);
+
+					args.push(wrapped);
+
+					if (after) {
+						args.push(after);
+					}
+
+					Array.prototype.splice.apply(strarr, args);
+
+					if (delNum != 1)
+						_.matchGrammar(text, strarr, grammar, i, pos, true, token);
+
+					if (oneshot)
+						break;
+				}
+			}
+		}
+	},
+
+	tokenize: function(text, grammar) {
+		var strarr = [text];
+
+		var rest = grammar.rest;
+
+		if (rest) {
+			for (var token in rest) {
+				grammar[token] = rest[token];
+			}
+
+			delete grammar.rest;
+		}
+
+		_.matchGrammar(text, strarr, grammar, 0, 0, false);
+
+		return strarr;
+	},
+
+	hooks: {
+		all: {},
+
+		add: function (name, callback) {
+			var hooks = _.hooks.all;
+
+			hooks[name] = hooks[name] || [];
+
+			hooks[name].push(callback);
+		},
+
+		run: function (name, env) {
+			var callbacks = _.hooks.all[name];
+
+			if (!callbacks || !callbacks.length) {
+				return;
+			}
+
+			for (var i=0, callback; callback = callbacks[i++];) {
+				callback(env);
+			}
+		}
+	},
+
+	Token: Token
+};
+
+_self.Prism = _;
+
+function Token(type, content, alias, matchedStr, greedy) {
+	this.type = type;
+	this.content = content;
+	this.alias = alias;
+	// Copy of the full string this token was created from
+	this.length = (matchedStr || "").length|0;
+	this.greedy = !!greedy;
+}
+
+Token.stringify = function(o, language, parent) {
+	if (typeof o == 'string') {
+		return o;
+	}
+
+	if (Array.isArray(o)) {
+		return o.map(function(element) {
+			return Token.stringify(element, language, o);
+		}).join('');
+	}
+
+	var env = {
+		type: o.type,
+		content: Token.stringify(o.content, language, parent),
+		tag: 'span',
+		classes: ['token', o.type],
+		attributes: {},
+		language: language,
+		parent: parent
+	};
+
+	if (o.alias) {
+		var aliases = Array.isArray(o.alias) ? o.alias : [o.alias];
+		Array.prototype.push.apply(env.classes, aliases);
+	}
+
+	_.hooks.run('wrap', env);
+
+	var attributes = Object.keys(env.attributes).map(function(name) {
+		return name + '="' + (env.attributes[name] || '').replace(/"/g, '&quot;') + '"';
+	}).join(' ');
+
+	return '<' + env.tag + ' class="' + env.classes.join(' ') + '"' + (attributes ? ' ' + attributes : '') + '>' + env.content + '</' + env.tag + '>';
+
+};
+
+if (!_self.document) {
+	if (!_self.addEventListener) {
+		// in Node.js
+		return _;
+	}
+
+	if (!_.disableWorkerMessageHandler) {
+		// In worker
+		_self.addEventListener('message', function (evt) {
+			var message = JSON.parse(evt.data),
+				lang = message.language,
+				code = message.code,
+				immediateClose = message.immediateClose;
+
+			_self.postMessage(_.highlight(code, _.languages[lang], lang));
+			if (immediateClose) {
+				_self.close();
+			}
+		}, false);
+	}
+
+	return _;
+}
+
+//Get current script and highlight
+var script = document.currentScript || [].slice.call(document.getElementsByTagName("script")).pop();
+
+if (script) {
+	_.filename = script.src;
+
+	if (!_.manual && !script.hasAttribute('data-manual')) {
+		if(document.readyState !== "loading") {
+			if (window.requestAnimationFrame) {
+				window.requestAnimationFrame(_.highlightAll);
+			} else {
+				window.setTimeout(_.highlightAll, 16);
+			}
+		}
+		else {
+			document.addEventListener('DOMContentLoaded', _.highlightAll);
+		}
+	}
+}
+
+return _;
+
+})(_self);
+
+if ( true && module.exports) {
+	module.exports = Prism;
+}
+
+// hack for components to work correctly in node.js
+if (typeof global !== 'undefined') {
+	global.Prism = Prism;
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/prismjs/components/prism-css.js":
+/*!******************************************************!*\
+  !*** ./node_modules/prismjs/components/prism-css.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function (Prism) {
+
+	var string = /("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/;
+
+	Prism.languages.css = {
+		'comment': /\/\*[\s\S]*?\*\//,
+		'atrule': {
+			pattern: /@[\w-]+?[\s\S]*?(?:;|(?=\s*\{))/i,
+			inside: {
+				'rule': /@[\w-]+/
+				// See rest below
+			}
+		},
+		'url': RegExp('url\\((?:' + string.source + '|.*?)\\)', 'i'),
+		'selector': RegExp('[^{}\\s](?:[^{};"\']|' + string.source + ')*?(?=\\s*\\{)'),
+		'string': {
+			pattern: string,
+			greedy: true
+		},
+		'property': /[-_a-z\xA0-\uFFFF][-\w\xA0-\uFFFF]*(?=\s*:)/i,
+		'important': /!important\b/i,
+		'function': /[-a-z0-9]+(?=\()/i,
+		'punctuation': /[(){};:,]/
+	};
+
+	Prism.languages.css['atrule'].inside.rest = Prism.languages.css;
+
+	var markup = Prism.languages.markup;
+	if (markup) {
+		markup.tag.addInlined('style', 'css');
+
+		Prism.languages.insertBefore('inside', 'attr-value', {
+			'style-attr': {
+				pattern: /\s*style=("|')(?:\\[\s\S]|(?!\1)[^\\])*\1/i,
+				inside: {
+					'attr-name': {
+						pattern: /^\s*style/i,
+						inside: markup.tag.inside
+					},
+					'punctuation': /^\s*=\s*['"]|['"]\s*$/,
+					'attr-value': {
+						pattern: /.+/i,
+						inside: Prism.languages.css
+					}
+				},
+				alias: 'language-css'
+			}
+		}, markup.tag);
+	}
+
+}(Prism));
+
+
+/***/ }),
+
+/***/ "./node_modules/prismjs/components/prism-javascript.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/prismjs/components/prism-javascript.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+Prism.languages.javascript = Prism.languages.extend('clike', {
+	'class-name': [
+		Prism.languages.clike['class-name'],
+		{
+			pattern: /(^|[^$\w\xA0-\uFFFF])[_$A-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\.(?:prototype|constructor))/,
+			lookbehind: true
+		}
+	],
+	'keyword': [
+		{
+			pattern: /((?:^|})\s*)(?:catch|finally)\b/,
+			lookbehind: true
+		},
+		{
+			pattern: /(^|[^.])\b(?:as|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,
+			lookbehind: true
+		},
+	],
+	'number': /\b(?:(?:0[xX][\dA-Fa-f]+|0[bB][01]+|0[oO][0-7]+)n?|\d+n|NaN|Infinity)\b|(?:\b\d+\.?\d*|\B\.\d+)(?:[Ee][+-]?\d+)?/,
+	// Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
+	'function': /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
+	'operator': /-[-=]?|\+[+=]?|!=?=?|<<?=?|>>?>?=?|=(?:==?|>)?|&[&=]?|\|[|=]?|\*\*?=?|\/=?|~|\^=?|%=?|\?|\.{3}/
+});
+
+Prism.languages.javascript['class-name'][0].pattern = /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/
+
+Prism.languages.insertBefore('javascript', 'keyword', {
+	'regex': {
+		pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s])\s*)\/(\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})\]]))/,
+		lookbehind: true,
+		greedy: true
+	},
+	// This must be declared before keyword because we use "function" inside the look-forward
+	'function-variable': {
+		pattern: /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)\s*=>))/,
+		alias: 'function'
+	},
+	'parameter': [
+		{
+			pattern: /(function(?:\s+[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)?\s*\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\))/,
+			lookbehind: true,
+			inside: Prism.languages.javascript
+		},
+		{
+			pattern: /[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*=>)/i,
+			inside: Prism.languages.javascript
+		},
+		{
+			pattern: /(\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*=>)/,
+			lookbehind: true,
+			inside: Prism.languages.javascript
+		},
+		{
+			pattern: /((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*\s*)\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*\{)/,
+			lookbehind: true,
+			inside: Prism.languages.javascript
+		}
+	],
+	'constant': /\b[A-Z](?:[A-Z_]|\dx?)*\b/
+});
+
+Prism.languages.insertBefore('javascript', 'string', {
+	'template-string': {
+		pattern: /`(?:\\[\s\S]|\${[^}]+}|[^\\`])*`/,
+		greedy: true,
+		inside: {
+			'interpolation': {
+				pattern: /\${[^}]+}/,
+				inside: {
+					'interpolation-punctuation': {
+						pattern: /^\${|}$/,
+						alias: 'punctuation'
+					},
+					rest: Prism.languages.javascript
+				}
+			},
+			'string': /[\s\S]+/
+		}
+	}
+});
+
+if (Prism.languages.markup) {
+	Prism.languages.markup.tag.addInlined('script', 'javascript');
+}
+
+Prism.languages.js = Prism.languages.javascript;
+
+
+/***/ }),
+
+/***/ "./node_modules/prismjs/components/prism-markup.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/prismjs/components/prism-markup.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+Prism.languages.markup = {
+	'comment': /<!--[\s\S]*?-->/,
+	'prolog': /<\?[\s\S]+?\?>/,
+	'doctype': /<!DOCTYPE[\s\S]+?>/i,
+	'cdata': /<!\[CDATA\[[\s\S]*?]]>/i,
+	'tag': {
+		pattern: /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/i,
+		greedy: true,
+		inside: {
+			'tag': {
+				pattern: /^<\/?[^\s>\/]+/i,
+				inside: {
+					'punctuation': /^<\/?/,
+					'namespace': /^[^\s>\/:]+:/
+				}
+			},
+			'attr-value': {
+				pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/i,
+				inside: {
+					'punctuation': [
+						/^=/,
+						{
+							pattern: /^(\s*)["']|["']$/,
+							lookbehind: true
+						}
+					]
+				}
+			},
+			'punctuation': /\/?>/,
+			'attr-name': {
+				pattern: /[^\s>\/]+/,
+				inside: {
+					'namespace': /^[^\s>\/:]+:/
+				}
+			}
+
+		}
+	},
+	'entity': /&#?[\da-z]{1,8};/i
+};
+
+Prism.languages.markup['tag'].inside['attr-value'].inside['entity'] =
+	Prism.languages.markup['entity'];
+
+// Plugin to make entity title show the real entity, idea by Roman Komarov
+Prism.hooks.add('wrap', function(env) {
+
+	if (env.type === 'entity') {
+		env.attributes['title'] = env.content.replace(/&amp;/, '&');
+	}
+});
+
+Object.defineProperty(Prism.languages.markup.tag, 'addInlined', {
+	/**
+	 * Adds an inlined language to markup.
+	 *
+	 * An example of an inlined language is CSS with `<style>` tags.
+	 *
+	 * @param {string} tagName The name of the tag that contains the inlined language. This name will be treated as
+	 * case insensitive.
+	 * @param {string} lang The language key.
+	 * @example
+	 * addInlined('style', 'css');
+	 */
+	value: function addInlined(tagName, lang) {
+		var includedCdataInside = {};
+		includedCdataInside['language-' + lang] = {
+			pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
+			lookbehind: true,
+			inside: Prism.languages[lang]
+		};
+		includedCdataInside['cdata'] = /^<!\[CDATA\[|\]\]>$/i;
+
+		var inside = {
+			'included-cdata': {
+				pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
+				inside: includedCdataInside
+			}
+		};
+		inside['language-' + lang] = {
+			pattern: /[\s\S]+/,
+			inside: Prism.languages[lang]
+		};
+
+		var def = {};
+		def[tagName] = {
+			pattern: RegExp(/(<__[\s\S]*?>)(?:<!\[CDATA\[[\s\S]*?\]\]>\s*|[\s\S])*?(?=<\/__>)/.source.replace(/__/g, tagName), 'i'),
+			lookbehind: true,
+			greedy: true,
+			inside: inside
+		};
+
+		Prism.languages.insertBefore('markup', 'cdata', def);
+	}
+});
+
+Prism.languages.xml = Prism.languages.extend('markup', {});
+Prism.languages.html = Prism.languages.markup;
+Prism.languages.mathml = Prism.languages.markup;
+Prism.languages.svg = Prism.languages.markup;
 
 
 /***/ }),
@@ -23828,6 +24720,37 @@ function arrayMax( array ) {
 }
 
 
+
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/global.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ })

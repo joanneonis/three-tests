@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import '../../assets/base.scss';
+import Prism from 'prismjs';
 
 import * as dat from 'dat.gui';
 import * as THREE from 'three';
@@ -9,6 +10,8 @@ import 'three/examples/js/loaders/GLTFLoader';
 import 'three/examples/js/AnimationClipCreator';
 
 import { setlightType, buildGui, changeLightType } from '../../helpers/functions/lights';
+
+Prism.highlightAll();
 
 //?--------------------------------------------------------------------
 //?		Base
