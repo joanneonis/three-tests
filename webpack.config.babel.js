@@ -4,6 +4,7 @@ const webpack = require('webpack')
 
 export default {
     entry: {
+        style: path.join(__dirname, 'assets/base.scss'),
         base: path.join(__dirname, 'js/main.js'),
         download: path.join(__dirname, 'basics/download/main.js'),
         lights: path.join(__dirname, 'basics/lights/main.js'),
@@ -13,10 +14,10 @@ export default {
         shaders: path.join(__dirname, 'basics/shaders/main.js'),
         modalloaders: path.join(__dirname, 'basics/modal-loaders/main.js'),
         bloom: path.join(__dirname, 'basics/bloom/main.js'),
-        car: path.join(__dirname, 'experiments/car/main.js'),
-        car2: path.join(__dirname, 'experiments/car-v2/main.js'),
-        car3: path.join(__dirname, 'experiments/car-v3/main.js'),
-        style: path.join(__dirname, 'assets/base.scss'),
+        car: path.join(__dirname, 'experiments/tractor/car-v1/main.js'),
+        car2: path.join(__dirname, 'experiments/tractor/car-v2/main.js'),
+        car3: path.join(__dirname, 'experiments/tractor/car-v3/main.js'),
+        sound: path.join(__dirname, 'experiments/sound/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),
