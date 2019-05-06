@@ -520,10 +520,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_src_helpers_DirectionalLightHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/src/helpers/DirectionalLightHelper */ "./node_modules/three/src/helpers/DirectionalLightHelper.js");
 /* harmony import */ var three_src_helpers_PointLightHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/src/helpers/PointLightHelper */ "./node_modules/three/src/helpers/PointLightHelper.js");
 /* harmony import */ var three_src_helpers_HemisphereLightHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/src/helpers/HemisphereLightHelper */ "./node_modules/three/src/helpers/HemisphereLightHelper.js");
+/* harmony import */ var three_src_helpers_CameraHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/src/helpers/CameraHelper */ "./node_modules/three/src/helpers/CameraHelper.js");
 /* eslint-disable no-unused-vars */
 
 
  // helpers
+
 
 
 
@@ -568,6 +570,8 @@ function createGuiSetting(scene, setting, name, key) {
       scene.userData.activeLightSettings.light[key] = val;
     } // render(); //!idk
 
+
+    console.log(scene.userData.activeLightSettings.light);
   });
 }
 function setLight(scene) {
@@ -586,6 +590,10 @@ function setLight(scene) {
     scene.add(scene.userData.activeLightSettings.Helper);
   }
 
+  if (scene.userData.activeLightSettings.shadowHelper) {
+    scene.add(scene.userData.activeLightSettings.shadowHelper);
+  }
+
   if (scene.userData.activeLightSettings.light.shadow) {
     scene.userData.activeLightSettings.ShadowCameraHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](scene.userData.activeLightSettings.light.shadow.camera);
     scene.add(scene.userData.activeLightSettings.ShadowCameraHelper);
@@ -595,6 +603,7 @@ function setLight(scene) {
 function setlightType(type, scene) {
   scene.remove(scene.userData.activeLightSettings.light);
   scene.remove(scene.userData.activeLightSettings.Helper);
+  scene.remove(scene.userData.activeLightSettings.shadowHelper);
   scene.remove(scene.userData.activeLightSettings.ShadowCameraHelper);
 
   switch (type) {
@@ -602,12 +611,16 @@ function setlightType(type, scene) {
       scene.userData.activeLightSettings.light = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 1);
       scene.userData.activeLightSettings.Helper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](scene.userData.activeLightSettings.light);
       scene.userData.activeLightSettings.GuiSettings = new _helpers_classes_lights__WEBPACK_IMPORTED_MODULE_2__["SpotLight"]();
+      scene.userData.activeLightSettings.light.castShadow = true;
+      scene.userData.activeLightSettings.shadowHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](scene.userData.activeLightSettings.light.shadow.camera);
       break;
 
     case 'PointLight':
       scene.userData.activeLightSettings.light = new three__WEBPACK_IMPORTED_MODULE_1__["PointLight"](0xffffff, 2.0, 600);
       scene.userData.activeLightSettings.Helper = new three__WEBPACK_IMPORTED_MODULE_1__["PointLightHelper"](scene.userData.activeLightSettings.light);
       scene.userData.activeLightSettings.GuiSettings = new _helpers_classes_lights__WEBPACK_IMPORTED_MODULE_2__["PointLight"]();
+      scene.userData.activeLightSettings.light.castShadow = true;
+      scene.userData.activeLightSettings.shadowHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](scene.userData.activeLightSettings.light.shadow.camera);
       break;
 
     case 'HemisphereLight':
@@ -8731,6 +8744,99 @@ THREE.GLTFLoader = ( function () {
 
 /***/ }),
 
+/***/ "./node_modules/three/src/cameras/Camera.js":
+/*!**************************************************!*\
+  !*** ./node_modules/three/src/cameras/Camera.js ***!
+  \**************************************************/
+/*! exports provided: Camera */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Camera", function() { return Camera; });
+/* harmony import */ var _math_Matrix4_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../math/Matrix4.js */ "./node_modules/three/src/math/Matrix4.js");
+/* harmony import */ var _core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/Object3D.js */ "./node_modules/three/src/core/Object3D.js");
+/* harmony import */ var _math_Vector3_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../math/Vector3.js */ "./node_modules/three/src/math/Vector3.js");
+/**
+ * @author mrdoob / http://mrdoob.com/
+ * @author mikael emtinger / http://gomo.se/
+ * @author WestLangley / http://github.com/WestLangley
+*/
+
+
+
+
+
+function Camera() {
+
+	_core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__["Object3D"].call( this );
+
+	this.type = 'Camera';
+
+	this.matrixWorldInverse = new _math_Matrix4_js__WEBPACK_IMPORTED_MODULE_0__["Matrix4"]();
+
+	this.projectionMatrix = new _math_Matrix4_js__WEBPACK_IMPORTED_MODULE_0__["Matrix4"]();
+	this.projectionMatrixInverse = new _math_Matrix4_js__WEBPACK_IMPORTED_MODULE_0__["Matrix4"]();
+
+}
+
+Camera.prototype = Object.assign( Object.create( _core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__["Object3D"].prototype ), {
+
+	constructor: Camera,
+
+	isCamera: true,
+
+	copy: function ( source, recursive ) {
+
+		_core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__["Object3D"].prototype.copy.call( this, source, recursive );
+
+		this.matrixWorldInverse.copy( source.matrixWorldInverse );
+
+		this.projectionMatrix.copy( source.projectionMatrix );
+		this.projectionMatrixInverse.copy( source.projectionMatrixInverse );
+
+		return this;
+
+	},
+
+	getWorldDirection: function ( target ) {
+
+		if ( target === undefined ) {
+
+			console.warn( 'THREE.Camera: .getWorldDirection() target is now required' );
+			target = new _math_Vector3_js__WEBPACK_IMPORTED_MODULE_2__["Vector3"]();
+
+		}
+
+		this.updateMatrixWorld( true );
+
+		var e = this.matrixWorld.elements;
+
+		return target.set( - e[ 8 ], - e[ 9 ], - e[ 10 ] ).normalize();
+
+	},
+
+	updateMatrixWorld: function ( force ) {
+
+		_core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__["Object3D"].prototype.updateMatrixWorld.call( this, force );
+
+		this.matrixWorldInverse.getInverse( this.matrixWorld );
+
+	},
+
+	clone: function () {
+
+		return new this.constructor().copy( this );
+
+	}
+
+} );
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/three/src/constants.js":
 /*!*********************************************!*\
   !*** ./node_modules/three/src/constants.js ***!
@@ -14299,6 +14405,238 @@ function SphereBufferGeometry( radius, widthSegments, heightSegments, phiStart, 
 
 SphereBufferGeometry.prototype = Object.create( _core_BufferGeometry_js__WEBPACK_IMPORTED_MODULE_1__["BufferGeometry"].prototype );
 SphereBufferGeometry.prototype.constructor = SphereBufferGeometry;
+
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/three/src/helpers/CameraHelper.js":
+/*!********************************************************!*\
+  !*** ./node_modules/three/src/helpers/CameraHelper.js ***!
+  \********************************************************/
+/*! exports provided: CameraHelper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CameraHelper", function() { return CameraHelper; });
+/* harmony import */ var _cameras_Camera_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cameras/Camera.js */ "./node_modules/three/src/cameras/Camera.js");
+/* harmony import */ var _math_Vector3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../math/Vector3.js */ "./node_modules/three/src/math/Vector3.js");
+/* harmony import */ var _objects_LineSegments_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../objects/LineSegments.js */ "./node_modules/three/src/objects/LineSegments.js");
+/* harmony import */ var _math_Color_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../math/Color.js */ "./node_modules/three/src/math/Color.js");
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../constants.js */ "./node_modules/three/src/constants.js");
+/* harmony import */ var _materials_LineBasicMaterial_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../materials/LineBasicMaterial.js */ "./node_modules/three/src/materials/LineBasicMaterial.js");
+/* harmony import */ var _core_BufferGeometry_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../core/BufferGeometry.js */ "./node_modules/three/src/core/BufferGeometry.js");
+/* harmony import */ var _core_BufferAttribute_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../core/BufferAttribute.js */ "./node_modules/three/src/core/BufferAttribute.js");
+/**
+ * @author alteredq / http://alteredqualia.com/
+ * @author Mugen87 / https://github.com/Mugen87
+ *
+ *	- shows frustum, line of sight and up of the camera
+ *	- suitable for fast updates
+ * 	- based on frustum visualization in lightgl.js shadowmap example
+ *		http://evanw.github.com/lightgl.js/tests/shadowmap.html
+ */
+
+
+
+
+
+
+
+
+
+
+function CameraHelper( camera ) {
+
+	var geometry = new _core_BufferGeometry_js__WEBPACK_IMPORTED_MODULE_6__["BufferGeometry"]();
+	var material = new _materials_LineBasicMaterial_js__WEBPACK_IMPORTED_MODULE_5__["LineBasicMaterial"]( { color: 0xffffff, vertexColors: _constants_js__WEBPACK_IMPORTED_MODULE_4__["FaceColors"] } );
+
+	var vertices = [];
+	var colors = [];
+
+	var pointMap = {};
+
+	// colors
+
+	var colorFrustum = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0xffaa00 );
+	var colorCone = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0xff0000 );
+	var colorUp = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0x00aaff );
+	var colorTarget = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0xffffff );
+	var colorCross = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0x333333 );
+
+	// near
+
+	addLine( 'n1', 'n2', colorFrustum );
+	addLine( 'n2', 'n4', colorFrustum );
+	addLine( 'n4', 'n3', colorFrustum );
+	addLine( 'n3', 'n1', colorFrustum );
+
+	// far
+
+	addLine( 'f1', 'f2', colorFrustum );
+	addLine( 'f2', 'f4', colorFrustum );
+	addLine( 'f4', 'f3', colorFrustum );
+	addLine( 'f3', 'f1', colorFrustum );
+
+	// sides
+
+	addLine( 'n1', 'f1', colorFrustum );
+	addLine( 'n2', 'f2', colorFrustum );
+	addLine( 'n3', 'f3', colorFrustum );
+	addLine( 'n4', 'f4', colorFrustum );
+
+	// cone
+
+	addLine( 'p', 'n1', colorCone );
+	addLine( 'p', 'n2', colorCone );
+	addLine( 'p', 'n3', colorCone );
+	addLine( 'p', 'n4', colorCone );
+
+	// up
+
+	addLine( 'u1', 'u2', colorUp );
+	addLine( 'u2', 'u3', colorUp );
+	addLine( 'u3', 'u1', colorUp );
+
+	// target
+
+	addLine( 'c', 't', colorTarget );
+	addLine( 'p', 'c', colorCross );
+
+	// cross
+
+	addLine( 'cn1', 'cn2', colorCross );
+	addLine( 'cn3', 'cn4', colorCross );
+
+	addLine( 'cf1', 'cf2', colorCross );
+	addLine( 'cf3', 'cf4', colorCross );
+
+	function addLine( a, b, color ) {
+
+		addPoint( a, color );
+		addPoint( b, color );
+
+	}
+
+	function addPoint( id, color ) {
+
+		vertices.push( 0, 0, 0 );
+		colors.push( color.r, color.g, color.b );
+
+		if ( pointMap[ id ] === undefined ) {
+
+			pointMap[ id ] = [];
+
+		}
+
+		pointMap[ id ].push( ( vertices.length / 3 ) - 1 );
+
+	}
+
+	geometry.addAttribute( 'position', new _core_BufferAttribute_js__WEBPACK_IMPORTED_MODULE_7__["Float32BufferAttribute"]( vertices, 3 ) );
+	geometry.addAttribute( 'color', new _core_BufferAttribute_js__WEBPACK_IMPORTED_MODULE_7__["Float32BufferAttribute"]( colors, 3 ) );
+
+	_objects_LineSegments_js__WEBPACK_IMPORTED_MODULE_2__["LineSegments"].call( this, geometry, material );
+
+	this.camera = camera;
+	if ( this.camera.updateProjectionMatrix ) this.camera.updateProjectionMatrix();
+
+	this.matrix = camera.matrixWorld;
+	this.matrixAutoUpdate = false;
+
+	this.pointMap = pointMap;
+
+	this.update();
+
+}
+
+CameraHelper.prototype = Object.create( _objects_LineSegments_js__WEBPACK_IMPORTED_MODULE_2__["LineSegments"].prototype );
+CameraHelper.prototype.constructor = CameraHelper;
+
+CameraHelper.prototype.update = function () {
+
+	var geometry, pointMap;
+
+	var vector = new _math_Vector3_js__WEBPACK_IMPORTED_MODULE_1__["Vector3"]();
+	var camera = new _cameras_Camera_js__WEBPACK_IMPORTED_MODULE_0__["Camera"]();
+
+	function setPoint( point, x, y, z ) {
+
+		vector.set( x, y, z ).unproject( camera );
+
+		var points = pointMap[ point ];
+
+		if ( points !== undefined ) {
+
+			var position = geometry.getAttribute( 'position' );
+
+			for ( var i = 0, l = points.length; i < l; i ++ ) {
+
+				position.setXYZ( points[ i ], vector.x, vector.y, vector.z );
+
+			}
+
+		}
+
+	}
+
+	return function update() {
+
+		geometry = this.geometry;
+		pointMap = this.pointMap;
+
+		var w = 1, h = 1;
+
+		// we need just camera projection matrix inverse
+		// world matrix must be identity
+
+		camera.projectionMatrixInverse.copy( this.camera.projectionMatrixInverse );
+
+		// center / target
+
+		setPoint( 'c', 0, 0, - 1 );
+		setPoint( 't', 0, 0, 1 );
+
+		// near
+
+		setPoint( 'n1', - w, - h, - 1 );
+		setPoint( 'n2', w, - h, - 1 );
+		setPoint( 'n3', - w, h, - 1 );
+		setPoint( 'n4', w, h, - 1 );
+
+		// far
+
+		setPoint( 'f1', - w, - h, 1 );
+		setPoint( 'f2', w, - h, 1 );
+		setPoint( 'f3', - w, h, 1 );
+		setPoint( 'f4', w, h, 1 );
+
+		// up
+
+		setPoint( 'u1', w * 0.7, h * 1.1, - 1 );
+		setPoint( 'u2', - w * 0.7, h * 1.1, - 1 );
+		setPoint( 'u3', 0, h * 2, - 1 );
+
+		// cross
+
+		setPoint( 'cf1', - w, 0, 1 );
+		setPoint( 'cf2', w, 0, 1 );
+		setPoint( 'cf3', 0, - h, 1 );
+		setPoint( 'cf4', 0, h, 1 );
+
+		setPoint( 'cn1', - w, 0, - 1 );
+		setPoint( 'cn2', w, 0, - 1 );
+		setPoint( 'cn3', 0, - h, - 1 );
+		setPoint( 'cn4', 0, h, - 1 );
+
+		geometry.getAttribute( 'position' ).needsUpdate = true;
+
+	};
+
+}();
 
 
 

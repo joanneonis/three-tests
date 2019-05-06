@@ -102,7 +102,13 @@ function init() {
 
 	let bgColor = new THREE.Color('#a3e1fe');
 
-	scene.add(new THREE.AmbientLight());
+	let ambient = new THREE.AmbientLight();
+	// ambient.castShadow = true;
+	scene.add(ambient);
+
+	let point = new THREE.PointLight();
+	// ambient.castShadow = true;
+	scene.add(point);
 
 	scene.background = bgColor;
 
@@ -110,6 +116,16 @@ function init() {
 
 	scene.userData.activeLightSettings = { type: 'Spotlight' };
 	scene.userData.gui = gui;
+
+	// Groundplane
+	var geometry = new THREE.PlaneGeometry( 5000, 2000, 32 );
+	var material = new THREE.MeshBasicMaterial( {color: new THREE.Color('#87CBEB'), side: THREE.DoubleSide} );
+	var plane = new THREE.Mesh( geometry, material );
+	plane.position.y = 0;
+	plane.rotation.x = -90 * (Math.PI / 180);
+	plane.receiveShadow = true;
+	plane.castShadow = false;
+	scene.add( plane );
 
 	setlightType('HemisphereLight', scene);
 	changeLightType('HemisphereLight', scene);
@@ -167,6 +183,9 @@ function loadModelThingies() {
 	loader.load('trekker-morph-1-multipart.glb', function (gltf) {
 		var model = gltf.scene;
 
+		model.traverse( function( node ) {
+			if ( node instanceof THREE.Mesh ) { node.castShadow = true; node.receiveShadow = false; }
+		} );
 		
 		tractorObj = model.children[0];
 		wheelObjects = [model.children[1], model.children[2], model.children[3]];
@@ -181,6 +200,8 @@ function loadModelThingies() {
 			expressionFolder.add( tractorObj.morphTargetInfluences, i, 0, 1, 0.01 ).name( expressions[ i ] );
 		}
 		tractorObj.userData.velocity = 0;
+
+		model.castShadow = true;
 		scene.add( model );
 	});
 }
@@ -271,43 +292,3 @@ function rotateObject(object, degreeX = 0, degreeY = 0, degreeZ = 0) {
   object.rotateY(THREE.Math.degToRad(degreeY));
 	object.rotateZ(THREE.Math.degToRad(degreeZ));
 } 
-
-// Rotate an object around an arbitrary axis in object space
-var rotObjectMatrix;
-function rotateAroundObjectAxis(object, axis, radians) {
-    rotObjectMatrix = new THREE.Matrix4();
-    rotObjectMatrix.makeRotationAxis(axis.normalize(), radians);
-
-    // old code for Three.JS pre r54:
-    // object.matrix.multiplySelf(rotObjectMatrix);      // post-multiply
-    // new code for Three.JS r55+:
-    object.matrix.multiply(rotObjectMatrix);
-
-    // old code for Three.js pre r49:
-    // object.rotation.getRotationFromMatrix(object.matrix, object.scale);
-    // old code for Three.js r50-r58:
-    // object.rotation.setEulerFromRotationMatrix(object.matrix);
-    // new code for Three.js r59+:
-    object.rotation.setFromRotationMatrix(object.matrix);
-}
-
-var rotWorldMatrix;
-// Rotate an object around an arbitrary axis in world space       
-function rotateAroundWorldAxis(object, axis, radians) {
-    rotWorldMatrix = new THREE.Matrix4();
-    rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);
-
-    // old code for Three.JS pre r54:
-    //  rotWorldMatrix.multiply(object.matrix);
-    // new code for Three.JS r55+:
-    rotWorldMatrix.multiply(object.matrix);                // pre-multiply
-
-    object.matrix = rotWorldMatrix;
-
-    // old code for Three.js pre r49:
-    // object.rotation.getRotationFromMatrix(object.matrix, object.scale);
-    // old code for Three.js pre r59:
-    // object.rotation.setEulerFromRotationMatrix(object.matrix);
-    // code for r59+:
-    object.rotation.setFromRotationMatrix(object.matrix);
-}

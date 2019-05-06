@@ -243,13 +243,30 @@ function init() {
   initControls(); // scene.add(new THREE.AxesHelper(10));
 
   var bgColor = new three__WEBPACK_IMPORTED_MODULE_7__["Color"]('#a3e1fe');
-  scene.add(new three__WEBPACK_IMPORTED_MODULE_7__["AmbientLight"]());
+  var ambient = new three__WEBPACK_IMPORTED_MODULE_7__["AmbientLight"](); // ambient.castShadow = true;
+
+  scene.add(ambient);
+  var point = new three__WEBPACK_IMPORTED_MODULE_7__["PointLight"](); // ambient.castShadow = true;
+
+  scene.add(point);
   scene.background = bgColor;
   window.addEventListener('resize', onResize, false);
   scene.userData.activeLightSettings = {
     type: 'Spotlight'
   };
-  scene.userData.gui = gui;
+  scene.userData.gui = gui; // Groundplane
+
+  var geometry = new three__WEBPACK_IMPORTED_MODULE_7__["PlaneGeometry"](5000, 2000, 32);
+  var material = new three__WEBPACK_IMPORTED_MODULE_7__["MeshBasicMaterial"]({
+    color: new three__WEBPACK_IMPORTED_MODULE_7__["Color"]('#87CBEB'),
+    side: three__WEBPACK_IMPORTED_MODULE_7__["DoubleSide"]
+  });
+  var plane = new three__WEBPACK_IMPORTED_MODULE_7__["Mesh"](geometry, material);
+  plane.position.y = 0;
+  plane.rotation.x = -90 * (Math.PI / 180);
+  plane.receiveShadow = true;
+  plane.castShadow = false;
+  scene.add(plane);
   Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["setlightType"])('HemisphereLight', scene);
   Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["changeLightType"])('HemisphereLight', scene);
   Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["buildGui"])(scene);
@@ -300,6 +317,12 @@ function loadModelThingies() {
   var loader = new three__WEBPACK_IMPORTED_MODULE_7__["GLTFLoader"]();
   loader.load('trekker-morph-1-multipart.glb', function (gltf) {
     var model = gltf.scene;
+    model.traverse(function (node) {
+      if (node instanceof three__WEBPACK_IMPORTED_MODULE_7__["Mesh"]) {
+        node.castShadow = true;
+        node.receiveShadow = false;
+      }
+    });
     tractorObj = model.children[0];
     wheelObjects = [model.children[1], model.children[2], model.children[3]]; // plaeObj(wheelObjects[2]);
 
@@ -313,6 +336,7 @@ function loadModelThingies() {
     }
 
     tractorObj.userData.velocity = 0;
+    model.castShadow = true;
     scene.add(model);
   });
 }
@@ -407,43 +431,6 @@ function rotateObject(object) {
   object.rotateX(three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(degreeX));
   object.rotateY(three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(degreeY));
   object.rotateZ(three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(degreeZ));
-} // Rotate an object around an arbitrary axis in object space
-
-
-var rotObjectMatrix;
-
-function rotateAroundObjectAxis(object, axis, radians) {
-  rotObjectMatrix = new three__WEBPACK_IMPORTED_MODULE_7__["Matrix4"]();
-  rotObjectMatrix.makeRotationAxis(axis.normalize(), radians); // old code for Three.JS pre r54:
-  // object.matrix.multiplySelf(rotObjectMatrix);      // post-multiply
-  // new code for Three.JS r55+:
-
-  object.matrix.multiply(rotObjectMatrix); // old code for Three.js pre r49:
-  // object.rotation.getRotationFromMatrix(object.matrix, object.scale);
-  // old code for Three.js r50-r58:
-  // object.rotation.setEulerFromRotationMatrix(object.matrix);
-  // new code for Three.js r59+:
-
-  object.rotation.setFromRotationMatrix(object.matrix);
-}
-
-var rotWorldMatrix; // Rotate an object around an arbitrary axis in world space       
-
-function rotateAroundWorldAxis(object, axis, radians) {
-  rotWorldMatrix = new three__WEBPACK_IMPORTED_MODULE_7__["Matrix4"]();
-  rotWorldMatrix.makeRotationAxis(axis.normalize(), radians); // old code for Three.JS pre r54:
-  //  rotWorldMatrix.multiply(object.matrix);
-  // new code for Three.JS r55+:
-
-  rotWorldMatrix.multiply(object.matrix); // pre-multiply
-
-  object.matrix = rotWorldMatrix; // old code for Three.js pre r49:
-  // object.rotation.getRotationFromMatrix(object.matrix, object.scale);
-  // old code for Three.js pre r59:
-  // object.rotation.setEulerFromRotationMatrix(object.matrix);
-  // code for r59+:
-
-  object.rotation.setFromRotationMatrix(object.matrix);
 }
 
 /***/ }),
@@ -660,10 +647,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_src_helpers_DirectionalLightHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/src/helpers/DirectionalLightHelper */ "./node_modules/three/src/helpers/DirectionalLightHelper.js");
 /* harmony import */ var three_src_helpers_PointLightHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/src/helpers/PointLightHelper */ "./node_modules/three/src/helpers/PointLightHelper.js");
 /* harmony import */ var three_src_helpers_HemisphereLightHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/src/helpers/HemisphereLightHelper */ "./node_modules/three/src/helpers/HemisphereLightHelper.js");
+/* harmony import */ var three_src_helpers_CameraHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/src/helpers/CameraHelper */ "./node_modules/three/src/helpers/CameraHelper.js");
 /* eslint-disable no-unused-vars */
 
 
  // helpers
+
 
 
 
@@ -708,6 +697,8 @@ function createGuiSetting(scene, setting, name, key) {
       scene.userData.activeLightSettings.light[key] = val;
     } // render(); //!idk
 
+
+    console.log(scene.userData.activeLightSettings.light);
   });
 }
 function setLight(scene) {
@@ -726,6 +717,10 @@ function setLight(scene) {
     scene.add(scene.userData.activeLightSettings.Helper);
   }
 
+  if (scene.userData.activeLightSettings.shadowHelper) {
+    scene.add(scene.userData.activeLightSettings.shadowHelper);
+  }
+
   if (scene.userData.activeLightSettings.light.shadow) {
     scene.userData.activeLightSettings.ShadowCameraHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](scene.userData.activeLightSettings.light.shadow.camera);
     scene.add(scene.userData.activeLightSettings.ShadowCameraHelper);
@@ -735,6 +730,7 @@ function setLight(scene) {
 function setlightType(type, scene) {
   scene.remove(scene.userData.activeLightSettings.light);
   scene.remove(scene.userData.activeLightSettings.Helper);
+  scene.remove(scene.userData.activeLightSettings.shadowHelper);
   scene.remove(scene.userData.activeLightSettings.ShadowCameraHelper);
 
   switch (type) {
@@ -742,12 +738,16 @@ function setlightType(type, scene) {
       scene.userData.activeLightSettings.light = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 1);
       scene.userData.activeLightSettings.Helper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](scene.userData.activeLightSettings.light);
       scene.userData.activeLightSettings.GuiSettings = new _helpers_classes_lights__WEBPACK_IMPORTED_MODULE_2__["SpotLight"]();
+      scene.userData.activeLightSettings.light.castShadow = true;
+      scene.userData.activeLightSettings.shadowHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](scene.userData.activeLightSettings.light.shadow.camera);
       break;
 
     case 'PointLight':
       scene.userData.activeLightSettings.light = new three__WEBPACK_IMPORTED_MODULE_1__["PointLight"](0xffffff, 2.0, 600);
       scene.userData.activeLightSettings.Helper = new three__WEBPACK_IMPORTED_MODULE_1__["PointLightHelper"](scene.userData.activeLightSettings.light);
       scene.userData.activeLightSettings.GuiSettings = new _helpers_classes_lights__WEBPACK_IMPORTED_MODULE_2__["PointLight"]();
+      scene.userData.activeLightSettings.light.castShadow = true;
+      scene.userData.activeLightSettings.shadowHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](scene.userData.activeLightSettings.light.shadow.camera);
       break;
 
     case 'HemisphereLight':
@@ -941,7 +941,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/di
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900);", ""]);
 
 // Module
-exports.push([module.i, "body {\n  font-family: 'Lato', sans-serif; }\n\n* {\n  box-sizing: border-box;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\np {\n  margin-top: 0;\n  line-height: 1.5;\n  font-weight: 300; }\n  p.intro {\n    font-size: 1.1em;\n    font-weight: 400;\n    color: #505050;\n    margin-bottom: 1.6em; }\n\nh1 {\n  font-weight: 900;\n  font-size: 3.4em;\n  margin-bottom: 0.2em;\n  margin-top: 0.1em; }\n\nh2 {\n  font-weight: 900;\n  font-size: 2.8em;\n  margin-bottom: 0em;\n  margin-top: 0.1em; }\n\nh3 {\n  font-weight: 900;\n  font-size: 2.1em;\n  margin-bottom: 0.3em;\n  margin-top: 1em; }\n\nh4 {\n  font-weight: 600;\n  font-size: 1em;\n  margin-bottom: 0.3em;\n  margin-top: 0.6em; }\n\nh5 {\n  font-size: 1em;\n  margin-bottom: 0.5em; }\n\n.meta {\n  color: #505050; }\n\np code {\n  background: #efefef;\n  display: inline-block;\n  padding: 0px 3px;\n  border: 1px solid #d2d2d2;\n  border-radius: 3px;\n  color: #545454; }\n\n.info-panel {\n  max-width: 50vw;\n  width: 100%;\n  position: absolute;\n  z-index: 999;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  background: #fff;\n  padding: 100px;\n  overflow: auto;\n  transform: translate3d(50vw, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open .info-panel {\n    transform: translate3d(0, 0, 0); }\n  .info-panel__inner > *:not(pre) {\n    max-width: 800px; }\n  .info-panel ul {\n    margin: 0.7em 0 2.2em 0; }\n    .info-panel ul li {\n      margin-bottom: .8em;\n      font-weight: 300; }\n\npre.code-highlight[class*=\"language-\"] {\n  margin: 4em;\n  margin-left: -100px;\n  margin-right: -100px; }\n\n.panel-toggle {\n  position: absolute;\n  right: 20px;\n  z-index: 90;\n  bottom: 20px;\n  transform: translate3d(0, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open .panel-toggle {\n    transform: translate3d(-50vw, 0, 0); }\n\ncanvas {\n  transform: translate3d(0, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open canvas {\n    transform: translate3d(-25vw, 0, 0); }\n\n.panel-toggle {\n  background: #fff;\n  border: none;\n  -webkit-appearance: none;\n  box-shadow: none;\n  font-size: 1em;\n  padding: 17px 20px;\n  border-radius: 100px;\n  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05); }\n  .panel-toggle:focus {\n    outline: none; }\n\nfigure {\n  margin: 0 0 1em 0; }\n  figure img, figure video {\n    max-width: 100%; }\n  figure figcaption {\n    margin-top: 10px;\n    font-style: italic; }\n\n.video-wrapper {\n  position: relative;\n  padding-bottom: 56.25%;\n  /* 16:9 */\n  padding-top: 25px;\n  height: 0; }\n  .video-wrapper iframe {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%; }\n\n/*\n\nName:       Base16 harmonic16 Dark\nAuthor:     Jannik Siebert (https://github.com/janniks)\n\nPrism template by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/prism/)\nOriginal Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)\n\n*/\ncode[class*=\"language-\"],\npre[class*=\"language-\"] {\n  font-family: Consolas, Menlo, Monaco, \"Andale Mono WT\", \"Andale Mono\", \"Lucida Console\", \"Lucida Sans Typewriter\", \"DejaVu Sans Mono\", \"Bitstream Vera Sans Mono\", \"Liberation Mono\", \"Nimbus Mono L\", \"Courier New\", Courier, monospace;\n  font-size: 14px;\n  line-height: 1.375;\n  direction: ltr;\n  text-align: left;\n  white-space: pre;\n  word-spacing: normal;\n  word-break: normal;\n  -moz-tab-size: 4;\n  -o-tab-size: 4;\n  tab-size: 4;\n  -webkit-hyphens: none;\n  -ms-hyphens: none;\n  hyphens: none;\n  background: #0b1c2c;\n  color: #cbd6e2; }\n\npre[class*=\"language-\"]::-moz-selection, pre[class*=\"language-\"] ::-moz-selection,\ncode[class*=\"language-\"]::-moz-selection, code[class*=\"language-\"] ::-moz-selection {\n  text-shadow: none;\n  background: #aabcce; }\n\npre[class*=\"language-\"]::selection, pre[class*=\"language-\"] ::selection,\ncode[class*=\"language-\"]::selection, code[class*=\"language-\"] ::selection {\n  text-shadow: none;\n  background: #aabcce; }\n\n/* Code blocks */\npre[class*=\"language-\"] {\n  padding: 1em;\n  margin: .5em 0;\n  overflow: auto; }\n\n/* Inline code */\n:not(pre) > code[class*=\"language-\"] {\n  padding: .1em;\n  border-radius: .3em; }\n\n.token.comment,\n.token.prolog,\n.token.doctype,\n.token.cdata {\n  color: #627e99; }\n\n.token.punctuation {\n  color: #cbd6e2; }\n\n.token.namespace {\n  opacity: .7; }\n\n.token.operator,\n.token.boolean,\n.token.number {\n  color: #bfbf56; }\n\n.token.property {\n  color: #8bbf56; }\n\n.token.tag {\n  color: #8b56bf; }\n\n.token.string {\n  color: #568bbf; }\n\n.token.selector {\n  color: #bf568b; }\n\n.token.attr-name {\n  color: #bfbf56; }\n\n.token.entity,\n.token.url,\n.language-css .token.string,\n.style .token.string {\n  color: #568bbf; }\n\n.token.attr-value,\n.token.keyword,\n.token.control,\n.token.directive,\n.token.unit {\n  color: #56bf8b; }\n\n.token.statement,\n.token.regex,\n.token.atrule {\n  color: #568bbf; }\n\n.token.placeholder,\n.token.variable {\n  color: #8b56bf; }\n\n.token.deleted {\n  text-decoration: line-through; }\n\n.token.inserted {\n  border-bottom: 1px dotted #f7f9fb;\n  text-decoration: none; }\n\n.token.italic {\n  font-style: italic; }\n\n.token.important,\n.token.bold {\n  font-weight: bold; }\n\n.token.important {\n  color: #bf8b56; }\n\n.token.entity {\n  cursor: help; }\n\npre > code.highlight {\n  outline: 0.4em solid #bf8b56;\n  outline-offset: .4em; }\n\n.line-numbers .line-numbers-rows {\n  border-right-color: #223b54 !important; }\n\n.line-numbers-rows > span:before {\n  color: #405c79 !important; }\n\n.line-highlight {\n  background: rgba(247, 249, 251, 0.2) !important;\n  background: -webkit-linear-gradient(left, rgba(247, 249, 251, 0.2) 70%, rgba(247, 249, 251, 0)) !important;\n  background: linear-gradient(to right, rgba(247, 249, 251, 0.2) 70%, rgba(247, 249, 251, 0)) !important; }\n", ""]);
+exports.push([module.i, "body {\n  font-family: 'Lato', sans-serif; }\n\n* {\n  box-sizing: border-box;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\np {\n  margin-top: 0;\n  line-height: 1.5;\n  font-weight: 300; }\n  p.intro {\n    font-size: 1.1em;\n    font-weight: 400;\n    color: #505050;\n    margin-bottom: 1.6em; }\n\nh1 {\n  font-weight: 900;\n  font-size: 3.4em;\n  margin-bottom: 0.2em;\n  margin-top: 0.1em; }\n\nh2 {\n  font-weight: 900;\n  font-size: 2.8em;\n  margin-bottom: 0em;\n  margin-top: 0.1em; }\n\nh3 {\n  font-weight: 900;\n  font-size: 2.1em;\n  margin-bottom: 0.3em;\n  margin-top: 1em; }\n\nh4 {\n  font-weight: 600;\n  font-size: 1em;\n  margin-bottom: 0.3em;\n  margin-top: 0.6em; }\n\nh5 {\n  font-size: 1em;\n  margin-bottom: 0.5em; }\n\n.meta {\n  color: #505050; }\n\np code {\n  background: #efefef;\n  display: inline-block;\n  padding: 0px 3px;\n  border: 1px solid #d2d2d2;\n  border-radius: 3px;\n  color: #545454; }\n\n.info-panel {\n  max-width: 50vw;\n  width: 100%;\n  position: absolute;\n  z-index: 999;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  background: #fff;\n  padding: 100px;\n  overflow: auto;\n  transform: translate3d(50vw, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open .info-panel {\n    transform: translate3d(0, 0, 0); }\n  .info-panel__inner > *:not(pre) {\n    max-width: 800px; }\n  .info-panel ul {\n    margin: 0.7em 0 2.2em 0; }\n    .info-panel ul li {\n      font-weight: 300;\n      margin-bottom: .8em; }\n\npre.code-highlight[class*=\"language-\"] {\n  margin: 4em;\n  margin-left: -100px;\n  margin-right: -100px; }\n\n.panel-toggle {\n  position: absolute;\n  right: 50px;\n  z-index: 90;\n  bottom: 50px;\n  transform: translate3d(0, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open .panel-toggle {\n    transform: translate3d(-50vw, 0, 0); }\n\ncanvas {\n  transform: translate3d(0, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open canvas {\n    transform: translate3d(-25vw, 0, 0); }\n\n.panel-toggle {\n  background: #fff;\n  border: none;\n  -webkit-appearance: none;\n  box-shadow: none;\n  font-size: 1.4em;\n  padding: 17px 30px;\n  border-radius: 100px;\n  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05); }\n  .panel-toggle:focus {\n    outline: none; }\n\nfigure {\n  margin: 0 0 1em 0; }\n  figure img,\n  figure video {\n    max-width: 100%; }\n  figure figcaption {\n    margin-top: 10px;\n    font-style: italic; }\n\n.video-wrapper {\n  position: relative;\n  padding-bottom: 56.25%;\n  /* 16:9 */\n  padding-top: 25px;\n  height: 0; }\n  .video-wrapper iframe {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%; }\n\n/*\n\nName:       Base16 harmonic16 Dark\nAuthor:     Jannik Siebert (https://github.com/janniks)\n\nPrism template by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/prism/)\nOriginal Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)\n\n*/\ncode[class*=\"language-\"],\npre[class*=\"language-\"] {\n  font-family: Consolas, Menlo, Monaco, \"Andale Mono WT\", \"Andale Mono\", \"Lucida Console\", \"Lucida Sans Typewriter\", \"DejaVu Sans Mono\", \"Bitstream Vera Sans Mono\", \"Liberation Mono\", \"Nimbus Mono L\", \"Courier New\", Courier, monospace;\n  font-size: 14px;\n  line-height: 1.375;\n  direction: ltr;\n  text-align: left;\n  white-space: pre;\n  word-spacing: normal;\n  word-break: normal;\n  -moz-tab-size: 4;\n  -o-tab-size: 4;\n  tab-size: 4;\n  -webkit-hyphens: none;\n  -ms-hyphens: none;\n  hyphens: none;\n  background: #0b1c2c;\n  color: #cbd6e2; }\n\npre[class*=\"language-\"]::-moz-selection, pre[class*=\"language-\"] ::-moz-selection,\ncode[class*=\"language-\"]::-moz-selection, code[class*=\"language-\"] ::-moz-selection {\n  text-shadow: none;\n  background: #aabcce; }\n\npre[class*=\"language-\"]::selection, pre[class*=\"language-\"] ::selection,\ncode[class*=\"language-\"]::selection, code[class*=\"language-\"] ::selection {\n  text-shadow: none;\n  background: #aabcce; }\n\n/* Code blocks */\npre[class*=\"language-\"] {\n  padding: 1em;\n  margin: .5em 0;\n  overflow: auto; }\n\n/* Inline code */\n:not(pre) > code[class*=\"language-\"] {\n  padding: .1em;\n  border-radius: .3em; }\n\n.token.comment,\n.token.prolog,\n.token.doctype,\n.token.cdata {\n  color: #627e99; }\n\n.token.punctuation {\n  color: #cbd6e2; }\n\n.token.namespace {\n  opacity: .7; }\n\n.token.operator,\n.token.boolean,\n.token.number {\n  color: #bfbf56; }\n\n.token.property {\n  color: #8bbf56; }\n\n.token.tag {\n  color: #8b56bf; }\n\n.token.string {\n  color: #568bbf; }\n\n.token.selector {\n  color: #bf568b; }\n\n.token.attr-name {\n  color: #bfbf56; }\n\n.token.entity,\n.token.url,\n.language-css .token.string,\n.style .token.string {\n  color: #568bbf; }\n\n.token.attr-value,\n.token.keyword,\n.token.control,\n.token.directive,\n.token.unit {\n  color: #56bf8b; }\n\n.token.statement,\n.token.regex,\n.token.atrule {\n  color: #568bbf; }\n\n.token.placeholder,\n.token.variable {\n  color: #8b56bf; }\n\n.token.deleted {\n  text-decoration: line-through; }\n\n.token.inserted {\n  border-bottom: 1px dotted #f7f9fb;\n  text-decoration: none; }\n\n.token.italic {\n  font-style: italic; }\n\n.token.important,\n.token.bold {\n  font-weight: bold; }\n\n.token.important {\n  color: #bf8b56; }\n\n.token.entity {\n  cursor: help; }\n\npre > code.highlight {\n  outline: 0.4em solid #bf8b56;\n  outline-offset: .4em; }\n\n.line-numbers .line-numbers-rows {\n  border-right-color: #223b54 !important; }\n\n.line-numbers-rows > span:before {\n  color: #405c79 !important; }\n\n.line-highlight {\n  background: rgba(247, 249, 251, 0.2) !important;\n  background: -webkit-linear-gradient(left, rgba(247, 249, 251, 0.2) 70%, rgba(247, 249, 251, 0)) !important;\n  background: linear-gradient(to right, rgba(247, 249, 251, 0.2) 70%, rgba(247, 249, 251, 0)) !important; }\n", ""]);
 
 
 
@@ -10370,6 +10370,99 @@ THREE.GLTFLoader = ( function () {
 
 /***/ }),
 
+/***/ "./node_modules/three/src/cameras/Camera.js":
+/*!**************************************************!*\
+  !*** ./node_modules/three/src/cameras/Camera.js ***!
+  \**************************************************/
+/*! exports provided: Camera */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Camera", function() { return Camera; });
+/* harmony import */ var _math_Matrix4_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../math/Matrix4.js */ "./node_modules/three/src/math/Matrix4.js");
+/* harmony import */ var _core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/Object3D.js */ "./node_modules/three/src/core/Object3D.js");
+/* harmony import */ var _math_Vector3_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../math/Vector3.js */ "./node_modules/three/src/math/Vector3.js");
+/**
+ * @author mrdoob / http://mrdoob.com/
+ * @author mikael emtinger / http://gomo.se/
+ * @author WestLangley / http://github.com/WestLangley
+*/
+
+
+
+
+
+function Camera() {
+
+	_core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__["Object3D"].call( this );
+
+	this.type = 'Camera';
+
+	this.matrixWorldInverse = new _math_Matrix4_js__WEBPACK_IMPORTED_MODULE_0__["Matrix4"]();
+
+	this.projectionMatrix = new _math_Matrix4_js__WEBPACK_IMPORTED_MODULE_0__["Matrix4"]();
+	this.projectionMatrixInverse = new _math_Matrix4_js__WEBPACK_IMPORTED_MODULE_0__["Matrix4"]();
+
+}
+
+Camera.prototype = Object.assign( Object.create( _core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__["Object3D"].prototype ), {
+
+	constructor: Camera,
+
+	isCamera: true,
+
+	copy: function ( source, recursive ) {
+
+		_core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__["Object3D"].prototype.copy.call( this, source, recursive );
+
+		this.matrixWorldInverse.copy( source.matrixWorldInverse );
+
+		this.projectionMatrix.copy( source.projectionMatrix );
+		this.projectionMatrixInverse.copy( source.projectionMatrixInverse );
+
+		return this;
+
+	},
+
+	getWorldDirection: function ( target ) {
+
+		if ( target === undefined ) {
+
+			console.warn( 'THREE.Camera: .getWorldDirection() target is now required' );
+			target = new _math_Vector3_js__WEBPACK_IMPORTED_MODULE_2__["Vector3"]();
+
+		}
+
+		this.updateMatrixWorld( true );
+
+		var e = this.matrixWorld.elements;
+
+		return target.set( - e[ 8 ], - e[ 9 ], - e[ 10 ] ).normalize();
+
+	},
+
+	updateMatrixWorld: function ( force ) {
+
+		_core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__["Object3D"].prototype.updateMatrixWorld.call( this, force );
+
+		this.matrixWorldInverse.getInverse( this.matrixWorld );
+
+	},
+
+	clone: function () {
+
+		return new this.constructor().copy( this );
+
+	}
+
+} );
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/three/src/constants.js":
 /*!*********************************************!*\
   !*** ./node_modules/three/src/constants.js ***!
@@ -15938,6 +16031,238 @@ function SphereBufferGeometry( radius, widthSegments, heightSegments, phiStart, 
 
 SphereBufferGeometry.prototype = Object.create( _core_BufferGeometry_js__WEBPACK_IMPORTED_MODULE_1__["BufferGeometry"].prototype );
 SphereBufferGeometry.prototype.constructor = SphereBufferGeometry;
+
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/three/src/helpers/CameraHelper.js":
+/*!********************************************************!*\
+  !*** ./node_modules/three/src/helpers/CameraHelper.js ***!
+  \********************************************************/
+/*! exports provided: CameraHelper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CameraHelper", function() { return CameraHelper; });
+/* harmony import */ var _cameras_Camera_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cameras/Camera.js */ "./node_modules/three/src/cameras/Camera.js");
+/* harmony import */ var _math_Vector3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../math/Vector3.js */ "./node_modules/three/src/math/Vector3.js");
+/* harmony import */ var _objects_LineSegments_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../objects/LineSegments.js */ "./node_modules/three/src/objects/LineSegments.js");
+/* harmony import */ var _math_Color_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../math/Color.js */ "./node_modules/three/src/math/Color.js");
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../constants.js */ "./node_modules/three/src/constants.js");
+/* harmony import */ var _materials_LineBasicMaterial_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../materials/LineBasicMaterial.js */ "./node_modules/three/src/materials/LineBasicMaterial.js");
+/* harmony import */ var _core_BufferGeometry_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../core/BufferGeometry.js */ "./node_modules/three/src/core/BufferGeometry.js");
+/* harmony import */ var _core_BufferAttribute_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../core/BufferAttribute.js */ "./node_modules/three/src/core/BufferAttribute.js");
+/**
+ * @author alteredq / http://alteredqualia.com/
+ * @author Mugen87 / https://github.com/Mugen87
+ *
+ *	- shows frustum, line of sight and up of the camera
+ *	- suitable for fast updates
+ * 	- based on frustum visualization in lightgl.js shadowmap example
+ *		http://evanw.github.com/lightgl.js/tests/shadowmap.html
+ */
+
+
+
+
+
+
+
+
+
+
+function CameraHelper( camera ) {
+
+	var geometry = new _core_BufferGeometry_js__WEBPACK_IMPORTED_MODULE_6__["BufferGeometry"]();
+	var material = new _materials_LineBasicMaterial_js__WEBPACK_IMPORTED_MODULE_5__["LineBasicMaterial"]( { color: 0xffffff, vertexColors: _constants_js__WEBPACK_IMPORTED_MODULE_4__["FaceColors"] } );
+
+	var vertices = [];
+	var colors = [];
+
+	var pointMap = {};
+
+	// colors
+
+	var colorFrustum = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0xffaa00 );
+	var colorCone = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0xff0000 );
+	var colorUp = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0x00aaff );
+	var colorTarget = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0xffffff );
+	var colorCross = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0x333333 );
+
+	// near
+
+	addLine( 'n1', 'n2', colorFrustum );
+	addLine( 'n2', 'n4', colorFrustum );
+	addLine( 'n4', 'n3', colorFrustum );
+	addLine( 'n3', 'n1', colorFrustum );
+
+	// far
+
+	addLine( 'f1', 'f2', colorFrustum );
+	addLine( 'f2', 'f4', colorFrustum );
+	addLine( 'f4', 'f3', colorFrustum );
+	addLine( 'f3', 'f1', colorFrustum );
+
+	// sides
+
+	addLine( 'n1', 'f1', colorFrustum );
+	addLine( 'n2', 'f2', colorFrustum );
+	addLine( 'n3', 'f3', colorFrustum );
+	addLine( 'n4', 'f4', colorFrustum );
+
+	// cone
+
+	addLine( 'p', 'n1', colorCone );
+	addLine( 'p', 'n2', colorCone );
+	addLine( 'p', 'n3', colorCone );
+	addLine( 'p', 'n4', colorCone );
+
+	// up
+
+	addLine( 'u1', 'u2', colorUp );
+	addLine( 'u2', 'u3', colorUp );
+	addLine( 'u3', 'u1', colorUp );
+
+	// target
+
+	addLine( 'c', 't', colorTarget );
+	addLine( 'p', 'c', colorCross );
+
+	// cross
+
+	addLine( 'cn1', 'cn2', colorCross );
+	addLine( 'cn3', 'cn4', colorCross );
+
+	addLine( 'cf1', 'cf2', colorCross );
+	addLine( 'cf3', 'cf4', colorCross );
+
+	function addLine( a, b, color ) {
+
+		addPoint( a, color );
+		addPoint( b, color );
+
+	}
+
+	function addPoint( id, color ) {
+
+		vertices.push( 0, 0, 0 );
+		colors.push( color.r, color.g, color.b );
+
+		if ( pointMap[ id ] === undefined ) {
+
+			pointMap[ id ] = [];
+
+		}
+
+		pointMap[ id ].push( ( vertices.length / 3 ) - 1 );
+
+	}
+
+	geometry.addAttribute( 'position', new _core_BufferAttribute_js__WEBPACK_IMPORTED_MODULE_7__["Float32BufferAttribute"]( vertices, 3 ) );
+	geometry.addAttribute( 'color', new _core_BufferAttribute_js__WEBPACK_IMPORTED_MODULE_7__["Float32BufferAttribute"]( colors, 3 ) );
+
+	_objects_LineSegments_js__WEBPACK_IMPORTED_MODULE_2__["LineSegments"].call( this, geometry, material );
+
+	this.camera = camera;
+	if ( this.camera.updateProjectionMatrix ) this.camera.updateProjectionMatrix();
+
+	this.matrix = camera.matrixWorld;
+	this.matrixAutoUpdate = false;
+
+	this.pointMap = pointMap;
+
+	this.update();
+
+}
+
+CameraHelper.prototype = Object.create( _objects_LineSegments_js__WEBPACK_IMPORTED_MODULE_2__["LineSegments"].prototype );
+CameraHelper.prototype.constructor = CameraHelper;
+
+CameraHelper.prototype.update = function () {
+
+	var geometry, pointMap;
+
+	var vector = new _math_Vector3_js__WEBPACK_IMPORTED_MODULE_1__["Vector3"]();
+	var camera = new _cameras_Camera_js__WEBPACK_IMPORTED_MODULE_0__["Camera"]();
+
+	function setPoint( point, x, y, z ) {
+
+		vector.set( x, y, z ).unproject( camera );
+
+		var points = pointMap[ point ];
+
+		if ( points !== undefined ) {
+
+			var position = geometry.getAttribute( 'position' );
+
+			for ( var i = 0, l = points.length; i < l; i ++ ) {
+
+				position.setXYZ( points[ i ], vector.x, vector.y, vector.z );
+
+			}
+
+		}
+
+	}
+
+	return function update() {
+
+		geometry = this.geometry;
+		pointMap = this.pointMap;
+
+		var w = 1, h = 1;
+
+		// we need just camera projection matrix inverse
+		// world matrix must be identity
+
+		camera.projectionMatrixInverse.copy( this.camera.projectionMatrixInverse );
+
+		// center / target
+
+		setPoint( 'c', 0, 0, - 1 );
+		setPoint( 't', 0, 0, 1 );
+
+		// near
+
+		setPoint( 'n1', - w, - h, - 1 );
+		setPoint( 'n2', w, - h, - 1 );
+		setPoint( 'n3', - w, h, - 1 );
+		setPoint( 'n4', w, h, - 1 );
+
+		// far
+
+		setPoint( 'f1', - w, - h, 1 );
+		setPoint( 'f2', w, - h, 1 );
+		setPoint( 'f3', - w, h, 1 );
+		setPoint( 'f4', w, h, 1 );
+
+		// up
+
+		setPoint( 'u1', w * 0.7, h * 1.1, - 1 );
+		setPoint( 'u2', - w * 0.7, h * 1.1, - 1 );
+		setPoint( 'u3', 0, h * 2, - 1 );
+
+		// cross
+
+		setPoint( 'cf1', - w, 0, 1 );
+		setPoint( 'cf2', w, 0, 1 );
+		setPoint( 'cf3', 0, - h, 1 );
+		setPoint( 'cf4', 0, h, 1 );
+
+		setPoint( 'cn1', - w, 0, - 1 );
+		setPoint( 'cn2', w, 0, - 1 );
+		setPoint( 'cn3', 0, - h, - 1 );
+		setPoint( 'cn4', 0, h, - 1 );
+
+		geometry.getAttribute( 'position' ).needsUpdate = true;
+
+	};
+
+}();
 
 
 

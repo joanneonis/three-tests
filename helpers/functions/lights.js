@@ -14,6 +14,7 @@ import 'three/src/helpers/SpotLightHelper';
 import 'three/src/helpers/DirectionalLightHelper';
 import 'three/src/helpers/PointLightHelper';
 import 'three/src/helpers/HemisphereLightHelper';
+import 'three/src/helpers/CameraHelper';
  
 export function changeLightType(type, scene) {
 	scene.userData.gui.add(
@@ -66,6 +67,8 @@ export function createGuiSetting(scene, setting, name, key) {
 				scene.userData.activeLightSettings.light[key] = val;
 			}
 			// render(); //!idk
+
+			console.log(scene.userData.activeLightSettings.light);
 		}
 	);
 }
@@ -84,6 +87,7 @@ export function setLight(scene) {
 	scene.add(scene.userData.activeLightSettings.light);
 	
 	if (scene.userData.activeLightSettings.Helper) { scene.add(scene.userData.activeLightSettings.Helper); }
+	if (scene.userData.activeLightSettings.shadowHelper) { scene.add(scene.userData.activeLightSettings.shadowHelper); }
 	
 	if (scene.userData.activeLightSettings.light.shadow) {
 		scene.userData.activeLightSettings.ShadowCameraHelper = new THREE.CameraHelper(scene.userData.activeLightSettings.light.shadow.camera);
@@ -97,6 +101,7 @@ export function setLight(scene) {
 export function setlightType(type, scene) {
 	scene.remove(scene.userData.activeLightSettings.light);
 	scene.remove(scene.userData.activeLightSettings.Helper);
+	scene.remove(scene.userData.activeLightSettings.shadowHelper);
 	scene.remove(scene.userData.activeLightSettings.ShadowCameraHelper);
 
 	switch(type) {
@@ -104,11 +109,19 @@ export function setlightType(type, scene) {
 			scene.userData.activeLightSettings.light = new THREE.SpotLight(0xffffff, 1);
 			scene.userData.activeLightSettings.Helper = new THREE.SpotLightHelper(scene.userData.activeLightSettings.light);
 			scene.userData.activeLightSettings.GuiSettings = new SpotLight;
+			scene.userData.activeLightSettings.light.castShadow = true;
+
+			scene.userData.activeLightSettings.shadowHelper = new THREE.CameraHelper( scene.userData.activeLightSettings.light.shadow.camera );
+
 			break;
 		case 'PointLight':
 			scene.userData.activeLightSettings.light = new THREE.PointLight(0xffffff, 2.0, 600);
 			scene.userData.activeLightSettings.Helper = new THREE.PointLightHelper(scene.userData.activeLightSettings.light);
 			scene.userData.activeLightSettings.GuiSettings = new PointLight;
+			scene.userData.activeLightSettings.light.castShadow = true;
+
+			scene.userData.activeLightSettings.shadowHelper = new THREE.CameraHelper( scene.userData.activeLightSettings.light.shadow.camera );
+
 			break;
 		case 'HemisphereLight':
 			scene.userData.activeLightSettings.light = new THREE.HemisphereLight(new THREE.Color("rgb(255, 255, 255)"), new THREE.Color("rgb(0, 0, 0)"), 1);
@@ -129,6 +142,7 @@ export function setlightType(type, scene) {
 	}
 
 	scene.userData.activeLightSettings.GuiSettings.params.color = scene.userData.activeLightSettings.light.color.getHex();
+
 	buildGui(scene);
 	setLight(scene);
 	// render(); //!idk
