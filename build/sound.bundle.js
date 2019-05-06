@@ -183,7 +183,17 @@ var cameraPos = {
   y: 36,
   z: 36
 };
-var controls;
+var controls; // Audio dingen
+
+var URL = './sound/bohfoitoch.mp3';
+var context = new AudioContext();
+var playButton = document.querySelector('#play');
+var soundBuffer; // eind
+
+var analyser;
+var dataArray;
+var bufferLength;
+var plane;
 
 function init() {
   initRenderer();
@@ -197,6 +207,7 @@ function init() {
 
   scene.add(ambient);
   scene.background = bgColor;
+  drawPlane();
   window.addEventListener('resize', onResize, false);
   scene.userData.activeLightSettings = {
     type: 'Spotlight'
@@ -215,8 +226,25 @@ function onResize() {
 
 function render() {
   // controls.update();
+  if (analyser) {
+    analyser.getByteTimeDomainData(dataArray);
+    var avgChange = avg(dataArray) / 100;
+    console.log(avgChange);
+    plane.scale.set(avgChange, avgChange, avgChange);
+  }
+
   requestAnimationFrame(render);
   renderer.render(scene, camera);
+}
+
+function drawPlane() {
+  var geometry = new three__WEBPACK_IMPORTED_MODULE_7__["PlaneGeometry"](5, 20, 32);
+  var material = new three__WEBPACK_IMPORTED_MODULE_7__["MeshBasicMaterial"]({
+    color: 0xffff00,
+    side: three__WEBPACK_IMPORTED_MODULE_7__["DoubleSide"]
+  });
+  plane = new three__WEBPACK_IMPORTED_MODULE_7__["Mesh"](geometry, material);
+  scene.add(plane);
 }
 
 function initGui() {
@@ -256,6 +284,58 @@ function initCameraGui() {
   });
   cameraFolder.add(cameraPos, 'z', -100, 100).onChange(function (val) {
     camera.position.z = val;
+  });
+}
+
+window.fetch(URL).then(function (response) {
+  return response.arrayBuffer();
+}).then(function (arrayBuffer) {
+  return context.decodeAudioData(arrayBuffer);
+}).then(function (audioBuffer) {
+  playButton.disabled = false;
+  soundBuffer = audioBuffer;
+});
+
+playButton.onclick = function () {
+  return play(soundBuffer);
+};
+
+function play(audioBuffer) {
+  var source = context.createBufferSource();
+  source.buffer = audioBuffer; // source.connect(context.destination);
+
+  source.start();
+  analyser = context.createAnalyser();
+  analyser.connect(context.destination);
+  analyser.fftSize = 2048;
+  bufferLength = analyser.frequencyBinCount;
+  dataArray = new Uint8Array(bufferLength);
+  analyser.getByteTimeDomainData(dataArray);
+  console.log('bufferleng', bufferLength);
+  source.connect(analyser);
+} //some helper functions here
+
+
+function fractionate(val, minVal, maxVal) {
+  return (val - minVal) / (maxVal - minVal);
+}
+
+function modulate(val, minVal, maxVal, outMin, outMax) {
+  var fr = fractionate(val, minVal, maxVal);
+  var delta = outMax - outMin;
+  return outMin + fr * delta;
+}
+
+function avg(arr) {
+  var total = arr.reduce(function (sum, b) {
+    return sum + b;
+  });
+  return total / arr.length;
+}
+
+function max(arr) {
+  return arr.reduce(function (a, b) {
+    return Math.max(a, b);
   });
 }
 

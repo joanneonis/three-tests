@@ -40,6 +40,21 @@ var cameraPos = {x: 58, y: 36, z: 36};
 
 var controls;
 
+// Audio dingen
+const URL = './sound/bohfoitoch.mp3';
+	
+const context = new AudioContext();
+const playButton = document.querySelector('#play');
+	
+let soundBuffer;
+// eind
+
+let analyser;
+let dataArray;
+let bufferLength;
+
+let plane;
+
 function init() {
 
 	initRenderer();
@@ -61,6 +76,8 @@ function init() {
 
 	scene.background = bgColor;
 
+	drawPlane();
+
 	window.addEventListener('resize', onResize, false);
 
 	scene.userData.activeLightSettings = { type: 'Spotlight' };
@@ -81,9 +98,24 @@ function onResize() {
 
 function render() {
 	// controls.update();
+	if (analyser) { 
+		analyser.getByteTimeDomainData(dataArray); 
+		
+		let avgChange = avg(dataArray) / 100;
+
+		console.log(avgChange);
+		plane.scale.set(avgChange, avgChange, avgChange);
+	}
 
 	requestAnimationFrame(render);
 	renderer.render(scene, camera);
+}
+
+function drawPlane() {
+	var geometry = new THREE.PlaneGeometry( 5, 20, 32 );
+	var material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+	plane = new THREE.Mesh( geometry, material );
+	scene.add( plane ); 
 }
 
 function initGui() {
@@ -118,4 +150,55 @@ function initCameraGui() {
 	cameraFolder.add(cameraPos, 'x', -100, 100).onChange((val) => { camera.position.x = val });
 	cameraFolder.add(cameraPos, 'y', -100, 100).onChange((val) => { camera.position.y = val });
 	cameraFolder.add(cameraPos, 'z', -100, 100).onChange((val) => { camera.position.z = val });
+}
+
+
+window.fetch(URL)
+	.then(response => response.arrayBuffer())
+	.then(arrayBuffer => context.decodeAudioData(arrayBuffer))
+	.then(audioBuffer => {
+		playButton.disabled = false;
+		soundBuffer = audioBuffer;
+	});
+	
+playButton.onclick = () => play(soundBuffer);
+
+function play(audioBuffer) {
+	const source = context.createBufferSource();
+	source.buffer = audioBuffer;
+	// source.connect(context.destination);
+	source.start();
+
+	analyser = context.createAnalyser();
+	analyser.connect(context.destination);
+	analyser.fftSize = 2048;
+	bufferLength = analyser.frequencyBinCount;
+	dataArray = new Uint8Array(bufferLength);
+	analyser.getByteTimeDomainData(dataArray);
+
+	console.log('bufferleng', bufferLength);
+
+	source.connect(analyser);
+}
+
+
+
+//some helper functions here
+function fractionate(val, minVal, maxVal) {
+	return (val - minVal)/(maxVal - minVal);
+}
+
+function modulate(val, minVal, maxVal, outMin, outMax) {
+	var fr = fractionate(val, minVal, maxVal);
+	var delta = outMax - outMin;
+	return outMin + (fr * delta);
+}
+
+function avg(arr){
+	var total = arr.reduce(function(sum, b) { return sum + b; });
+	return (total / arr.length);
+}
+
+function max(arr){
+	return arr.reduce(function(a, b){ return Math.max(a, b); })
 }
