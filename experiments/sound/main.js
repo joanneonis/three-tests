@@ -2,11 +2,11 @@
 import '../../assets/base.scss';
 import Prism from 'prismjs';
 
-import * as dat from 'dat.gui';
+// import * as dat from 'dat.gui';
 import * as THREE from 'three';
 
 import 'three/examples/js/controls/OrbitControls';
-import { setlightType, buildGui, changeLightType } from '../../helpers/functions/lights';
+// import 'three/examples/js/WebGL';
 
 Prism.highlightAll();
 
@@ -29,16 +29,12 @@ panelToggle.onclick = function() {
 //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
+var SEPARATION = 100, AMOUNTX = 50, AMOUNTY = 50;
 
-var renderer,
-		scene,
-		camera,
-		theCanvas = document.getElementById('gl-canvas');
-
-var gui;
-var cameraPos = {x: 58, y: 36, z: 36};
-
+var camera, scene, renderer;
 var controls;
+
+var particles, count = 0;
 
 // Audio dingen
 const URL = './sound/bohfoitoch.mp3';
@@ -53,104 +49,110 @@ let analyser;
 let dataArray;
 let bufferLength;
 
-let plane;
+//
+let positions;
+let scales;
+
+init();
+animate();
 
 function init() {
 
-	initRenderer();
+	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+	camera.position.z = 1000;
 
 	scene = new THREE.Scene();
-	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-	camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
-	
+
+	renderer = new THREE.WebGLRenderer( { antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
 	initControls();
 
+	//
+
+	var numParticles = AMOUNTX * AMOUNTY;
+
+	positions = new Float32Array( numParticles * 3 );
+	scales = new Float32Array( numParticles );
+
+	var i = 0, j = 0;
+
+	for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
+
+		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
+
+			positions[ i ] = ix * SEPARATION - ( ( AMOUNTX * SEPARATION ) / 2 ); // x
+			positions[ i + 1 ] = 0; // y
+			positions[ i + 2 ] = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 ); // z
+
+			scales[ j ] = 1;
+
+			i += 3;
+			j ++;
+
+		}
+
+	}
+
+	var geometry = new THREE.BufferGeometry();
+	geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+	geometry.addAttribute( 'scale', new THREE.BufferAttribute( scales, 1 ) );
+
+	var material = new THREE.ShaderMaterial( {
+
+		uniforms: {
+			color: { value: new THREE.Color( 0xffffff ) },
+		},
+		vertexShader: document.getElementById( 'vertexshader' ).textContent,
+		fragmentShader: document.getElementById( 'fragmentshader' ).textContent
+
+	} );
+
+	//
+
+	particles = new THREE.Points( geometry, material );
+	scene.add( particles );
+
+	//
+
 	
-	scene.add(new THREE.AxesHelper(10));
+	document.body.appendChild( renderer.domElement );
 
-	let bgColor = new THREE.Color('#a3e1fe');
+	window.addEventListener( 'resize', onWindowResize, false );
 
-	let ambient = new THREE.AmbientLight();
-	// ambient.castShadow = true;
-	scene.add(ambient);
-
-	scene.background = bgColor;
-
-	drawPlane();
-
-	window.addEventListener('resize', onResize, false);
-
-	scene.userData.activeLightSettings = { type: 'Spotlight' };
-	scene.userData.gui = gui;
-
-	setlightType('HemisphereLight', scene);
-	changeLightType('HemisphereLight', scene);
-	buildGui(scene);
 }
 
-
-function onResize() {
+function onWindowResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
 
-	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.setSize( window.innerWidth, window.innerHeight );
+}
+
+//
+
+function animate() {
+	requestAnimationFrame( animate );
+	render();
 }
 
 function render() {
-	// controls.update();
-	if (analyser) { 
-		analyser.getByteTimeDomainData(dataArray); 
-		
-		let avgChange = avg(dataArray) / 100;
+	camera.lookAt( scene.position );
+	
+	
+	audioThingies();
+	
 
-		console.log(avgChange);
-		plane.scale.set(avgChange, avgChange, avgChange);
-	}
+	particles.geometry.attributes.position.needsUpdate = true;
+	particles.geometry.attributes.scale.needsUpdate = true;
 
-	requestAnimationFrame(render);
-	renderer.render(scene, camera);
+	renderer.render( scene, camera );
+
+	count += 0.1;
+
 }
 
-function drawPlane() {
-	var geometry = new THREE.PlaneGeometry( 5, 20, 32 );
-	var material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-	plane = new THREE.Mesh( geometry, material );
-	scene.add( plane ); 
-}
-
-function initGui() {
-	gui = new dat.GUI();
-	initCameraGui();
-}
-
-initGui();
-init();
-render();
-
-function initRenderer() {
-	renderer = new THREE.WebGLRenderer({
-		canvas: theCanvas, 
-		antialias: true
-	});
-	renderer.setPixelRatio(window.devicePixelRatio);
-	renderer.setSize(window.innerWidth, window.innerHeight);
-	renderer.shadowMap.enabled = true;
-	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-}
-
-function initControls() {
-	controls = new THREE.OrbitControls(camera, renderer.domElement);
-	controls.minDistance = 0;
-	controls.maxDistance = 700;
-	controls.enableKeys = false;
-}
-
-function initCameraGui() {
-	var cameraFolder = gui.addFolder('Camera');
-	cameraFolder.add(cameraPos, 'x', -100, 100).onChange((val) => { camera.position.x = val });
-	cameraFolder.add(cameraPos, 'y', -100, 100).onChange((val) => { camera.position.y = val });
-	cameraFolder.add(cameraPos, 'z', -100, 100).onChange((val) => { camera.position.z = val });
-}
 
 
 window.fetch(URL)
@@ -171,16 +173,58 @@ function play(audioBuffer) {
 
 	analyser = context.createAnalyser();
 	analyser.connect(context.destination);
-	analyser.fftSize = 2048;
+	analyser.fftSize = 512; // 2048
 	bufferLength = analyser.frequencyBinCount;
 	dataArray = new Uint8Array(bufferLength);
 	analyser.getByteTimeDomainData(dataArray);
 
-	console.log('bufferleng', bufferLength);
-
 	source.connect(analyser);
 }
 
+function audioThingies() {
+	if (analyser) { 
+		analyser.getByteTimeDomainData(dataArray); 
+		
+		let avgChange = avg(dataArray) / 100;
+
+	// 	for (let x = 0; x < bufferLength; x++) {
+	// 		var amp = dataArray[x];
+	// 		var y = THREE.Math.clamp(amp, 0, 10);
+	// 		positions[x] = y;
+	// 		scales[x] = y;
+	// 		console.log(y);
+	// 	}
+	}
+
+	positions = particles.geometry.attributes.position.array;
+	scales = particles.geometry.attributes.scale.array;
+	
+	var i = 0, j = 0;
+
+	// console.log(AMOUNTX * AMOUNTY);
+
+	for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
+
+		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
+			// console.log(i, j);
+
+			// positions[ i + 1 ] = ( Math.sin( ( ix + count ) * 0.3 ) * 50 ) +
+			// 				( Math.sin( ( iy + count ) * 0.5 ) * 50 );
+
+			// scales[ j ] = ( Math.sin( ( ix + count ) * 0.3 ) + 1 ) * 8 +
+			// 				( Math.sin( ( iy + count ) * 0.5 ) + 1 ) * 8;
+
+			positions[ i + 1 ] = 1;
+			scales[ j ] = 20;
+
+			i += 3;
+			j ++;
+
+		}
+
+	}
+	
+}
 
 
 //some helper functions here
@@ -201,4 +245,12 @@ function avg(arr){
 
 function max(arr){
 	return arr.reduce(function(a, b){ return Math.max(a, b); })
+}
+
+
+function initControls() {
+	controls = new THREE.OrbitControls(camera, renderer.domElement);
+	controls.minDistance = 0;
+	controls.maxDistance = 700;
+	controls.enableKeys = false;
 }
