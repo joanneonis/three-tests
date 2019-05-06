@@ -8,10 +8,358 @@
 	<style>
     body { margin: 0; width: 100%; height: 100vh; overflow: hidden; }
     canvas { width: 100%; height: 100%; }
-  </style>
+	</style>
 </head>
 <body>
 	<canvas id="gl-canvas"></canvas>
+	<button class="panel-toggle">Lees proces</button>
+	<section class="info-panel">
+		<div class="info-panel__inner">
+			<span class="meta">Experiment 1</span>
+			<h1>Trekker</h1>
+			<p class="intro">
+					Voor dit experiment wil ik een model leren manipuleren, en animeren op basis van parameters. Ik heb ervoor gekozen om een trekker met een flexibele frame te maken.
+			</p>
+
+			<h4>Requirements</h4>
+			<ul>
+				<li>Model inladen met textuur</li>
+				<li>Trekker krom trekken aan de hand van rijrichting</li>
+				<li>Trekker besturen met pijltjestoetsen</li>
+				<li>Draaien van de wielen</li>
+				<li>Sturen van voorwielen</li>
+			</ul>
+
+			<h4>Nice to have</h4>
+			<ul>
+				<li>Camera meebewegen met trekker</li>
+				<li>Parkour</li>
+			</ul>
+
+			<h2>Stap voor stap...</h2>
+
+			<h3>1. Animaties</h3>
+			<h5>Mean values</h5>
+			<p>
+				Tijdens de eerste poging heb ik geprobeerd de model direct te manipuleren middels een soort eigen <a href="https://docs.blender.org/manual/en/latest/modeling/modifiers/deform/lattice.html">lattice</a> te maken.
+				Ik vond een enorm leerzaam artikel; <a href="http://hecodes.com/2016/07/mesh-manipulation-using-mean-values-coordinates-in-three-js/">Mesh Manipulation Using Mean Values Coordinates in Three.js</a>.
+				In dit artikel gebruiker ze mean values om de deforms toe te passen, dit is wel wat ik nodig had, maar voor een eerste experiment wel te complex. Dit geld ook voor de andere interessante bronnen: <a href="https://github.com/a-jie/threejs-geometry-modifiers">geometry modifiers</a> en <a href="https://github.com/zz85/threejs-path-flow">path flow</a>.
+			</p>
+			
+			<figure>
+				<img src="../proces/triangle.png" alt="">
+				<figcaption>Mean values. Bron: <a href="http://hecodes.com/2016/07/mesh-manipulation-using-mean-values-coordinates-in-three-js/">hecodes</a></figcaption>
+			</figure>
+
+			<h5>Animatie mixer</h5>
+			<p>
+				In de zoektocht naar een makkelijker te implementere oplossing kwam ik op de <a href="https://threejs.org/docs/#api/en/animation/AnimationMixer">animatie mixer</a> van <code>THREE</code>. 
+				Hiermee kun je verschillende animaties tegelijk afspelen, en zelf controle houden over de "zwaarte" waarmee je het toepast. 
+				<br><br>
+				Daarna ben ik gaan zoeken naar hoe je animaties kan importeren in <code>THREE</code>, vanuit een 3D modeling software pakket. Eerst via <code>JSON</code> import, maar dat leek depricated te zijn. 
+				Vervolgens via <code>GLTF</code>, hiermee kunnen ook animaties en textures geimporteerd worden.
+			</p>
+
+			<pre class="code-highlight">
+				<code class="language-js">
+		import 'three/examples/js/loaders/GLTFLoader';
+
+		function loadModel() {
+			var loader = new THREE.GLTFLoader();
+
+			loader.load('trekker.glb', function (gltf) {
+				var model = gltf.scene;
+				
+				tractorObj = model.children[0];
+				
+				scene.add( model );
+			});
+		}
+				</code>
+			</pre>
+
+			<p>
+				Vervolgens ben ik gaan kijken hoe ik het schuintrekken kon doen met Cinema 4D. Toen kwam ik op hetzelfde principe als het artikel over mean values, de <a href="https://labs.maxon.net/?p=3192">lattice deformer</a>, perfect voor het resultaat wat ik voor ogen had.
+				Met deze deformer kun je een kooi om je model zetten, wanneer je punten in deze kooi verplaatst, gaan alle punten in de buurt binnen de kooi ook mee.
+			</p>
+
+			<figure>
+				<img src="../proces/lattice-test.png" alt="">
+				<figcaption>Lattice (FFD) deformer</figcaption>
+			</figure>
+
+			<p>
+				Al snel merkte ik dat er weinig export tools voor Cinema 4d naar <code>THREE</code> waren, dus ben ik geswitched naar Blender. Een gratis modelling pakket die ook gebaseerds is op <code>OpenGl</code> net als <code>webgl</code> (de basis van <code>THREE</code>)
+			</p>
+
+
+			<h5>Eerste animaties</h5>
+			<p>
+				Elke stand die de trekker moest krijgen heb ik als animatie in Blender gemaakt. 
+			</p>
+			<figure>
+				<video autoplay muted playsinline loop controls src="../proces/standen.mp4"></video>
+				<figcaption>Standen trekker</figcaption>		
+			</figure>
+
+			<p>
+				Het importeren van deze animatie bleek lastig. Basis transformaties zoals translate en rotate werken wel. Maar modifiers niet.
+				Een andere manier waarop het wel kan is de animatie omzetten naar keyframes (voor elke frame), dit kan met lightwave point cache. 
+				Dit heb ik geimplementeerd, maar daardoor verlies je wel de controle over de inividuele animaties.
+			</p>
+
+			<figure>
+				<img src="../proces/keyframes.png" alt="">
+				<figcaption>Export en import lightwave point cache (.mdd)</figcaption>
+			</figure>
+
+			<p>
+				Om dit op te lossen heb ik de animaties handmatig los geknipt met code en in de workflow van THREE gezet. 
+			</p>
+
+			<pre class="code-highlight">
+				<code class="language-js">	
+		loader.load('v0-MDD-2.glb', function (gltf) {
+			var model = gltf.scene;
+			mixer = new THREE.AnimationMixer(model);
+			
+			var clips = ['forwards', 'backwards', 'right', 'left'];
+			var stepLength = 40;
+			var actions = new Array(4);
+
+			for (let i = 0; i < clips.length; i++) {
+				actions[i] = mixer.clipAction(
+					createAction(i, clips[i], gltf.animations[0], stepLength)
+				);
+			}
+
+			actions[2].play();
+
+			scene.add( model );
+		});
+
+		function createAction(index, name, animation, step) {
+			let baseTrack = animation.tracks[0];
+			let sceneLength = animation.duration;
+			let frameDuration = sceneLength / 160;
+			let i = index + 1;
+			let skipStep = i * step;
+			let prevSkipStep = index * step;
+		
+			let track = baseTrack.clone().trim(frameDuration + (frameDuration * prevSkipStep), skipStep);
+			
+			if (index > 0) {
+				track.shift(-(frameDuration + frameDuration * prevSkipStep));
+			}
+		
+			let clip = new THREE.AnimationClip( 
+				name, 
+				sceneLength / 4, 
+				[  
+					track
+				] 
+			);
+		
+			return clip;
+		}
+				</code>
+			</pre>
+
+			<p>
+				Het werkte wel, maar de code was lang en moeilijk te lezen, ook het modelbestand werdt erg zwaar door alle individuele keyframes. 
+				Dus ben opzoek gegaan naar alternatieve manieren. In <a href="https://threejs.org/examples/?q=animati#webgl_animation_skinning_morph">een van de voorbeelden</a> zat een gedeelte "expressions" van de robot, die leek op wat ik ook wou bereiken. 
+				Dus ik heb onderzocht hoe dit gemaakt is. In de broncode vond ik <code>morphTargetInfluences</code> en <code>morphTargetDictionary</code>. Precies wat ik nodig had!
+				Later vond ik ook hoe dit in Blender aangemaakt en geexporteerd kon worden. Door per stand de lattice modifier toe te passen, en deze als shape key opslaan. 
+				Deze shapekeys worden door THREE opgehaald als <code>morphTargetDictionary</code>. Dit heb ik doorgevoerd.
+			</p>
+
+			<pre class="code-highlight">
+					<code class="language-js">	
+		function loadModelThingies() {
+			var loader = new THREE.GLTFLoader();
+		
+			loader.load('trekker-morph-1-multipart.glb', function (gltf) {
+				var model = gltf.scene;
+		
+				tractorObj = model.children[0];
+				wheelObjects = [model.children[1], model.children[2], model.children[3]];
+		
+				var expressions = Object.keys( tractorObj.morphTargetDictionary );
+				var expressionFolder = gui.ddFolder('Blob');
+				
+				for ( var i = 0; i < expressions.length; i++ ) {
+					expressionFolder.add( tractorObj.morphTargetInfluences, i, 0, 1, 0.01 ).name( expressions[ i ] );
+				}
+		
+				scene.add( model );
+			});
+		}
+					</code>
+				</pre>
+				<p>
+					Veel korter en beter te beheren. Zo kunnen er ook makkelijk meerdere standen toegevoegd worden. Deze waarden heb ik eerst in de dat.gui gezet, om te kijken hoe het manipuleren van de waardes eruit zag.
+				</p>
+
+				<h3>2. Rijden</h3>
+				<p>
+					Wanneer je alleen de x en y positie van de trekker (linear) update, krijg je een erg statische animatie. Daarom is het belangrijk om met velocity te werken.
+					Ik heb de stappen van een tutorial gevolgd om de basisprincipes onder de knie te krijgen: <a href="https://codepen.io/Tobsta/post/implementing-velocity-acceleration-and-friction-on-a-canvas">Implementing Velocity, Acceleration and Friction on a Canvas</a>
+				</p>
+				<pre class="code-highlight">
+					<code class="language-js">	
+		// Register key events
+		document.addEventListener('keydown', function(e){
+			keys[e.which] = true;
+		});
+		document.addEventListener('keyup', function(e){
+			keys[e.which] = false;
+		});
+
+		var tractor = {
+			x: 0, y: 0,
+			vx: 0, vy: 0,
+			ax: 0, ay: 0,
+			vr: 0, ar:0,
+			sr: 0, r: 0,
+			update: function(){
+				if (tractorObj) {
+					// Set min and max for velocity calculations
+					this.vx = THREE.Math.clamp(this.vx, -1.0, 1.0); //float (-1) otherwise it will see it as a boolean
+					this.vy = THREE.Math.clamp(this.vy, -1.0, 1.0);
+					this.vr = THREE.Math.clamp(this.vr, -10.0, 10.0);
+		
+					// Rotation from velocity to degrees
+					let rotation = THREE.Math.degToRad(this.vr) * 10;
+					
+					// Rotate object (with custom function)
+					rotateObject(tractorObj.parent, 0, rotation, 0);
+
+					// Move tractor on Z axe
+					tractorObj.parent.translateZ(this.vx);
+					
+					// Rotate the wheels
+					wheelObjects[0].rotation.x += (THREE.Math.degToRad(this.vx) * 10);
+					wheelObjects[1].rotation.x += (THREE.Math.degToRad(this.vx) * 10);
+					wheelObjects[2].rotation.x += (THREE.Math.degToRad(this.vx) * 10);
+				}
+			}
+		};
+		
+		function posCalcs() {
+			if (keys[37]) {
+				tractor.ar += 0.05;
+				tractor.sr += 0.05;
+			} else if (keys[39]) {
+				tractor.ar -= 0.05;
+				tractor.sr -= 0.05;
+			} else {
+				tractor.ar = 0;
+			}
+		
+			if(keys[38]){
+				tractor.ax += 0.005;
+				tractor.ay += 0.005;
+			} else if(keys[40]) {
+				tractor.ax -= 0.005;
+				tractor.ay -= 0.005;
+			} else {
+				tractor.ax = 0;
+				tractor.ay = 0;
+			}
+		
+			updatePosition(tractor);
+			tractor.update();
+		}
+
+		function applyFriction(obj){
+			obj.vx *= friction;
+			obj.vy *= friction;
+			obj.vr *= rFriction;
+		}
+		
+		function updatePosition(obj){
+			//update velocity
+			obj.vx += obj.ax;
+			obj.vy += obj.ay;
+			obj.vr += obj.ar;
+			
+			applyFriction(obj);
+			
+			//update position
+			obj.x += obj.vx;
+			obj.y += obj.vy;
+			obj.r += obj.vr;
+		}
+					</code>
+				</pre>
+
+				<figure>
+					<video autoplay muted playsinline loop controls src="../proces/lol.mp4"></video>
+					<figcaption>Standen trekker</figcaption>		
+				</figure>
+				
+				<p>
+					Voor het roteren van de wielen is het wel vereist om het middelpunt van de wielen goed te hebben staan. Anders krijg je zoals hieronder.
+				</p>
+				
+				<pre class="code-highlight">
+						<code class="language-js">	
+		function resetWheel() {
+			wheelObjects[0].geometry.center();
+			wheelObjects[1].geometry.center();
+			wheelObjects[2].geometry.center();
+			
+			wheelObjects[0].position.set(3.6, 3.4, -4.8);
+			wheelObjects[1].position.set(-3.6, 3.9, -5.4);
+			wheelObjects[2].position.set(0, 2.1, 4.5);
+		}
+					</code>
+				</pre>
+
+				<p>
+					Nu moeten de voorwielen alleen ook nog over de Y as draaien zodat het lijkt alsof de trekker stuurt. Helaas als je de y en z as tegelijk draait, doen ze het niet afzonderlijk, maar dan krijg je het gemiddelde.
+					Na een lange zoektoch kwam ik erachter dat dat het GIMBAL probleem heet. 
+				</p>
+
+				<figure>
+					<div class="video-wrapper">
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/zc8b2Jo7mno?start=8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>	
+					</div>
+					<figcaption>Gimbal en Euler uitgelegd</figcaption>
+				</figure>
+
+				<p>
+					Omdat ik maar 2 assen wil draaien, kon ik dus d.m.v. euler simpel de volgorde van de assen aanpassen.
+				</p>
+
+				<pre class="code-highlight">
+						<code class="language-js">	
+			var newX = THREE.Math.degToRad(this.x) * 10; // Rolling
+			var newY = THREE.Math.degToRad(this.vr) * 2; // Steering
+			
+			// fix gimbal problem
+			var euler = new THREE.Euler( newX, newY, 0, 'YXZ' );
+			wheelObjects[2].setRotationFromEuler(euler); // front wheels
+					</code>
+				</pre>
+
+				<h3>4. Trekker schuintrekken op basis van rijden</h3>
+				<p>
+					De laatste stap was de trekker schuintrekken op basis van het rijden. De <code>morphTargetDictionary</code> had ik al aangelegd.
+					Dus het was nog een kwestie van het toevoegen van de velocity toepassen op de <code>morphTargetInfluences</code>.
+				</p>
+
+				<pre class="code-highlight">
+						<code class="language-js">	
+			if (Math.abs(this.vx) > blobbyMinSpeed) {
+				tractorObj.morphTargetInfluences[0] = this.vx;
+				tractorObj.morphTargetInfluences[2] = this.vr * 0.1;
+			}
+					</code>
+				</pre>
+
+		</div>
+	</section>
 	<script src="./../../build/car3.bundle.js"></script>
 </body>
 </html>

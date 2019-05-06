@@ -16,6 +16,7 @@ export default {
         car: path.join(__dirname, 'experiments/car/main.js'),
         car2: path.join(__dirname, 'experiments/car-v2/main.js'),
         car3: path.join(__dirname, 'experiments/car-v3/main.js'),
+        style: path.join(__dirname, 'assets/base.scss'),
     },
     output: {
         path: path.join(__dirname, 'build'),
@@ -23,11 +24,29 @@ export default {
     },
     module: {
         rules: [{
-            test: /\.js/,
+            test: /\.js$/,
             exclude: /(node_modules|bower_components)/,
             use: [{
                 loader: 'babel-loader'
             }]
+        },
+        {
+            test: /\.scss$/,
+            use: [
+                {
+                loader: "style-loader" // creates style nodes from JS strings
+                },
+                {
+                loader: "css-loader" // translates CSS into CommonJS
+                },
+                {
+                loader: "sass-loader" // compiles Sass to CSS
+                }
+            ]
+        },
+        {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
         }],
     },
     resolve: {

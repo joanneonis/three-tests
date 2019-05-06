@@ -86,6 +86,36 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./assets/base.scss":
+/*!**************************!*\
+  !*** ./assets/base.scss ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js!../node_modules/sass-loader/lib/loader.js!./base.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./assets/base.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./experiments/car-v3/main.js":
 /*!************************************!*\
   !*** ./experiments/car-v3/main.js ***!
@@ -95,25 +125,59 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var dat_gui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dat.gui */ "./node_modules/dat.gui/build/dat.gui.module.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
-/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
-/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/examples/js/AnimationClipCreator */ "./node_modules/three/examples/js/AnimationClipCreator.js");
-/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
+/* harmony import */ var _assets_base_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/base.scss */ "./assets/base.scss");
+/* harmony import */ var _assets_base_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_base_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prismjs/components/prism-core */ "./node_modules/prismjs/components/prism-core.js");
+/* harmony import */ var prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prismjs/components/prism-clike */ "./node_modules/prismjs/components/prism-clike.js");
+/* harmony import */ var prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prismjs/components/prism-javascript */ "./node_modules/prismjs/components/prism-javascript.js");
+/* harmony import */ var prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prismjs/components/prism-css */ "./node_modules/prismjs/components/prism-css.js");
+/* harmony import */ var prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prismjs/components/prism-markup */ "./node_modules/prismjs/components/prism-markup.js");
+/* harmony import */ var prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var dat_gui__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dat.gui */ "./node_modules/dat.gui/build/dat.gui.module.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
+/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
+/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! three/examples/js/AnimationClipCreator */ "./node_modules/three/examples/js/AnimationClipCreator.js");
+/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
 /* eslint-disable no-unused-vars */
 
 
 
 
 
- //?--------------------------------------------------------------------
+
+
+
+
+
+
+
+prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1___default.a.highlightAll();
+var panelToggle = document.querySelector('.panel-toggle');
+var body = document.querySelector('body');
+var panelOpen = false;
+
+panelToggle.onclick = function () {
+  body.classList.toggle('panel-open');
+  panelOpen = !panelOpen;
+
+  if (panelOpen) {
+    panelToggle.textContent = 'Sluit proces';
+  } else {
+    panelToggle.textContent = 'Lees proces';
+  }
+}; //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
+
 
 var renderer,
     scene,
@@ -143,23 +207,21 @@ var tractor = {
   r: 0,
   update: function update() {
     if (tractorObj) {
-      this.vx = three__WEBPACK_IMPORTED_MODULE_1__["Math"].clamp(this.vx, -1.0, 1.0); //float (-1) otherwise it will see it as a boolean
+      this.vx = three__WEBPACK_IMPORTED_MODULE_7__["Math"].clamp(this.vx, -1.0, 1.0); //float (-1) otherwise it will see it as a boolean
 
-      this.vy = three__WEBPACK_IMPORTED_MODULE_1__["Math"].clamp(this.vy, -1.0, 1.0);
-      this.vr = three__WEBPACK_IMPORTED_MODULE_1__["Math"].clamp(this.vr, -10.0, 10.0);
-      var rotation = three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vr) * 10; // !
-
+      this.vy = three__WEBPACK_IMPORTED_MODULE_7__["Math"].clamp(this.vy, -1.0, 1.0);
+      this.vr = three__WEBPACK_IMPORTED_MODULE_7__["Math"].clamp(this.vr, -10.0, 10.0);
+      var rotation = three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.vr) * 10;
       rotateObject(tractorObj.parent, 0, rotation, 0);
       tractorObj.parent.translateZ(this.vx);
-      wheelObjects[0].rotation.x += three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vx) * 10;
-      wheelObjects[1].rotation.x += three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vx) * 10;
-      var smallerVr = three__WEBPACK_IMPORTED_MODULE_1__["Math"].clamp(this.vr, -1.0, 1.0);
-      var newX = three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.x) * 10; // Rolling
+      wheelObjects[0].rotation.x += three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.vx) * 10;
+      wheelObjects[1].rotation.x += three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.vx) * 10;
+      var newX = three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.x) * 10; // Rolling
 
-      var newY = three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(this.vr) * 2; // Steering
+      var newY = three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.vr) * 2; // Steering
       // XZY (fix the gimbal problem  =)
 
-      var euler = new three__WEBPACK_IMPORTED_MODULE_1__["Euler"](newX, newY, 0, 'YXZ');
+      var euler = new three__WEBPACK_IMPORTED_MODULE_7__["Euler"](newX, newY, 0, 'YXZ');
       wheelObjects[2].setRotationFromEuler(euler);
 
       if (Math.abs(this.vx) > blobbyMinSpeed) {
@@ -175,22 +237,39 @@ var keys = []; //? end
 
 function init() {
   initRenderer();
-  scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
-  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000);
+  scene = new three__WEBPACK_IMPORTED_MODULE_7__["Scene"]();
+  camera = new three__WEBPACK_IMPORTED_MODULE_7__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000);
   camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
   initControls(); // scene.add(new THREE.AxesHelper(10));
 
-  var bgColor = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#a3e1fe');
-  scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"]());
+  var bgColor = new three__WEBPACK_IMPORTED_MODULE_7__["Color"]('#a3e1fe');
+  var ambient = new three__WEBPACK_IMPORTED_MODULE_7__["AmbientLight"](); // ambient.castShadow = true;
+
+  scene.add(ambient);
+  var point = new three__WEBPACK_IMPORTED_MODULE_7__["PointLight"](); // ambient.castShadow = true;
+
+  scene.add(point);
   scene.background = bgColor;
   window.addEventListener('resize', onResize, false);
   scene.userData.activeLightSettings = {
     type: 'Spotlight'
   };
-  scene.userData.gui = gui;
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["setlightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["changeLightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["buildGui"])(scene);
+  scene.userData.gui = gui; // Groundplane
+
+  var geometry = new three__WEBPACK_IMPORTED_MODULE_7__["PlaneGeometry"](5000, 2000, 32);
+  var material = new three__WEBPACK_IMPORTED_MODULE_7__["MeshBasicMaterial"]({
+    color: new three__WEBPACK_IMPORTED_MODULE_7__["Color"]('#87CBEB'),
+    side: three__WEBPACK_IMPORTED_MODULE_7__["DoubleSide"]
+  });
+  var plane = new three__WEBPACK_IMPORTED_MODULE_7__["Mesh"](geometry, material);
+  plane.position.y = 0;
+  plane.rotation.x = -90 * (Math.PI / 180);
+  plane.receiveShadow = true;
+  plane.castShadow = false;
+  scene.add(plane);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["setlightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["changeLightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["buildGui"])(scene);
 }
 
 function onResize() {
@@ -207,7 +286,7 @@ function render() {
 }
 
 function initGui() {
-  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_6__["GUI"]();
   initCameraGui();
 }
 
@@ -217,27 +296,33 @@ render();
 loadModelThingies();
 
 function initRenderer() {
-  renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
+  renderer = new three__WEBPACK_IMPORTED_MODULE_7__["WebGLRenderer"]({
     canvas: theCanvas,
     antialias: true
   });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = three__WEBPACK_IMPORTED_MODULE_1__["PCFSoftShadowMap"];
+  renderer.shadowMap.type = three__WEBPACK_IMPORTED_MODULE_7__["PCFSoftShadowMap"];
 }
 
 function initControls() {
-  controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement);
+  controls = new three__WEBPACK_IMPORTED_MODULE_7__["OrbitControls"](camera, renderer.domElement);
   controls.minDistance = 0;
   controls.maxDistance = 700;
   controls.enableKeys = false;
 }
 
 function loadModelThingies() {
-  var loader = new three__WEBPACK_IMPORTED_MODULE_1__["GLTFLoader"]();
+  var loader = new three__WEBPACK_IMPORTED_MODULE_7__["GLTFLoader"]();
   loader.load('trekker-morph-1-multipart.glb', function (gltf) {
     var model = gltf.scene;
+    model.traverse(function (node) {
+      if (node instanceof three__WEBPACK_IMPORTED_MODULE_7__["Mesh"]) {
+        node.castShadow = true;
+        node.receiveShadow = false;
+      }
+    });
     tractorObj = model.children[0];
     wheelObjects = [model.children[1], model.children[2], model.children[3]]; // plaeObj(wheelObjects[2]);
 
@@ -251,6 +336,7 @@ function loadModelThingies() {
     }
 
     tractorObj.userData.velocity = 0;
+    model.castShadow = true;
     scene.add(model);
   });
 }
@@ -277,18 +363,14 @@ function posCalcs() {
     tractor.sr -= 0.05;
   } else {
     tractor.ar = 0;
-  } //thrust
-
+  }
 
   if (keys[38]) {
-    // tractor.ax = Math.cos(tractor.sr) * 0.05;
-    // tractor.ay = Math.sin(tractor.sr) * 0.05;
     tractor.ax += 0.005;
     tractor.ay += 0.005;
   } else if (keys[40]) {
     tractor.ax -= 0.005;
-    tractor.ay -= 0.005; // tractor.ax = Math.cos(tractor.sr) * -0.05;
-    // tractor.ay = Math.sin(tractor.sr) * -0.05;
+    tractor.ay -= 0.005;
   } else {
     tractor.ax = 0;
     tractor.ay = 0;
@@ -346,46 +428,9 @@ function rotateObject(object) {
   var degreeX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   var degreeY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
   var degreeZ = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-  object.rotateX(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeX));
-  object.rotateY(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeY));
-  object.rotateZ(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeZ));
-} // Rotate an object around an arbitrary axis in object space
-
-
-var rotObjectMatrix;
-
-function rotateAroundObjectAxis(object, axis, radians) {
-  rotObjectMatrix = new three__WEBPACK_IMPORTED_MODULE_1__["Matrix4"]();
-  rotObjectMatrix.makeRotationAxis(axis.normalize(), radians); // old code for Three.JS pre r54:
-  // object.matrix.multiplySelf(rotObjectMatrix);      // post-multiply
-  // new code for Three.JS r55+:
-
-  object.matrix.multiply(rotObjectMatrix); // old code for Three.js pre r49:
-  // object.rotation.getRotationFromMatrix(object.matrix, object.scale);
-  // old code for Three.js r50-r58:
-  // object.rotation.setEulerFromRotationMatrix(object.matrix);
-  // new code for Three.js r59+:
-
-  object.rotation.setFromRotationMatrix(object.matrix);
-}
-
-var rotWorldMatrix; // Rotate an object around an arbitrary axis in world space       
-
-function rotateAroundWorldAxis(object, axis, radians) {
-  rotWorldMatrix = new three__WEBPACK_IMPORTED_MODULE_1__["Matrix4"]();
-  rotWorldMatrix.makeRotationAxis(axis.normalize(), radians); // old code for Three.JS pre r54:
-  //  rotWorldMatrix.multiply(object.matrix);
-  // new code for Three.JS r55+:
-
-  rotWorldMatrix.multiply(object.matrix); // pre-multiply
-
-  object.matrix = rotWorldMatrix; // old code for Three.js pre r49:
-  // object.rotation.getRotationFromMatrix(object.matrix, object.scale);
-  // old code for Three.js pre r59:
-  // object.rotation.setEulerFromRotationMatrix(object.matrix);
-  // code for r59+:
-
-  object.rotation.setFromRotationMatrix(object.matrix);
+  object.rotateX(three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(degreeX));
+  object.rotateY(three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(degreeY));
+  object.rotateZ(three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(degreeZ));
 }
 
 /***/ }),
@@ -602,10 +647,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_src_helpers_DirectionalLightHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/src/helpers/DirectionalLightHelper */ "./node_modules/three/src/helpers/DirectionalLightHelper.js");
 /* harmony import */ var three_src_helpers_PointLightHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/src/helpers/PointLightHelper */ "./node_modules/three/src/helpers/PointLightHelper.js");
 /* harmony import */ var three_src_helpers_HemisphereLightHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/src/helpers/HemisphereLightHelper */ "./node_modules/three/src/helpers/HemisphereLightHelper.js");
+/* harmony import */ var three_src_helpers_CameraHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/src/helpers/CameraHelper */ "./node_modules/three/src/helpers/CameraHelper.js");
 /* eslint-disable no-unused-vars */
 
 
  // helpers
+
 
 
 
@@ -649,6 +696,7 @@ function createGuiSetting(scene, setting, name, key) {
     } else {
       scene.userData.activeLightSettings.light[key] = val;
     } // render(); //!idk
+    // console.log(scene.userData.activeLightSettings.light);
 
   });
 }
@@ -668,6 +716,10 @@ function setLight(scene) {
     scene.add(scene.userData.activeLightSettings.Helper);
   }
 
+  if (scene.userData.activeLightSettings.shadowHelper) {
+    scene.add(scene.userData.activeLightSettings.shadowHelper);
+  }
+
   if (scene.userData.activeLightSettings.light.shadow) {
     scene.userData.activeLightSettings.ShadowCameraHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](scene.userData.activeLightSettings.light.shadow.camera);
     scene.add(scene.userData.activeLightSettings.ShadowCameraHelper);
@@ -677,6 +729,7 @@ function setLight(scene) {
 function setlightType(type, scene) {
   scene.remove(scene.userData.activeLightSettings.light);
   scene.remove(scene.userData.activeLightSettings.Helper);
+  scene.remove(scene.userData.activeLightSettings.shadowHelper);
   scene.remove(scene.userData.activeLightSettings.ShadowCameraHelper);
 
   switch (type) {
@@ -684,12 +737,16 @@ function setlightType(type, scene) {
       scene.userData.activeLightSettings.light = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLight"](0xffffff, 1);
       scene.userData.activeLightSettings.Helper = new three__WEBPACK_IMPORTED_MODULE_1__["SpotLightHelper"](scene.userData.activeLightSettings.light);
       scene.userData.activeLightSettings.GuiSettings = new _helpers_classes_lights__WEBPACK_IMPORTED_MODULE_2__["SpotLight"]();
+      scene.userData.activeLightSettings.light.castShadow = true;
+      scene.userData.activeLightSettings.shadowHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](scene.userData.activeLightSettings.light.shadow.camera);
       break;
 
     case 'PointLight':
       scene.userData.activeLightSettings.light = new three__WEBPACK_IMPORTED_MODULE_1__["PointLight"](0xffffff, 2.0, 600);
       scene.userData.activeLightSettings.Helper = new three__WEBPACK_IMPORTED_MODULE_1__["PointLightHelper"](scene.userData.activeLightSettings.light);
       scene.userData.activeLightSettings.GuiSettings = new _helpers_classes_lights__WEBPACK_IMPORTED_MODULE_2__["PointLight"]();
+      scene.userData.activeLightSettings.light.castShadow = true;
+      scene.userData.activeLightSettings.shadowHelper = new three__WEBPACK_IMPORTED_MODULE_1__["CameraHelper"](scene.userData.activeLightSettings.light.shadow.camera);
       break;
 
     case 'HemisphereLight':
@@ -868,6 +925,120 @@ function _typeof(obj) {
 }
 
 module.exports = _typeof;
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./assets/base.scss":
+/*!*********************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./assets/base.scss ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Imports
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900);", ""]);
+
+// Module
+exports.push([module.i, "body {\n  font-family: 'Lato', sans-serif; }\n\n* {\n  box-sizing: border-box;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\np {\n  margin-top: 0;\n  line-height: 1.5;\n  font-weight: 300; }\n  p.intro {\n    font-size: 1.1em;\n    font-weight: 400;\n    color: #505050;\n    margin-bottom: 1.6em; }\n\nh1 {\n  font-weight: 900;\n  font-size: 3.4em;\n  margin-bottom: 0.2em;\n  margin-top: 0.1em; }\n\nh2 {\n  font-weight: 900;\n  font-size: 2.8em;\n  margin-bottom: 0em;\n  margin-top: 0.1em; }\n\nh3 {\n  font-weight: 900;\n  font-size: 2.1em;\n  margin-bottom: 0.3em;\n  margin-top: 1em; }\n\nh4 {\n  font-weight: 600;\n  font-size: 1em;\n  margin-bottom: 0.3em;\n  margin-top: 0.6em; }\n\nh5 {\n  font-size: 1em;\n  margin-bottom: 0.5em; }\n\n.meta {\n  color: #505050; }\n\np code {\n  background: #efefef;\n  display: inline-block;\n  padding: 0px 3px;\n  border: 1px solid #d2d2d2;\n  border-radius: 3px;\n  color: #545454; }\n\n.info-panel {\n  max-width: 50vw;\n  width: 100%;\n  position: absolute;\n  z-index: 999;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  background: #fff;\n  padding: 100px;\n  overflow: auto;\n  transform: translate3d(50vw, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open .info-panel {\n    transform: translate3d(0, 0, 0); }\n  .info-panel__inner > *:not(pre) {\n    max-width: 800px; }\n  .info-panel ul {\n    margin: 0.7em 0 2.2em 0; }\n    .info-panel ul li {\n      font-weight: 300;\n      margin-bottom: .8em; }\n\npre.code-highlight[class*=\"language-\"] {\n  margin: 4em;\n  margin-left: -100px;\n  margin-right: -100px; }\n\n.panel-toggle {\n  position: absolute;\n  right: 50px;\n  z-index: 90;\n  bottom: 50px;\n  transform: translate3d(0, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open .panel-toggle {\n    transform: translate3d(-50vw, 0, 0); }\n\ncanvas {\n  transform: translate3d(0, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open canvas {\n    transform: translate3d(-25vw, 0, 0); }\n\n.panel-toggle {\n  background: #fff;\n  border: none;\n  -webkit-appearance: none;\n  box-shadow: none;\n  font-size: 1.4em;\n  padding: 17px 30px;\n  border-radius: 100px;\n  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05); }\n  .panel-toggle:focus {\n    outline: none; }\n\nfigure {\n  margin: 0 0 1em 0; }\n  figure img,\n  figure video {\n    max-width: 100%; }\n  figure figcaption {\n    margin-top: 10px;\n    font-style: italic; }\n\n.video-wrapper {\n  position: relative;\n  padding-bottom: 56.25%;\n  /* 16:9 */\n  padding-top: 25px;\n  height: 0; }\n  .video-wrapper iframe {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%; }\n\n/*\n\nName:       Base16 harmonic16 Dark\nAuthor:     Jannik Siebert (https://github.com/janniks)\n\nPrism template by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/prism/)\nOriginal Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)\n\n*/\ncode[class*=\"language-\"],\npre[class*=\"language-\"] {\n  font-family: Consolas, Menlo, Monaco, \"Andale Mono WT\", \"Andale Mono\", \"Lucida Console\", \"Lucida Sans Typewriter\", \"DejaVu Sans Mono\", \"Bitstream Vera Sans Mono\", \"Liberation Mono\", \"Nimbus Mono L\", \"Courier New\", Courier, monospace;\n  font-size: 14px;\n  line-height: 1.375;\n  direction: ltr;\n  text-align: left;\n  white-space: pre;\n  word-spacing: normal;\n  word-break: normal;\n  -moz-tab-size: 4;\n  -o-tab-size: 4;\n  tab-size: 4;\n  -webkit-hyphens: none;\n  -ms-hyphens: none;\n  hyphens: none;\n  background: #0b1c2c;\n  color: #cbd6e2; }\n\npre[class*=\"language-\"]::-moz-selection, pre[class*=\"language-\"] ::-moz-selection,\ncode[class*=\"language-\"]::-moz-selection, code[class*=\"language-\"] ::-moz-selection {\n  text-shadow: none;\n  background: #aabcce; }\n\npre[class*=\"language-\"]::selection, pre[class*=\"language-\"] ::selection,\ncode[class*=\"language-\"]::selection, code[class*=\"language-\"] ::selection {\n  text-shadow: none;\n  background: #aabcce; }\n\n/* Code blocks */\npre[class*=\"language-\"] {\n  padding: 1em;\n  margin: .5em 0;\n  overflow: auto; }\n\n/* Inline code */\n:not(pre) > code[class*=\"language-\"] {\n  padding: .1em;\n  border-radius: .3em; }\n\n.token.comment,\n.token.prolog,\n.token.doctype,\n.token.cdata {\n  color: #627e99; }\n\n.token.punctuation {\n  color: #cbd6e2; }\n\n.token.namespace {\n  opacity: .7; }\n\n.token.operator,\n.token.boolean,\n.token.number {\n  color: #bfbf56; }\n\n.token.property {\n  color: #8bbf56; }\n\n.token.tag {\n  color: #8b56bf; }\n\n.token.string {\n  color: #568bbf; }\n\n.token.selector {\n  color: #bf568b; }\n\n.token.attr-name {\n  color: #bfbf56; }\n\n.token.entity,\n.token.url,\n.language-css .token.string,\n.style .token.string {\n  color: #568bbf; }\n\n.token.attr-value,\n.token.keyword,\n.token.control,\n.token.directive,\n.token.unit {\n  color: #56bf8b; }\n\n.token.statement,\n.token.regex,\n.token.atrule {\n  color: #568bbf; }\n\n.token.placeholder,\n.token.variable {\n  color: #8b56bf; }\n\n.token.deleted {\n  text-decoration: line-through; }\n\n.token.inserted {\n  border-bottom: 1px dotted #f7f9fb;\n  text-decoration: none; }\n\n.token.italic {\n  font-style: italic; }\n\n.token.important,\n.token.bold {\n  font-weight: bold; }\n\n.token.important {\n  color: #bf8b56; }\n\n.token.entity {\n  cursor: help; }\n\npre > code.highlight {\n  outline: 0.4em solid #bf8b56;\n  outline-offset: .4em; }\n\n.line-numbers .line-numbers-rows {\n  border-right-color: #223b54 !important; }\n\n.line-numbers-rows > span:before {\n  color: #405c79 !important; }\n\n.line-highlight {\n  background: rgba(247, 249, 251, 0.2) !important;\n  background: -webkit-linear-gradient(left, rgba(247, 249, 251, 0.2) 70%, rgba(247, 249, 251, 0)) !important;\n  background: linear-gradient(to right, rgba(247, 249, 251, 0.2) 70%, rgba(247, 249, 251, 0)) !important; }\n", ""]);
+
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/api.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function (useSourceMap) {
+  var list = []; // return the list of modules as css string
+
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = cssWithMappingToString(item, useSourceMap);
+
+      if (item[2]) {
+        return '@media ' + item[2] + '{' + content + '}';
+      } else {
+        return content;
+      }
+    }).join('');
+  }; // import a list of modules into the list
+
+
+  list.i = function (modules, mediaQuery) {
+    if (typeof modules === 'string') {
+      modules = [[null, modules, '']];
+    }
+
+    var alreadyImportedModules = {};
+
+    for (var i = 0; i < this.length; i++) {
+      var id = this[i][0];
+
+      if (id != null) {
+        alreadyImportedModules[id] = true;
+      }
+    }
+
+    for (i = 0; i < modules.length; i++) {
+      var item = modules[i]; // skip already imported module
+      // this implementation is not 100% perfect for weird media query combinations
+      // when a module is imported multiple times with different media queries.
+      // I hope this will never occur (Hey this way we have smaller bundles)
+
+      if (item[0] == null || !alreadyImportedModules[item[0]]) {
+        if (mediaQuery && !item[2]) {
+          item[2] = mediaQuery;
+        } else if (mediaQuery) {
+          item[2] = '(' + item[2] + ') and (' + mediaQuery + ')';
+        }
+
+        list.push(item);
+      }
+    }
+  };
+
+  return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+  var content = item[1] || '';
+  var cssMapping = item[3];
+
+  if (!cssMapping) {
+    return content;
+  }
+
+  if (useSourceMap && typeof btoa === 'function') {
+    var sourceMapping = toComment(cssMapping);
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  }
+
+  return [content].join('\n');
+} // Adapted from convert-source-map (MIT)
+
+
+function toComment(sourceMap) {
+  // eslint-disable-next-line no-undef
+  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+  var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+  return '/*# ' + data + ' */';
+}
 
 /***/ }),
 
@@ -3408,6 +3579,1391 @@ var index = {
 
 /* harmony default export */ __webpack_exports__["default"] = (index);
 //# sourceMappingURL=dat.gui.module.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/prismjs/components/prism-clike.js":
+/*!********************************************************!*\
+  !*** ./node_modules/prismjs/components/prism-clike.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+Prism.languages.clike = {
+	'comment': [
+		{
+			pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,
+			lookbehind: true
+		},
+		{
+			pattern: /(^|[^\\:])\/\/.*/,
+			lookbehind: true,
+			greedy: true
+		}
+	],
+	'string': {
+		pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
+		greedy: true
+	},
+	'class-name': {
+		pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[\w.\\]+/i,
+		lookbehind: true,
+		inside: {
+			punctuation: /[.\\]/
+		}
+	},
+	'keyword': /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+	'boolean': /\b(?:true|false)\b/,
+	'function': /\w+(?=\()/,
+	'number': /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,
+	'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
+	'punctuation': /[{}[\];(),.:]/
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/prismjs/components/prism-core.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/prismjs/components/prism-core.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var _self = (typeof window !== 'undefined')
+	? window   // if in browser
+	: (
+		(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope)
+		? self // if in worker
+		: {}   // if in node js
+	);
+
+/**
+ * Prism: Lightweight, robust, elegant syntax highlighting
+ * MIT license http://www.opensource.org/licenses/mit-license.php/
+ * @author Lea Verou http://lea.verou.me
+ */
+
+var Prism = (function (_self){
+
+// Private helper vars
+var lang = /\blang(?:uage)?-([\w-]+)\b/i;
+var uniqueId = 0;
+
+var _ = {
+	manual: _self.Prism && _self.Prism.manual,
+	disableWorkerMessageHandler: _self.Prism && _self.Prism.disableWorkerMessageHandler,
+	util: {
+		encode: function (tokens) {
+			if (tokens instanceof Token) {
+				return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
+			} else if (Array.isArray(tokens)) {
+				return tokens.map(_.util.encode);
+			} else {
+				return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
+			}
+		},
+
+		type: function (o) {
+			return Object.prototype.toString.call(o).slice(8, -1);
+		},
+
+		objId: function (obj) {
+			if (!obj['__id']) {
+				Object.defineProperty(obj, '__id', { value: ++uniqueId });
+			}
+			return obj['__id'];
+		},
+
+		// Deep clone a language definition (e.g. to extend it)
+		clone: function deepClone(o, visited) {
+			var clone, id, type = _.util.type(o);
+			visited = visited || {};
+
+			switch (type) {
+				case 'Object':
+					id = _.util.objId(o);
+					if (visited[id]) {
+						return visited[id];
+					}
+					clone = {};
+					visited[id] = clone;
+
+					for (var key in o) {
+						if (o.hasOwnProperty(key)) {
+							clone[key] = deepClone(o[key], visited);
+						}
+					}
+
+					return clone;
+
+				case 'Array':
+					id = _.util.objId(o);
+					if (visited[id]) {
+						return visited[id];
+					}
+					clone = [];
+					visited[id] = clone;
+
+					o.forEach(function (v, i) {
+						clone[i] = deepClone(v, visited);
+					});
+
+					return clone;
+
+				default:
+					return o;
+			}
+		}
+	},
+
+	languages: {
+		extend: function (id, redef) {
+			var lang = _.util.clone(_.languages[id]);
+
+			for (var key in redef) {
+				lang[key] = redef[key];
+			}
+
+			return lang;
+		},
+
+		/**
+		 * Insert a token before another token in a language literal
+		 * As this needs to recreate the object (we cannot actually insert before keys in object literals),
+		 * we cannot just provide an object, we need an object and a key.
+		 * @param inside The key (or language id) of the parent
+		 * @param before The key to insert before.
+		 * @param insert Object with the key/value pairs to insert
+		 * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
+		 */
+		insertBefore: function (inside, before, insert, root) {
+			root = root || _.languages;
+			var grammar = root[inside];
+			var ret = {};
+
+			for (var token in grammar) {
+				if (grammar.hasOwnProperty(token)) {
+
+					if (token == before) {
+						for (var newToken in insert) {
+							if (insert.hasOwnProperty(newToken)) {
+								ret[newToken] = insert[newToken];
+							}
+						}
+					}
+
+					// Do not insert token which also occur in insert. See #1525
+					if (!insert.hasOwnProperty(token)) {
+						ret[token] = grammar[token];
+					}
+				}
+			}
+
+			var old = root[inside];
+			root[inside] = ret;
+
+			// Update references in other language definitions
+			_.languages.DFS(_.languages, function(key, value) {
+				if (value === old && key != inside) {
+					this[key] = ret;
+				}
+			});
+
+			return ret;
+		},
+
+		// Traverse a language definition with Depth First Search
+		DFS: function DFS(o, callback, type, visited) {
+			visited = visited || {};
+
+			var objId = _.util.objId;
+
+			for (var i in o) {
+				if (o.hasOwnProperty(i)) {
+					callback.call(o, i, o[i], type || i);
+
+					var property = o[i],
+					    propertyType = _.util.type(property);
+
+					if (propertyType === 'Object' && !visited[objId(property)]) {
+						visited[objId(property)] = true;
+						DFS(property, callback, null, visited);
+					}
+					else if (propertyType === 'Array' && !visited[objId(property)]) {
+						visited[objId(property)] = true;
+						DFS(property, callback, i, visited);
+					}
+				}
+			}
+		}
+	},
+	plugins: {},
+
+	highlightAll: function(async, callback) {
+		_.highlightAllUnder(document, async, callback);
+	},
+
+	highlightAllUnder: function(container, async, callback) {
+		var env = {
+			callback: callback,
+			selector: 'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'
+		};
+
+		_.hooks.run("before-highlightall", env);
+
+		var elements = env.elements || container.querySelectorAll(env.selector);
+
+		for (var i=0, element; element = elements[i++];) {
+			_.highlightElement(element, async === true, env.callback);
+		}
+	},
+
+	highlightElement: function(element, async, callback) {
+		// Find language
+		var language, grammar, parent = element;
+
+		while (parent && !lang.test(parent.className)) {
+			parent = parent.parentNode;
+		}
+
+		if (parent) {
+			language = (parent.className.match(lang) || [,''])[1].toLowerCase();
+			grammar = _.languages[language];
+		}
+
+		// Set language on the element, if not present
+		element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+
+		if (element.parentNode) {
+			// Set language on the parent, for styling
+			parent = element.parentNode;
+
+			if (/pre/i.test(parent.nodeName)) {
+				parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+			}
+		}
+
+		var code = element.textContent;
+
+		var env = {
+			element: element,
+			language: language,
+			grammar: grammar,
+			code: code
+		};
+
+		var insertHighlightedCode = function (highlightedCode) {
+			env.highlightedCode = highlightedCode;
+
+			_.hooks.run('before-insert', env);
+
+			env.element.innerHTML = env.highlightedCode;
+
+			_.hooks.run('after-highlight', env);
+			_.hooks.run('complete', env);
+			callback && callback.call(env.element);
+		}
+
+		_.hooks.run('before-sanity-check', env);
+
+		if (!env.code) {
+			_.hooks.run('complete', env);
+			return;
+		}
+
+		_.hooks.run('before-highlight', env);
+
+		if (!env.grammar) {
+			insertHighlightedCode(_.util.encode(env.code));
+			return;
+		}
+
+		if (async && _self.Worker) {
+			var worker = new Worker(_.filename);
+
+			worker.onmessage = function(evt) {
+				insertHighlightedCode(evt.data);
+			};
+
+			worker.postMessage(JSON.stringify({
+				language: env.language,
+				code: env.code,
+				immediateClose: true
+			}));
+		}
+		else {
+			insertHighlightedCode(_.highlight(env.code, env.grammar, env.language));
+		}
+	},
+
+	highlight: function (text, grammar, language) {
+		var env = {
+			code: text,
+			grammar: grammar,
+			language: language
+		};
+		_.hooks.run('before-tokenize', env);
+		env.tokens = _.tokenize(env.code, env.grammar);
+		_.hooks.run('after-tokenize', env);
+		return Token.stringify(_.util.encode(env.tokens), env.language);
+	},
+
+	matchGrammar: function (text, strarr, grammar, index, startPos, oneshot, target) {
+		for (var token in grammar) {
+			if(!grammar.hasOwnProperty(token) || !grammar[token]) {
+				continue;
+			}
+
+			if (token == target) {
+				return;
+			}
+
+			var patterns = grammar[token];
+			patterns = (_.util.type(patterns) === "Array") ? patterns : [patterns];
+
+			for (var j = 0; j < patterns.length; ++j) {
+				var pattern = patterns[j],
+					inside = pattern.inside,
+					lookbehind = !!pattern.lookbehind,
+					greedy = !!pattern.greedy,
+					lookbehindLength = 0,
+					alias = pattern.alias;
+
+				if (greedy && !pattern.pattern.global) {
+					// Without the global flag, lastIndex won't work
+					var flags = pattern.pattern.toString().match(/[imuy]*$/)[0];
+					pattern.pattern = RegExp(pattern.pattern.source, flags + "g");
+				}
+
+				pattern = pattern.pattern || pattern;
+
+				// Don’t cache length as it changes during the loop
+				for (var i = index, pos = startPos; i < strarr.length; pos += strarr[i].length, ++i) {
+
+					var str = strarr[i];
+
+					if (strarr.length > text.length) {
+						// Something went terribly wrong, ABORT, ABORT!
+						return;
+					}
+
+					if (str instanceof Token) {
+						continue;
+					}
+
+					if (greedy && i != strarr.length - 1) {
+						pattern.lastIndex = pos;
+						var match = pattern.exec(text);
+						if (!match) {
+							break;
+						}
+
+						var from = match.index + (lookbehind ? match[1].length : 0),
+						    to = match.index + match[0].length,
+						    k = i,
+						    p = pos;
+
+						for (var len = strarr.length; k < len && (p < to || (!strarr[k].type && !strarr[k - 1].greedy)); ++k) {
+							p += strarr[k].length;
+							// Move the index i to the element in strarr that is closest to from
+							if (from >= p) {
+								++i;
+								pos = p;
+							}
+						}
+
+						// If strarr[i] is a Token, then the match starts inside another Token, which is invalid
+						if (strarr[i] instanceof Token) {
+							continue;
+						}
+
+						// Number of tokens to delete and replace with the new match
+						delNum = k - i;
+						str = text.slice(pos, p);
+						match.index -= pos;
+					} else {
+						pattern.lastIndex = 0;
+
+						var match = pattern.exec(str),
+							delNum = 1;
+					}
+
+					if (!match) {
+						if (oneshot) {
+							break;
+						}
+
+						continue;
+					}
+
+					if(lookbehind) {
+						lookbehindLength = match[1] ? match[1].length : 0;
+					}
+
+					var from = match.index + lookbehindLength,
+					    match = match[0].slice(lookbehindLength),
+					    to = from + match.length,
+					    before = str.slice(0, from),
+					    after = str.slice(to);
+
+					var args = [i, delNum];
+
+					if (before) {
+						++i;
+						pos += before.length;
+						args.push(before);
+					}
+
+					var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias, match, greedy);
+
+					args.push(wrapped);
+
+					if (after) {
+						args.push(after);
+					}
+
+					Array.prototype.splice.apply(strarr, args);
+
+					if (delNum != 1)
+						_.matchGrammar(text, strarr, grammar, i, pos, true, token);
+
+					if (oneshot)
+						break;
+				}
+			}
+		}
+	},
+
+	tokenize: function(text, grammar) {
+		var strarr = [text];
+
+		var rest = grammar.rest;
+
+		if (rest) {
+			for (var token in rest) {
+				grammar[token] = rest[token];
+			}
+
+			delete grammar.rest;
+		}
+
+		_.matchGrammar(text, strarr, grammar, 0, 0, false);
+
+		return strarr;
+	},
+
+	hooks: {
+		all: {},
+
+		add: function (name, callback) {
+			var hooks = _.hooks.all;
+
+			hooks[name] = hooks[name] || [];
+
+			hooks[name].push(callback);
+		},
+
+		run: function (name, env) {
+			var callbacks = _.hooks.all[name];
+
+			if (!callbacks || !callbacks.length) {
+				return;
+			}
+
+			for (var i=0, callback; callback = callbacks[i++];) {
+				callback(env);
+			}
+		}
+	},
+
+	Token: Token
+};
+
+_self.Prism = _;
+
+function Token(type, content, alias, matchedStr, greedy) {
+	this.type = type;
+	this.content = content;
+	this.alias = alias;
+	// Copy of the full string this token was created from
+	this.length = (matchedStr || "").length|0;
+	this.greedy = !!greedy;
+}
+
+Token.stringify = function(o, language, parent) {
+	if (typeof o == 'string') {
+		return o;
+	}
+
+	if (Array.isArray(o)) {
+		return o.map(function(element) {
+			return Token.stringify(element, language, o);
+		}).join('');
+	}
+
+	var env = {
+		type: o.type,
+		content: Token.stringify(o.content, language, parent),
+		tag: 'span',
+		classes: ['token', o.type],
+		attributes: {},
+		language: language,
+		parent: parent
+	};
+
+	if (o.alias) {
+		var aliases = Array.isArray(o.alias) ? o.alias : [o.alias];
+		Array.prototype.push.apply(env.classes, aliases);
+	}
+
+	_.hooks.run('wrap', env);
+
+	var attributes = Object.keys(env.attributes).map(function(name) {
+		return name + '="' + (env.attributes[name] || '').replace(/"/g, '&quot;') + '"';
+	}).join(' ');
+
+	return '<' + env.tag + ' class="' + env.classes.join(' ') + '"' + (attributes ? ' ' + attributes : '') + '>' + env.content + '</' + env.tag + '>';
+
+};
+
+if (!_self.document) {
+	if (!_self.addEventListener) {
+		// in Node.js
+		return _;
+	}
+
+	if (!_.disableWorkerMessageHandler) {
+		// In worker
+		_self.addEventListener('message', function (evt) {
+			var message = JSON.parse(evt.data),
+				lang = message.language,
+				code = message.code,
+				immediateClose = message.immediateClose;
+
+			_self.postMessage(_.highlight(code, _.languages[lang], lang));
+			if (immediateClose) {
+				_self.close();
+			}
+		}, false);
+	}
+
+	return _;
+}
+
+//Get current script and highlight
+var script = document.currentScript || [].slice.call(document.getElementsByTagName("script")).pop();
+
+if (script) {
+	_.filename = script.src;
+
+	if (!_.manual && !script.hasAttribute('data-manual')) {
+		if(document.readyState !== "loading") {
+			if (window.requestAnimationFrame) {
+				window.requestAnimationFrame(_.highlightAll);
+			} else {
+				window.setTimeout(_.highlightAll, 16);
+			}
+		}
+		else {
+			document.addEventListener('DOMContentLoaded', _.highlightAll);
+		}
+	}
+}
+
+return _;
+
+})(_self);
+
+if ( true && module.exports) {
+	module.exports = Prism;
+}
+
+// hack for components to work correctly in node.js
+if (typeof global !== 'undefined') {
+	global.Prism = Prism;
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/prismjs/components/prism-css.js":
+/*!******************************************************!*\
+  !*** ./node_modules/prismjs/components/prism-css.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function (Prism) {
+
+	var string = /("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/;
+
+	Prism.languages.css = {
+		'comment': /\/\*[\s\S]*?\*\//,
+		'atrule': {
+			pattern: /@[\w-]+?[\s\S]*?(?:;|(?=\s*\{))/i,
+			inside: {
+				'rule': /@[\w-]+/
+				// See rest below
+			}
+		},
+		'url': RegExp('url\\((?:' + string.source + '|.*?)\\)', 'i'),
+		'selector': RegExp('[^{}\\s](?:[^{};"\']|' + string.source + ')*?(?=\\s*\\{)'),
+		'string': {
+			pattern: string,
+			greedy: true
+		},
+		'property': /[-_a-z\xA0-\uFFFF][-\w\xA0-\uFFFF]*(?=\s*:)/i,
+		'important': /!important\b/i,
+		'function': /[-a-z0-9]+(?=\()/i,
+		'punctuation': /[(){};:,]/
+	};
+
+	Prism.languages.css['atrule'].inside.rest = Prism.languages.css;
+
+	var markup = Prism.languages.markup;
+	if (markup) {
+		markup.tag.addInlined('style', 'css');
+
+		Prism.languages.insertBefore('inside', 'attr-value', {
+			'style-attr': {
+				pattern: /\s*style=("|')(?:\\[\s\S]|(?!\1)[^\\])*\1/i,
+				inside: {
+					'attr-name': {
+						pattern: /^\s*style/i,
+						inside: markup.tag.inside
+					},
+					'punctuation': /^\s*=\s*['"]|['"]\s*$/,
+					'attr-value': {
+						pattern: /.+/i,
+						inside: Prism.languages.css
+					}
+				},
+				alias: 'language-css'
+			}
+		}, markup.tag);
+	}
+
+}(Prism));
+
+
+/***/ }),
+
+/***/ "./node_modules/prismjs/components/prism-javascript.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/prismjs/components/prism-javascript.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+Prism.languages.javascript = Prism.languages.extend('clike', {
+	'class-name': [
+		Prism.languages.clike['class-name'],
+		{
+			pattern: /(^|[^$\w\xA0-\uFFFF])[_$A-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\.(?:prototype|constructor))/,
+			lookbehind: true
+		}
+	],
+	'keyword': [
+		{
+			pattern: /((?:^|})\s*)(?:catch|finally)\b/,
+			lookbehind: true
+		},
+		{
+			pattern: /(^|[^.])\b(?:as|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,
+			lookbehind: true
+		},
+	],
+	'number': /\b(?:(?:0[xX][\dA-Fa-f]+|0[bB][01]+|0[oO][0-7]+)n?|\d+n|NaN|Infinity)\b|(?:\b\d+\.?\d*|\B\.\d+)(?:[Ee][+-]?\d+)?/,
+	// Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
+	'function': /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
+	'operator': /-[-=]?|\+[+=]?|!=?=?|<<?=?|>>?>?=?|=(?:==?|>)?|&[&=]?|\|[|=]?|\*\*?=?|\/=?|~|\^=?|%=?|\?|\.{3}/
+});
+
+Prism.languages.javascript['class-name'][0].pattern = /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/
+
+Prism.languages.insertBefore('javascript', 'keyword', {
+	'regex': {
+		pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s])\s*)\/(\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})\]]))/,
+		lookbehind: true,
+		greedy: true
+	},
+	// This must be declared before keyword because we use "function" inside the look-forward
+	'function-variable': {
+		pattern: /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)\s*=>))/,
+		alias: 'function'
+	},
+	'parameter': [
+		{
+			pattern: /(function(?:\s+[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)?\s*\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\))/,
+			lookbehind: true,
+			inside: Prism.languages.javascript
+		},
+		{
+			pattern: /[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*=>)/i,
+			inside: Prism.languages.javascript
+		},
+		{
+			pattern: /(\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*=>)/,
+			lookbehind: true,
+			inside: Prism.languages.javascript
+		},
+		{
+			pattern: /((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*\s*)\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*\{)/,
+			lookbehind: true,
+			inside: Prism.languages.javascript
+		}
+	],
+	'constant': /\b[A-Z](?:[A-Z_]|\dx?)*\b/
+});
+
+Prism.languages.insertBefore('javascript', 'string', {
+	'template-string': {
+		pattern: /`(?:\\[\s\S]|\${[^}]+}|[^\\`])*`/,
+		greedy: true,
+		inside: {
+			'interpolation': {
+				pattern: /\${[^}]+}/,
+				inside: {
+					'interpolation-punctuation': {
+						pattern: /^\${|}$/,
+						alias: 'punctuation'
+					},
+					rest: Prism.languages.javascript
+				}
+			},
+			'string': /[\s\S]+/
+		}
+	}
+});
+
+if (Prism.languages.markup) {
+	Prism.languages.markup.tag.addInlined('script', 'javascript');
+}
+
+Prism.languages.js = Prism.languages.javascript;
+
+
+/***/ }),
+
+/***/ "./node_modules/prismjs/components/prism-markup.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/prismjs/components/prism-markup.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+Prism.languages.markup = {
+	'comment': /<!--[\s\S]*?-->/,
+	'prolog': /<\?[\s\S]+?\?>/,
+	'doctype': /<!DOCTYPE[\s\S]+?>/i,
+	'cdata': /<!\[CDATA\[[\s\S]*?]]>/i,
+	'tag': {
+		pattern: /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/i,
+		greedy: true,
+		inside: {
+			'tag': {
+				pattern: /^<\/?[^\s>\/]+/i,
+				inside: {
+					'punctuation': /^<\/?/,
+					'namespace': /^[^\s>\/:]+:/
+				}
+			},
+			'attr-value': {
+				pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/i,
+				inside: {
+					'punctuation': [
+						/^=/,
+						{
+							pattern: /^(\s*)["']|["']$/,
+							lookbehind: true
+						}
+					]
+				}
+			},
+			'punctuation': /\/?>/,
+			'attr-name': {
+				pattern: /[^\s>\/]+/,
+				inside: {
+					'namespace': /^[^\s>\/:]+:/
+				}
+			}
+
+		}
+	},
+	'entity': /&#?[\da-z]{1,8};/i
+};
+
+Prism.languages.markup['tag'].inside['attr-value'].inside['entity'] =
+	Prism.languages.markup['entity'];
+
+// Plugin to make entity title show the real entity, idea by Roman Komarov
+Prism.hooks.add('wrap', function(env) {
+
+	if (env.type === 'entity') {
+		env.attributes['title'] = env.content.replace(/&amp;/, '&');
+	}
+});
+
+Object.defineProperty(Prism.languages.markup.tag, 'addInlined', {
+	/**
+	 * Adds an inlined language to markup.
+	 *
+	 * An example of an inlined language is CSS with `<style>` tags.
+	 *
+	 * @param {string} tagName The name of the tag that contains the inlined language. This name will be treated as
+	 * case insensitive.
+	 * @param {string} lang The language key.
+	 * @example
+	 * addInlined('style', 'css');
+	 */
+	value: function addInlined(tagName, lang) {
+		var includedCdataInside = {};
+		includedCdataInside['language-' + lang] = {
+			pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
+			lookbehind: true,
+			inside: Prism.languages[lang]
+		};
+		includedCdataInside['cdata'] = /^<!\[CDATA\[|\]\]>$/i;
+
+		var inside = {
+			'included-cdata': {
+				pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
+				inside: includedCdataInside
+			}
+		};
+		inside['language-' + lang] = {
+			pattern: /[\s\S]+/,
+			inside: Prism.languages[lang]
+		};
+
+		var def = {};
+		def[tagName] = {
+			pattern: RegExp(/(<__[\s\S]*?>)(?:<!\[CDATA\[[\s\S]*?\]\]>\s*|[\s\S])*?(?=<\/__>)/.source.replace(/__/g, tagName), 'i'),
+			lookbehind: true,
+			greedy: true,
+			inside: inside
+		};
+
+		Prism.languages.insertBefore('markup', 'cdata', def);
+	}
+});
+
+Prism.languages.xml = Prism.languages.extend('markup', {});
+Prism.languages.html = Prism.languages.markup;
+Prism.languages.mathml = Prism.languages.markup;
+Prism.languages.svg = Prism.languages.markup;
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/addStyles.js":
+/*!****************************************************!*\
+  !*** ./node_modules/style-loader/lib/addStyles.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getTarget = function (target, parent) {
+  if (parent){
+    return parent.querySelector(target);
+  }
+  return document.querySelector(target);
+};
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(target, parent) {
+                // If passing function in options, then use it for resolve "head" element.
+                // Useful for Shadow Root style i.e
+                // {
+                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
+                // }
+                if (typeof target === 'function') {
+                        return target();
+                }
+                if (typeof memo[target] === "undefined") {
+			var styleTarget = getTarget.call(this, target, parent);
+			// Special case to return head of iframe instead of iframe itself
+			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+				try {
+					// This will throw an exception if access to iframe is blocked
+					// due to cross-origin restrictions
+					styleTarget = styleTarget.contentDocument.head;
+				} catch(e) {
+					styleTarget = null;
+				}
+			}
+			memo[target] = styleTarget;
+		}
+		return memo[target]
+	};
+})();
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+        if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
+		var nextSibling = getElement(options.insertAt.before, target);
+		target.insertBefore(style, nextSibling);
+	} else {
+		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+
+	if(options.attrs.nonce === undefined) {
+		var nonce = getNonce();
+		if (nonce) {
+			options.attrs.nonce = nonce;
+		}
+	}
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function getNonce() {
+	if (false) {}
+
+	return __webpack_require__.nc;
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = typeof options.transform === 'function'
+		 ? options.transform(obj.css) 
+		 : options.transform.default(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/urls.js":
+/*!***********************************************!*\
+  !*** ./node_modules/style-loader/lib/urls.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+/**
+ * When source maps are enabled, `style-loader` uses a link element with a data-uri to
+ * embed the css on the page. This breaks all relative urls because now they are relative to a
+ * bundle instead of the current page.
+ *
+ * One solution is to only use full urls, but that may be impossible.
+ *
+ * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
+ *
+ * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
+ *
+ */
+
+module.exports = function (css) {
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
+
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  }
+
+	// blank or null?
+	if (!css || typeof css !== "string") {
+	  return css;
+  }
+
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
+
+	// convert each url(...)
+	/*
+	This regular expression is just a way to recursively match brackets within
+	a string.
+
+	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+	   (  = Start a capturing group
+	     (?:  = Start a non-capturing group
+	         [^)(]  = Match anything that isn't a parentheses
+	         |  = OR
+	         \(  = Match a start parentheses
+	             (?:  = Start another non-capturing groups
+	                 [^)(]+  = Match anything that isn't a parentheses
+	                 |  = OR
+	                 \(  = Match a start parentheses
+	                     [^)(]*  = Match anything that isn't a parentheses
+	                 \)  = Match a end parentheses
+	             )  = End Group
+              *\) = Match anything and then a close parens
+          )  = Close non-capturing group
+          *  = Match anything
+       )  = Close capturing group
+	 \)  = Match a close parens
+
+	 /gi  = Get all matches, not the first.  Be case insensitive.
+	 */
+	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
+		// strip quotes (if they exist)
+		var unquotedOrigUrl = origUrl
+			.trim()
+			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
+			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
+
+		// already a full url? no change
+		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
+		  return fullMatch;
+		}
+
+		// convert the url to a full url
+		var newUrl;
+
+		if (unquotedOrigUrl.indexOf("//") === 0) {
+		  	//TODO: should we add protocol?
+			newUrl = unquotedOrigUrl;
+		} else if (unquotedOrigUrl.indexOf("/") === 0) {
+			// path should be relative to the base url
+			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+		} else {
+			// path should be relative to current directory
+			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+		}
+
+		// send back the fixed url(...)
+		return "url(" + JSON.stringify(newUrl) + ")";
+	});
+
+	// send back the fixed css
+	return fixedCss;
+};
 
 
 /***/ }),
@@ -8810,6 +10366,99 @@ THREE.GLTFLoader = ( function () {
 } )();
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js")))
+
+/***/ }),
+
+/***/ "./node_modules/three/src/cameras/Camera.js":
+/*!**************************************************!*\
+  !*** ./node_modules/three/src/cameras/Camera.js ***!
+  \**************************************************/
+/*! exports provided: Camera */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Camera", function() { return Camera; });
+/* harmony import */ var _math_Matrix4_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../math/Matrix4.js */ "./node_modules/three/src/math/Matrix4.js");
+/* harmony import */ var _core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/Object3D.js */ "./node_modules/three/src/core/Object3D.js");
+/* harmony import */ var _math_Vector3_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../math/Vector3.js */ "./node_modules/three/src/math/Vector3.js");
+/**
+ * @author mrdoob / http://mrdoob.com/
+ * @author mikael emtinger / http://gomo.se/
+ * @author WestLangley / http://github.com/WestLangley
+*/
+
+
+
+
+
+function Camera() {
+
+	_core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__["Object3D"].call( this );
+
+	this.type = 'Camera';
+
+	this.matrixWorldInverse = new _math_Matrix4_js__WEBPACK_IMPORTED_MODULE_0__["Matrix4"]();
+
+	this.projectionMatrix = new _math_Matrix4_js__WEBPACK_IMPORTED_MODULE_0__["Matrix4"]();
+	this.projectionMatrixInverse = new _math_Matrix4_js__WEBPACK_IMPORTED_MODULE_0__["Matrix4"]();
+
+}
+
+Camera.prototype = Object.assign( Object.create( _core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__["Object3D"].prototype ), {
+
+	constructor: Camera,
+
+	isCamera: true,
+
+	copy: function ( source, recursive ) {
+
+		_core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__["Object3D"].prototype.copy.call( this, source, recursive );
+
+		this.matrixWorldInverse.copy( source.matrixWorldInverse );
+
+		this.projectionMatrix.copy( source.projectionMatrix );
+		this.projectionMatrixInverse.copy( source.projectionMatrixInverse );
+
+		return this;
+
+	},
+
+	getWorldDirection: function ( target ) {
+
+		if ( target === undefined ) {
+
+			console.warn( 'THREE.Camera: .getWorldDirection() target is now required' );
+			target = new _math_Vector3_js__WEBPACK_IMPORTED_MODULE_2__["Vector3"]();
+
+		}
+
+		this.updateMatrixWorld( true );
+
+		var e = this.matrixWorld.elements;
+
+		return target.set( - e[ 8 ], - e[ 9 ], - e[ 10 ] ).normalize();
+
+	},
+
+	updateMatrixWorld: function ( force ) {
+
+		_core_Object3D_js__WEBPACK_IMPORTED_MODULE_1__["Object3D"].prototype.updateMatrixWorld.call( this, force );
+
+		this.matrixWorldInverse.getInverse( this.matrixWorld );
+
+	},
+
+	clone: function () {
+
+		return new this.constructor().copy( this );
+
+	}
+
+} );
+
+
+
 
 /***/ }),
 
@@ -14381,6 +16030,238 @@ function SphereBufferGeometry( radius, widthSegments, heightSegments, phiStart, 
 
 SphereBufferGeometry.prototype = Object.create( _core_BufferGeometry_js__WEBPACK_IMPORTED_MODULE_1__["BufferGeometry"].prototype );
 SphereBufferGeometry.prototype.constructor = SphereBufferGeometry;
+
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/three/src/helpers/CameraHelper.js":
+/*!********************************************************!*\
+  !*** ./node_modules/three/src/helpers/CameraHelper.js ***!
+  \********************************************************/
+/*! exports provided: CameraHelper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CameraHelper", function() { return CameraHelper; });
+/* harmony import */ var _cameras_Camera_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../cameras/Camera.js */ "./node_modules/three/src/cameras/Camera.js");
+/* harmony import */ var _math_Vector3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../math/Vector3.js */ "./node_modules/three/src/math/Vector3.js");
+/* harmony import */ var _objects_LineSegments_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../objects/LineSegments.js */ "./node_modules/three/src/objects/LineSegments.js");
+/* harmony import */ var _math_Color_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../math/Color.js */ "./node_modules/three/src/math/Color.js");
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../constants.js */ "./node_modules/three/src/constants.js");
+/* harmony import */ var _materials_LineBasicMaterial_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../materials/LineBasicMaterial.js */ "./node_modules/three/src/materials/LineBasicMaterial.js");
+/* harmony import */ var _core_BufferGeometry_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../core/BufferGeometry.js */ "./node_modules/three/src/core/BufferGeometry.js");
+/* harmony import */ var _core_BufferAttribute_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../core/BufferAttribute.js */ "./node_modules/three/src/core/BufferAttribute.js");
+/**
+ * @author alteredq / http://alteredqualia.com/
+ * @author Mugen87 / https://github.com/Mugen87
+ *
+ *	- shows frustum, line of sight and up of the camera
+ *	- suitable for fast updates
+ * 	- based on frustum visualization in lightgl.js shadowmap example
+ *		http://evanw.github.com/lightgl.js/tests/shadowmap.html
+ */
+
+
+
+
+
+
+
+
+
+
+function CameraHelper( camera ) {
+
+	var geometry = new _core_BufferGeometry_js__WEBPACK_IMPORTED_MODULE_6__["BufferGeometry"]();
+	var material = new _materials_LineBasicMaterial_js__WEBPACK_IMPORTED_MODULE_5__["LineBasicMaterial"]( { color: 0xffffff, vertexColors: _constants_js__WEBPACK_IMPORTED_MODULE_4__["FaceColors"] } );
+
+	var vertices = [];
+	var colors = [];
+
+	var pointMap = {};
+
+	// colors
+
+	var colorFrustum = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0xffaa00 );
+	var colorCone = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0xff0000 );
+	var colorUp = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0x00aaff );
+	var colorTarget = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0xffffff );
+	var colorCross = new _math_Color_js__WEBPACK_IMPORTED_MODULE_3__["Color"]( 0x333333 );
+
+	// near
+
+	addLine( 'n1', 'n2', colorFrustum );
+	addLine( 'n2', 'n4', colorFrustum );
+	addLine( 'n4', 'n3', colorFrustum );
+	addLine( 'n3', 'n1', colorFrustum );
+
+	// far
+
+	addLine( 'f1', 'f2', colorFrustum );
+	addLine( 'f2', 'f4', colorFrustum );
+	addLine( 'f4', 'f3', colorFrustum );
+	addLine( 'f3', 'f1', colorFrustum );
+
+	// sides
+
+	addLine( 'n1', 'f1', colorFrustum );
+	addLine( 'n2', 'f2', colorFrustum );
+	addLine( 'n3', 'f3', colorFrustum );
+	addLine( 'n4', 'f4', colorFrustum );
+
+	// cone
+
+	addLine( 'p', 'n1', colorCone );
+	addLine( 'p', 'n2', colorCone );
+	addLine( 'p', 'n3', colorCone );
+	addLine( 'p', 'n4', colorCone );
+
+	// up
+
+	addLine( 'u1', 'u2', colorUp );
+	addLine( 'u2', 'u3', colorUp );
+	addLine( 'u3', 'u1', colorUp );
+
+	// target
+
+	addLine( 'c', 't', colorTarget );
+	addLine( 'p', 'c', colorCross );
+
+	// cross
+
+	addLine( 'cn1', 'cn2', colorCross );
+	addLine( 'cn3', 'cn4', colorCross );
+
+	addLine( 'cf1', 'cf2', colorCross );
+	addLine( 'cf3', 'cf4', colorCross );
+
+	function addLine( a, b, color ) {
+
+		addPoint( a, color );
+		addPoint( b, color );
+
+	}
+
+	function addPoint( id, color ) {
+
+		vertices.push( 0, 0, 0 );
+		colors.push( color.r, color.g, color.b );
+
+		if ( pointMap[ id ] === undefined ) {
+
+			pointMap[ id ] = [];
+
+		}
+
+		pointMap[ id ].push( ( vertices.length / 3 ) - 1 );
+
+	}
+
+	geometry.addAttribute( 'position', new _core_BufferAttribute_js__WEBPACK_IMPORTED_MODULE_7__["Float32BufferAttribute"]( vertices, 3 ) );
+	geometry.addAttribute( 'color', new _core_BufferAttribute_js__WEBPACK_IMPORTED_MODULE_7__["Float32BufferAttribute"]( colors, 3 ) );
+
+	_objects_LineSegments_js__WEBPACK_IMPORTED_MODULE_2__["LineSegments"].call( this, geometry, material );
+
+	this.camera = camera;
+	if ( this.camera.updateProjectionMatrix ) this.camera.updateProjectionMatrix();
+
+	this.matrix = camera.matrixWorld;
+	this.matrixAutoUpdate = false;
+
+	this.pointMap = pointMap;
+
+	this.update();
+
+}
+
+CameraHelper.prototype = Object.create( _objects_LineSegments_js__WEBPACK_IMPORTED_MODULE_2__["LineSegments"].prototype );
+CameraHelper.prototype.constructor = CameraHelper;
+
+CameraHelper.prototype.update = function () {
+
+	var geometry, pointMap;
+
+	var vector = new _math_Vector3_js__WEBPACK_IMPORTED_MODULE_1__["Vector3"]();
+	var camera = new _cameras_Camera_js__WEBPACK_IMPORTED_MODULE_0__["Camera"]();
+
+	function setPoint( point, x, y, z ) {
+
+		vector.set( x, y, z ).unproject( camera );
+
+		var points = pointMap[ point ];
+
+		if ( points !== undefined ) {
+
+			var position = geometry.getAttribute( 'position' );
+
+			for ( var i = 0, l = points.length; i < l; i ++ ) {
+
+				position.setXYZ( points[ i ], vector.x, vector.y, vector.z );
+
+			}
+
+		}
+
+	}
+
+	return function update() {
+
+		geometry = this.geometry;
+		pointMap = this.pointMap;
+
+		var w = 1, h = 1;
+
+		// we need just camera projection matrix inverse
+		// world matrix must be identity
+
+		camera.projectionMatrixInverse.copy( this.camera.projectionMatrixInverse );
+
+		// center / target
+
+		setPoint( 'c', 0, 0, - 1 );
+		setPoint( 't', 0, 0, 1 );
+
+		// near
+
+		setPoint( 'n1', - w, - h, - 1 );
+		setPoint( 'n2', w, - h, - 1 );
+		setPoint( 'n3', - w, h, - 1 );
+		setPoint( 'n4', w, h, - 1 );
+
+		// far
+
+		setPoint( 'f1', - w, - h, 1 );
+		setPoint( 'f2', w, - h, 1 );
+		setPoint( 'f3', - w, h, 1 );
+		setPoint( 'f4', w, h, 1 );
+
+		// up
+
+		setPoint( 'u1', w * 0.7, h * 1.1, - 1 );
+		setPoint( 'u2', - w * 0.7, h * 1.1, - 1 );
+		setPoint( 'u3', 0, h * 2, - 1 );
+
+		// cross
+
+		setPoint( 'cf1', - w, 0, 1 );
+		setPoint( 'cf2', w, 0, 1 );
+		setPoint( 'cf3', 0, - h, 1 );
+		setPoint( 'cf4', 0, h, 1 );
+
+		setPoint( 'cn1', - w, 0, - 1 );
+		setPoint( 'cn2', w, 0, - 1 );
+		setPoint( 'cn3', 0, - h, - 1 );
+		setPoint( 'cn4', 0, h, - 1 );
+
+		geometry.getAttribute( 'position' ).needsUpdate = true;
+
+	};
+
+}();
 
 
 
@@ -23172,6 +25053,37 @@ function arrayMax( array ) {
 }
 
 
+
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/global.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ })

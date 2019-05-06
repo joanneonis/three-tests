@@ -4,5 +4,8 @@
 // import 'three/examples/js/exporters/OBJExporter';
 // import 'three/examples/js/controls/TrackballControls.js';
 
+import '../assets/base.scss';
+
 // start the magic here
 console.log('hellooo');
+
