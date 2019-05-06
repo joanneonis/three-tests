@@ -1,0 +1,14 @@
+.info {
+	position: absolute;
+	z-index: 2;
+	left: 50px;
+	top: 50px;
+	width: 240px;
+	padding: 20px;
+	background: rgba(white, .6);
+	border-radius: 5px;
+
+	p {
+		margin: 0;
+	}
+}
