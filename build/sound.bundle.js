@@ -172,8 +172,8 @@ panelToggle.onclick = function () {
 
 
 var SEPARATION = 100,
-    AMOUNTX = 50,
-    AMOUNTY = 50;
+    AMOUNTX = 64,
+    AMOUNTY = 64;
 var camera, scene, renderer;
 var controls;
 var particles,
@@ -190,6 +190,7 @@ var bufferLength; //
 
 var positions;
 var scales;
+var avgChange;
 init();
 animate();
 
@@ -285,7 +286,7 @@ function play(audioBuffer) {
   source.start();
   analyser = context.createAnalyser();
   analyser.connect(context.destination);
-  analyser.fftSize = 512; // 2048
+  analyser.fftSize = AMOUNTX * 2; // 2048
 
   bufferLength = analyser.frequencyBinCount;
   dataArray = new Uint8Array(bufferLength);
@@ -296,7 +297,7 @@ function play(audioBuffer) {
 function audioThingies() {
   if (analyser) {
     analyser.getByteTimeDomainData(dataArray);
-    var avgChange = avg(dataArray) / 100; // 	for (let x = 0; x < bufferLength; x++) {
+    avgChange = avg(dataArray); // 	for (let x = 0; x < bufferLength; x++) {
     // 		var amp = dataArray[x];
     // 		var y = THREE.Math.clamp(amp, 0, 10);
     // 		positions[x] = y;
@@ -313,12 +314,9 @@ function audioThingies() {
   for (var ix = 0; ix < AMOUNTX; ix++) {
     for (var iy = 0; iy < AMOUNTY; iy++) {
       // console.log(i, j);
-      // positions[ i + 1 ] = ( Math.sin( ( ix + count ) * 0.3 ) * 50 ) +
-      // 				( Math.sin( ( iy + count ) * 0.5 ) * 50 );
-      // scales[ j ] = ( Math.sin( ( ix + count ) * 0.3 ) + 1 ) * 8 +
-      // 				( Math.sin( ( iy + count ) * 0.5 ) + 1 ) * 8;
-      positions[i + 1] = 1;
-      scales[j] = 20;
+      positions[i + 1] = Math.sin((1 + count) * 0.3) * 50 + Math.sin((2 + count) * 0.5) * 50;
+      scales[j] = (Math.sin((1 + count) * 0.3) + 1) * 8 + (Math.sin((2 + count) * 0.5) + 1) * 8; // scales[ j ] = 30;
+
       i += 3;
       j++;
     }
@@ -350,9 +348,9 @@ function max(arr) {
 }
 
 function initControls() {
-  controls = new three__WEBPACK_IMPORTED_MODULE_6__["OrbitControls"](camera, renderer.domElement);
-  controls.minDistance = 0;
-  controls.maxDistance = 700;
+  controls = new three__WEBPACK_IMPORTED_MODULE_6__["OrbitControls"](camera, renderer.domElement); // controls.minDistance = 0;
+  // controls.maxDistance = 700;
+
   controls.enableKeys = false;
 }
 

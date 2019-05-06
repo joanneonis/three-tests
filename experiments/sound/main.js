@@ -29,7 +29,7 @@ panelToggle.onclick = function() {
 //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
-var SEPARATION = 100, AMOUNTX = 50, AMOUNTY = 50;
+var SEPARATION = 100, AMOUNTX = 64, AMOUNTY = 64;
 
 var camera, scene, renderer;
 var controls;
@@ -52,6 +52,9 @@ let bufferLength;
 //
 let positions;
 let scales;
+
+
+let avgChange;
 
 init();
 animate();
@@ -173,7 +176,7 @@ function play(audioBuffer) {
 
 	analyser = context.createAnalyser();
 	analyser.connect(context.destination);
-	analyser.fftSize = 512; // 2048
+	analyser.fftSize = AMOUNTX * 2; // 2048
 	bufferLength = analyser.frequencyBinCount;
 	dataArray = new Uint8Array(bufferLength);
 	analyser.getByteTimeDomainData(dataArray);
@@ -185,7 +188,7 @@ function audioThingies() {
 	if (analyser) { 
 		analyser.getByteTimeDomainData(dataArray); 
 		
-		let avgChange = avg(dataArray) / 100;
+		avgChange = avg(dataArray);
 
 	// 	for (let x = 0; x < bufferLength; x++) {
 	// 		var amp = dataArray[x];
@@ -208,15 +211,15 @@ function audioThingies() {
 		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
 			// console.log(i, j);
 
-			// positions[ i + 1 ] = ( Math.sin( ( ix + count ) * 0.3 ) * 50 ) +
-			// 				( Math.sin( ( iy + count ) * 0.5 ) * 50 );
+			positions[ i + 1 ] = ( Math.sin( ( 1 + count ) * 0.3 ) * 50 ) +
+							( Math.sin( ( 2 + count ) * 0.5 ) * 50 );
 
-			// scales[ j ] = ( Math.sin( ( ix + count ) * 0.3 ) + 1 ) * 8 +
-			// 				( Math.sin( ( iy + count ) * 0.5 ) + 1 ) * 8;
+			scales[ j ] = ( Math.sin( ( 1 + count ) * 0.3 ) + 1 ) * 8 +
+							( Math.sin( ( 2 + count ) * 0.5 ) + 1 ) * 8;
 
-			positions[ i + 1 ] = 1;
-			scales[ j ] = 20;
+			// scales[ j ] = 30;
 
+			
 			i += 3;
 			j ++;
 
@@ -250,7 +253,7 @@ function max(arr){
 
 function initControls() {
 	controls = new THREE.OrbitControls(camera, renderer.domElement);
-	controls.minDistance = 0;
-	controls.maxDistance = 700;
+	// controls.minDistance = 0;
+	// controls.maxDistance = 700;
 	controls.enableKeys = false;
 }
