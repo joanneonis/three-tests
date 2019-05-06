@@ -1,5 +1,6 @@
 
 $sides: 100px;
+$timing: .4s;
 
 .info-panel {
 	max-width: 50vw;
@@ -13,7 +14,7 @@ $sides: 100px;
 	padding: $sides;
 	overflow: auto;
 	transform: translate3d(50vw, 0, 0);
-	transition: transform .5s ease-out;
+	transition: transform $timing ease-out;
 
 	.panel-open & {
 		transform: translate3d(0, 0, 0);
@@ -24,7 +25,16 @@ $sides: 100px;
 			max-width: 800px;
 		}
 	}
-} 
+
+	ul {
+		margin: 0.7em 0 2.2em 0;
+	
+		li {
+			margin-bottom: .8em;
+			font-weight: 300;
+		}
+	}
+}  
 
 pre.code-highlight[class*="language-"] {
 	margin: 4em;
@@ -38,7 +48,7 @@ pre.code-highlight[class*="language-"] {
 	z-index: 90;
 	bottom: 20px;
 	transform: translate3d(0, 0, 0);
-	transition: transform .5s ease-out;
+	transition: transform $timing ease-out;
 
 	.panel-open & {
 		transform: translate3d(-50vw, 0, 0);
@@ -47,7 +57,7 @@ pre.code-highlight[class*="language-"] {
 
 canvas {
 	transform: translate3d(0, 0, 0);
-	transition: transform .5s ease-out;
+	transition: transform $timing ease-out;
 
 	.panel-open & {
 		transform: translate3d(-25vw, 0, 0);
@@ -68,3 +78,32 @@ canvas {
 		outline: none;
 	}
 }
+
+figure {
+	margin: 0 0 1em 0;
+
+	img, video {
+		max-width: 100%;
+	}
+
+	figcaption {
+		margin-top: 10px;
+		font-style: italic;
+	}
+}
+
+
+.video-wrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+
+	iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+} 

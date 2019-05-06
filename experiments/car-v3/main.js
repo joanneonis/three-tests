@@ -15,9 +15,18 @@ Prism.highlightAll();
 
 var panelToggle = document.querySelector('.panel-toggle');
 var body = document.querySelector('body');
+var panelOpen = false;
 
 panelToggle.onclick = function() {
 	body.classList.toggle('panel-open');
+	
+	panelOpen = !panelOpen;
+
+	if (panelOpen) {
+		panelToggle.textContent = 'Sluit proces';
+	} else {
+		panelToggle.textContent = 'Lees proces';
+	}
 }
 
 //?--------------------------------------------------------------------
@@ -50,7 +59,7 @@ var tractor = {
 			this.vy = THREE.Math.clamp(this.vy, -1.0, 1.0);
 			this.vr = THREE.Math.clamp(this.vr, -10.0, 10.0);
 
-			let rotation = THREE.Math.degToRad(this.vr) * 10; // !
+			let rotation = THREE.Math.degToRad(this.vr) * 10;
 			
 			rotateObject(tractorObj.parent, 0, rotation, 0);
 			tractorObj.parent.translateZ(this.vx);
@@ -58,7 +67,6 @@ var tractor = {
 			wheelObjects[0].rotation.x += (THREE.Math.degToRad(this.vx) * 10);
 			wheelObjects[1].rotation.x += (THREE.Math.degToRad(this.vx) * 10);
 			
-			var smallerVr = THREE.Math.clamp(this.vr, -1.0, 1.0);
 			var newX = THREE.Math.degToRad(this.x) * 10; // Rolling
 			var newY = THREE.Math.degToRad(this.vr) * 2; // Steering
 			
@@ -195,17 +203,12 @@ function posCalcs() {
 		tractor.ar = 0;
 	}
 
-	//thrust
 	if(keys[38]){
-		// tractor.ax = Math.cos(tractor.sr) * 0.05;
-		// tractor.ay = Math.sin(tractor.sr) * 0.05;
 		tractor.ax += 0.005;
 		tractor.ay += 0.005;
 	} else if(keys[40]) {
 		tractor.ax -= 0.005;
 		tractor.ay -= 0.005;
-		// tractor.ax = Math.cos(tractor.sr) * -0.05;
-		// tractor.ay = Math.sin(tractor.sr) * -0.05;
 	} else {
 		tractor.ax = 0;
 		tractor.ay = 0;
