@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./js/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./assets/base.scss");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -113,28 +113,6 @@ var update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
-
-/***/ }),
-
-/***/ "./js/main.js":
-/*!********************!*\
-  !*** ./js/main.js ***!
-  \********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _assets_base_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/base.scss */ "./assets/base.scss");
-/* harmony import */ var _assets_base_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_base_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* eslint-disable no-unused-vars */
-// import * as THREE from 'three';
-// import 'three/examples/js/controls/OrbitControls';
-// import 'three/examples/js/exporters/OBJExporter';
-// import 'three/examples/js/controls/TrackballControls.js';
- // start the magic here
-
-console.log('hellooo');
 
 /***/ }),
 
@@ -762,4 +740,4 @@ module.exports = function (css) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=base.bundle.js.map
+//# sourceMappingURL=style.bundle.js.map

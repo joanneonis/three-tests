@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+import '../../assets/base.scss';
+
 import * as dat from 'dat.gui';
 import * as THREE from 'three';
 
