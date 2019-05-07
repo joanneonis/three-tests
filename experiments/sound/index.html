@@ -4,14 +4,44 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Car v2</title>
+	<title>Sound</title>
 	<style>
     body { margin: 0; width: 100%; height: 100vh; overflow: hidden; }
     canvas { width: 100%; height: 100%; }
 	</style>
 </head>
 <body>
-	<canvas id="gl-canvas"></canvas>
+			<script type="x-shader/x-vertex" id="vertexshader">
+	
+				attribute float scale;
+	
+				void main() {
+	
+					vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+	
+					gl_PointSize = scale * ( 300.0 / - mvPosition.z );
+	
+					gl_Position = projectionMatrix * mvPosition;
+	
+				}
+	
+			</script>
+	
+			<script type="x-shader/x-fragment" id="fragmentshader">
+	
+				uniform vec3 color;
+	
+				void main() {
+	
+					if ( length( gl_PointCoord - vec2( 0.5, 0.5 ) ) > 0.475 ) discard;
+	
+					gl_FragColor = vec4( color, 1.0 );
+	
+				}
+	
+			</script>
+
+	<button id="play">hoi</button>
 	<button class="panel-toggle">Lees proces</button>
 	<section class="info-panel">
 		<div class="info-panel__inner">
@@ -43,6 +73,7 @@
 
 		</div>
 	</section>
+	
 	<script src="./../../build/sound.bundle.js"></script>
 </body>
 </html>
