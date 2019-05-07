@@ -39,11 +39,22 @@ var renderer,
 		theCanvas = document.getElementById('gl-canvas');
 
 var gui;
-var cameraPos = {x: 58, y: 36, z: 36};
+
+var cameraSettings = {
+	cameraPos: {x: 58, y: 36, z: 36},
+	followTractor: false,
+	lookAt: true,
+	all: 30,
+};
 
 var controls;
 var tractorObj;
 var wheelObjects;
+
+var goal;
+var temp = new THREE.Vector3;
+
+var model;
 
 var blobbyMinSpeed = 0.1;
 //? test
@@ -93,7 +104,7 @@ function init() {
 
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-	camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
+	camera.position.set(cameraSettings.cameraPos.x, cameraSettings.cameraPos.y, cameraSettings.cameraPos.z);
 	
 	initControls();
 
@@ -144,6 +155,17 @@ function render() {
 	// controls.update();
 
 	requestAnimationFrame(render);
+
+	if (goal && cameraSettings.followTractor) {
+		temp.setFromMatrixPosition(goal.matrixWorld);
+    
+		camera.position.lerp(temp, 0.2);
+		
+		if (cameraSettings.lookAt) {
+			camera.lookAt( model.position );
+		}
+	}
+	
 	renderer.render(scene, camera);
 
 	posCalcs();
@@ -151,6 +173,7 @@ function render() {
 
 function initGui() {
 	gui = new dat.GUI();
+
 	initCameraGui();
 }
 
@@ -181,7 +204,7 @@ function loadModelThingies() {
 	var loader = new THREE.GLTFLoader();
 
 	loader.load('trekker-morph-1-multipart.glb', function (gltf) {
-		var model = gltf.scene;
+		model = gltf.scene;
 
 		model.traverse( function( node ) {
 			if ( node instanceof THREE.Mesh ) { node.castShadow = true; node.receiveShadow = false; }
@@ -189,6 +212,11 @@ function loadModelThingies() {
 		
 		tractorObj = model.children[0];
 		wheelObjects = [model.children[1], model.children[2], model.children[3]];
+
+		goal = new THREE.Object3D;
+		goal.position.set(20, 20, 20);
+    
+    model.add( goal );
 
 		// plaeObj(wheelObjects[2]);
 		resetWheel();
@@ -208,9 +236,18 @@ function loadModelThingies() {
 
 function initCameraGui() {
 	var cameraFolder = gui.addFolder('Camera');
-	cameraFolder.add(cameraPos, 'x', -100, 100).onChange((val) => { camera.position.x = val });
-	cameraFolder.add(cameraPos, 'y', -100, 100).onChange((val) => { camera.position.y = val });
-	cameraFolder.add(cameraPos, 'z', -100, 100).onChange((val) => { camera.position.z = val });
+	cameraFolder.add(cameraSettings, 'followTractor');
+	cameraFolder.add(cameraSettings, 'lookAt');
+	cameraFolder.add(cameraSettings.cameraPos, 'x', -100, 100).onChange((val) => { camera.position.x = val });
+	cameraFolder.add(cameraSettings.cameraPos, 'y', -100, 100).onChange((val) => { camera.position.y = val });
+	cameraFolder.add(cameraSettings.cameraPos, 'z', -100, 100).onChange((val) => { camera.position.z = val });
+	cameraFolder.add(cameraSettings, 'all', -100, 100, 0.1).onChange((val) => {
+		camera.position.set(val, val, val);
+
+		if (cameraSettings.followTractor) {
+			goal.position.set(val, val, val);
+		}
+	});
 }
 
 function posCalcs() {
