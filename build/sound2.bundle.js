@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/sound/v1/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/sound/v2/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -116,9 +116,9 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./experiments/sound/v1/main.js":
+/***/ "./experiments/sound/v2/main.js":
 /*!**************************************!*\
-  !*** ./experiments/sound/v1/main.js ***!
+  !*** ./experiments/sound/v2/main.js ***!
   \**************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -172,14 +172,15 @@ panelToggle.onclick = function () {
 
 
 var SEPARATION = 100,
-    AMOUNTX = 64,
-    AMOUNTY = 64;
+    AMOUNTX = 20,
+    AMOUNTY = 64; // 64
+
 var camera, scene, renderer;
 var controls;
 var particles,
     count = 0; // Audio dingen
 
-var URL = './../sound/bohfoitoch.mp3';
+var URL = '../sound/bohfoitoch.mp3';
 var context = new AudioContext();
 var playButton = document.querySelector('#play');
 var soundBuffer; // eind
@@ -190,7 +191,9 @@ var bufferLength; //
 
 var positions;
 var scales;
+var opacities;
 var avgChange;
+var soundHistory = [];
 init();
 animate();
 
@@ -209,8 +212,11 @@ function init() {
   initControls(); //
 
   var numParticles = AMOUNTX * AMOUNTY;
-  positions = new Float32Array(numParticles * 3);
-  scales = new Float32Array(numParticles);
+  positions = new Float32Array(numParticles * 3); //*  *3, because xyz per dot
+
+  scales = new Float32Array(numParticles); //* scale per dot
+  // 	opacities = new Float32Array( numParticles );
+
   var i = 0,
       j = 0;
 
@@ -223,14 +229,16 @@ function init() {
       positions[i + 2] = iy * SEPARATION - AMOUNTY * SEPARATION / 2; // z
 
       scales[j] = 30;
-      i += 3;
+      i += 3; // skip to nex pos
+
       j++;
     }
   }
 
   var geometry = new three__WEBPACK_IMPORTED_MODULE_6__["BufferGeometry"]();
   geometry.addAttribute('position', new three__WEBPACK_IMPORTED_MODULE_6__["BufferAttribute"](positions, 3));
-  geometry.addAttribute('scale', new three__WEBPACK_IMPORTED_MODULE_6__["BufferAttribute"](scales, 1));
+  geometry.addAttribute('scale', new three__WEBPACK_IMPORTED_MODULE_6__["BufferAttribute"](scales, 1)); // got from example three dotwaves
+
   var material = new three__WEBPACK_IMPORTED_MODULE_6__["ShaderMaterial"]({
     uniforms: {
       color: {
@@ -239,11 +247,9 @@ function init() {
     },
     vertexShader: document.getElementById('vertexshader').textContent,
     fragmentShader: document.getElementById('fragmentshader').textContent
-  }); //
-
+  });
   particles = new three__WEBPACK_IMPORTED_MODULE_6__["Points"](geometry, material);
-  scene.add(particles); //
-
+  scene.add(particles);
   document.body.appendChild(renderer.domElement);
   window.addEventListener('resize', onWindowResize, false);
 }
@@ -252,8 +258,7 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-} //
-
+}
 
 function animate() {
   requestAnimationFrame(animate);
@@ -266,7 +271,6 @@ function render() {
   particles.geometry.attributes.position.needsUpdate = true;
   particles.geometry.attributes.scale.needsUpdate = true;
   renderer.render(scene, camera);
-  console.log(camera);
   count += 0.1;
 }
 
@@ -290,7 +294,7 @@ function play(audioBuffer) {
   source.start();
   analyser = context.createAnalyser();
   analyser.connect(context.destination);
-  analyser.fftSize = AMOUNTX * 2; // 2048
+  analyser.fftSize = AMOUNTY * 2; // 2048
 
   bufferLength = analyser.frequencyBinCount;
   dataArray = new Uint8Array(bufferLength);
@@ -299,37 +303,46 @@ function play(audioBuffer) {
 }
 
 function audioThingies() {
-  if (analyser) {
+  if (dataArray) {
     analyser.getByteTimeDomainData(dataArray);
-    avgChange = avg(dataArray); // 	for (let x = 0; x < bufferLength; x++) {
+    avgChange = avg(dataArray);
+    soundHistory.push(avgChange);
+
+    if (soundHistory.length > AMOUNTY) {
+      soundHistory.splice(0, 1);
+    } // 	for (let x = 0; x < bufferLength; x++) {
     // 		var amp = dataArray[x];
     // 		var y = THREE.Math.clamp(amp, 0, 10);
     // 		positions[x] = y;
     // 		scales[x] = y;
     // 		console.log(y);
     // 	}
+
   }
 
   positions = particles.geometry.attributes.position.array;
   scales = particles.geometry.attributes.scale.array;
   var i = 0,
-      j = 0; // console.log(AMOUNTX * AMOUNTY);
+      j = 0;
 
   for (var ix = 0; ix < AMOUNTX; ix++) {
-    scales[ix] = 80;
-    positions[ix] = 80;
-
     for (var iy = 0; iy < AMOUNTY; iy++) {
-      // positions[ i + 1 ] = count;
-      // scales[ ix ] = 80;
-      // scales[ i + 1 ] = 40;
-      // scales[ i + 2 ] = 20;
-      // console.log(i, j);
-      // positions[ i + 1 ] = ( Math.sin( ( 1 + count ) * 0.3 ) * 50 ) +
-      // 				( Math.sin( ( 2 + count ) * 0.5 ) * 50 );
-      // scales[ j ] = ( Math.sin( ( 1 + count ) * 0.3 ) + 1 ) * 8 +
-      // 				( Math.sin( ( 2 + count ) * 0.5 ) + 1 ) * 8;
-      // scales[ j ] = 30;
+      // ? j = pos arrayScale of dot
+      // ? i = pos arrayPos of dot
+      // if ( j < AMOUNTY) {
+      // 	positions[ i + 1 ] = 600;
+      // }
+      // if ( j >= AMOUNTY && j < AMOUNTY * 2) {
+      // 	positions[ i + 1 ] = 400;
+      // }
+      // if ( j >= AMOUNTY * 2 && j < AMOUNTY * 3) {
+      // 	positions[ i + 1 ] = 200;
+      // }
+      if (soundHistory[j]) {
+        positions[i + 1] = soundHistory[j];
+      }
+
+      scales[j] = 30;
       i += 3;
       j++;
     }
@@ -361,9 +374,7 @@ function max(arr) {
 }
 
 function initControls() {
-  controls = new three__WEBPACK_IMPORTED_MODULE_6__["OrbitControls"](camera, renderer.domElement); // controls.minDistance = 0;
-  // controls.maxDistance = 700;
-
+  controls = new three__WEBPACK_IMPORTED_MODULE_6__["OrbitControls"](camera, renderer.domElement);
   controls.enableKeys = false;
 }
 
@@ -3979,4 +3990,4 @@ module.exports = g;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=sound.bundle.js.map
+//# sourceMappingURL=sound2.bundle.js.map

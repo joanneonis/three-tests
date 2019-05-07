@@ -17,7 +17,8 @@ export default {
         car: path.join(__dirname, 'experiments/tractor/car-v1/main.js'),
         car2: path.join(__dirname, 'experiments/tractor/car-v2/main.js'),
         car3: path.join(__dirname, 'experiments/tractor/car-v3/main.js'),
-        sound: path.join(__dirname, 'experiments/sound/main.js'),
+        sound: path.join(__dirname, 'experiments/sound/v1/main.js'),
+        sound2: path.join(__dirname, 'experiments/sound/v2/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),
