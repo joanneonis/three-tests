@@ -219,7 +219,7 @@ function init() {
 
       positions[i + 2] = iy * SEPARATION - AMOUNTY * SEPARATION / 2; // z
 
-      scales[j] = 1;
+      scales[j] = 30;
       i += 3;
       j++;
     }
@@ -314,9 +314,11 @@ function audioThingies() {
   for (var ix = 0; ix < AMOUNTX; ix++) {
     for (var iy = 0; iy < AMOUNTY; iy++) {
       // console.log(i, j);
-      positions[i + 1] = Math.sin((1 + count) * 0.3) * 50 + Math.sin((2 + count) * 0.5) * 50;
-      scales[j] = (Math.sin((1 + count) * 0.3) + 1) * 8 + (Math.sin((2 + count) * 0.5) + 1) * 8; // scales[ j ] = 30;
-
+      // positions[ i + 1 ] = ( Math.sin( ( 1 + count ) * 0.3 ) * 50 ) +
+      // 				( Math.sin( ( 2 + count ) * 0.5 ) * 50 );
+      // scales[ j ] = ( Math.sin( ( 1 + count ) * 0.3 ) + 1 ) * 8 +
+      // 				( Math.sin( ( 2 + count ) * 0.5 ) + 1 ) * 8;
+      // scales[ j ] = 30;
       i += 3;
       j++;
     }
