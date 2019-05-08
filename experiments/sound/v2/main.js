@@ -30,7 +30,7 @@ panelToggle.onclick = function() {
 //?		Base
 //?--------------------------------------------------------------------
 var SEPARATION = 20; // 100
-var AMOUNTX = 2;
+var AMOUNTX = 1;
 var AMOUNTY = 256; // 64
 
 var camera, scene, renderer;
@@ -65,6 +65,9 @@ let opacities;
 let avgChange;
 
 let soundHistory = [];
+
+let skipStep = 0;
+let skipSize = 10;
 
 init();
 animate();
@@ -195,11 +198,7 @@ function play(audioBuffer) {
 }
 
 function audioThingies() {
-	var scaledSpectrum;
-	var len;
-
 	if (dataArray && dataArray2) { 
-		// analyser.getByteTimeDomainData(dataArray); 
 		analyser.getFloatTimeDomainData(dataArray2);
 
 		// !? do dit en dan lerp voor pos ertussen?
@@ -208,11 +207,24 @@ function audioThingies() {
 	} else {
 		return;
 	}
+	
+	if (skipStep > skipSize) {
+		skipStep = 0;
+		return;
+	}
+	
+	if (skipStep > 0 && skipStep < (skipSize / 2)) {
+		updateParticlePos(dataArray2);
+	}
 
+	skipStep ++;
+}
+
+function updateParticlePos(theArray) {
 	positions = particles.geometry.attributes.position.array;
 	scales = particles.geometry.attributes.scale.array;
-	let scaleFactor = 800;
 
+	let scaleFactor = 800;
 	var i = 0, j = 0;
 
 	for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
@@ -221,12 +233,12 @@ function audioThingies() {
 			// var point = smoothPoint(scaledSpectrum, iy, 2);
 
 			if ( j < AMOUNTY) {
-				positions[ i + 1] = THREE.Math.mapLinear(dataArray2[iy], 0, 1, 0, scaleFactor);
-			}
+				positions[ i + 1] = THREE.Math.mapLinear(theArray[iy], 0, 1, 0, scaleFactor);
+			} 
 
-			if ( j >= AMOUNTY && j < AMOUNTY * 2 ) {
-				positions[ i + 1] = THREE.Math.mapLinear(dataArray2[iy], 0, 1, 0, scaleFactor) *-1;
-			}
+			// if ( j >= AMOUNTY && j < AMOUNTY * 2 ) {
+			// 	positions[ i + 1] = THREE.Math.mapLinear(dataArray2[iy], 0, 1, 0, scaleFactor) *-1;
+			// }
 
 	// 		// ? j = pos arrayScale of dot
 	// 		// ? i = pos arrayPos of dot
