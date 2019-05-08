@@ -29,15 +29,10 @@ panelToggle.onclick = function() {
 //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
-var SEPARATION = 20; // 100
-var AMOUNTX = 2;
-var AMOUNTY = 256; // 64
+var SEPARATION = 100, AMOUNTX = 20, AMOUNTY = 64; // 64
 
 var camera, scene, renderer;
 var controls;
-
-var clock = new THREE.Clock();
-let tp;
 
 var particles, count = 0;
 
@@ -54,7 +49,6 @@ let soundBuffer;
 let analyser;
 let dataArray;
 let bufferLength;
-let dataArray2;
 
 //
 let positions;
@@ -103,7 +97,7 @@ function init() {
 			positions[ i + 1 ] = 0; // y
 			positions[ i + 2 ] = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 ); // z
 
-			scales[ j ] = 80;
+			scales[ j ] = 30;
 
 			i += 3; // skip to nex pos
 			j ++;
@@ -155,8 +149,6 @@ function render() {
 
 	renderer.render( scene, camera );
 
-	tp = clock.getDelta();
-
 	count += 0.1;
 }
 
@@ -187,9 +179,6 @@ function play(audioBuffer) {
 	dataArray = new Uint8Array(bufferLength);
 	analyser.getByteTimeDomainData(dataArray);
 
-	bufferLength = analyser.fftSize;
-	dataArray2 = new Float32Array(bufferLength);
-
 	
 	source.connect(analyser);
 }
@@ -198,36 +187,37 @@ function audioThingies() {
 	var scaledSpectrum;
 	var len;
 
-	if (dataArray && dataArray2) { 
-		// analyser.getByteTimeDomainData(dataArray); 
-		analyser.getFloatTimeDomainData(dataArray2);
+	if (dataArray) { 
+		analyser.getByteTimeDomainData(dataArray); 
+		scaledSpectrum = splitOctaves(dataArray, 15);
+		len = scaledSpectrum.length;
+		
+		// avgChange = avg(dataArray);
 
-		// !? do dit en dan lerp voor pos ertussen?
-		// scaledSpectrum = splitOctaves(dataArray, 15);
+		// soundHistory.push(avgChange);
 
+		// if (soundHistory.length > AMOUNTY) {
+		// 	soundHistory.splice(0, 1);
+		// }
 	} else {
 		return;
 	}
 
 	positions = particles.geometry.attributes.position.array;
 	scales = particles.geometry.attributes.scale.array;
-	let scaleFactor = 800;
 
 	var i = 0, j = 0;
 
 	for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
 		
 		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
-			// var point = smoothPoint(scaledSpectrum, iy, 2);
+			var point = smoothPoint(scaledSpectrum, iy, 2);
+			var newY = THREE.Math.mapLinear(point, 0, 255, -800, 800);
 
-			if ( j < AMOUNTY) {
-				positions[ i + 1] = THREE.Math.mapLinear(dataArray2[iy], 0, 1, 0, scaleFactor);
-			}
+			positions[ i + 1 ] = isNaN(newY) ? 0 : newY; 
 
-			if ( j >= AMOUNTY && j < AMOUNTY * 2 ) {
-				positions[ i + 1] = THREE.Math.mapLinear(dataArray2[iy], 0, 1, 0, scaleFactor) *-1;
-			}
-
+			// console.log(newY);
+			
 	// 		// ? j = pos arrayScale of dot
 	// 		// ? i = pos arrayPos of dot
 			
@@ -240,6 +230,13 @@ function audioThingies() {
 	// 		// if ( j >= AMOUNTY * 2 && j < AMOUNTY * 3) {
 	// 		// 	positions[ i + 1 ] = 200;
 	// 		// }
+
+	// 		// !!!!!!!!!!!!!!
+	// 		if (dataArray && analyser) {
+	// 			let newY = THREE.Math.mapLinear(dataArray[j], 0, 64*2, -800, 800);
+	// 			positions[ i + 1 ] = (newY - 800); 
+	// 			scales[ j ] = 80;
+	// 		}
 			
 			i += 3;
 			j ++;

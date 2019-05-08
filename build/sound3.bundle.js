@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/sound/v2/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/sound/v3/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -116,9 +116,9 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./experiments/sound/v2/main.js":
+/***/ "./experiments/sound/v3/main.js":
 /*!**************************************!*\
-  !*** ./experiments/sound/v2/main.js ***!
+  !*** ./experiments/sound/v3/main.js ***!
   \**************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -171,15 +171,12 @@ panelToggle.onclick = function () {
 //?--------------------------------------------------------------------
 
 
-var SEPARATION = 20; // 100
-
-var AMOUNTX = 2;
-var AMOUNTY = 256; // 64
+var SEPARATION = 100,
+    AMOUNTX = 20,
+    AMOUNTY = 64; // 64
 
 var camera, scene, renderer;
 var controls;
-var clock = new three__WEBPACK_IMPORTED_MODULE_6__["Clock"]();
-var tp;
 var particles,
     count = 0; // Audio dingen
 // const URL = '../sound/bohfoitoch.mp3';
@@ -191,8 +188,7 @@ var soundBuffer; // eind
 
 var analyser;
 var dataArray;
-var bufferLength;
-var dataArray2; //
+var bufferLength; //
 
 var positions;
 var scales;
@@ -233,7 +229,7 @@ function init() {
 
       positions[i + 2] = iy * SEPARATION - AMOUNTY * SEPARATION / 2; // z
 
-      scales[j] = 80;
+      scales[j] = 30;
       i += 3; // skip to nex pos
 
       j++;
@@ -277,7 +273,6 @@ function render() {
   particles.geometry.attributes.position.needsUpdate = true;
   particles.geometry.attributes.scale.needsUpdate = true;
   renderer.render(scene, camera);
-  tp = clock.getDelta();
   count += 0.1;
 }
 
@@ -308,8 +303,6 @@ function play(audioBuffer) {
   analyser.smoothingTimeConstant = .1;
   dataArray = new Uint8Array(bufferLength);
   analyser.getByteTimeDomainData(dataArray);
-  bufferLength = analyser.fftSize;
-  dataArray2 = new Float32Array(bufferLength);
   source.connect(analyser);
 }
 
@@ -317,30 +310,29 @@ function audioThingies() {
   var scaledSpectrum;
   var len;
 
-  if (dataArray && dataArray2) {
-    // analyser.getByteTimeDomainData(dataArray); 
-    analyser.getFloatTimeDomainData(dataArray2); // !? do dit en dan lerp voor pos ertussen?
-    // scaledSpectrum = splitOctaves(dataArray, 15);
+  if (dataArray) {
+    analyser.getByteTimeDomainData(dataArray);
+    scaledSpectrum = splitOctaves(dataArray, 15);
+    len = scaledSpectrum.length; // avgChange = avg(dataArray);
+    // soundHistory.push(avgChange);
+    // if (soundHistory.length > AMOUNTY) {
+    // 	soundHistory.splice(0, 1);
+    // }
   } else {
     return;
   }
 
   positions = particles.geometry.attributes.position.array;
   scales = particles.geometry.attributes.scale.array;
-  var scaleFactor = 800;
   var i = 0,
       j = 0;
 
   for (var ix = 0; ix < AMOUNTX; ix++) {
     for (var iy = 0; iy < AMOUNTY; iy++) {
-      // var point = smoothPoint(scaledSpectrum, iy, 2);
-      if (j < AMOUNTY) {
-        positions[i + 1] = three__WEBPACK_IMPORTED_MODULE_6__["Math"].mapLinear(dataArray2[iy], 0, 1, 0, scaleFactor);
-      }
-
-      if (j >= AMOUNTY && j < AMOUNTY * 2) {
-        positions[i + 1] = three__WEBPACK_IMPORTED_MODULE_6__["Math"].mapLinear(dataArray2[iy], 0, 1, 0, scaleFactor) * -1;
-      } // 		// ? j = pos arrayScale of dot
+      var point = smoothPoint(scaledSpectrum, iy, 2);
+      var newY = three__WEBPACK_IMPORTED_MODULE_6__["Math"].mapLinear(point, 0, 255, -800, 800);
+      positions[i + 1] = isNaN(newY) ? 0 : newY; // console.log(newY);
+      // 		// ? j = pos arrayScale of dot
       // 		// ? i = pos arrayPos of dot
       // 		// if ( j < AMOUNTY) {
       // 		// 	positions[ i + 1 ] = 600;
@@ -351,7 +343,12 @@ function audioThingies() {
       // 		// if ( j >= AMOUNTY * 2 && j < AMOUNTY * 3) {
       // 		// 	positions[ i + 1 ] = 200;
       // 		// }
-
+      // 		// !!!!!!!!!!!!!!
+      // 		if (dataArray && analyser) {
+      // 			let newY = THREE.Math.mapLinear(dataArray[j], 0, 64*2, -800, 800);
+      // 			positions[ i + 1 ] = (newY - 800); 
+      // 			scales[ j ] = 80;
+      // 		}
 
       i += 3;
       j++;
@@ -4076,4 +4073,4 @@ module.exports = g;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=sound2.bundle.js.map
+//# sourceMappingURL=sound3.bundle.js.map
