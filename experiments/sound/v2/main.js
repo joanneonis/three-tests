@@ -37,7 +37,8 @@ var controls;
 var particles, count = 0;
 
 // Audio dingen
-const URL = '../sound/bohfoitoch.mp3';
+// const URL = '../sound/bohfoitoch.mp3';
+const URL = '../sound/testvideo.mp3';
 	
 const context = new AudioContext();
 const playButton = document.querySelector('#play');
@@ -112,7 +113,7 @@ function init() {
 	// got from example three dotwaves
 	var material = new THREE.ShaderMaterial( {
 		uniforms: {
-			color: { value: new THREE.Color( 0xffffff ) },
+			color: { value: new THREE.Color( '#9B8F78' ) },
 		},
 		vertexShader: document.getElementById( 'vertexshader' ).textContent,
 		fragmentShader: document.getElementById( 'fragmentshader' ).textContent
@@ -121,7 +122,7 @@ function init() {
 	particles = new THREE.Points( geometry, material );
 	scene.add( particles );
 
-	
+	scene.background = new THREE.Color('#1E2B31');
 	document.body.appendChild( renderer.domElement );
 	window.addEventListener( 'resize', onWindowResize, false );
 }
@@ -162,6 +163,7 @@ window.fetch(URL)
 playButton.onclick = () => play(soundBuffer);
 
 function play(audioBuffer) {
+	playButton.style.display = 'none';
 	const source = context.createBufferSource();
 	source.buffer = audioBuffer;
 	// source.connect(context.destination);
@@ -169,65 +171,83 @@ function play(audioBuffer) {
 
 	analyser = context.createAnalyser();
 	analyser.connect(context.destination);
-	analyser.fftSize = AMOUNTY * 2; // 2048
+	analyser.fftSize = AMOUNTY * 4; // 2048
 	bufferLength = analyser.frequencyBinCount;
+	
+	analyser.smoothingTimeConstant = .1;
+
 	dataArray = new Uint8Array(bufferLength);
 	analyser.getByteTimeDomainData(dataArray);
 
+	
 	source.connect(analyser);
 }
 
 function audioThingies() {
+	var scaledSpectrum;
+	var len;
+
 	if (dataArray) { 
 		analyser.getByteTimeDomainData(dataArray); 
+		scaledSpectrum = splitOctaves(dataArray, 15);
+		len = scaledSpectrum.length;
 		
-		avgChange = avg(dataArray);
+		// avgChange = avg(dataArray);
 
-		soundHistory.push(avgChange);
+		// soundHistory.push(avgChange);
 
-		if (soundHistory.length > AMOUNTY) {
-			soundHistory.splice(0, 1);
-		}
-
-	// 	for (let x = 0; x < bufferLength; x++) {
-	// 		var amp = dataArray[x];
-	// 		var y = THREE.Math.clamp(amp, 0, 10);
-	// 		positions[x] = y;
-	// 		scales[x] = y;
-	// 		console.log(y);
-	// 	}
+		// if (soundHistory.length > AMOUNTY) {
+		// 	soundHistory.splice(0, 1);
+		// }
+	} else {
+		return;
 	}
 
 	positions = particles.geometry.attributes.position.array;
 	scales = particles.geometry.attributes.scale.array;
-	
+
 	var i = 0, j = 0;
 
 	for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
+		
 		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
-			// ? j = pos arrayScale of dot
-			// ? i = pos arrayPos of dot
+			var point = smoothPoint(scaledSpectrum, iy, 2);
+			var newY = THREE.Math.mapLinear(point, 0, 255, -800, 800);
+
+			positions[ i + 1 ] = isNaN(newY) ? 0 : newY; 
+
+			// console.log(newY);
 			
-			// if ( j < AMOUNTY) {
-			// 	positions[ i + 1 ] = 600;
-			// }
-			// if ( j >= AMOUNTY && j < AMOUNTY * 2) {
-			// 	positions[ i + 1 ] = 400;
-			// }
-			// if ( j >= AMOUNTY * 2 && j < AMOUNTY * 3) {
-			// 	positions[ i + 1 ] = 200;
-			// }
+	// 		// ? j = pos arrayScale of dot
+	// 		// ? i = pos arrayPos of dot
+			
+	// 		// if ( j < AMOUNTY) {
+	// 		// 	positions[ i + 1 ] = 600;
+	// 		// }
+	// 		// if ( j >= AMOUNTY && j < AMOUNTY * 2) {
+	// 		// 	positions[ i + 1 ] = 400;
+	// 		// }
+	// 		// if ( j >= AMOUNTY * 2 && j < AMOUNTY * 3) {
+	// 		// 	positions[ i + 1 ] = 200;
+	// 		// }
 
-			if (soundHistory[j]) {
-				positions[ i + 1 ] = soundHistory[j]; 
-			}
-
-			scales[ j ] = 30;
+	// 		// !!!!!!!!!!!!!!
+	// 		if (dataArray && analyser) {
+	// 			let newY = THREE.Math.mapLinear(dataArray[j], 0, 64*2, -800, 800);
+	// 			positions[ i + 1 ] = (newY - 800); 
+	// 			scales[ j ] = 80;
+	// 		}
 			
 			i += 3;
 			j ++;
 		}
 	}
+}
+
+function initControls() {
+	controls = new THREE.OrbitControls(camera, renderer.domElement);
+	controls.enableKeys = false;
+	controls.enablePan = true;
 }
 
 //some helper functions here
@@ -250,7 +270,85 @@ function max(arr){
 	return arr.reduce(function(a, b){ return Math.max(a, b); })
 }
 
-function initControls() {
-	controls = new THREE.OrbitControls(camera, renderer.domElement);
-	controls.enableKeys = false;
+
+/**
+ *  Divides an fft array into octaves with each
+ *  divided by three, or by a specified "slicesPerOctave".
+ *  
+ *  There are 10 octaves in the range 20 - 20,000 Hz,
+ *  so this will result in 10 * slicesPerOctave + 1
+ *
+ *  @method splitOctaves
+ *  @param {Array} spectrum Array of fft.analyze() values
+ *  @param {Number} [slicesPerOctave] defaults to thirds
+ *  @return {Array} scaledSpectrum array of the spectrum reorganized by division
+ *                                 of octaves
+ */
+function splitOctaves(spectrum, slicesPerOctave) {
+  var scaledSpectrum = [];
+  var len = spectrum.length;
+
+  // default to thirds
+  var n = slicesPerOctave || 3;
+  var nthRootOfTwo = Math.pow(2, 1 / n);
+
+  // the last N bins get their own 
+  var lowestBin = slicesPerOctave;
+
+  var binIndex = len - 1;
+  var i = binIndex;
+
+  while (i > lowestBin) {
+    var nextBinIndex = Math.round(binIndex / nthRootOfTwo);
+    if (nextBinIndex === 1) return;
+    var total = 0;
+    var numBins = 0;
+    // add up all of the values for the frequencies
+    for (i = binIndex; i > nextBinIndex; i--) {
+      total += spectrum[i];
+      numBins++;
+    }
+    // divide total sum by number of bins
+    var energy = total / numBins;
+    scaledSpectrum.push(energy);
+    // keep the loop going
+    binIndex = nextBinIndex;
+  }
+
+  // add the lowest bins at the end
+  for (var j = i; j > 0; j--) {
+    scaledSpectrum.push(spectrum[j]);
+  }
+
+  // reverse so that array has same order as original array (low to high frequencies)
+  scaledSpectrum.reverse();
+
+  return scaledSpectrum;
+}
+
+
+// average a point in an array with its neighbors
+function smoothPoint(spectrum, index, numberOfNeighbors) {
+
+  // default to 2 neighbors on either side
+  var neighbors = numberOfNeighbors || 2;
+  var len = spectrum.length;
+
+  var val = 0;
+
+  // start below the index
+  var indexMinusNeighbors = index - neighbors;
+  var smoothedPoints = 0;
+
+  for (var i = indexMinusNeighbors; i < (index + neighbors) && i < len; i++) {
+    // if there is a point at spectrum[i], tally it
+    if (typeof (spectrum[i]) !== 'undefined') {
+      val += spectrum[i];
+      smoothedPoints++;
+    }
+  }
+
+  val = val / smoothedPoints;
+
+  return val;
 }

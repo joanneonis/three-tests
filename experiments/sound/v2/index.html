@@ -7,7 +7,24 @@
 	<title>Sound</title>
 	<style>
     body { margin: 0; width: 100%; height: 100vh; overflow: hidden; }
-    canvas { width: 100%; height: 100%; }
+		canvas { width: 100%; height: 100%; }
+		
+		#play {
+			position: absolute;
+			z-index: 1000;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			width: 100px;
+			height: 100px;
+			border-radius: 100px;
+			-webkit-appearance: none;
+			border: none;
+			font-size: 1.4em;
+			font-weight: 600;
+		}
 	</style>
 </head>
 <body>
@@ -41,7 +58,7 @@
 	
 			</script>
 
-	<button id="play">hoi</button>
+	<button id="play">Play</button>
 	<button class="panel-toggle">Lees proces</button>
 	<section class="info-panel">
 		<div class="info-panel__inner">
