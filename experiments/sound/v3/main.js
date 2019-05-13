@@ -29,7 +29,7 @@ panelToggle.onclick = function() {
 //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
-var SEPARATION = 100, AMOUNTX = 20, AMOUNTY = 64; // 64
+var SEPARATION = 10, AMOUNTX = 20, AMOUNTY = 256; // 64
 
 var camera, scene, renderer;
 var controls;
@@ -189,8 +189,8 @@ function audioThingies() {
 
 	if (dataArray) { 
 		analyser.getByteTimeDomainData(dataArray); 
-		scaledSpectrum = splitOctaves(dataArray, 15);
-		len = scaledSpectrum.length;
+		// scaledSpectrum = splitOctaves(dataArray, 15);
+		// len = scaledSpectrum.length;
 		
 		// avgChange = avg(dataArray);
 
@@ -211,10 +211,12 @@ function audioThingies() {
 	for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
 		
 		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
-			var point = smoothPoint(scaledSpectrum, iy, 2);
+			var point = smoothPoint(dataArray, j, 2);
 			var newY = THREE.Math.mapLinear(point, 0, 255, -800, 800);
 
-			positions[ i + 1 ] = isNaN(newY) ? 0 : newY; 
+			if (j < AMOUNTY) {
+				positions[ i + 1 ] = isNaN(newY) ? 0 : newY; 
+			}
 
 			// console.log(newY);
 			

@@ -42,7 +42,6 @@ let tp;
 var particles, count = 0;
 
 // Audio dingen
-// const URL = '../sound/bohfoitoch.mp3';
 const URL = '../sound/testvideo.mp3';
 	
 const context = new AudioContext();
@@ -52,28 +51,12 @@ let soundBuffer;
 // eind
 
 let analyser;
-let dataArray;
 let bufferLength;
-let dataArray2;
+let dataArray;
 
-//
+// applied transforms
 let positions;
 let scales;
-let opacities;
-
-
-let avgChange;
-
-let currentSound;
-let prevValues;
-
-let skipStep = 0;
-let skipSize = 150;
-let skipped = 0;
-
-let firstRound = false;
-
-let fullHistory = [];
 
 init();
 animate();
@@ -93,8 +76,6 @@ function init() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
 	initControls();
-
-	//
 
 	var numParticles = AMOUNTX * AMOUNTY;
 
@@ -121,7 +102,7 @@ function init() {
 	}
 
 	var geometry = new THREE.BufferGeometry();
-	geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+	geometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array([...positions]), 3 ) );
 	geometry.addAttribute( 'scale', new THREE.BufferAttribute( scales, 1 ) );
 
 	// got from example three dotwaves
@@ -182,87 +163,52 @@ function play(audioBuffer) {
 	playButton.style.display = 'none';
 	const source = context.createBufferSource();
 	source.buffer = audioBuffer;
-	// source.connect(context.destination);
 	source.start();
 
 	analyser = context.createAnalyser();
 	analyser.connect(context.destination);
-	analyser.fftSize = AMOUNTY * 4; // 2048
+	analyser.fftSize = AMOUNTY * 4;
 	bufferLength = analyser.frequencyBinCount;
 	
 	analyser.smoothingTimeConstant = .1;
 
-	dataArray = new Uint8Array(bufferLength);
-	analyser.getByteTimeDomainData(dataArray);
-
 	bufferLength = analyser.fftSize;
-	dataArray2 = new Float32Array(bufferLength);
-
-	// init length
-	prevValues = new Float32Array(bufferLength);
-	currentSound = new Float32Array(bufferLength);
+	dataArray = new Float32Array(bufferLength);
 
 	source.connect(analyser);
 }
 
 function audioThingies() {
-	if (dataArray2) { 
-		analyser.getFloatTimeDomainData(dataArray2);
+	if (dataArray) { 
+		analyser.getFloatTimeDomainData(dataArray);
+		updateParticlePos();
+
 	} else {
 		return;
 	}
-
-	
-	if (skipStep === (skipSize / 2)) {
-		console.log('set old', skipped);
-		// console.log('first');
-		updateParticlePos(0);
-
-		if (skipped === 3) {
-			skipped = 0;
-			firstRound = true;
-		} else {
-			skipped ++;
-		}
-		skipStep = 0;
-
-	}	else {
-		if (currentSound && prevValues) {
-			console.log('middle: could lerp?',fullHistory[0] !== fullHistory[2]);
-			updateParticlePos(1);
-		}
-	}
-
-	skipStep ++;
 }
 
-function updateParticlePos(type) {
+
+
+function updateParticlePos() {
 	positions = particles.geometry.attributes.position.array;
 	scales = particles.geometry.attributes.scale.array;
 
 	let scaleFactor = 800;
-	var i = 0, j = 0;
+	let smoothFactor = 10;
+	var posArray = 0, loopStep = 0;
 
-	fullHistory[skipped] = [...positions];
+	let smoothedValues = smoothArray(dataArray, smoothFactor);
 
 	for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
 		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
+			
+			if (loopStep < AMOUNTY) {
+				positions[posArray + 1] = THREE.Math.mapLinear(smoothedValues[loopStep], 0, 1, 0, scaleFactor);
+			}
 
-			if ( j < AMOUNTY && type === 0) {
-				fullHistory[skipped][i + 1] = dataArray2[j];
-				positions[i + 1] = THREE.Math.mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
-			} 
-
-			if ( j < AMOUNTY && type === 1 && firstRound) {
-				let pos1 = fullHistory[Math.abs(skipped - 2)][i + 1];
-				let pos2 = fullHistory[Math.abs(skipped - 1)][i + 1];
-				let lerped = THREE.Math.lerp(pos1, pos2, 0.0135);
-
-				positions[i + 1] = lerped;
-			} 
-
-			i += 3;
-			j ++;
+			posArray += 3;
+			loopStep ++;
 		}
 	}
 }
@@ -271,4 +217,19 @@ function initControls() {
 	controls = new THREE.OrbitControls(camera, renderer.domElement);
 	controls.enableKeys = false;
 	controls.enablePan = true;
+}
+
+function smoothArray(array, smoothing) {
+	var newArray = [];
+	for (let i = 0; i < array.length; i++) {
+			var sum = 0;
+
+			for (let index = i - smoothing; index <= i + smoothing; index++) {
+					var thisIndex = index < 0 ? index + array.length : index % array.length;
+					sum += array[thisIndex];
+			}
+			newArray[i] = sum/((smoothing*2)+1);
+	}
+
+	return newArray;
 }
