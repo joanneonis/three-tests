@@ -29,8 +29,8 @@ panelToggle.onclick = function() {
 //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
-var SEPARATION = 20; // 100
-var AMOUNTX = 1;
+var SEPARATION = 40; // 100
+var AMOUNTX = 30;
 var AMOUNTY = 256; // 64
 
 var camera, scene, renderer;
@@ -68,7 +68,7 @@ let currentSound;
 let prevValues;
 
 let skipStep = 0;
-let skipSize = 150;
+let skipSize = 50;
 let skipped = 0;
 
 let firstRound = false;
@@ -228,10 +228,7 @@ function audioThingies() {
 		skipStep = 0;
 
 	}	else {
-		if (currentSound && prevValues) {
-			console.log('fromPos', Math.abs(skipped - 2), 'to', Math.abs(skipped - 1), 'currentSkip', skipped); // 1 0 1 works
-			// console.log('middle: could lerp?',fullHistory[0] !== fullHistory[1]);
-
+		if (currentSound && prevValues && firstRound) {
 			updateParticlePos(1);
 		}
 	}
@@ -243,6 +240,8 @@ function updateParticlePos(type) {
 	positions = particles.geometry.attributes.position.array;
 	scales = particles.geometry.attributes.scale.array;
 
+	let musicPos = [...dataArray2];
+
 	let scaleFactor = 800;
 	var i = 0, j = 0;
 
@@ -252,17 +251,29 @@ function updateParticlePos(type) {
 		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
 
 			//? updating SKIPPED to !last audiowave  
-			if ( j < AMOUNTY && type === 0) {
-				fullHistory[skipped][i + 1] = dataArray2[j];
-				positions[i + 1] = THREE.Math.mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
+			if (type === 0) {
+				fullHistory[skipped][ i ] = ix * SEPARATION - ( ( AMOUNTX * SEPARATION ) / 2 ); // x
+				fullHistory[skipped][ i + 1 ] = musicPos[j]; // y
+				fullHistory[skipped][ i + 2 ] = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 ); // z
+				
+				if (j < AMOUNTY) {
+					positions[i + 1] = THREE.Math.mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
+				} else if (j >= AMOUNTY && j <= AMOUNTY * 2) {
+					positions[i + 1] = THREE.Math.mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
+				}
 			} 
 
-			if ( j < AMOUNTY && type === 1 && firstRound) {
+			if (type === 1) {
 				let pos1 = fullHistory[skipped][i + 1];
 				let pos2 = fullHistory[Math.abs(skipped - 1)][i + 1];
-				let lerped = THREE.Math.lerp(pos1, pos2, 0.0135);
+				let lerped = THREE.Math.lerp(pos1, pos2, 0.08);
 
-				positions[i + 1] = lerped;
+				if (j < AMOUNTY) {
+					positions[i + 1] = lerped;
+				} else if (j >= AMOUNTY && j <= AMOUNTY * 2) {
+					positions[i + 1] = lerped;
+				}
+				
 			} 
 
 			i += 3;

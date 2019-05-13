@@ -175,9 +175,9 @@ panelToggle.onclick = function () {
 //?--------------------------------------------------------------------
 
 
-var SEPARATION = 20; // 100
+var SEPARATION = 40; // 100
 
-var AMOUNTX = 1;
+var AMOUNTX = 30;
 var AMOUNTY = 256; // 64
 
 var camera, scene, renderer;
@@ -205,7 +205,7 @@ var avgChange;
 var currentSound;
 var prevValues;
 var skipStep = 0;
-var skipSize = 150;
+var skipSize = 50;
 var skipped = 0;
 var firstRound = false;
 var secondRound = false;
@@ -351,10 +351,7 @@ function audioThingies() {
 
     skipStep = 0;
   } else {
-    if (currentSound && prevValues) {
-      console.log('fromPos', Math.abs(skipped - 2), 'to', Math.abs(skipped - 1), 'currentSkip', skipped); // 1 0 1 works
-      // console.log('middle: could lerp?',fullHistory[0] !== fullHistory[1]);
-
+    if (currentSound && prevValues && firstRound) {
       updateParticlePos(1);
     }
   }
@@ -365,6 +362,9 @@ function audioThingies() {
 function updateParticlePos(type) {
   positions = particles.geometry.attributes.position.array;
   scales = particles.geometry.attributes.scale.array;
+
+  var musicPos = _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(dataArray2);
+
   var scaleFactor = 800;
   var i = 0,
       j = 0;
@@ -373,16 +373,30 @@ function updateParticlePos(type) {
   for (var ix = 0; ix < AMOUNTX; ix++) {
     for (var iy = 0; iy < AMOUNTY; iy++) {
       //? updating SKIPPED to !last audiowave  
-      if (j < AMOUNTY && type === 0) {
-        fullHistory[skipped][i + 1] = dataArray2[j];
-        positions[i + 1] = three__WEBPACK_IMPORTED_MODULE_7__["Math"].mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
+      if (type === 0) {
+        fullHistory[skipped][i] = ix * SEPARATION - AMOUNTX * SEPARATION / 2; // x
+
+        fullHistory[skipped][i + 1] = musicPos[j]; // y
+
+        fullHistory[skipped][i + 2] = iy * SEPARATION - AMOUNTY * SEPARATION / 2; // z
+
+        if (j < AMOUNTY) {
+          positions[i + 1] = three__WEBPACK_IMPORTED_MODULE_7__["Math"].mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
+        } else if (j >= AMOUNTY && j <= AMOUNTY * 2) {
+          positions[i + 1] = three__WEBPACK_IMPORTED_MODULE_7__["Math"].mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
+        }
       }
 
-      if (j < AMOUNTY && type === 1 && firstRound) {
+      if (type === 1) {
         var pos1 = fullHistory[skipped][i + 1];
         var pos2 = fullHistory[Math.abs(skipped - 1)][i + 1];
-        var lerped = three__WEBPACK_IMPORTED_MODULE_7__["Math"].lerp(pos1, pos2, 0.0135);
-        positions[i + 1] = lerped;
+        var lerped = three__WEBPACK_IMPORTED_MODULE_7__["Math"].lerp(pos1, pos2, 0.08);
+
+        if (j < AMOUNTY) {
+          positions[i + 1] = lerped;
+        } else if (j >= AMOUNTY && j <= AMOUNTY * 2) {
+          positions[i + 1] = lerped;
+        }
       }
 
       i += 3;
