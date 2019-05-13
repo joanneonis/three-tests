@@ -208,6 +208,7 @@ var skipStep = 0;
 var skipSize = 150;
 var skipped = 0;
 var firstRound = false;
+var secondRound = false;
 var fullHistory = [];
 init();
 animate();
@@ -333,12 +334,16 @@ function audioThingies() {
   }
 
   if (skipStep === skipSize / 2) {
-    console.log('set old', skipped); // console.log('first');
-
+    // console.log('first');
     updateParticlePos(0);
 
-    if (skipped === 3) {
+    if (skipped === 1) {
       skipped = 0;
+
+      if (firstRound) {
+        secondRound = true;
+      }
+
       firstRound = true;
     } else {
       skipped++;
@@ -347,7 +352,9 @@ function audioThingies() {
     skipStep = 0;
   } else {
     if (currentSound && prevValues) {
-      console.log('middle: could lerp?', fullHistory[0] !== fullHistory[2]);
+      console.log('fromPos', Math.abs(skipped - 2), 'to', Math.abs(skipped - 1), 'currentSkip', skipped); // 1 0 1 works
+      // console.log('middle: could lerp?',fullHistory[0] !== fullHistory[1]);
+
       updateParticlePos(1);
     }
   }
@@ -365,13 +372,14 @@ function updateParticlePos(type) {
 
   for (var ix = 0; ix < AMOUNTX; ix++) {
     for (var iy = 0; iy < AMOUNTY; iy++) {
+      //? updating SKIPPED to !last audiowave  
       if (j < AMOUNTY && type === 0) {
         fullHistory[skipped][i + 1] = dataArray2[j];
         positions[i + 1] = three__WEBPACK_IMPORTED_MODULE_7__["Math"].mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
       }
 
       if (j < AMOUNTY && type === 1 && firstRound) {
-        var pos1 = fullHistory[Math.abs(skipped - 2)][i + 1];
+        var pos1 = fullHistory[skipped][i + 1];
         var pos2 = fullHistory[Math.abs(skipped - 1)][i + 1];
         var lerped = three__WEBPACK_IMPORTED_MODULE_7__["Math"].lerp(pos1, pos2, 0.0135);
         positions[i + 1] = lerped;

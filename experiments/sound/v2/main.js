@@ -72,6 +72,7 @@ let skipSize = 150;
 let skipped = 0;
 
 let firstRound = false;
+let secondRound = false;
 
 let fullHistory = [];
 
@@ -214,12 +215,12 @@ function audioThingies() {
 
 	
 	if (skipStep === (skipSize / 2)) {
-		console.log('set old', skipped);
 		// console.log('first');
 		updateParticlePos(0);
 
-		if (skipped === 3) {
+		if (skipped === 1) {
 			skipped = 0;
+			if (firstRound) { secondRound = true }
 			firstRound = true;
 		} else {
 			skipped ++;
@@ -228,7 +229,9 @@ function audioThingies() {
 
 	}	else {
 		if (currentSound && prevValues) {
-			console.log('middle: could lerp?',fullHistory[0] !== fullHistory[2]);
+			console.log('fromPos', Math.abs(skipped - 2), 'to', Math.abs(skipped - 1), 'currentSkip', skipped); // 1 0 1 works
+			// console.log('middle: could lerp?',fullHistory[0] !== fullHistory[1]);
+
 			updateParticlePos(1);
 		}
 	}
@@ -248,13 +251,14 @@ function updateParticlePos(type) {
 	for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
 		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
 
+			//? updating SKIPPED to !last audiowave  
 			if ( j < AMOUNTY && type === 0) {
 				fullHistory[skipped][i + 1] = dataArray2[j];
 				positions[i + 1] = THREE.Math.mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
 			} 
 
 			if ( j < AMOUNTY && type === 1 && firstRound) {
-				let pos1 = fullHistory[Math.abs(skipped - 2)][i + 1];
+				let pos1 = fullHistory[skipped][i + 1];
 				let pos2 = fullHistory[Math.abs(skipped - 1)][i + 1];
 				let lerped = THREE.Math.lerp(pos1, pos2, 0.0135);
 
