@@ -64,10 +64,16 @@ let opacities;
 
 let avgChange;
 
-let soundHistory = [];
+let currentSound;
+let prevValues;
 
 let skipStep = 0;
-let skipSize = 10;
+let skipSize = 50;
+let skipped = 0;
+
+let firstRound = false;
+
+let fullHistory = [];
 
 init();
 animate();
@@ -193,66 +199,70 @@ function play(audioBuffer) {
 	bufferLength = analyser.fftSize;
 	dataArray2 = new Float32Array(bufferLength);
 
-	
+	// init length
+	prevValues = new Float32Array(bufferLength);
+	currentSound = new Float32Array(bufferLength);
+
 	source.connect(analyser);
 }
 
 function audioThingies() {
-	if (dataArray && dataArray2) { 
+	if (dataArray2) { 
 		analyser.getFloatTimeDomainData(dataArray2);
-
-		// !? do dit en dan lerp voor pos ertussen?
-		// scaledSpectrum = splitOctaves(dataArray, 15);
-
 	} else {
 		return;
 	}
+
 	
-	if (skipStep > skipSize) {
+	if (skipStep === (skipSize / 2)) {
+		console.log('set old', skipped);
+		// console.log('first');
+		updateParticlePos(0);
+
+		if (skipped === 3) {
+			skipped = 0;
+			firstRound = true;
+		} else {
+			skipped ++;
+		}
 		skipStep = 0;
-		return;
-	}
-	
-	if (skipStep > 0 && skipStep < (skipSize / 2)) {
-		updateParticlePos(dataArray2);
+
+	} else if (skipStep > skipSize) { // newUpdate
+		console.log('new Update', skipped);
+		
+		updateParticlePos(2);
+	}	else {
+		if (currentSound && prevValues) {
+			console.log('middle: could lerp?',fullHistory[0] !== fullHistory[2]);
+			updateParticlePos(1);
+		}
 	}
 
 	skipStep ++;
 }
 
-function updateParticlePos(theArray) {
+function updateParticlePos(type) {
 	positions = particles.geometry.attributes.position.array;
 	scales = particles.geometry.attributes.scale.array;
 
 	let scaleFactor = 800;
 	var i = 0, j = 0;
 
-	for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
-		
-		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
-			// var point = smoothPoint(scaledSpectrum, iy, 2);
+	fullHistory[skipped] = [...positions];
 
-			if ( j < AMOUNTY) {
-				positions[ i + 1] = THREE.Math.mapLinear(theArray[iy], 0, 1, 0, scaleFactor);
+	for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
+		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
+
+			if ( j < AMOUNTY && type === 0) {
+				fullHistory[skipped][i + 1] = dataArray2[j];
+				positions[i + 1] = THREE.Math.mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
 			} 
 
-			// if ( j >= AMOUNTY && j < AMOUNTY * 2 ) {
-			// 	positions[ i + 1] = THREE.Math.mapLinear(dataArray2[iy], 0, 1, 0, scaleFactor) *-1;
-			// }
+			if ( j < AMOUNTY  && type === 1 && firstRound && skipped === 3) {
+				// let posBetweenOldAndNew = THREE.Math.lerp(fullHistory[skipped][i + 1], fullHistory[skipped][i + 1], 0.25);
+				// positions[ i + 1] = THREE.Math.mapLinear(posBetweenOldAndNew, 0, 1, 0, scaleFactor);
+			}
 
-	// 		// ? j = pos arrayScale of dot
-	// 		// ? i = pos arrayPos of dot
-			
-	// 		// if ( j < AMOUNTY) {
-	// 		// 	positions[ i + 1 ] = 600;
-	// 		// }
-	// 		// if ( j >= AMOUNTY && j < AMOUNTY * 2) {
-	// 		// 	positions[ i + 1 ] = 400;
-	// 		// }
-	// 		// if ( j >= AMOUNTY * 2 && j < AMOUNTY * 3) {
-	// 		// 	positions[ i + 1 ] = 200;
-	// 		// }
-			
 			i += 3;
 			j ++;
 		}
