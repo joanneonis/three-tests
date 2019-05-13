@@ -78,6 +78,10 @@ let fullHistory = [];
 init();
 animate();
 
+let stepZero = new Float32Array();
+let stepOne = new Float32Array();
+let stepTwo = new Float32Array();
+
 function init() {
 
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
@@ -122,7 +126,7 @@ function init() {
 	}
 
 	var geometry = new THREE.BufferGeometry();
-	geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+	geometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array([...positions]), 3 ) );
 	geometry.addAttribute( 'scale', new THREE.BufferAttribute( scales, 1 ) );
 
 	// got from example three dotwaves
@@ -215,11 +219,12 @@ function audioThingies() {
 
 	
 	if (skipStep === (skipSize / 2)) {
-		console.log('set old', skipped);
+		console.log('Update pos', stepTwo);
 		// console.log('first');
-		updateParticlePos(0);
+		updateParticlePos(1);
+		// console.log('middle: could lerp?', stepZero !== stepOne);
 
-		if (skipped === 3) {
+		if (skipped === 2) {
 			skipped = 0;
 			firstRound = true;
 		} else {
@@ -227,46 +232,70 @@ function audioThingies() {
 		}
 		skipStep = 0;
 
-	} else if (skipStep > skipSize) { // newUpdate
-		console.log('new Update', skipped);
-		
-		updateParticlePos(2);
-	}	else {
+	} else {
 		if (currentSound && prevValues) {
-			console.log('middle: could lerp?',fullHistory[0] !== fullHistory[2]);
-			updateParticlePos(1);
+			// console.log('middle: could lerp?',fullHistory[0] !== fullHistory[2]);
+			updateParticlePos(2);
+			// updateParticlePos(1);
 		}
 	}
 
 	skipStep ++;
 }
 
+
+
 function updateParticlePos(type) {
+	// transformation applied
 	positions = particles.geometry.attributes.position.array;
 	scales = particles.geometry.attributes.scale.array;
 
-	let scaleFactor = 800;
-	var i = 0, j = 0;
+	// if (skipped === 0 && type === 'update') { stepZero = new Float32Array([...positions]); }
+	// if (skipped === 1 && type === 'update') { stepOne = new Float32Array([...positions]); }
+	// if (skipped === 2 && type === 'update') { stepTwo = new Float32Array([...positions]); }
 
-	fullHistory[skipped] = [...positions];
+	let scaleFactor = 800;
+	var posArray = 0, loopStep = 0;
 
 	for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
 		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
 
-			if ( j < AMOUNTY && type === 0) {
-				fullHistory[skipped][i + 1] = dataArray2[j];
-				positions[i + 1] = THREE.Math.mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
-			} 
+			// if ( loopStep < AMOUNTY && type === 0) {
+			// 	// fullHistory[skipped][posArray + 1] = dataArray2[loopStep];
+			// 	// positions[posArray + 1] = THREE.Math.mapLinear(fullHistory[skipped][posArray + 1], 0, 1, 0, scaleFactor);
+			// } 
 
-			if ( j < AMOUNTY  && type === 1 && firstRound && skipped === 3) {
-				// let posBetweenOldAndNew = THREE.Math.lerp(fullHistory[skipped][i + 1], fullHistory[skipped][i + 1], 0.25);
-				// positions[ i + 1] = THREE.Math.mapLinear(posBetweenOldAndNew, 0, 1, 0, scaleFactor);
+			
+			// if ( loopStep < AMOUNTY  && type === 1 && firstRound && skipped === 3) {
+			// 	// let posBetweenOldAndNew = THREE.Math.lerp(fullHistory[0][i + 1], fullHistory[2][i + 1], 1);
+			// 	// positions[ i + 1] = THREE.Math.mapLinear(posBetweenOldAndNew, 0, 1, 0, scaleFactor);
+
+			// 	// let posBetweenOldAndNew = THREE.Math.lerp(fullHistory[skipped -1][posArray + 1], fullHistory[skipped][posArray + 1]);
+			// }
+
+			//? update Y pos based on MUSIC
+			if (type === 1) {
+				if (skipped === 0) { stepZero[posArray + 1] = dataArray2[loopStep] }
+				if (skipped === 1) { stepOne[posArray + 1] = dataArray2[loopStep] }
+				if (skipped === 2) { stepTwo[posArray + 1] = dataArray2[loopStep] }
 			}
 
-			i += 3;
-			j ++;
+			//? update Y pos based on LERP
+			if (type === 2) {
+				stepTwo[posArray + 1] = THREE.Math.lerp(stepZero[posArray + 1], stepOne[posArray + 1], 1);
+			}
+
+			positions[posArray + 1] = stepTwo[posArray + 1]; 
+
+			posArray += 3;
+			loopStep ++;
 		}
 	}
+
+	// positions = [...stepTwo]; 
+	// if (skipped === 0) { positions = new Float32Array([...stepZero]); }
+	// if (skipped === 1) { positions = new Float32Array([...stepOne]); }
+	// if (skipped === 2) { positions = new Float32Array([...stepTwo]); }
 }
 
 function initControls() {

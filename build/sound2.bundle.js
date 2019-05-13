@@ -211,6 +211,9 @@ var firstRound = false;
 var fullHistory = [];
 init();
 animate();
+var stepZero = new Float32Array();
+var stepOne = new Float32Array();
+var stepTwo = new Float32Array();
 
 function init() {
   camera = new three__WEBPACK_IMPORTED_MODULE_7__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 10000); // camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 0, 10000 );
@@ -251,7 +254,7 @@ function init() {
   }
 
   var geometry = new three__WEBPACK_IMPORTED_MODULE_7__["BufferGeometry"]();
-  geometry.addAttribute('position', new three__WEBPACK_IMPORTED_MODULE_7__["BufferAttribute"](positions, 3));
+  geometry.addAttribute('position', new three__WEBPACK_IMPORTED_MODULE_7__["BufferAttribute"](new Float32Array(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(positions)), 3));
   geometry.addAttribute('scale', new three__WEBPACK_IMPORTED_MODULE_7__["BufferAttribute"](scales, 1)); // got from example three dotwaves
 
   var material = new three__WEBPACK_IMPORTED_MODULE_7__["ShaderMaterial"]({
@@ -334,11 +337,11 @@ function audioThingies() {
   }
 
   if (skipStep === skipSize / 2) {
-    console.log('set old', skipped); // console.log('first');
+    console.log('Update pos', stepTwo); // console.log('first');
 
-    updateParticlePos(0);
+    updateParticlePos(1); // console.log('middle: could lerp?', stepZero !== stepOne);
 
-    if (skipped === 3) {
+    if (skipped === 2) {
       skipped = 0;
       firstRound = true;
     } else {
@@ -346,14 +349,10 @@ function audioThingies() {
     }
 
     skipStep = 0;
-  } else if (skipStep > skipSize) {
-    // newUpdate
-    console.log('new Update', skipped);
-    updateParticlePos(2);
   } else {
     if (currentSound && prevValues) {
-      console.log('middle: could lerp?', fullHistory[0] !== fullHistory[2]);
-      updateParticlePos(1);
+      // console.log('middle: could lerp?',fullHistory[0] !== fullHistory[2]);
+      updateParticlePos(2); // updateParticlePos(1);
     }
   }
 
@@ -361,28 +360,56 @@ function audioThingies() {
 }
 
 function updateParticlePos(type) {
+  // transformation applied
   positions = particles.geometry.attributes.position.array;
-  scales = particles.geometry.attributes.scale.array;
+  scales = particles.geometry.attributes.scale.array; // if (skipped === 0 && type === 'update') { stepZero = new Float32Array([...positions]); }
+  // if (skipped === 1 && type === 'update') { stepOne = new Float32Array([...positions]); }
+  // if (skipped === 2 && type === 'update') { stepTwo = new Float32Array([...positions]); }
+
   var scaleFactor = 800;
-  var i = 0,
-      j = 0;
-  fullHistory[skipped] = _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(positions);
+  var posArray = 0,
+      loopStep = 0;
 
   for (var ix = 0; ix < AMOUNTX; ix++) {
     for (var iy = 0; iy < AMOUNTY; iy++) {
-      if (j < AMOUNTY && type === 0) {
-        fullHistory[skipped][i + 1] = dataArray2[j];
-        positions[i + 1] = three__WEBPACK_IMPORTED_MODULE_7__["Math"].mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
+      // if ( loopStep < AMOUNTY && type === 0) {
+      // 	// fullHistory[skipped][posArray + 1] = dataArray2[loopStep];
+      // 	// positions[posArray + 1] = THREE.Math.mapLinear(fullHistory[skipped][posArray + 1], 0, 1, 0, scaleFactor);
+      // } 
+      // if ( loopStep < AMOUNTY  && type === 1 && firstRound && skipped === 3) {
+      // 	// let posBetweenOldAndNew = THREE.Math.lerp(fullHistory[0][i + 1], fullHistory[2][i + 1], 1);
+      // 	// positions[ i + 1] = THREE.Math.mapLinear(posBetweenOldAndNew, 0, 1, 0, scaleFactor);
+      // 	// let posBetweenOldAndNew = THREE.Math.lerp(fullHistory[skipped -1][posArray + 1], fullHistory[skipped][posArray + 1]);
+      // }
+      //? update Y pos based on MUSIC
+      if (type === 1) {
+        if (skipped === 0) {
+          stepZero[posArray + 1] = dataArray2[loopStep];
+        }
+
+        if (skipped === 1) {
+          stepOne[posArray + 1] = dataArray2[loopStep];
+        }
+
+        if (skipped === 2) {
+          stepTwo[posArray + 1] = dataArray2[loopStep];
+        }
+      } //? update Y pos based on LERP
+
+
+      if (type === 2) {
+        stepTwo[posArray + 1] = three__WEBPACK_IMPORTED_MODULE_7__["Math"].lerp(stepZero[posArray + 1], stepOne[posArray + 1], 1);
       }
 
-      if (j < AMOUNTY && type === 1 && firstRound && skipped === 3) {// let posBetweenOldAndNew = THREE.Math.lerp(fullHistory[skipped][i + 1], fullHistory[skipped][i + 1], 0.25);
-        // positions[ i + 1] = THREE.Math.mapLinear(posBetweenOldAndNew, 0, 1, 0, scaleFactor);
-      }
-
-      i += 3;
-      j++;
+      positions[posArray + 1] = stepTwo[posArray + 1];
+      posArray += 3;
+      loopStep++;
     }
-  }
+  } // positions = [...stepTwo]; 
+  // if (skipped === 0) { positions = new Float32Array([...stepZero]); }
+  // if (skipped === 1) { positions = new Float32Array([...stepOne]); }
+  // if (skipped === 2) { positions = new Float32Array([...stepTwo]); }
+
 }
 
 function initControls() {
