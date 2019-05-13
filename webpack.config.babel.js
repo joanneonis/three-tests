@@ -20,6 +20,7 @@ export default {
         sound: path.join(__dirname, 'experiments/sound/v1/main.js'),
         sound2: path.join(__dirname, 'experiments/sound/v2/main.js'),
         sound3: path.join(__dirname, 'experiments/sound/v3/main.js'),
+        workshop: path.join(__dirname, 'workshop/shaders/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),
