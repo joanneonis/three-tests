@@ -5,118 +5,229 @@ import 'three/examples/js/controls/OrbitControls';
 import 'three/examples/js/loaders/DDSLoader';
 import 'three/examples/js/loaders/OBJLoader';
 
-import 'three/examples/js/postprocessing/EffectComposer';
-import 'three/examples/js/postprocessing/RenderPass';
-import 'three/examples/js/postprocessing/ShaderPass';
-import 'three/examples/js/shaders/CopyShader';
-import 'three/examples/js/shaders/LuminosityHighPassShader';
-import 'three/examples/js/postprocessing/UnrealBloomPass';
+import 'three/examples/js/postprocessing/EffectComposer.js';
+import 'three/examples/js/postprocessing/RenderPass.js';
+import 'three/examples/js/postprocessing/ShaderPass.js';
+import 'three/examples/js/shaders/CopyShader.js';
+import 'three/examples/js/shaders/LuminosityHighPassShader.js';
+import 'three/examples/js/postprocessing/UnrealBloomPass.js';
 
 //?--------------------------------------------------------------------
 //?		Base
-//? 	Earth source: http://blog.mastermaps.com/2013/09/creating-webgl-earth-with-threejs.html
 //?--------------------------------------------------------------------
 
-let renderer,
-		scene,
-		camera,
-		controls,
-		theCanvas = document.getElementById('gl-canvas');
-
-var gui;
-var materials;
-var composer;
-
-var rotation = 0;
-var rotationSpeed = 0.009;
+var scene, camera, geometry, controls;
+var bloomComposer, bloomPass, finalComposer;
 var triangle;
+var renderer;
+var ENTIRE_SCENE = 0, BLOOM_SCENE = 1;
+var bloomLayer = new THREE.Layers();
+bloomLayer.set( BLOOM_SCENE );
+var params = {
+	exposure: 1,
+	bloomStrength: 5,
+	bloomThreshold: 0,
+	bloomRadius: 0,
+	scene: "Scene with Glow"
+};
+var darkMaterial = new THREE.MeshBasicMaterial( { color: "black" } );
+var materials = {};
+var container = document.getElementById( 'container' );
 
-let bloomPassSettings = {
-	threshold: 0,
-	strength: 3.7,
-	radius: 1.3,
-	exposure: 1.2
+renderer = new THREE.WebGLRenderer( { antialias: true } );
+renderer.setPixelRatio( window.devicePixelRatio );
+renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.toneMapping = THREE.ReinhardToneMapping;
+document.body.appendChild( renderer.domElement );
+scene = new THREE.Scene();
+
+
+camera = new THREE.PerspectiveCamera(7, window.innerWidth / window.innerHeight, 1, 1000);
+camera.position.z = 500;
+// camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 200 );
+// camera.position.set( 0, 0, 20 );
+camera.lookAt( 0, 0, 0 );
+initControls();
+scene.add( new THREE.AmbientLight( 0x404040 ) );
+var renderScene = new THREE.RenderPass( scene, camera );
+initBloom();
+
+
+var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2();
+window.addEventListener( 'click', onDocumentMouseClick, false );
+
+initGui();
+modelLoaders();
+
+setupScene();
+
+function onDocumentMouseClick( event ) {
+	event.preventDefault();
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	raycaster.setFromCamera( mouse, camera );
+	var intersects = raycaster.intersectObjects( scene.children );
+	if ( intersects.length > 0 ) {
+		var object = intersects[ 0 ].object;
+		object.layers.toggle( BLOOM_SCENE );
+		render();
+	}
+}
+
+window.onresize = function () {
+	var width = window.innerWidth;
+	var height = window.innerHeight;
+	camera.aspect = width / height;
+	camera.updateProjectionMatrix();
+	renderer.setSize( width, height );
+	bloomComposer.setSize( width * window.devicePixelRatio, height * window.devicePixelRatio );
+	finalComposer.setSize( width * window.devicePixelRatio, height * window.devicePixelRatio );
+	render();
 };
 
-let bloomPass;
-
-function init() {
-	initRenderer();
+function setupScene() {
+	var minLightness = 0;
+	var maxLightness = 0.1;
+	scene.traverse( disposeMaterial );
 	
-	scene = new THREE.Scene();
-	
-	camera = new THREE.PerspectiveCamera(7, window.innerWidth / window.innerHeight, 1, 1000);
-	camera.position.z = 100;
-	
-	initControls();
-	
-	var light = new THREE.DirectionalLight(0xffffff, .1);
-	light.position.set(5,3,5);
-	scene.add(light);
-
-	scene.add(new THREE.HemisphereLight( 0xffffbb, 0x080820, .1 ))
-
-	scene.add( new THREE.AmbientLight( 0x404040 ) );
-	// scene.background = new THREE.Color('#f9f9f9');
-
-	bloomy();
-
-	modelLoaders();
-// TODO
-
-	window.addEventListener('resize', onResize, false);
+	scene.children.length = 0;
+	var geometry = new THREE.IcosahedronBufferGeometry( 1, 4 );
+	for ( var i = 0; i < 5; i ++ ) {
+		var color = new THREE.Color();
+		color.setHSL( Math.random(), 0.7, Math.random() * 0.2 + 0.05 );
+		var material = new THREE.MeshBasicMaterial( { color: color } );
+		var box = new THREE.Mesh( geometry, material );
+		box.position.x = Math.random() * 10 - 5;
+		box.position.y = Math.random() * 10 - 5;
+		box.position.z = Math.random() * 10 - 5;
+		box.position.normalize().multiplyScalar( Math.random() * 4.0 + 2.0 );
+		box.scale.setScalar( Math.random() * Math.random() + 0.5 );
+		scene.add( box );
+		if ( Math.random() < 0.25 ) box.layers.enable( BLOOM_SCENE );
+	}
+	render();
 }
-
-function onResize() {
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
-
-	renderer.setSize(window.innerWidth, window.innerHeight);
+function disposeMaterial( obj ) {
+	if ( obj.material ) {
+		obj.material.dispose();
+	}
 }
-
-
 function render() {
-	controls.update();
+	switch ( params.scene ) {
+		case 'Scene only':
+			renderer.render( scene, camera );
+			break;
+		case 'Glow only':
+			renderBloom( false );
+			break;
+		case 'Scene with Glow':
+		default:
+			// render scene with bloom
+			renderBloom( true );
+			// render the entire scene, then render bloom scene on top
+			finalComposer.render();
+			break;
+	}
 
-	requestAnimationFrame(render);
-	renderer.render(scene, camera);
-	composer.render();
+	// requestAnimationFrame(render);
+}
+function renderBloom( mask ) {
+	if ( mask === true ) {
+		scene.traverse( darkenNonBloomed );
+		bloomComposer.render();
+		scene.traverse( restoreMaterial );
+	} else {
+		camera.layers.set( BLOOM_SCENE );
+		bloomComposer.render();
+		camera.layers.set( ENTIRE_SCENE );
+	}
+}
+function darkenNonBloomed( obj ) {
+	if ( obj.isMesh && bloomLayer.test( obj.layers ) === false ) {
+		materials[ obj.uuid ] = obj.material;
+		obj.material = darkMaterial;
+	}
+}
+function restoreMaterial( obj ) {
+	if ( materials[ obj.uuid ] ) {
+		obj.material = materials[ obj.uuid ];
+		delete materials[ obj.uuid ];
+	}
+}
+
+function initBloom() {
+	bloomPass = new THREE.UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
+	bloomPass.threshold = params.bloomThreshold;
+	bloomPass.strength = params.bloomStrength;
+	bloomPass.radius = params.bloomRadius;
+	bloomComposer = new THREE.EffectComposer( renderer );
+	bloomComposer.renderToScreen = false;
+	bloomComposer.setSize( window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio );
+	bloomComposer.addPass( renderScene );
+	bloomComposer.addPass( bloomPass );
+
+	var finalPass = new THREE.ShaderPass(
+		new THREE.ShaderMaterial( {
+			uniforms: {
+				baseTexture: { value: null },
+				bloomTexture: { value: bloomComposer.renderTarget2.texture }
+			},
+			vertexShader: document.getElementById( 'vertexshader' ).textContent,
+			fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
+			defines: {}
+		} ), "baseTexture"
+	);
+	finalPass.needsSwap = true;
+	finalComposer = new THREE.EffectComposer( renderer );
+	finalComposer.setSize( window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio );
+	finalComposer.addPass( renderScene );
+	finalComposer.addPass( finalPass );
+}
+
+function initControls() {
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.maxPolarAngle = Math.PI * 0.5;
+	controls.minDistance = 1;
+	controls.maxDistance = 1000;
+	controls.addEventListener( 'change', render );
 }
 
 function initGui() {
-	gui = new dat.GUI();
-
-	let bloomFolder = gui.addFolder('bloom');
-
-	bloomFolder.add(bloomPassSettings, 'threshold', 0, 3, .1).onChange((val) => { bloomPass.threshold = val; });
-	bloomFolder.add(bloomPassSettings, 'strength', 0, 10, .1).onChange((val) => { bloomPass.strength = val; });
-	bloomFolder.add(bloomPassSettings, 'radius', 0, 10, .1).onChange((val) => { bloomPass.radius = val; });
-	bloomFolder.add(bloomPassSettings, 'exposure', 0, 3, .1).onChange((val) => { renderer.toneMappingExposure = Math.pow( val, 4.0 ); });
+	var gui = new dat.GUI();
+	gui.add( params, 'scene', [ 'Scene with Glow', 'Glow only', 'Scene only' ] ).onChange( function ( value ) {
+		switch ( value ) 	{
+			case 'Scene with Glow':
+				bloomComposer.renderToScreen = false;
+				break;
+			case 'Glow only':
+				bloomComposer.renderToScreen = true;
+				break;
+			case 'Scene only':
+				// nothing to do
+				break;
+		}
+		render();
+	} );
+	var folder = gui.addFolder( 'Bloom Parameters' );
+	folder.add( params, 'exposure', 0.1, 2 ).onChange( function ( value ) {
+		renderer.toneMappingExposure = Math.pow( value, 4.0 );
+		render();
+	} );
+	folder.add( params, 'bloomThreshold', 0.0, 1.0 ).onChange( function ( value ) {
+		bloomPass.threshold = Number( value );
+		render();
+	} );
+	folder.add( params, 'bloomStrength', 0.0, 10.0 ).onChange( function ( value ) {
+		bloomPass.strength = Number( value );
+		render();
+	} );
+	folder.add( params, 'bloomRadius', 0.0, 1.0 ).step( 0.01 ).onChange( function ( value ) {
+		bloomPass.radius = Number( value );
+		render();
+	} );
 }
 
-
-init();
-render();
-initGui();
-
-
-function initRenderer() {
-	renderer = new THREE.WebGLRenderer({
-		canvas: theCanvas, 
-		antialias: true
-	});
-	renderer.setPixelRatio(window.devicePixelRatio);
-	renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-
-function initControls() {
-	controls = new THREE.OrbitControls(camera, renderer.domElement); //? NO trackball for gui issues
-	// controls.addEventListener('change', render); //? needed if theres no loop going on
-	controls.minDistance = 0;
-	controls.maxDistance = 700;
-	// controls.enablePan = true;
-}
 
 function modelLoaders() {
 
@@ -138,8 +249,8 @@ function modelLoaders() {
 	// THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
 
-	materials = new THREE.MeshStandardMaterial({wireframe: false});
-	materials.color = new THREE.Color('#F4182F');
+	// materials = new THREE.MeshStandardMaterial({wireframe: false});
+	// materials.color = new THREE.Color('#F4182F');
 
 	// load a resource
 	var loader = new THREE.OBJLoader();
@@ -149,23 +260,24 @@ function modelLoaders() {
 		'./triangle-v3.obj',
 		// called when resource is loaded
 		function ( object ) {
-			object.traverse( function ( child ) {
-					if ( child instanceof THREE.Mesh ) {
-							child.material = materials;
-					}
-			} );
+			object.traverse( disposeMaterial );
+			// object.traverse( function ( child ) {
+			// 		if ( child instanceof THREE.Mesh ) {
+			// 				// child.material = materials;
+							
+			// 		}
+			// } );
 			
 			// rotateObject(object, 20, 0, 0);
 
+			var color = new THREE.Color();
+			color.setHSL( Math.random(), 0.7, Math.random() * 0.2 + 0.05 );
+			var material = new THREE.MeshBasicMaterial( { color: color } );
+
 			triangle = object.children[0];
 			triangle.position.set(-2.0639669336378574 / 2, 0, -0.06514400243759155 / 2);
-			// triangle.applyMatrix();
-			// x: 2.0639669336378574 //  -2.0639669336378574, -2.2093340158462524, -0.06514400243759155
-			// y: 2.2093340158462524
-			// z: 0.06514400243759155
-			// var box = new THREE.Box3().setFromObject( triangle.children[0] );
-			// console.log( box.min, box.max, box.getSize() );
-			
+			triangle.material = material;
+
 			setTriangles(triangle);
 
 		},
@@ -184,34 +296,14 @@ function modelLoaders() {
 	);
 }
 
-function rotateObject(object, degreeX = 0, degreeY = 0, degreeZ = 0) {
-  object.rotateX(THREE.Math.degToRad(degreeX));
-  object.rotateY(THREE.Math.degToRad(degreeY));
-  object.rotateZ(THREE.Math.degToRad(degreeZ));
-} 
-
-
-function bloomy() {
-	var renderScene = new THREE.RenderPass( scene, camera );
-
-	bloomPass = new THREE.UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
-	bloomPass.threshold = bloomPassSettings.threshold;
-	bloomPass.strength = bloomPassSettings.strength;
-	bloomPass.radius = bloomPassSettings.radius;
-	bloomPass.exposure = bloomPassSettings.exposure;
-	renderer.toneMappingExposure = Math.pow( bloomPassSettings.exposure, 4.0 );
-
-	composer = new THREE.EffectComposer( renderer );
-	composer.setSize( window.innerWidth, window.innerHeight );
-	composer.addPass( renderScene );
-	composer.addPass( bloomPass );
-}
-
 function setTriangles(triangle) {
 	for(let i = 0; i < 5; i++) {
 		let newTriangle = triangle.clone();
 
 		triangle.position.z = i * 30;
+		newTriangle.layers.enable( BLOOM_SCENE );
+
+		console.log(newTriangle);
 		scene.add( newTriangle );
 	}
 }

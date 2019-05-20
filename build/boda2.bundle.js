@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/text/boda/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/text/boda-2/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./experiments/text/boda/main.js":
-/*!***************************************!*\
-  !*** ./experiments/text/boda/main.js ***!
-  \***************************************/
+/***/ "./experiments/text/boda-2/main.js":
+/*!*****************************************!*\
+  !*** ./experiments/text/boda-2/main.js ***!
+  \*****************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -104,18 +104,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_examples_js_loaders_DDSLoader__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_DDSLoader__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var three_examples_js_loaders_OBJLoader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/examples/js/loaders/OBJLoader */ "./node_modules/three/examples/js/loaders/OBJLoader.js");
 /* harmony import */ var three_examples_js_loaders_OBJLoader__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_OBJLoader__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var three_examples_js_postprocessing_EffectComposer_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/examples/js/postprocessing/EffectComposer.js */ "./node_modules/three/examples/js/postprocessing/EffectComposer.js");
-/* harmony import */ var three_examples_js_postprocessing_EffectComposer_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_postprocessing_EffectComposer_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var three_examples_js_postprocessing_RenderPass_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/examples/js/postprocessing/RenderPass.js */ "./node_modules/three/examples/js/postprocessing/RenderPass.js");
-/* harmony import */ var three_examples_js_postprocessing_RenderPass_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_postprocessing_RenderPass_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var three_examples_js_postprocessing_ShaderPass_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/examples/js/postprocessing/ShaderPass.js */ "./node_modules/three/examples/js/postprocessing/ShaderPass.js");
-/* harmony import */ var three_examples_js_postprocessing_ShaderPass_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_postprocessing_ShaderPass_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var three_examples_js_shaders_CopyShader_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! three/examples/js/shaders/CopyShader.js */ "./node_modules/three/examples/js/shaders/CopyShader.js");
-/* harmony import */ var three_examples_js_shaders_CopyShader_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_shaders_CopyShader_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var three_examples_js_shaders_LuminosityHighPassShader_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! three/examples/js/shaders/LuminosityHighPassShader.js */ "./node_modules/three/examples/js/shaders/LuminosityHighPassShader.js");
-/* harmony import */ var three_examples_js_shaders_LuminosityHighPassShader_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_shaders_LuminosityHighPassShader_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var three_examples_js_postprocessing_UnrealBloomPass_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! three/examples/js/postprocessing/UnrealBloomPass.js */ "./node_modules/three/examples/js/postprocessing/UnrealBloomPass.js");
-/* harmony import */ var three_examples_js_postprocessing_UnrealBloomPass_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_postprocessing_UnrealBloomPass_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var three_examples_js_postprocessing_EffectComposer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/examples/js/postprocessing/EffectComposer */ "./node_modules/three/examples/js/postprocessing/EffectComposer.js");
+/* harmony import */ var three_examples_js_postprocessing_EffectComposer__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_postprocessing_EffectComposer__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var three_examples_js_postprocessing_RenderPass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/examples/js/postprocessing/RenderPass */ "./node_modules/three/examples/js/postprocessing/RenderPass.js");
+/* harmony import */ var three_examples_js_postprocessing_RenderPass__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_postprocessing_RenderPass__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var three_examples_js_postprocessing_ShaderPass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/examples/js/postprocessing/ShaderPass */ "./node_modules/three/examples/js/postprocessing/ShaderPass.js");
+/* harmony import */ var three_examples_js_postprocessing_ShaderPass__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_postprocessing_ShaderPass__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var three_examples_js_shaders_CopyShader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! three/examples/js/shaders/CopyShader */ "./node_modules/three/examples/js/shaders/CopyShader.js");
+/* harmony import */ var three_examples_js_shaders_CopyShader__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_shaders_CopyShader__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var three_examples_js_shaders_LuminosityHighPassShader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! three/examples/js/shaders/LuminosityHighPassShader */ "./node_modules/three/examples/js/shaders/LuminosityHighPassShader.js");
+/* harmony import */ var three_examples_js_shaders_LuminosityHighPassShader__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_shaders_LuminosityHighPassShader__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var three_examples_js_postprocessing_UnrealBloomPass__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! three/examples/js/postprocessing/UnrealBloomPass */ "./node_modules/three/examples/js/postprocessing/UnrealBloomPass.js");
+/* harmony import */ var three_examples_js_postprocessing_UnrealBloomPass__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_postprocessing_UnrealBloomPass__WEBPACK_IMPORTED_MODULE_10__);
 /* eslint-disable no-unused-vars */
 
 
@@ -129,230 +129,95 @@ __webpack_require__.r(__webpack_exports__);
 
  //?--------------------------------------------------------------------
 //?		Base
+//? 	Earth source: http://blog.mastermaps.com/2013/09/creating-webgl-earth-with-threejs.html
 //?--------------------------------------------------------------------
 
-var scene, camera, geometry, controls;
-var bloomComposer, bloomPass, finalComposer;
+var renderer,
+    scene,
+    camera,
+    controls,
+    theCanvas = document.getElementById('gl-canvas');
+var gui;
+var materials;
+var composer;
+var rotation = 0;
+var rotationSpeed = 0.009;
 var triangle;
-var renderer;
-var ENTIRE_SCENE = 0,
-    BLOOM_SCENE = 1;
-var bloomLayer = new three__WEBPACK_IMPORTED_MODULE_1__["Layers"]();
-bloomLayer.set(BLOOM_SCENE);
-var params = {
-  exposure: 1,
-  bloomStrength: 5,
-  bloomThreshold: 0,
-  bloomRadius: 0,
-  scene: "Scene with Glow"
+var bloomPassSettings = {
+  threshold: 0,
+  strength: 3.7,
+  radius: 1.3,
+  exposure: 1.2
 };
-var darkMaterial = new three__WEBPACK_IMPORTED_MODULE_1__["MeshBasicMaterial"]({
-  color: "black"
-});
-var materials = {};
-var container = document.getElementById('container');
-renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
-  antialias: true
-});
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.toneMapping = three__WEBPACK_IMPORTED_MODULE_1__["ReinhardToneMapping"];
-document.body.appendChild(renderer.domElement);
-scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
-camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](7, window.innerWidth / window.innerHeight, 1, 1000);
-camera.position.z = 500; // camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 200 );
-// camera.position.set( 0, 0, 20 );
+var bloomPass;
 
-camera.lookAt(0, 0, 0);
-initControls();
-scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0x404040));
-var renderScene = new three__WEBPACK_IMPORTED_MODULE_1__["RenderPass"](scene, camera);
-initBloom();
-var raycaster = new three__WEBPACK_IMPORTED_MODULE_1__["Raycaster"]();
-var mouse = new three__WEBPACK_IMPORTED_MODULE_1__["Vector2"]();
-window.addEventListener('click', onDocumentMouseClick, false);
-initGui();
-modelLoaders();
-setupScene();
+function init() {
+  initRenderer();
+  scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](7, window.innerWidth / window.innerHeight, 1, 1000);
+  camera.position.z = 100;
+  initControls();
+  var light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, .1);
+  light.position.set(5, 3, 5);
+  scene.add(light);
+  scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["HemisphereLight"](0xffffbb, 0x080820, .1));
+  scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0x404040)); // scene.background = new THREE.Color('#f9f9f9');
 
-function onDocumentMouseClick(event) {
-  event.preventDefault();
-  mouse.x = event.clientX / window.innerWidth * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-  raycaster.setFromCamera(mouse, camera);
-  var intersects = raycaster.intersectObjects(scene.children);
+  bloomy();
+  modelLoaders(); // TODO
 
-  if (intersects.length > 0) {
-    var object = intersects[0].object;
-    object.layers.toggle(BLOOM_SCENE);
-    render();
-  }
+  window.addEventListener('resize', onResize, false);
 }
 
-window.onresize = function () {
-  var width = window.innerWidth;
-  var height = window.innerHeight;
-  camera.aspect = width / height;
+function onResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize(width, height);
-  bloomComposer.setSize(width * window.devicePixelRatio, height * window.devicePixelRatio);
-  finalComposer.setSize(width * window.devicePixelRatio, height * window.devicePixelRatio);
-  render();
-};
-
-function setupScene() {
-  var minLightness = 0;
-  var maxLightness = 0.1;
-  scene.traverse(disposeMaterial);
-  scene.children.length = 0;
-  var geometry = new three__WEBPACK_IMPORTED_MODULE_1__["IcosahedronBufferGeometry"](1, 4);
-
-  for (var i = 0; i < 5; i++) {
-    var color = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]();
-    color.setHSL(Math.random(), 0.7, Math.random() * 0.2 + 0.05);
-    var material = new three__WEBPACK_IMPORTED_MODULE_1__["MeshBasicMaterial"]({
-      color: color
-    });
-    var box = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](geometry, material);
-    box.position.x = Math.random() * 10 - 5;
-    box.position.y = Math.random() * 10 - 5;
-    box.position.z = Math.random() * 10 - 5;
-    box.position.normalize().multiplyScalar(Math.random() * 4.0 + 2.0);
-    box.scale.setScalar(Math.random() * Math.random() + 0.5);
-    scene.add(box);
-    if (Math.random() < 0.25) box.layers.enable(BLOOM_SCENE);
-  }
-
-  render();
-}
-
-function disposeMaterial(obj) {
-  if (obj.material) {
-    obj.material.dispose();
-  }
+  renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function render() {
-  switch (params.scene) {
-    case 'Scene only':
-      renderer.render(scene, camera);
-      break;
-
-    case 'Glow only':
-      renderBloom(false);
-      break;
-
-    case 'Scene with Glow':
-    default:
-      // render scene with bloom
-      renderBloom(true); // render the entire scene, then render bloom scene on top
-
-      finalComposer.render();
-      break;
-  } // requestAnimationFrame(render);
-
-}
-
-function renderBloom(mask) {
-  if (mask === true) {
-    scene.traverse(darkenNonBloomed);
-    bloomComposer.render();
-    scene.traverse(restoreMaterial);
-  } else {
-    camera.layers.set(BLOOM_SCENE);
-    bloomComposer.render();
-    camera.layers.set(ENTIRE_SCENE);
-  }
-}
-
-function darkenNonBloomed(obj) {
-  if (obj.isMesh && bloomLayer.test(obj.layers) === false) {
-    materials[obj.uuid] = obj.material;
-    obj.material = darkMaterial;
-  }
-}
-
-function restoreMaterial(obj) {
-  if (materials[obj.uuid]) {
-    obj.material = materials[obj.uuid];
-    delete materials[obj.uuid];
-  }
-}
-
-function initBloom() {
-  bloomPass = new three__WEBPACK_IMPORTED_MODULE_1__["UnrealBloomPass"](new three__WEBPACK_IMPORTED_MODULE_1__["Vector2"](window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
-  bloomPass.threshold = params.bloomThreshold;
-  bloomPass.strength = params.bloomStrength;
-  bloomPass.radius = params.bloomRadius;
-  bloomComposer = new three__WEBPACK_IMPORTED_MODULE_1__["EffectComposer"](renderer);
-  bloomComposer.renderToScreen = false;
-  bloomComposer.setSize(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio);
-  bloomComposer.addPass(renderScene);
-  bloomComposer.addPass(bloomPass);
-  var finalPass = new three__WEBPACK_IMPORTED_MODULE_1__["ShaderPass"](new three__WEBPACK_IMPORTED_MODULE_1__["ShaderMaterial"]({
-    uniforms: {
-      baseTexture: {
-        value: null
-      },
-      bloomTexture: {
-        value: bloomComposer.renderTarget2.texture
-      }
-    },
-    vertexShader: document.getElementById('vertexshader').textContent,
-    fragmentShader: document.getElementById('fragmentshader').textContent,
-    defines: {}
-  }), "baseTexture");
-  finalPass.needsSwap = true;
-  finalComposer = new three__WEBPACK_IMPORTED_MODULE_1__["EffectComposer"](renderer);
-  finalComposer.setSize(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio);
-  finalComposer.addPass(renderScene);
-  finalComposer.addPass(finalPass);
-}
-
-function initControls() {
-  controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement);
-  controls.maxPolarAngle = Math.PI * 0.5;
-  controls.minDistance = 1;
-  controls.maxDistance = 1000;
-  controls.addEventListener('change', render);
+  controls.update();
+  requestAnimationFrame(render);
+  renderer.render(scene, camera);
+  composer.render();
 }
 
 function initGui() {
-  var gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
-  gui.add(params, 'scene', ['Scene with Glow', 'Glow only', 'Scene only']).onChange(function (value) {
-    switch (value) {
-      case 'Scene with Glow':
-        bloomComposer.renderToScreen = false;
-        break;
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+  var bloomFolder = gui.addFolder('bloom');
+  bloomFolder.add(bloomPassSettings, 'threshold', 0, 3, .1).onChange(function (val) {
+    bloomPass.threshold = val;
+  });
+  bloomFolder.add(bloomPassSettings, 'strength', 0, 10, .1).onChange(function (val) {
+    bloomPass.strength = val;
+  });
+  bloomFolder.add(bloomPassSettings, 'radius', 0, 10, .1).onChange(function (val) {
+    bloomPass.radius = val;
+  });
+  bloomFolder.add(bloomPassSettings, 'exposure', 0, 3, .1).onChange(function (val) {
+    renderer.toneMappingExposure = Math.pow(val, 4.0);
+  });
+}
 
-      case 'Glow only':
-        bloomComposer.renderToScreen = true;
-        break;
+init();
+render();
+initGui();
 
-      case 'Scene only':
-        // nothing to do
-        break;
-    }
+function initRenderer() {
+  renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
+    canvas: theCanvas,
+    antialias: true
+  });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
 
-    render();
-  });
-  var folder = gui.addFolder('Bloom Parameters');
-  folder.add(params, 'exposure', 0.1, 2).onChange(function (value) {
-    renderer.toneMappingExposure = Math.pow(value, 4.0);
-    render();
-  });
-  folder.add(params, 'bloomThreshold', 0.0, 1.0).onChange(function (value) {
-    bloomPass.threshold = Number(value);
-    render();
-  });
-  folder.add(params, 'bloomStrength', 0.0, 10.0).onChange(function (value) {
-    bloomPass.strength = Number(value);
-    render();
-  });
-  folder.add(params, 'bloomRadius', 0.0, 1.0).step(0.01).onChange(function (value) {
-    bloomPass.radius = Number(value);
-    render();
-  });
+function initControls() {
+  controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement); //? NO trackball for gui issues
+  // controls.addEventListener('change', render); //? needed if theres no loop going on
+
+  controls.minDistance = 0;
+  controls.maxDistance = 700; // controls.enablePan = true;
 }
 
 function modelLoaders() {
@@ -366,30 +231,31 @@ function modelLoaders() {
   var onError = function onError(e) {
     console.log(e);
   }; // THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
-  // materials = new THREE.MeshStandardMaterial({wireframe: false});
-  // materials.color = new THREE.Color('#F4182F');
-  // load a resource
 
+
+  materials = new three__WEBPACK_IMPORTED_MODULE_1__["MeshStandardMaterial"]({
+    wireframe: false
+  });
+  materials.color = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#F4182F'); // load a resource
 
   var loader = new three__WEBPACK_IMPORTED_MODULE_1__["OBJLoader"]();
   loader.load( // resource URL
   './triangle-v3.obj', // called when resource is loaded
   function (object) {
-    object.traverse(disposeMaterial); // object.traverse( function ( child ) {
-    // 		if ( child instanceof THREE.Mesh ) {
-    // 				// child.material = materials;
-    // 		}
-    // } );
-    // rotateObject(object, 20, 0, 0);
+    object.traverse(function (child) {
+      if (child instanceof three__WEBPACK_IMPORTED_MODULE_1__["Mesh"]) {
+        child.material = materials;
+      }
+    }); // rotateObject(object, 20, 0, 0);
 
-    var color = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]();
-    color.setHSL(Math.random(), 0.7, Math.random() * 0.2 + 0.05);
-    var material = new three__WEBPACK_IMPORTED_MODULE_1__["MeshBasicMaterial"]({
-      color: color
-    });
     triangle = object.children[0];
-    triangle.position.set(-2.0639669336378574 / 2, 0, -0.06514400243759155 / 2);
-    triangle.material = material;
+    triangle.position.set(-2.0639669336378574 / 2, 0, -0.06514400243759155 / 2); // triangle.applyMatrix();
+    // x: 2.0639669336378574 //  -2.0639669336378574, -2.2093340158462524, -0.06514400243759155
+    // y: 2.2093340158462524
+    // z: 0.06514400243759155
+    // var box = new THREE.Box3().setFromObject( triangle.children[0] );
+    // console.log( box.min, box.max, box.getSize() );
+
     setTriangles(triangle);
   }, // called when loading is in progresses
   function (xhr) {
@@ -400,12 +266,33 @@ function modelLoaders() {
   });
 }
 
+function rotateObject(object) {
+  var degreeX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var degreeY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var degreeZ = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+  object.rotateX(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeX));
+  object.rotateY(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeY));
+  object.rotateZ(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeZ));
+}
+
+function bloomy() {
+  var renderScene = new three__WEBPACK_IMPORTED_MODULE_1__["RenderPass"](scene, camera);
+  bloomPass = new three__WEBPACK_IMPORTED_MODULE_1__["UnrealBloomPass"](new three__WEBPACK_IMPORTED_MODULE_1__["Vector2"](window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+  bloomPass.threshold = bloomPassSettings.threshold;
+  bloomPass.strength = bloomPassSettings.strength;
+  bloomPass.radius = bloomPassSettings.radius;
+  bloomPass.exposure = bloomPassSettings.exposure;
+  renderer.toneMappingExposure = Math.pow(bloomPassSettings.exposure, 4.0);
+  composer = new three__WEBPACK_IMPORTED_MODULE_1__["EffectComposer"](renderer);
+  composer.setSize(window.innerWidth, window.innerHeight);
+  composer.addPass(renderScene);
+  composer.addPass(bloomPass);
+}
+
 function setTriangles(triangle) {
   for (var i = 0; i < 5; i++) {
     var newTriangle = triangle.clone();
     triangle.position.z = i * 30;
-    newTriangle.layers.enable(BLOOM_SCENE);
-    console.log(newTriangle);
     scene.add(newTriangle);
   }
 }
@@ -7098,4 +6985,4 @@ THREE.LuminosityHighPassShader = {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=boda.bundle.js.map
+//# sourceMappingURL=boda2.bundle.js.map
