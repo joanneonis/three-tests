@@ -141,9 +141,9 @@ var bloomLayer = new three__WEBPACK_IMPORTED_MODULE_1__["Layers"]();
 bloomLayer.set(BLOOM_SCENE);
 var params = {
   exposure: 1,
-  bloomStrength: 5,
+  bloomStrength: 9.1,
   bloomThreshold: 0,
-  bloomRadius: 0,
+  bloomRadius: .13,
   scene: "Scene with Glow"
 };
 var darkMaterial = new three__WEBPACK_IMPORTED_MODULE_1__["MeshBasicMaterial"]({
@@ -168,26 +168,8 @@ initControls();
 scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0x404040));
 var renderScene = new three__WEBPACK_IMPORTED_MODULE_1__["RenderPass"](scene, camera);
 initBloom();
-var raycaster = new three__WEBPACK_IMPORTED_MODULE_1__["Raycaster"]();
-var mouse = new three__WEBPACK_IMPORTED_MODULE_1__["Vector2"]();
-window.addEventListener('click', onDocumentMouseClick, false);
 initGui();
 modelLoaders();
-setupScene();
-
-function onDocumentMouseClick(event) {
-  event.preventDefault();
-  mouse.x = event.clientX / window.innerWidth * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-  raycaster.setFromCamera(mouse, camera);
-  var intersects = raycaster.intersectObjects(scene.children);
-
-  if (intersects.length > 0) {
-    var object = intersects[0].object;
-    object.layers.toggle(BLOOM_SCENE);
-    render();
-  }
-}
 
 window.onresize = function () {
   var width = window.innerWidth;
@@ -197,34 +179,7 @@ window.onresize = function () {
   renderer.setSize(width, height);
   bloomComposer.setSize(width * window.devicePixelRatio, height * window.devicePixelRatio);
   finalComposer.setSize(width * window.devicePixelRatio, height * window.devicePixelRatio);
-  render();
 };
-
-function setupScene() {
-  var minLightness = 0;
-  var maxLightness = 0.1;
-  scene.traverse(disposeMaterial);
-  scene.children.length = 0;
-  var geometry = new three__WEBPACK_IMPORTED_MODULE_1__["IcosahedronBufferGeometry"](1, 4);
-
-  for (var i = 0; i < 5; i++) {
-    var color = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]();
-    color.setHSL(Math.random(), 0.7, Math.random() * 0.2 + 0.05);
-    var material = new three__WEBPACK_IMPORTED_MODULE_1__["MeshBasicMaterial"]({
-      color: color
-    });
-    var box = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](geometry, material);
-    box.position.x = Math.random() * 10 - 5;
-    box.position.y = Math.random() * 10 - 5;
-    box.position.z = Math.random() * 10 - 5;
-    box.position.normalize().multiplyScalar(Math.random() * 4.0 + 2.0);
-    box.scale.setScalar(Math.random() * Math.random() + 0.5);
-    scene.add(box);
-    if (Math.random() < 0.25) box.layers.enable(BLOOM_SCENE);
-  }
-
-  render();
-}
 
 function disposeMaterial(obj) {
   if (obj.material) {
@@ -233,25 +188,14 @@ function disposeMaterial(obj) {
 }
 
 function render() {
-  switch (params.scene) {
-    case 'Scene only':
-      renderer.render(scene, camera);
-      break;
-
-    case 'Glow only':
-      renderBloom(false);
-      break;
-
-    case 'Scene with Glow':
-    default:
-      // render scene with bloom
-      renderBloom(true); // render the entire scene, then render bloom scene on top
-
-      finalComposer.render();
-      break;
-  } // requestAnimationFrame(render);
-
+  controls.update();
+  renderer.render(scene, camera);
+  renderBloom(true);
+  finalComposer.render();
+  requestAnimationFrame(render);
 }
+
+render();
 
 function renderBloom(mask) {
   if (mask === true) {
@@ -313,8 +257,7 @@ function initControls() {
   controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement);
   controls.maxPolarAngle = Math.PI * 0.5;
   controls.minDistance = 1;
-  controls.maxDistance = 1000;
-  controls.addEventListener('change', render);
+  controls.maxDistance = 1000; // controls.addEventListener( 'change', render );
 }
 
 function initGui() {
@@ -332,26 +275,21 @@ function initGui() {
       case 'Scene only':
         // nothing to do
         break;
-    }
+    } // render();
 
-    render();
   });
   var folder = gui.addFolder('Bloom Parameters');
   folder.add(params, 'exposure', 0.1, 2).onChange(function (value) {
-    renderer.toneMappingExposure = Math.pow(value, 4.0);
-    render();
+    renderer.toneMappingExposure = Math.pow(value, 4.0); // render();
   });
   folder.add(params, 'bloomThreshold', 0.0, 1.0).onChange(function (value) {
-    bloomPass.threshold = Number(value);
-    render();
+    bloomPass.threshold = Number(value); // render();
   });
   folder.add(params, 'bloomStrength', 0.0, 10.0).onChange(function (value) {
-    bloomPass.strength = Number(value);
-    render();
+    bloomPass.strength = Number(value); // render();
   });
   folder.add(params, 'bloomRadius', 0.0, 1.0).step(0.01).onChange(function (value) {
-    bloomPass.radius = Number(value);
-    render();
+    bloomPass.radius = Number(value); // render();
   });
 }
 
