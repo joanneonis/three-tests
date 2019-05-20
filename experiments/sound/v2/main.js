@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import '../../assets/base.scss';
+import '../../../assets/base.scss';
 import Prism from 'prismjs';
 
 // import * as dat from 'dat.gui';
@@ -15,7 +15,7 @@ var body = document.querySelector('body');
 var panelOpen = false;
 
 panelToggle.onclick = function() {
-	body.classList.toggle('panel-open');
+	body.classList.toggle('panel-open'); 
 	
 	panelOpen = !panelOpen;
 
@@ -29,15 +29,21 @@ panelToggle.onclick = function() {
 //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
-var SEPARATION = 100, AMOUNTX = 64, AMOUNTY = 64;
+var SEPARATION = 40; // 100
+var AMOUNTX = 30;
+var AMOUNTY = 256; // 64
 
 var camera, scene, renderer;
 var controls;
 
+var clock = new THREE.Clock();
+let tp;
+
 var particles, count = 0;
 
 // Audio dingen
-const URL = './sound/bohfoitoch.mp3';
+// const URL = '../sound/bohfoitoch.mp3';
+const URL = '../sound/testvideo.mp3';
 	
 const context = new AudioContext();
 const playButton = document.querySelector('#play');
@@ -48,13 +54,27 @@ let soundBuffer;
 let analyser;
 let dataArray;
 let bufferLength;
+let dataArray2;
 
 //
 let positions;
 let scales;
+let opacities;
 
 
 let avgChange;
+
+let currentSound;
+let prevValues;
+
+let skipStep = 0;
+let skipSize = 50;
+let skipped = 0;
+
+let firstRound = false;
+let secondRound = false;
+
+let fullHistory = [];
 
 init();
 animate();
@@ -62,7 +82,10 @@ animate();
 function init() {
 
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-	camera.position.z = 1000;
+	// camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 0, 10000 );
+	camera.position.x = -5837.563823462691;
+	camera.position.y = 300;
+	camera.position.z = 600;
 
 	scene = new THREE.Scene();
 
@@ -76,8 +99,8 @@ function init() {
 
 	var numParticles = AMOUNTX * AMOUNTY;
 
-	positions = new Float32Array( numParticles * 3 );
-	scales = new Float32Array( numParticles );
+	positions = new Float32Array( numParticles * 3 ); //*  *3, because xyz per dot
+	scales = new Float32Array( numParticles ); //* scale per dot
 
 	var i = 0, j = 0;
 
@@ -89,9 +112,9 @@ function init() {
 			positions[ i + 1 ] = 0; // y
 			positions[ i + 2 ] = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 ); // z
 
-			scales[ j ] = 1;
+			scales[ j ] = 80;
 
-			i += 3;
+			i += 3; // skip to nex pos
 			j ++;
 
 		}
@@ -102,28 +125,21 @@ function init() {
 	geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
 	geometry.addAttribute( 'scale', new THREE.BufferAttribute( scales, 1 ) );
 
+	// got from example three dotwaves
 	var material = new THREE.ShaderMaterial( {
-
 		uniforms: {
-			color: { value: new THREE.Color( 0xffffff ) },
+			color: { value: new THREE.Color( '#9B8F78' ) },
 		},
 		vertexShader: document.getElementById( 'vertexshader' ).textContent,
 		fragmentShader: document.getElementById( 'fragmentshader' ).textContent
-
 	} );
-
-	//
 
 	particles = new THREE.Points( geometry, material );
 	scene.add( particles );
 
-	//
-
-	
+	scene.background = new THREE.Color('#1E2B31');
 	document.body.appendChild( renderer.domElement );
-
 	window.addEventListener( 'resize', onWindowResize, false );
-
 }
 
 function onWindowResize() {
@@ -133,8 +149,6 @@ function onWindowResize() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
-//
-
 function animate() {
 	requestAnimationFrame( animate );
 	render();
@@ -143,20 +157,17 @@ function animate() {
 function render() {
 	camera.lookAt( scene.position );
 	
-	
 	audioThingies();
 	
-
 	particles.geometry.attributes.position.needsUpdate = true;
 	particles.geometry.attributes.scale.needsUpdate = true;
 
 	renderer.render( scene, camera );
 
+	tp = clock.getDelta();
+
 	count += 0.1;
-
 }
-
-
 
 window.fetch(URL)
 	.then(response => response.arrayBuffer())
@@ -169,6 +180,7 @@ window.fetch(URL)
 playButton.onclick = () => play(soundBuffer);
 
 function play(audioBuffer) {
+	playButton.style.display = 'none';
 	const source = context.createBufferSource();
 	source.buffer = audioBuffer;
 	// source.connect(context.destination);
@@ -176,84 +188,102 @@ function play(audioBuffer) {
 
 	analyser = context.createAnalyser();
 	analyser.connect(context.destination);
-	analyser.fftSize = AMOUNTX * 2; // 2048
+	analyser.fftSize = AMOUNTY * 4; // 2048
 	bufferLength = analyser.frequencyBinCount;
+	
+	analyser.smoothingTimeConstant = .1;
+
 	dataArray = new Uint8Array(bufferLength);
 	analyser.getByteTimeDomainData(dataArray);
+
+	bufferLength = analyser.fftSize;
+	dataArray2 = new Float32Array(bufferLength);
+
+	// init length
+	prevValues = new Float32Array(bufferLength);
+	currentSound = new Float32Array(bufferLength);
 
 	source.connect(analyser);
 }
 
 function audioThingies() {
-	if (analyser) { 
-		analyser.getByteTimeDomainData(dataArray); 
-		
-		avgChange = avg(dataArray);
-
-	// 	for (let x = 0; x < bufferLength; x++) {
-	// 		var amp = dataArray[x];
-	// 		var y = THREE.Math.clamp(amp, 0, 10);
-	// 		positions[x] = y;
-	// 		scales[x] = y;
-	// 		console.log(y);
-	// 	}
+	if (dataArray2) { 
+		analyser.getFloatTimeDomainData(dataArray2);
+	} else {
+		return;
 	}
 
+	
+	if (skipStep === (skipSize / 2)) {
+		// console.log('first');
+		updateParticlePos(0);
+
+		if (skipped === 1) {
+			skipped = 0;
+			if (firstRound) { secondRound = true }
+			firstRound = true;
+		} else {
+			skipped ++;
+		}
+		skipStep = 0;
+
+	}	else {
+		if (currentSound && prevValues && firstRound) {
+			updateParticlePos(1);
+		}
+	}
+
+	skipStep ++;
+}
+
+function updateParticlePos(type) {
 	positions = particles.geometry.attributes.position.array;
 	scales = particles.geometry.attributes.scale.array;
-	
+
+	let musicPos = [...dataArray2];
+
+	let scaleFactor = 800;
 	var i = 0, j = 0;
 
-	// console.log(AMOUNTX * AMOUNTY);
+	fullHistory[skipped] = [...positions];
 
 	for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
-
 		for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
-			// console.log(i, j);
 
-			positions[ i + 1 ] = ( Math.sin( ( 1 + count ) * 0.3 ) * 50 ) +
-							( Math.sin( ( 2 + count ) * 0.5 ) * 50 );
+			//? updating SKIPPED to !last audiowave  
+			if (type === 0) {
+				fullHistory[skipped][ i ] = ix * SEPARATION - ( ( AMOUNTX * SEPARATION ) / 2 ); // x
+				fullHistory[skipped][ i + 1 ] = musicPos[j]; // y
+				fullHistory[skipped][ i + 2 ] = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 ); // z
+				
+				if (j < AMOUNTY) {
+					positions[i + 1] = THREE.Math.mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
+				} else if (j >= AMOUNTY && j <= AMOUNTY * 2) {
+					positions[i + 1] = THREE.Math.mapLinear(fullHistory[skipped][i + 1], 0, 1, 0, scaleFactor);
+				}
+			} 
 
-			scales[ j ] = ( Math.sin( ( 1 + count ) * 0.3 ) + 1 ) * 8 +
-							( Math.sin( ( 2 + count ) * 0.5 ) + 1 ) * 8;
+			if (type === 1) {
+				let pos1 = fullHistory[skipped][i + 1];
+				let pos2 = fullHistory[Math.abs(skipped - 1)][i + 1];
+				let lerped = THREE.Math.lerp(pos1, pos2, 0.08);
 
-			// scales[ j ] = 30;
+				if (j < AMOUNTY) {
+					positions[i + 1] = lerped;
+				} else if (j >= AMOUNTY && j <= AMOUNTY * 2) {
+					positions[i + 1] = lerped;
+				}
+				
+			} 
 
-			
 			i += 3;
 			j ++;
-
 		}
-
 	}
-	
 }
-
-
-//some helper functions here
-function fractionate(val, minVal, maxVal) {
-	return (val - minVal)/(maxVal - minVal);
-}
-
-function modulate(val, minVal, maxVal, outMin, outMax) {
-	var fr = fractionate(val, minVal, maxVal);
-	var delta = outMax - outMin;
-	return outMin + (fr * delta);
-}
-
-function avg(arr){
-	var total = arr.reduce(function(sum, b) { return sum + b; });
-	return (total / arr.length);
-}
-
-function max(arr){
-	return arr.reduce(function(a, b){ return Math.max(a, b); })
-}
-
 
 function initControls() {
 	controls = new THREE.OrbitControls(camera, renderer.domElement);
-	// controls.minDistance = 0;
-	// controls.maxDistance = 700;
 	controls.enableKeys = false;
+	controls.enablePan = true;
 }

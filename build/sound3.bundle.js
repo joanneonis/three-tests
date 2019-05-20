@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/sound/v1/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/sound/v3/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -116,9 +116,9 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./experiments/sound/v1/main.js":
+/***/ "./experiments/sound/v3/main.js":
 /*!**************************************!*\
-  !*** ./experiments/sound/v1/main.js ***!
+  !*** ./experiments/sound/v3/main.js ***!
   \**************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -171,15 +171,17 @@ panelToggle.onclick = function () {
 //?--------------------------------------------------------------------
 
 
-var SEPARATION = 100,
-    AMOUNTX = 64,
-    AMOUNTY = 64;
+var SEPARATION = 10,
+    AMOUNTX = 20,
+    AMOUNTY = 256; // 64
+
 var camera, scene, renderer;
 var controls;
 var particles,
     count = 0; // Audio dingen
+// const URL = '../sound/bohfoitoch.mp3';
 
-var URL = './../sound/bohfoitoch.mp3';
+var URL = '../sound/testvideo.mp3';
 var context = new AudioContext();
 var playButton = document.querySelector('#play');
 var soundBuffer; // eind
@@ -190,7 +192,9 @@ var bufferLength; //
 
 var positions;
 var scales;
+var opacities;
 var avgChange;
+var soundHistory = [];
 init();
 animate();
 
@@ -209,8 +213,11 @@ function init() {
   initControls(); //
 
   var numParticles = AMOUNTX * AMOUNTY;
-  positions = new Float32Array(numParticles * 3);
-  scales = new Float32Array(numParticles);
+  positions = new Float32Array(numParticles * 3); //*  *3, because xyz per dot
+
+  scales = new Float32Array(numParticles); //* scale per dot
+  // 	opacities = new Float32Array( numParticles );
+
   var i = 0,
       j = 0;
 
@@ -223,27 +230,28 @@ function init() {
       positions[i + 2] = iy * SEPARATION - AMOUNTY * SEPARATION / 2; // z
 
       scales[j] = 30;
-      i += 3;
+      i += 3; // skip to nex pos
+
       j++;
     }
   }
 
   var geometry = new three__WEBPACK_IMPORTED_MODULE_6__["BufferGeometry"]();
   geometry.addAttribute('position', new three__WEBPACK_IMPORTED_MODULE_6__["BufferAttribute"](positions, 3));
-  geometry.addAttribute('scale', new three__WEBPACK_IMPORTED_MODULE_6__["BufferAttribute"](scales, 1));
+  geometry.addAttribute('scale', new three__WEBPACK_IMPORTED_MODULE_6__["BufferAttribute"](scales, 1)); // got from example three dotwaves
+
   var material = new three__WEBPACK_IMPORTED_MODULE_6__["ShaderMaterial"]({
     uniforms: {
       color: {
-        value: new three__WEBPACK_IMPORTED_MODULE_6__["Color"](0xffffff)
+        value: new three__WEBPACK_IMPORTED_MODULE_6__["Color"]('#9B8F78')
       }
     },
     vertexShader: document.getElementById('vertexshader').textContent,
     fragmentShader: document.getElementById('fragmentshader').textContent
-  }); //
-
+  });
   particles = new three__WEBPACK_IMPORTED_MODULE_6__["Points"](geometry, material);
-  scene.add(particles); //
-
+  scene.add(particles);
+  scene.background = new three__WEBPACK_IMPORTED_MODULE_6__["Color"]('#1E2B31');
   document.body.appendChild(renderer.domElement);
   window.addEventListener('resize', onWindowResize, false);
 }
@@ -252,8 +260,7 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-} //
-
+}
 
 function animate() {
   requestAnimationFrame(animate);
@@ -266,7 +273,6 @@ function render() {
   particles.geometry.attributes.position.needsUpdate = true;
   particles.geometry.attributes.scale.needsUpdate = true;
   renderer.render(scene, camera);
-  console.log(camera);
   count += 0.1;
 }
 
@@ -284,56 +290,80 @@ playButton.onclick = function () {
 };
 
 function play(audioBuffer) {
+  playButton.style.display = 'none';
   var source = context.createBufferSource();
   source.buffer = audioBuffer; // source.connect(context.destination);
 
   source.start();
   analyser = context.createAnalyser();
   analyser.connect(context.destination);
-  analyser.fftSize = AMOUNTX * 2; // 2048
+  analyser.fftSize = AMOUNTY * 4; // 2048
 
   bufferLength = analyser.frequencyBinCount;
+  analyser.smoothingTimeConstant = .1;
   dataArray = new Uint8Array(bufferLength);
   analyser.getByteTimeDomainData(dataArray);
   source.connect(analyser);
 }
 
 function audioThingies() {
-  if (analyser) {
-    analyser.getByteTimeDomainData(dataArray);
-    avgChange = avg(dataArray); // 	for (let x = 0; x < bufferLength; x++) {
-    // 		var amp = dataArray[x];
-    // 		var y = THREE.Math.clamp(amp, 0, 10);
-    // 		positions[x] = y;
-    // 		scales[x] = y;
-    // 		console.log(y);
-    // 	}
+  var scaledSpectrum;
+  var len;
+
+  if (dataArray) {
+    analyser.getByteTimeDomainData(dataArray); // scaledSpectrum = splitOctaves(dataArray, 15);
+    // len = scaledSpectrum.length;
+    // avgChange = avg(dataArray);
+    // soundHistory.push(avgChange);
+    // if (soundHistory.length > AMOUNTY) {
+    // 	soundHistory.splice(0, 1);
+    // }
+  } else {
+    return;
   }
 
   positions = particles.geometry.attributes.position.array;
   scales = particles.geometry.attributes.scale.array;
   var i = 0,
-      j = 0; // console.log(AMOUNTX * AMOUNTY);
+      j = 0;
 
   for (var ix = 0; ix < AMOUNTX; ix++) {
-    scales[ix] = 80;
-    positions[ix] = 80;
-
     for (var iy = 0; iy < AMOUNTY; iy++) {
-      // positions[ i + 1 ] = count;
-      // scales[ ix ] = 80;
-      // scales[ i + 1 ] = 40;
-      // scales[ i + 2 ] = 20;
-      // console.log(i, j);
-      // positions[ i + 1 ] = ( Math.sin( ( 1 + count ) * 0.3 ) * 50 ) +
-      // 				( Math.sin( ( 2 + count ) * 0.5 ) * 50 );
-      // scales[ j ] = ( Math.sin( ( 1 + count ) * 0.3 ) + 1 ) * 8 +
-      // 				( Math.sin( ( 2 + count ) * 0.5 ) + 1 ) * 8;
-      // scales[ j ] = 30;
+      var point = smoothPoint(dataArray, j, 2);
+      var newY = three__WEBPACK_IMPORTED_MODULE_6__["Math"].mapLinear(point, 0, 255, -800, 800);
+
+      if (j < AMOUNTY) {
+        positions[i + 1] = isNaN(newY) ? 0 : newY;
+      } // console.log(newY);
+      // 		// ? j = pos arrayScale of dot
+      // 		// ? i = pos arrayPos of dot
+      // 		// if ( j < AMOUNTY) {
+      // 		// 	positions[ i + 1 ] = 600;
+      // 		// }
+      // 		// if ( j >= AMOUNTY && j < AMOUNTY * 2) {
+      // 		// 	positions[ i + 1 ] = 400;
+      // 		// }
+      // 		// if ( j >= AMOUNTY * 2 && j < AMOUNTY * 3) {
+      // 		// 	positions[ i + 1 ] = 200;
+      // 		// }
+      // 		// !!!!!!!!!!!!!!
+      // 		if (dataArray && analyser) {
+      // 			let newY = THREE.Math.mapLinear(dataArray[j], 0, 64*2, -800, 800);
+      // 			positions[ i + 1 ] = (newY - 800); 
+      // 			scales[ j ] = 80;
+      // 		}
+
+
       i += 3;
       j++;
     }
   }
+}
+
+function initControls() {
+  controls = new three__WEBPACK_IMPORTED_MODULE_6__["OrbitControls"](camera, renderer.domElement);
+  controls.enableKeys = false;
+  controls.enablePan = true;
 } //some helper functions here
 
 
@@ -359,12 +389,80 @@ function max(arr) {
     return Math.max(a, b);
   });
 }
+/**
+ *  Divides an fft array into octaves with each
+ *  divided by three, or by a specified "slicesPerOctave".
+ *  
+ *  There are 10 octaves in the range 20 - 20,000 Hz,
+ *  so this will result in 10 * slicesPerOctave + 1
+ *
+ *  @method splitOctaves
+ *  @param {Array} spectrum Array of fft.analyze() values
+ *  @param {Number} [slicesPerOctave] defaults to thirds
+ *  @return {Array} scaledSpectrum array of the spectrum reorganized by division
+ *                                 of octaves
+ */
 
-function initControls() {
-  controls = new three__WEBPACK_IMPORTED_MODULE_6__["OrbitControls"](camera, renderer.domElement); // controls.minDistance = 0;
-  // controls.maxDistance = 700;
 
-  controls.enableKeys = false;
+function splitOctaves(spectrum, slicesPerOctave) {
+  var scaledSpectrum = [];
+  var len = spectrum.length; // default to thirds
+
+  var n = slicesPerOctave || 3;
+  var nthRootOfTwo = Math.pow(2, 1 / n); // the last N bins get their own 
+
+  var lowestBin = slicesPerOctave;
+  var binIndex = len - 1;
+  var i = binIndex;
+
+  while (i > lowestBin) {
+    var nextBinIndex = Math.round(binIndex / nthRootOfTwo);
+    if (nextBinIndex === 1) return;
+    var total = 0;
+    var numBins = 0; // add up all of the values for the frequencies
+
+    for (i = binIndex; i > nextBinIndex; i--) {
+      total += spectrum[i];
+      numBins++;
+    } // divide total sum by number of bins
+
+
+    var energy = total / numBins;
+    scaledSpectrum.push(energy); // keep the loop going
+
+    binIndex = nextBinIndex;
+  } // add the lowest bins at the end
+
+
+  for (var j = i; j > 0; j--) {
+    scaledSpectrum.push(spectrum[j]);
+  } // reverse so that array has same order as original array (low to high frequencies)
+
+
+  scaledSpectrum.reverse();
+  return scaledSpectrum;
+} // average a point in an array with its neighbors
+
+
+function smoothPoint(spectrum, index, numberOfNeighbors) {
+  // default to 2 neighbors on either side
+  var neighbors = numberOfNeighbors || 2;
+  var len = spectrum.length;
+  var val = 0; // start below the index
+
+  var indexMinusNeighbors = index - neighbors;
+  var smoothedPoints = 0;
+
+  for (var i = indexMinusNeighbors; i < index + neighbors && i < len; i++) {
+    // if there is a point at spectrum[i], tally it
+    if (typeof spectrum[i] !== 'undefined') {
+      val += spectrum[i];
+      smoothedPoints++;
+    }
+  }
+
+  val = val / smoothedPoints;
+  return val;
 }
 
 /***/ }),
@@ -3979,4 +4077,4 @@ module.exports = g;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=sound.bundle.js.map
+//# sourceMappingURL=sound3.bundle.js.map

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/sound/v1/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/sound/v4/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -116,31 +116,35 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./experiments/sound/v1/main.js":
+/***/ "./experiments/sound/v4/main.js":
 /*!**************************************!*\
-  !*** ./experiments/sound/v1/main.js ***!
+  !*** ./experiments/sound/v4/main.js ***!
   \**************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _assets_base_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../assets/base.scss */ "./assets/base.scss");
-/* harmony import */ var _assets_base_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_base_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prismjs/components/prism-core */ "./node_modules/prismjs/components/prism-core.js");
-/* harmony import */ var prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prismjs/components/prism-clike */ "./node_modules/prismjs/components/prism-clike.js");
-/* harmony import */ var prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prismjs/components/prism-javascript */ "./node_modules/prismjs/components/prism-javascript.js");
-/* harmony import */ var prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prismjs/components/prism-css */ "./node_modules/prismjs/components/prism-css.js");
-/* harmony import */ var prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prismjs/components/prism-markup */ "./node_modules/prismjs/components/prism-markup.js");
-/* harmony import */ var prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
-/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _assets_base_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../assets/base.scss */ "./assets/base.scss");
+/* harmony import */ var _assets_base_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_base_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prismjs/components/prism-core */ "./node_modules/prismjs/components/prism-core.js");
+/* harmony import */ var prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prismjs/components/prism-clike */ "./node_modules/prismjs/components/prism-clike.js");
+/* harmony import */ var prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prismjs/components/prism-javascript */ "./node_modules/prismjs/components/prism-javascript.js");
+/* harmony import */ var prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prismjs/components/prism-css */ "./node_modules/prismjs/components/prism-css.js");
+/* harmony import */ var prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! prismjs/components/prism-markup */ "./node_modules/prismjs/components/prism-markup.js");
+/* harmony import */ var prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
+/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8__);
+
+
 /* eslint-disable no-unused-vars */
 
  // import * as dat from 'dat.gui';
@@ -152,7 +156,7 @@ __webpack_require__.r(__webpack_exports__);
 
  // import 'three/examples/js/WebGL';
 
-prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1___default.a.highlightAll();
+prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_2___default.a.highlightAll();
 var panelToggle = document.querySelector('.panel-toggle');
 var body = document.querySelector('body');
 var panelOpen = false;
@@ -171,46 +175,50 @@ panelToggle.onclick = function () {
 //?--------------------------------------------------------------------
 
 
-var SEPARATION = 100,
-    AMOUNTX = 64,
-    AMOUNTY = 64;
+var SEPARATION = 20; // 100
+
+var AMOUNTX = 1;
+var AMOUNTY = 256; // 64
+
 var camera, scene, renderer;
 var controls;
+var clock = new three__WEBPACK_IMPORTED_MODULE_7__["Clock"]();
+var tp;
 var particles,
     count = 0; // Audio dingen
 
-var URL = './../sound/bohfoitoch.mp3';
+var URL = '../sound/testvideo.mp3';
 var context = new AudioContext();
 var playButton = document.querySelector('#play');
 var soundBuffer; // eind
 
 var analyser;
-var dataArray;
-var bufferLength; //
+var bufferLength;
+var dataArray; // applied transforms
 
 var positions;
 var scales;
-var avgChange;
 init();
 animate();
 
 function init() {
-  camera = new three__WEBPACK_IMPORTED_MODULE_6__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 10000); // camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 0, 10000 );
+  camera = new three__WEBPACK_IMPORTED_MODULE_7__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 10000); // camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 0, 10000 );
 
   camera.position.x = -5837.563823462691;
   camera.position.y = 300;
   camera.position.z = 600;
-  scene = new three__WEBPACK_IMPORTED_MODULE_6__["Scene"]();
-  renderer = new three__WEBPACK_IMPORTED_MODULE_6__["WebGLRenderer"]({
+  scene = new three__WEBPACK_IMPORTED_MODULE_7__["Scene"]();
+  renderer = new three__WEBPACK_IMPORTED_MODULE_7__["WebGLRenderer"]({
     antialias: true
   });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  initControls(); //
-
+  initControls();
   var numParticles = AMOUNTX * AMOUNTY;
-  positions = new Float32Array(numParticles * 3);
-  scales = new Float32Array(numParticles);
+  positions = new Float32Array(numParticles * 3); //*  *3, because xyz per dot
+
+  scales = new Float32Array(numParticles); //* scale per dot
+
   var i = 0,
       j = 0;
 
@@ -222,28 +230,29 @@ function init() {
 
       positions[i + 2] = iy * SEPARATION - AMOUNTY * SEPARATION / 2; // z
 
-      scales[j] = 30;
-      i += 3;
+      scales[j] = 80;
+      i += 3; // skip to nex pos
+
       j++;
     }
   }
 
-  var geometry = new three__WEBPACK_IMPORTED_MODULE_6__["BufferGeometry"]();
-  geometry.addAttribute('position', new three__WEBPACK_IMPORTED_MODULE_6__["BufferAttribute"](positions, 3));
-  geometry.addAttribute('scale', new three__WEBPACK_IMPORTED_MODULE_6__["BufferAttribute"](scales, 1));
-  var material = new three__WEBPACK_IMPORTED_MODULE_6__["ShaderMaterial"]({
+  var geometry = new three__WEBPACK_IMPORTED_MODULE_7__["BufferGeometry"]();
+  geometry.addAttribute('position', new three__WEBPACK_IMPORTED_MODULE_7__["BufferAttribute"](new Float32Array(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(positions)), 3));
+  geometry.addAttribute('scale', new three__WEBPACK_IMPORTED_MODULE_7__["BufferAttribute"](scales, 1)); // got from example three dotwaves
+
+  var material = new three__WEBPACK_IMPORTED_MODULE_7__["ShaderMaterial"]({
     uniforms: {
       color: {
-        value: new three__WEBPACK_IMPORTED_MODULE_6__["Color"](0xffffff)
+        value: new three__WEBPACK_IMPORTED_MODULE_7__["Color"]('#9B8F78')
       }
     },
     vertexShader: document.getElementById('vertexshader').textContent,
     fragmentShader: document.getElementById('fragmentshader').textContent
-  }); //
-
-  particles = new three__WEBPACK_IMPORTED_MODULE_6__["Points"](geometry, material);
-  scene.add(particles); //
-
+  });
+  particles = new three__WEBPACK_IMPORTED_MODULE_7__["Points"](geometry, material);
+  scene.add(particles);
+  scene.background = new three__WEBPACK_IMPORTED_MODULE_7__["Color"]('#1E2B31');
   document.body.appendChild(renderer.domElement);
   window.addEventListener('resize', onWindowResize, false);
 }
@@ -252,8 +261,7 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-} //
-
+}
 
 function animate() {
   requestAnimationFrame(animate);
@@ -266,7 +274,7 @@ function render() {
   particles.geometry.attributes.position.needsUpdate = true;
   particles.geometry.attributes.scale.needsUpdate = true;
   renderer.render(scene, camera);
-  console.log(camera);
+  tp = clock.getDelta();
   count += 0.1;
 }
 
@@ -284,88 +292,144 @@ playButton.onclick = function () {
 };
 
 function play(audioBuffer) {
+  playButton.style.display = 'none';
   var source = context.createBufferSource();
-  source.buffer = audioBuffer; // source.connect(context.destination);
-
+  source.buffer = audioBuffer;
   source.start();
   analyser = context.createAnalyser();
   analyser.connect(context.destination);
-  analyser.fftSize = AMOUNTX * 2; // 2048
-
+  analyser.fftSize = AMOUNTY * 4;
   bufferLength = analyser.frequencyBinCount;
-  dataArray = new Uint8Array(bufferLength);
-  analyser.getByteTimeDomainData(dataArray);
+  analyser.smoothingTimeConstant = .1;
+  bufferLength = analyser.fftSize;
+  dataArray = new Float32Array(bufferLength);
   source.connect(analyser);
 }
 
 function audioThingies() {
-  if (analyser) {
-    analyser.getByteTimeDomainData(dataArray);
-    avgChange = avg(dataArray); // 	for (let x = 0; x < bufferLength; x++) {
-    // 		var amp = dataArray[x];
-    // 		var y = THREE.Math.clamp(amp, 0, 10);
-    // 		positions[x] = y;
-    // 		scales[x] = y;
-    // 		console.log(y);
-    // 	}
+  if (dataArray) {
+    analyser.getFloatTimeDomainData(dataArray);
+    updateParticlePos();
+  } else {
+    return;
   }
+}
 
+function updateParticlePos() {
   positions = particles.geometry.attributes.position.array;
   scales = particles.geometry.attributes.scale.array;
-  var i = 0,
-      j = 0; // console.log(AMOUNTX * AMOUNTY);
+  var scaleFactor = 800;
+  var smoothFactor = 10;
+  var posArray = 0,
+      loopStep = 0;
+  var smoothedValues = smoothArray(dataArray, smoothFactor);
 
   for (var ix = 0; ix < AMOUNTX; ix++) {
-    scales[ix] = 80;
-    positions[ix] = 80;
-
     for (var iy = 0; iy < AMOUNTY; iy++) {
-      // positions[ i + 1 ] = count;
-      // scales[ ix ] = 80;
-      // scales[ i + 1 ] = 40;
-      // scales[ i + 2 ] = 20;
-      // console.log(i, j);
-      // positions[ i + 1 ] = ( Math.sin( ( 1 + count ) * 0.3 ) * 50 ) +
-      // 				( Math.sin( ( 2 + count ) * 0.5 ) * 50 );
-      // scales[ j ] = ( Math.sin( ( 1 + count ) * 0.3 ) + 1 ) * 8 +
-      // 				( Math.sin( ( 2 + count ) * 0.5 ) + 1 ) * 8;
-      // scales[ j ] = 30;
-      i += 3;
-      j++;
+      if (loopStep < AMOUNTY) {
+        positions[posArray + 1] = three__WEBPACK_IMPORTED_MODULE_7__["Math"].mapLinear(smoothedValues[loopStep], 0, 1, 0, scaleFactor);
+      }
+
+      posArray += 3;
+      loopStep++;
     }
   }
-} //some helper functions here
-
-
-function fractionate(val, minVal, maxVal) {
-  return (val - minVal) / (maxVal - minVal);
-}
-
-function modulate(val, minVal, maxVal, outMin, outMax) {
-  var fr = fractionate(val, minVal, maxVal);
-  var delta = outMax - outMin;
-  return outMin + fr * delta;
-}
-
-function avg(arr) {
-  var total = arr.reduce(function (sum, b) {
-    return sum + b;
-  });
-  return total / arr.length;
-}
-
-function max(arr) {
-  return arr.reduce(function (a, b) {
-    return Math.max(a, b);
-  });
 }
 
 function initControls() {
-  controls = new three__WEBPACK_IMPORTED_MODULE_6__["OrbitControls"](camera, renderer.domElement); // controls.minDistance = 0;
-  // controls.maxDistance = 700;
-
+  controls = new three__WEBPACK_IMPORTED_MODULE_7__["OrbitControls"](camera, renderer.domElement);
   controls.enableKeys = false;
+  controls.enablePan = true;
 }
+
+function smoothArray(array, smoothing) {
+  var newArray = [];
+
+  for (var i = 0; i < array.length; i++) {
+    var sum = 0;
+
+    for (var index = i - smoothing; index <= i + smoothing; index++) {
+      var thisIndex = index < 0 ? index + array.length : index % array.length;
+      sum += array[thisIndex];
+    }
+
+    newArray[i] = sum / (smoothing * 2 + 1);
+  }
+
+  return newArray;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+
+module.exports = _arrayWithoutHoles;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArray.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArray.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+module.exports = _iterableToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableSpread.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+module.exports = _nonIterableSpread;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/toConsumableArray.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles */ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js");
+
+var iterableToArray = __webpack_require__(/*! ./iterableToArray */ "./node_modules/@babel/runtime/helpers/iterableToArray.js");
+
+var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread */ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js");
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
 
 /***/ }),
 
@@ -3979,4 +4043,4 @@ module.exports = g;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=sound.bundle.js.map
+//# sourceMappingURL=sound4.bundle.js.map
