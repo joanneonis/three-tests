@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>TUBES</title>
+		<style>
+			body { margin: 0; width: 100%; height: 100vh; }
+			#scene { width: 100%; height: 100%; }
+
+			.intro-overlay {
+					position: absolute;
+					z-index: 2;
+					background: #1b1b1bb3;
+					width: 100%;
+					height: 100vh;
+					display: flex;
+					padding: 20px;
+					box-sizing: border-box;
+					transition: opacity .2s;
+			}
+
+			.intro-overlay__inner {
+					width: 100%;
+					max-width: 600px;
+					background: white;
+					border-radius: 5px;
+					box-shadow: 1px 1px 1px black;
+					margin: auto;
+					box-sizing: border-box;
+					padding: 40px;
+					font-family: sans-serif;
+					transition: opacity .2s;
+			}
+
+			.intro-overlay.is-hidden, .is-hidden .intro-overlay__inner {
+					opacity: 0;
+			}
+		</style>
+	</head>
+	<body class="demo-1 loading">
+		<div class="intro-overlay">
+			<div class="intro-overlay__inner">
+				<h1>Please enable camera</h1>
+				<p>With this experiment you control the tube direction with your face.</p>
+				<p><small>(Sidenote: Doesn't work well with glasses on)</small></p>
+			</div>
+		</div>
+		<canvas id="scene"></canvas>
+		<video id="inputVideo" width="400" height="300" autoplay loop></video>
+		<canvas id="drawCanvas" width="400" height="300"></canvas>
+
+		<script src="clmtrackr.js"></script>
+		<script type="text/javascript">
+			var videoInput = document.getElementById('inputVideo');
+			
+			var ctracker = new clm.tracker();
+			ctracker.init();
+			ctracker.start(videoInput);
+		</script>
+		<script src="./../../../build/face.bundle.js"></script>
+	</body>
+</html>

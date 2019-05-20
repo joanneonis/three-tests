@@ -23,6 +23,7 @@ export default {
         sound4: path.join(__dirname, 'experiments/sound/v4/main.js'),
         text1: path.join(__dirname, 'experiments/text/shaders/main.js'),
         layered: path.join(__dirname, 'experiments/text/layered/main.js'),
+        face: path.join(__dirname, 'experiments/text/facetunnel/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),
