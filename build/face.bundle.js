@@ -330,6 +330,7 @@ function cameraThingies() {
     video.srcObject = mediaStream;
 
     video.onloadedmetadata = function (e) {
+      hidePanel();
       video.play();
     };
   })["catch"](function (err) {
@@ -346,6 +347,11 @@ function drawFace() {
 
 function map_range(value, low1, high1, low2, high2) {
   return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+}
+
+function hidePanel() {
+  var panel = document.querySelector('.intro-overlay');
+  panel.classList.add('is-hidden');
 }
 
 /***/ }),
