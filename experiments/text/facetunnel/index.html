@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>TUBES</title>
+	</head>
+	<body class="demo-1 loading">
+		<canvas id="scene"></canvas>
+		<video id="inputVideo" width="400" height="300" autoplay loop>
+			<source src="./media/somevideo.ogv" type="video/ogg"/>
+		</video>
+		<canvas id="drawCanvas" width="400" height="300"></canvas>
+
+		<script src="clmtrackr.js"></script>
+		<script type="text/javascript">
+			var videoInput = document.getElementById('inputVideo');
+			
+			var ctracker = new clm.tracker();
+			ctracker.init();
+			ctracker.start(videoInput);
+		</script>
+		<script src="js/vendors/three.min.js"></script>
+		<script src="./../../../build/face.bundle.js"></script>
+	</body>
+</html>
