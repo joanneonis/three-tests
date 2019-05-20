@@ -40,6 +40,8 @@ var effectComposer;
 var ssaoPass;
 
 var letters;
+var cameraPos = {x: 90, y: -87, z: -87};
+var cameraEnd = {x: 100, y: 100, z: 200};
 
 function init() {
 	initRenderer();
@@ -47,7 +49,7 @@ function init() {
 	scene = new THREE.Scene();
 	
 	camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-	camera.position.set(100, 100, 200);
+	camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
 	
 	initControls();
 	
@@ -79,6 +81,7 @@ function onResize() {
 
 function render() {
 	controls.update();
+	TWEEN.update();
 
 	requestAnimationFrame(render);
 	renderer.render(scene, camera);
@@ -86,6 +89,7 @@ function render() {
 
 function initGui() {
 	gui = new dat.GUI();
+	initCameraGui();
 
 	// gui.add(
 	// 	presets,
@@ -148,6 +152,7 @@ function loadModel() {
 			letters = object;
 
 			object.children.forEach(element => {
+				element.position.set(0, 50, 0);
 				element.castShadow = true; 
 				element.receiveShadow = true;
 			});
@@ -185,19 +190,43 @@ function effectComposerStuff() {
 }
 
 function animateLetters(object) {
-	let letterL = object.children[5];
-	letterL.matrixWorldNeedsUpdate = true;
-
 	var delay = 0;
-	var position = { x: 0, y: -100, z: 0 };
-	var target = {  x: 0, y: 0, z: 0 };
 
-	var tween = new TWEEN.Tween(position).to(target, 2000);
-		
+	var target = {  x: 0, y: 0, z: 0 };
+	
+	object.children.forEach(element => {
+		var position = element.position;
+		var tween = new TWEEN.Tween(position).to(target, 4000);
+		tween.delay(delay);
+		tween.easing(TWEEN.Easing.Elastic.Out);
+		tween.start();
+
+		tween.onUpdate(function(){
+			element.position.y = position.y;
+		});
+
+		delay += 100;
+	});
+}
+
+function initCameraGui() {
+	var cameraFolder = gui.addFolder('Camera');
+	cameraFolder.add(cameraPos, 'x', -1000, 1000).onChange((val) => { camera.position.x = val });
+	cameraFolder.add(cameraPos, 'y', -1000, 1000).onChange((val) => { camera.position.y = val });
+	cameraFolder.add(cameraPos, 'z', -1000, 1000).onChange((val) => { camera.position.z = val });
+}
+
+animateCamera();
+
+function animateCamera() {
+	var tween = new TWEEN.Tween(cameraPos).to(cameraEnd, 5000);
+	tween.easing(TWEEN.Easing.Quadratic.Out);
+	tween.start();
+	camera.lookAt(0, 0, 0);
+
 	tween.onUpdate(function(){
-		console.log('updating?');
-		// element.position.x = position.x;
-		letterL.position.y = position.y;
-		// element.position.z = position.z;
+		camera.position.x = cameraPos.x;
+		camera.position.y = cameraPos.y;
+		camera.position.z = cameraPos.z;
 	});
 }

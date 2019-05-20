@@ -148,12 +148,22 @@ var renderer,
 var effectComposer;
 var ssaoPass;
 var letters;
+var cameraPos = {
+  x: 90,
+  y: -87,
+  z: -87
+};
+var cameraEnd = {
+  x: 100,
+  y: 100,
+  z: 200
+};
 
 function init() {
   initRenderer();
   scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
   camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](70, window.innerWidth / window.innerHeight, 1, 1000);
-  camera.position.set(100, 100, 200);
+  camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
   initControls();
   var ambientLight = new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0xffffff, .5);
   ambientLight.position.set(0, 133, 73);
@@ -178,12 +188,14 @@ function onResize() {
 
 function render() {
   controls.update();
+  _tweenjs_tween_js__WEBPACK_IMPORTED_MODULE_9___default.a.update();
   requestAnimationFrame(render);
   renderer.render(scene, camera);
 }
 
 function initGui() {
-  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"](); // gui.add(
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+  initCameraGui(); // gui.add(
   // 	presets,
   // 	'type',
   // 	['dots', 'shade'] 
@@ -237,6 +249,7 @@ function loadModel() {
   function (object) {
     letters = object;
     object.children.forEach(function (element) {
+      element.position.set(0, 50, 0);
       element.castShadow = true;
       element.receiveShadow = true;
     });
@@ -270,24 +283,49 @@ function effectComposerStuff() {
 }
 
 function animateLetters(object) {
-  var letterL = object.children[5];
-  letterL.matrixWorldNeedsUpdate = true;
   var delay = 0;
-  var position = {
-    x: 0,
-    y: -100,
-    z: 0
-  };
   var target = {
     x: 0,
     y: 0,
     z: 0
   };
-  var tween = new _tweenjs_tween_js__WEBPACK_IMPORTED_MODULE_9___default.a.Tween(position).to(target, 2000);
-  tween.onUpdate(function () {
-    console.log('updating?'); // element.position.x = position.x;
+  object.children.forEach(function (element) {
+    var position = element.position;
+    var tween = new _tweenjs_tween_js__WEBPACK_IMPORTED_MODULE_9___default.a.Tween(position).to(target, 4000);
+    tween.delay(delay);
+    tween.easing(_tweenjs_tween_js__WEBPACK_IMPORTED_MODULE_9___default.a.Easing.Elastic.Out);
+    tween.start();
+    tween.onUpdate(function () {
+      element.position.y = position.y;
+    });
+    delay += 100;
+  });
+}
 
-    letterL.position.y = position.y; // element.position.z = position.z;
+function initCameraGui() {
+  var cameraFolder = gui.addFolder('Camera');
+  cameraFolder.add(cameraPos, 'x', -1000, 1000).onChange(function (val) {
+    camera.position.x = val;
+  });
+  cameraFolder.add(cameraPos, 'y', -1000, 1000).onChange(function (val) {
+    camera.position.y = val;
+  });
+  cameraFolder.add(cameraPos, 'z', -1000, 1000).onChange(function (val) {
+    camera.position.z = val;
+  });
+}
+
+animateCamera();
+
+function animateCamera() {
+  var tween = new _tweenjs_tween_js__WEBPACK_IMPORTED_MODULE_9___default.a.Tween(cameraPos).to(cameraEnd, 5000);
+  tween.easing(_tweenjs_tween_js__WEBPACK_IMPORTED_MODULE_9___default.a.Easing.Quadratic.Out);
+  tween.start();
+  camera.lookAt(0, 0, 0);
+  tween.onUpdate(function () {
+    camera.position.x = cameraPos.x;
+    camera.position.y = cameraPos.y;
+    camera.position.z = cameraPos.z;
   });
 }
 
