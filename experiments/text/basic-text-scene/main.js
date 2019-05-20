@@ -4,14 +4,14 @@ import * as THREE from 'three';
 import 'three/examples/js/controls/OrbitControls';
 // import 'three/examples/fonts/droi';
 
-var textLoader = new THREE.FontLoader();
 let renderer,
-		scene,
-		camera,
-		gui,
-		controls,
-		theCanvas = document.getElementById('gl-canvas');
+scene,
+camera,
+gui,
+controls,
+theCanvas = document.getElementById('gl-canvas');
 
+var textLoader = new THREE.FontLoader();
 textLoader.load( './fonts/helvetiker_regular.typeface.json', function ( font ) {
 	var textMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00});
 
