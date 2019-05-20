@@ -86,6 +86,7 @@
 /************************************************************************/
 /******/ ({
 
+<<<<<<< HEAD
 /***/ "./assets/base.scss":
 /*!**************************!*\
   !*** ./assets/base.scss ***!
@@ -116,11 +117,14 @@ if(false) {}
 
 /***/ }),
 
+=======
+>>>>>>> build
 /***/ "./experiments/sound/v4/main.js":
 /*!**************************************!*\
   !*** ./experiments/sound/v4/main.js ***!
   \**************************************/
 /*! no exports provided */
+<<<<<<< HEAD
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4039,6 +4043,11 @@ try {
 
 module.exports = g;
 
+=======
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Users/joanneonis/Documents/_PROJECTS/_VERDIEPING three/research-tests/experiments/sound/v4/main.js'");
+>>>>>>> build
 
 /***/ })
 
