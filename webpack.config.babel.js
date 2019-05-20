@@ -24,6 +24,8 @@ export default {
         text1: path.join(__dirname, 'experiments/text/shaders/main.js'),
         layered: path.join(__dirname, 'experiments/text/layered/main.js'),
         face: path.join(__dirname, 'experiments/text/facetunnel/main.js'),
+        sobel: path.join(__dirname, 'experiments/text/sobel-text/main.js'),
+        boda: path.join(__dirname, 'experiments/text/boda/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),
