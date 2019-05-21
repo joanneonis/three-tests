@@ -66,6 +66,13 @@ camera.position.set( 0, 0, 0 );
 camera.lookAt( 0, 0, 0 );
 initControls();
 scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
 var renderScene = new THREE.RenderPass( scene, camera );
 initBloom();
 
@@ -363,19 +370,21 @@ function evolveSmoke() {
 }
 
 function smokeThingies(color) {
-	let smokeSize = 10;
+	let smokeSize = 15;
 
 	cubeSineDriver = 0;
 	
 	var smokeTexture = THREE.ImageUtils.loadTexture('./Smoke-Element.png');
 	// var smokeColor = new THREE.Color("#F4182F");
 	var smokeMaterial = new THREE.MeshLambertMaterial({color: color, map: smokeTexture, transparent: true});
+	smokeMaterial.opacity = .3;
 	smokeMaterial.needsUpdate = true;
 	var smokeGeo = new THREE.PlaneGeometry(smokeSize,smokeSize);
 	smokeParticles = [];
 
 	for (let p = 0; p < 10; p++) {
-		var randomPos = Math.random() * smokeSize - (smokeSize / 2);
+		var randomPos = (Math.random() * smokeSize) - 5;
+		console.log(randomPos);
 		var randomPosZ = (Math.random() * (smokeSize * 2)) + triangleSpacing*(triangleCount - 5);
 
 		var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
