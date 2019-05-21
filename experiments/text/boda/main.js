@@ -162,8 +162,6 @@ function initBloom() {
 function initControls() {
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
 	controls.maxPolarAngle = Math.PI * 0.5;
-	// controls.minDistance = 1;
-	// controls.maxDistance = 1500;
 	// controls.addEventListener( 'change', render );
 }
 
@@ -181,74 +179,46 @@ function initGui() {
 				// nothing to do
 				break;
 		}
-		// render();
 	} );
 	var folder = gui.addFolder( 'Bloom Parameters' );
 	folder.add( params, 'exposure', 0.1, 2 ).onChange( function ( value ) {
 		renderer.toneMappingExposure = Math.pow( value, 4.0 );
-		// render();
 	} );
 	folder.add( params, 'bloomThreshold', 0.0, 1.0 ).onChange( function ( value ) {
 		bloomPass.threshold = Number( value );
-		// render();
 	} );
 	folder.add( params, 'bloomStrength', 0.0, 10.0 ).onChange( function ( value ) {
 		bloomPass.strength = Number( value );
-		// render();
 	} );
 	folder.add( params, 'bloomRadius', 0.0, 1.0 ).step( 0.01 ).onChange( function ( value ) {
 		bloomPass.radius = Number( value );
-		// render();
 	} );
 }
 
 
 function modelLoaders() {
-
 	var onProgress = function ( xhr ) {
-
 		if ( xhr.lengthComputable ) {
-
 			var percentComplete = xhr.loaded / xhr.total * 100;
 			console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
-
 		}
-
 	};
 
 	var onError = function (e) {
 		console.log(e);
 	};
 
-	// THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
-
-
-	// materials = new THREE.MeshStandardMaterial({wireframe: false});
-	// materials.color = new THREE.Color('#F4182F');
-
-	// load a resource
 	var loader = new THREE.OBJLoader();
 
 	loader.load(
-		// resource URL
 		'./triangle-v3.obj',
-		// called when resource is loaded
 		function ( object ) {
 			object.traverse( disposeMaterial );
-			// object.traverse( function ( child ) {
-			// 		if ( child instanceof THREE.Mesh ) {
-			// 				// child.material = materials;
-							
-			// 		}
-			// } );
-			
-			// rotateObject(object, 20, 0, 0);
 
 			var color = new THREE.Color();
 			color.setHSL( Math.random(), 0.7, Math.random() * 0.2 + 0.05 );
 
 			smokeThingies(color);
-			// color.setHSL(...colors[0]);
 			var material = new THREE.MeshBasicMaterial( { color: color } );
 			material.needsUpdate = true;
 
@@ -257,19 +227,14 @@ function modelLoaders() {
 			triangle.material = material;
 
 			setTriangles(triangle);
-
 		},
 		// called when loading is in progresses
 		function ( xhr ) {
-
 			console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
 		},
 		// called when loading has errors
 		function ( error ) {
-
 			console.log( 'An error happened' );
-
 		}
 	);
 }
@@ -292,8 +257,6 @@ textLoader.load( './fonts/Cornerstone_Regular.json', function ( font ) {
 	animateCameraFurther({ x: 0, y: 0, z: triangleSpacing*(triangleCount - 1) - 8 });
 	createTextLines('Challenge your', 'quest-self', font, triangleSpacing*(triangleCount - 2) + 10);
 	cornerStone = font;
-	// createTextLines('Find your', 'quest-self', font, triangleSpacing*(triangleCount - 3) + 10);
-	// createTextLines('What is', 'your weakness?', font, triangleSpacing*(triangleCount - 4) + 10);
 });
 
 function createTextLines(first, second, font, z) {
@@ -354,6 +317,7 @@ function animateTriangleColor() {
 
 	smokeParticles.forEach(element => {
 		element.material.color = newColor;
+		element.position.z -= triangleSpacing;
 	});
 }
 
@@ -361,11 +325,11 @@ function animateTriangleColor() {
 document.addEventListener("click", function(){
 	animateCameraFurther({ x: 0, y: 0, z: triangleSpacing*(triangleCount - (cameraStep + 1)) - 8 });
 	animateTriangleColor();
-
-	// console.log(lines[0].firstline);
-	// console.log(lines[0].secondline);
-
+	
 	switch ( cameraStep ) 	{
+		case 1: 
+			console.log('hallo');
+			break;
 		case 2:
 			createTextLines('Find your', 'quest-self', cornerStone, triangleSpacing*(triangleCount - 3) + 10);
 			break;
@@ -376,9 +340,6 @@ document.addEventListener("click", function(){
 				createTextLines('What is', 'your weakness?', cornerStone, triangleSpacing*(triangleCount - 5) + 10);
 			break;
 	}
-
-	console.log(cameraStep);
-	// scene.remove(lines);
 });
 
 document.addEventListener( 'mousemove', onDocumentMouseMove, false );
@@ -414,7 +375,7 @@ function smokeThingies(color) {
 
 	for (let p = 0; p < 10; p++) {
 		var randomPos = Math.random() * smokeSize - (smokeSize / 2);
-		var randomPosZ = Math.random() * (smokeSize * 2) - 10;
+		var randomPosZ = (Math.random() * (smokeSize * 2)) + triangleSpacing*(triangleCount - 4);
 
 		var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
 		particle.position.set(randomPos, randomPos, randomPosZ);
@@ -422,4 +383,4 @@ function smokeThingies(color) {
 		scene.add(particle);
 		smokeParticles.push(particle);
 	}
-}
+} 

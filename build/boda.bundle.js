@@ -298,21 +298,20 @@ function initGui() {
       case 'Scene only':
         // nothing to do
         break;
-    } // render();
-
+    }
   });
   var folder = gui.addFolder('Bloom Parameters');
   folder.add(params, 'exposure', 0.1, 2).onChange(function (value) {
-    renderer.toneMappingExposure = Math.pow(value, 4.0); // render();
+    renderer.toneMappingExposure = Math.pow(value, 4.0);
   });
   folder.add(params, 'bloomThreshold', 0.0, 1.0).onChange(function (value) {
-    bloomPass.threshold = Number(value); // render();
+    bloomPass.threshold = Number(value);
   });
   folder.add(params, 'bloomStrength', 0.0, 10.0).onChange(function (value) {
-    bloomPass.strength = Number(value); // render();
+    bloomPass.strength = Number(value);
   });
   folder.add(params, 'bloomRadius', 0.0, 1.0).step(0.01).onChange(function (value) {
-    bloomPass.radius = Number(value); // render();
+    bloomPass.radius = Number(value);
   });
 }
 
@@ -326,27 +325,14 @@ function modelLoaders() {
 
   var onError = function onError(e) {
     console.log(e);
-  }; // THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
-  // materials = new THREE.MeshStandardMaterial({wireframe: false});
-  // materials.color = new THREE.Color('#F4182F');
-  // load a resource
-
+  };
 
   var loader = new three__WEBPACK_IMPORTED_MODULE_1__["OBJLoader"]();
-  loader.load( // resource URL
-  './triangle-v3.obj', // called when resource is loaded
-  function (object) {
-    object.traverse(disposeMaterial); // object.traverse( function ( child ) {
-    // 		if ( child instanceof THREE.Mesh ) {
-    // 				// child.material = materials;
-    // 		}
-    // } );
-    // rotateObject(object, 20, 0, 0);
-
+  loader.load('./triangle-v3.obj', function (object) {
+    object.traverse(disposeMaterial);
     var color = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]();
     color.setHSL(Math.random(), 0.7, Math.random() * 0.2 + 0.05);
-    smokeThingies(color); // color.setHSL(...colors[0]);
-
+    smokeThingies(color);
     var material = new three__WEBPACK_IMPORTED_MODULE_1__["MeshBasicMaterial"]({
       color: color
     });
@@ -383,8 +369,7 @@ textLoader.load('./fonts/Cornerstone_Regular.json', function (font) {
     z: triangleSpacing * (triangleCount - 1) - 8
   });
   createTextLines('Challenge your', 'quest-self', font, triangleSpacing * (triangleCount - 2) + 10);
-  cornerStone = font; // createTextLines('Find your', 'quest-self', font, triangleSpacing*(triangleCount - 3) + 10);
-  // createTextLines('What is', 'your weakness?', font, triangleSpacing*(triangleCount - 4) + 10);
+  cornerStone = font;
 });
 
 function createTextLines(first, second, font, z) {
@@ -443,6 +428,7 @@ function animateTriangleColor() {
   });
   smokeParticles.forEach(function (element) {
     element.material.color = newColor;
+    element.position.z -= triangleSpacing;
   });
 }
 
@@ -452,10 +438,13 @@ document.addEventListener("click", function () {
     y: 0,
     z: triangleSpacing * (triangleCount - (cameraStep + 1)) - 8
   });
-  animateTriangleColor(); // console.log(lines[0].firstline);
-  // console.log(lines[0].secondline);
+  animateTriangleColor();
 
   switch (cameraStep) {
+    case 1:
+      console.log('hallo');
+      break;
+
     case 2:
       createTextLines('Find your', 'quest-self', cornerStone, triangleSpacing * (triangleCount - 3) + 10);
       break;
@@ -468,8 +457,6 @@ document.addEventListener("click", function () {
       createTextLines('What is', 'your weakness?', cornerStone, triangleSpacing * (triangleCount - 5) + 10);
       break;
   }
-
-  console.log(cameraStep); // scene.remove(lines);
 });
 document.addEventListener('mousemove', onDocumentMouseMove, false);
 
@@ -507,7 +494,7 @@ function smokeThingies(color) {
 
   for (var p = 0; p < 10; p++) {
     var randomPos = Math.random() * smokeSize - smokeSize / 2;
-    var randomPosZ = Math.random() * (smokeSize * 2) - 10;
+    var randomPosZ = Math.random() * (smokeSize * 2) + triangleSpacing * (triangleCount - 4);
     var particle = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](smokeGeo, smokeMaterial);
     particle.position.set(randomPos, randomPos, randomPosZ);
     particle.rotation.z = Math.random() * 36;
