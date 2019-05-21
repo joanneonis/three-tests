@@ -278,9 +278,7 @@ function initBloom() {
 
 function initControls() {
   controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement);
-  controls.maxPolarAngle = Math.PI * 0.5; // controls.minDistance = 1;
-  // controls.maxDistance = 1500;
-  // controls.addEventListener( 'change', render );
+  controls.maxPolarAngle = Math.PI * 0.5; // controls.addEventListener( 'change', render );
 }
 
 function initGui() {
@@ -328,7 +326,7 @@ function modelLoaders() {
   };
 
   var loader = new three__WEBPACK_IMPORTED_MODULE_1__["OBJLoader"]();
-  loader.load('./triangle-v3.obj', function (object) {
+  loader.load('./triangle-v5.obj', function (object) {
     object.traverse(disposeMaterial);
     var color = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]();
     color.setHSL(Math.random(), 0.7, Math.random() * 0.2 + 0.05);
@@ -338,7 +336,8 @@ function modelLoaders() {
     });
     material.needsUpdate = true;
     triangle = object.children[0];
-    triangle.position.set(-2.0639669336378574 / 2, 0, -0.06514400243759155 / 2);
+    triangle.geometry.center(); // triangle.position.set(-2.0639669336378574 / 2, 0, -0.06514400243759155 / 2);
+
     triangle.material = material;
     setTriangles(triangle);
   }, // called when loading is in progresses
@@ -494,7 +493,7 @@ function smokeThingies(color) {
 
   for (var p = 0; p < 10; p++) {
     var randomPos = Math.random() * smokeSize - smokeSize / 2;
-    var randomPosZ = Math.random() * (smokeSize * 2) + triangleSpacing * (triangleCount - 4);
+    var randomPosZ = Math.random() * (smokeSize * 2) + triangleSpacing * (triangleCount - 5);
     var particle = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](smokeGeo, smokeMaterial);
     particle.position.set(randomPos, randomPos, randomPosZ);
     particle.rotation.z = Math.random() * 36;
