@@ -24,6 +24,7 @@ var triangle;
 var triangles = [];
 var triangleCount = 5;
 var colors = [[.74, .64, .59], [.27, .235, .117], [.29, .24, .9], [.27, .235, .117]];
+var currentColor;
 var triangleSpacing = 30;
 var cornerStone;
 
@@ -44,8 +45,10 @@ var params = {
 var darkMaterial = new THREE.MeshBasicMaterial( { color: "black" } );
 var materials = {};
 var container = document.getElementById( 'container' );
-
+clock = new THREE.Clock();
 let cameraStep = 0;
+
+var smokeParticles, clock, material, mesh, delta, cubeSineDriver;
 
 renderer = new THREE.WebGLRenderer( { antialias: true } );
 renderer.setPixelRatio( window.devicePixelRatio );
@@ -54,6 +57,7 @@ renderer.toneMapping = THREE.ReinhardToneMapping;
 document.body.appendChild( renderer.domElement );
 scene = new THREE.Scene();
 
+// smokeThingies();
 
 camera = new THREE.PerspectiveCamera(7, window.innerWidth / window.innerHeight, 1, 1000);
 // camera.position.z = 300;
@@ -91,6 +95,11 @@ function render() {
 	renderBloom( true );
 	finalComposer.render();
 	TWEEN.update();
+
+	delta = clock.getDelta();
+	
+	if (smokeParticles) { evolveSmoke(); }
+
 	updateOnMouseMove();
 	requestAnimationFrame(render);
 }
@@ -237,6 +246,8 @@ function modelLoaders() {
 
 			var color = new THREE.Color();
 			color.setHSL( Math.random(), 0.7, Math.random() * 0.2 + 0.05 );
+
+			smokeThingies(color);
 			// color.setHSL(...colors[0]);
 			var material = new THREE.MeshBasicMaterial( { color: color } );
 			material.needsUpdate = true;
@@ -334,11 +345,15 @@ function animateCameraFurther(cameraEnd) {
 }
 
 function animateTriangleColor() {
+	var newColor = new THREE.Color();
+	newColor.setHSL( Math.random(), 0.7, Math.random() * 0.2 + 0.05 ); 
+	
 	triangles.forEach(shape => {
-		// var oldColor = shape.material.color;
-		var newColor = new THREE.Color();
-		newColor.setHSL( Math.random(), 0.7, Math.random() * 0.2 + 0.05 );
 		shape.material.color = newColor;
+	});
+
+	smokeParticles.forEach(element => {
+		element.material.color = newColor;
 	});
 }
 
@@ -376,4 +391,35 @@ function onDocumentMouseMove( event ) {
 function updateOnMouseMove() {
 	camera.position.x += ( mouseX - camera.position.x ) * .000005;
 	camera.position.y += ( - mouseY - camera.position.y ) * .000008;
+}
+
+function evolveSmoke() {
+	var sp = smokeParticles.length;
+	while(sp--) {
+			smokeParticles[sp].rotation.z += (delta * 0.2);
+	}
+}
+
+function smokeThingies(color) {
+	let smokeSize = 10;
+
+	cubeSineDriver = 0;
+	
+	var smokeTexture = THREE.ImageUtils.loadTexture('./Smoke-Element.png');
+	// var smokeColor = new THREE.Color("#F4182F");
+	var smokeMaterial = new THREE.MeshLambertMaterial({color: color, map: smokeTexture, transparent: true});
+	smokeMaterial.needsUpdate = true;
+	var smokeGeo = new THREE.PlaneGeometry(smokeSize,smokeSize);
+	smokeParticles = [];
+
+	for (let p = 0; p < 10; p++) {
+		var randomPos = Math.random() * smokeSize - (smokeSize / 2);
+		var randomPosZ = Math.random() * (smokeSize * 2) - 10;
+
+		var particle = new THREE.Mesh(smokeGeo,smokeMaterial);
+		particle.position.set(randomPos, randomPos, randomPosZ);
+		particle.rotation.z = Math.random() * 36;
+		scene.add(particle);
+		smokeParticles.push(particle);
+	}
 }

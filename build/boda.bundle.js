@@ -140,6 +140,7 @@ var triangle;
 var triangles = [];
 var triangleCount = 5;
 var colors = [[.74, .64, .59], [.27, .235, .117], [.29, .24, .9], [.27, .235, .117]];
+var currentColor;
 var triangleSpacing = 30;
 var cornerStone;
 var mouseX, mouseY;
@@ -161,7 +162,9 @@ var darkMaterial = new three__WEBPACK_IMPORTED_MODULE_1__["MeshBasicMaterial"]({
 });
 var materials = {};
 var container = document.getElementById('container');
+clock = new three__WEBPACK_IMPORTED_MODULE_1__["Clock"]();
 var cameraStep = 0;
+var smokeParticles, clock, material, mesh, delta, cubeSineDriver;
 renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
   antialias: true
 });
@@ -169,7 +172,8 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = three__WEBPACK_IMPORTED_MODULE_1__["ReinhardToneMapping"];
 document.body.appendChild(renderer.domElement);
-scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
+scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"](); // smokeThingies();
+
 camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](7, window.innerWidth / window.innerHeight, 1, 1000); // camera.position.z = 300;
 // camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 200 );
 
@@ -204,6 +208,12 @@ function render() {
   renderBloom(true);
   finalComposer.render();
   _tweenjs_tween_js__WEBPACK_IMPORTED_MODULE_11___default.a.update();
+  delta = clock.getDelta();
+
+  if (smokeParticles) {
+    evolveSmoke();
+  }
+
   updateOnMouseMove();
   requestAnimationFrame(render);
 }
@@ -334,7 +344,8 @@ function modelLoaders() {
     // rotateObject(object, 20, 0, 0);
 
     var color = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]();
-    color.setHSL(Math.random(), 0.7, Math.random() * 0.2 + 0.05); // color.setHSL(...colors[0]);
+    color.setHSL(Math.random(), 0.7, Math.random() * 0.2 + 0.05);
+    smokeThingies(color); // color.setHSL(...colors[0]);
 
     var material = new three__WEBPACK_IMPORTED_MODULE_1__["MeshBasicMaterial"]({
       color: color
@@ -425,11 +436,13 @@ function animateCameraFurther(cameraEnd) {
 }
 
 function animateTriangleColor() {
+  var newColor = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]();
+  newColor.setHSL(Math.random(), 0.7, Math.random() * 0.2 + 0.05);
   triangles.forEach(function (shape) {
-    // var oldColor = shape.material.color;
-    var newColor = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]();
-    newColor.setHSL(Math.random(), 0.7, Math.random() * 0.2 + 0.05);
     shape.material.color = newColor;
+  });
+  smokeParticles.forEach(function (element) {
+    element.material.color = newColor;
   });
 }
 
@@ -468,6 +481,39 @@ function onDocumentMouseMove(event) {
 function updateOnMouseMove() {
   camera.position.x += (mouseX - camera.position.x) * .000005;
   camera.position.y += (-mouseY - camera.position.y) * .000008;
+}
+
+function evolveSmoke() {
+  var sp = smokeParticles.length;
+
+  while (sp--) {
+    smokeParticles[sp].rotation.z += delta * 0.2;
+  }
+}
+
+function smokeThingies(color) {
+  var smokeSize = 10;
+  cubeSineDriver = 0;
+  var smokeTexture = three__WEBPACK_IMPORTED_MODULE_1__["ImageUtils"].loadTexture('./Smoke-Element.png'); // var smokeColor = new THREE.Color("#F4182F");
+
+  var smokeMaterial = new three__WEBPACK_IMPORTED_MODULE_1__["MeshLambertMaterial"]({
+    color: color,
+    map: smokeTexture,
+    transparent: true
+  });
+  smokeMaterial.needsUpdate = true;
+  var smokeGeo = new three__WEBPACK_IMPORTED_MODULE_1__["PlaneGeometry"](smokeSize, smokeSize);
+  smokeParticles = [];
+
+  for (var p = 0; p < 10; p++) {
+    var randomPos = Math.random() * smokeSize - smokeSize / 2;
+    var randomPosZ = Math.random() * (smokeSize * 2) - 10;
+    var particle = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](smokeGeo, smokeMaterial);
+    particle.position.set(randomPos, randomPos, randomPosZ);
+    particle.rotation.z = Math.random() * 36;
+    scene.add(particle);
+    smokeParticles.push(particle);
+  }
 }
 
 /***/ }),
