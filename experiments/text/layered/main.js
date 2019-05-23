@@ -41,7 +41,7 @@ var effectComposer;
 var ssaoPass;
 
 var letters;
-var cameraPos = {x: 90, y: -87, z: -87};
+var cameraPos = {x: -90, y: 90, z: 90};
 var cameraEnd = {x: 100, y: 100, z: 200};
 
 function init() {
@@ -220,14 +220,14 @@ function initCameraGui() {
 animateCamera();
 
 function animateCamera() {
-	var tween = new TWEEN.Tween(cameraPos).to(cameraEnd, 5000);
-	tween.easing(TWEEN.Easing.Quadratic.Out);
-	tween.start();
-	camera.lookAt(0, 0, 0);
+	// var tween = new TWEEN.Tween(cameraPos).to(cameraEnd, 5000);
+	// tween.easing(TWEEN.Easing.Quadratic.Out);
+	// tween.start();
+	// camera.lookAt(0, 0, 0);
 
-	tween.onUpdate(function(){
-		camera.position.x = cameraPos.x;
-		camera.position.y = cameraPos.y;
-		camera.position.z = cameraPos.z;
-	});
+	// tween.onUpdate(function(){
+	// 	camera.position.x = cameraPos.x;
+	// 	camera.position.y = cameraPos.y;
+	// 	camera.position.z = cameraPos.z;
+	// });
 }

@@ -27,6 +27,7 @@ export default {
         sobel: path.join(__dirname, 'experiments/text/sobel-text/main.js'),
         boda: path.join(__dirname, 'experiments/text/boda/main.js'),
         boda2: path.join(__dirname, 'experiments/text/boda-2/main.js'),
+        textBasic: path.join(__dirname, 'experiments/text/basic-text-scene/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),

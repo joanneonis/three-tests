@@ -14,9 +14,19 @@ import 'three/examples/js/postprocessing/UnrealBloomPass.js';
 
 import TWEEN from '@tweenjs/tween.js';
 
+import RendererStats from '@xailabs/three-renderer-stats';
+
+
 //?--------------------------------------------------------------------
 //?		Base
 //?--------------------------------------------------------------------
+
+const rendererStats = new RendererStats();
+
+rendererStats.domElement.style.position	= 'absolute'
+rendererStats.domElement.style.left	= '0px'
+rendererStats.domElement.style.bottom	= '0px'
+document.body.appendChild( rendererStats.domElement )
 
 var scene, camera, geometry, controls;
 var bloomComposer, bloomPass, finalComposer;
@@ -65,14 +75,14 @@ camera = new THREE.PerspectiveCamera(7, window.innerWidth / window.innerHeight, 
 camera.position.set( 0, 0, 0 );
 camera.lookAt( 0, 0, 0 );
 initControls();
-scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
-scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
-scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
-scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
-scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
-scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
-scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
-scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 10 ) );
+// scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+// scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+// scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+// scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+// scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+// scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
+// scene.add( new THREE.AmbientLight( "rgb(255, 255, 255)", 1 ) );
 var renderScene = new THREE.RenderPass( scene, camera );
 initBloom();
 
@@ -97,18 +107,20 @@ function disposeMaterial( obj ) {
 	}
 }
 function render() {
+	requestAnimationFrame(render);
+
 	controls.update();
 	renderer.render( scene, camera );
-	renderBloom( true );
-	finalComposer.render();
 	TWEEN.update();
-
+	
 	delta = clock.getDelta();
 	
 	if (smokeParticles) { evolveSmoke(); }
-
+	
 	updateOnMouseMove();
-	requestAnimationFrame(render);
+	renderBloom( true );
+	finalComposer.render();
+	rendererStats.update(renderer);
 }
 
 render();
@@ -227,7 +239,7 @@ function modelLoaders() {
 
 			smokeThingies(color);
 			var material = new THREE.MeshBasicMaterial( { color: color } );
-			material.needsUpdate = true;
+			// material.needsUpdate = true;
 
 			triangle = object.children[0];
 			triangle.geometry.center();
@@ -378,7 +390,7 @@ function smokeThingies(color) {
 	// var smokeColor = new THREE.Color("#F4182F");
 	var smokeMaterial = new THREE.MeshLambertMaterial({color: color, map: smokeTexture, transparent: true});
 	smokeMaterial.opacity = .3;
-	smokeMaterial.needsUpdate = true;
+	// smokeMaterial.needsUpdate = true;
 	var smokeGeo = new THREE.PlaneGeometry(smokeSize,smokeSize);
 	smokeParticles = [];
 
