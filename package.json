@@ -6,6 +6,7 @@
   "dependencies": {
     "@babel/runtime": "^7.4.4",
     "@tweenjs/tween.js": "^17.3.0",
+    "@xailabs/three-renderer-stats": "^1.0.4",
     "babel-loader": "^8.0.5",
     "babel-plugin-prismjs": "^1.0.2",
     "css-loader": "^2.1.1",
