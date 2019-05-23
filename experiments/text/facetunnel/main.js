@@ -7,6 +7,8 @@ var ww = document.documentElement.clientWidth || document.body.clientWidth;
 var wh = window.innerHeight;
 
 var Facepositions;
+var faceWidth;
+// var faceHeight;
 
 // Constructor function
 function Tunnel() {
@@ -133,6 +135,19 @@ Tunnel.prototype.updateCameraPosition = function() {
   // Move a bit the camera horizontally & vertically
   this.camera.position.x = nosePos.x * 0.015;
   this.camera.position.y = -nosePos.y * 0.015;
+
+  // var faceSquare = {
+  //   0: Facepositions[1],
+  //   1: [Facepositions[1][0], Facepositions[7][1]],
+  //   2: [Facepositions[13][0], Facepositions[7][1]],
+  //   3: Facepositions[13],
+  // };
+
+  faceWidth = Facepositions[13][0] - Facepositions[1][0];
+  // faceHeight = Facepositions[7][1] - Facepositions[1][1];
+
+  // console.log(this.speed, faceWidth);
+  this.speed = map_range(faceWidth, 20, 200, 0.1, 0.00005);
 };
 
 Tunnel.prototype.updateMaterialOffset = function() {
