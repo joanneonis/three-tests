@@ -207,10 +207,15 @@ function updateRandomPos() {
   console.log(objectScene.children.length);
 
   for (var i = 0; i < objectScene.children.length; i++) {
+    var axis = getRandomAxis();
     objectScene.children[i].rotation.x += Math.random() * 0.01;
     objectScene.children[i].rotation.z += Math.random() * 0.01; // objectScene.children[i].position.x += 0.001;
     // objectScene.children[i].position.y += 0.001;
   }
+}
+
+function getRandomAxis() {
+  return new three__WEBPACK_IMPORTED_MODULE_1__["Vector3"](Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
 }
 
 /***/ }),
