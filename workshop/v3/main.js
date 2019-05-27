@@ -33,7 +33,7 @@ var controls;
 var model;
 let meshes = [];
 let theData;
-let GridSize = 10;
+let GridSize = 15;
 
 function init() {
 
@@ -141,6 +141,8 @@ function loadModelThingies() {
 	loader.load('./models/piramidthing2.glb', function (gltf) {
 		model = gltf.scene.children[2];
 
+		console.log(gltf.scene);
+
 		createGrid(GridSize, GridSize, model);
 	});
 }
@@ -179,9 +181,9 @@ function createGrid(x, y, model) {
 			newModel.position.x = (xDistance * i) + xOffset;
 			newModel.position.z = (zDistance * j) + yOffset;
 
-			newModel.morphTargetInfluences[6] = THREE.Math.mapLinear((theData[i][2015 - j]) / 1000000, 0, 4.4, -1, 2);
+			newModel.morphTargetInfluences[6] = THREE.Math.mapLinear((theData[i][2015 - j]) / 1000000, 0, 4.4, -1, 3);
 			// console.log((theData[i][2015 - j]) / 1000000);
-			newModel.morphTargetInfluences[2] = THREE.Math.mapLinear((theData[j][2015 - i]) / 1000000, 0, 4.4, -1, 1);
+			newModel.morphTargetInfluences[0] = THREE.Math.mapLinear((theData[j][2015 - i]) / 1000000, 0, 4.4, 0, 1);
 			// console.log(theData[i][2015 - j]);
 			// // save meshes instead of adding to scene (for merging later)
 			// meshes[count] = mesh;
@@ -208,3 +210,35 @@ function loadJSON(callback) {
 	};
 	xobj.send(null);  
 }
+
+
+//?--------------------------------------------------------------------
+//?		Download part
+//?--------------------------------------------------------------------
+// create download file 
+// inspiration from: (https://stackoverflow.com/questions/2897619/using-html5-javascript-to-generate-and-save-a-file)
+function download(filename, text) {
+	var pom = document.createElement('a');
+	pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+	pom.setAttribute('download', filename);
+
+	if (document.createEvent) {
+		var event = document.createEvent('MouseEvents');
+		event.initEvent('click', true, true);
+		pom.dispatchEvent(event);
+	} else {
+		pom.click();
+	}
+}
+
+// mesh to obj
+function generateObj(mesh) {
+	var exporter = new THREE.OBJExporter();
+	objFile = exporter.parse(mesh);
+}
+
+// download attached to btn
+document.querySelector('button').addEventListener('click', function () {
+	generateObj(mesh);
+	download('test.obj', objFile);
+});
