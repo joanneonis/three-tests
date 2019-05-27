@@ -33,6 +33,7 @@ var controls;
 var model;
 let meshes = [];
 let theData;
+let GridSize = 10;
 
 function init() {
 
@@ -52,14 +53,14 @@ function init() {
 	let ambient = new THREE.AmbientLight();
 	scene.add(ambient);
 
-	let point = new THREE.PointLight();
-	scene.add(point);
+	// let point = new THREE.PointLight();
+	// scene.add(point);
 
 	scene.background = bgColor;
 
 	window.addEventListener('resize', onResize, false);
 
-	scene.userData.activeLightSettings = { type: 'Spotlight' };
+	scene.userData.activeLightSettings = { type: 'PointLight' };
 	scene.userData.gui = gui;
 
 	// Groundplane
@@ -78,8 +79,8 @@ function init() {
 	// });
 	// scene.add(new THREE.Mesh(geometry, material));
 
-	setlightType('HemisphereLight', scene);
-	changeLightType('HemisphereLight', scene);
+	setlightType('PointLight', scene);
+	changeLightType('PointLight', scene);
 	buildGui(scene);
 }
 
@@ -140,7 +141,7 @@ function loadModelThingies() {
 	loader.load('./models/piramidthing2.glb', function (gltf) {
 		model = gltf.scene.children[2];
 
-		createGrid(28, 4, model);
+		createGrid(GridSize, GridSize, model);
 	});
 }
 
@@ -169,8 +170,8 @@ function createGrid(x, y, model) {
 	var zDistance = 2.1;
 
 	//initial offset so does not start in middle.
-	var xOffset = 0;
-	var yOffset = 0;
+	var xOffset = -GridSize;
+	var yOffset = -GridSize;
 
 	for (var i = 0; i < x; i++) {
 		for (var j = 0; j < y; j++) {
@@ -178,6 +179,10 @@ function createGrid(x, y, model) {
 			newModel.position.x = (xDistance * i) + xOffset;
 			newModel.position.z = (zDistance * j) + yOffset;
 
+			newModel.morphTargetInfluences[6] = THREE.Math.mapLinear((theData[i][2015 - j]) / 1000000, 0, 4.4, -1, 2);
+			// console.log((theData[i][2015 - j]) / 1000000);
+			newModel.morphTargetInfluences[2] = THREE.Math.mapLinear((theData[j][2015 - i]) / 1000000, 0, 4.4, -1, 1);
+			// console.log(theData[i][2015 - j]);
 			// // save meshes instead of adding to scene (for merging later)
 			// meshes[count] = mesh;
 			count++;

@@ -23258,6 +23258,7 @@ var controls;
 var model;
 var meshes = [];
 var theData;
+var GridSize = 10;
 
 function init() {
   initRenderer();
@@ -23268,13 +23269,13 @@ function init() {
   scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AxesHelper"](100));
   var bgColor = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#a3e1fe');
   var ambient = new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"]();
-  scene.add(ambient);
-  var point = new three__WEBPACK_IMPORTED_MODULE_1__["PointLight"]();
-  scene.add(point);
+  scene.add(ambient); // let point = new THREE.PointLight();
+  // scene.add(point);
+
   scene.background = bgColor;
   window.addEventListener('resize', onResize, false);
   scene.userData.activeLightSettings = {
-    type: 'Spotlight'
+    type: 'PointLight'
   };
   scene.userData.gui = gui; // Groundplane
   // var geometry = new THREE.PlaneGeometry( 5000, 2000, 32 );
@@ -23291,8 +23292,8 @@ function init() {
   // });
   // scene.add(new THREE.Mesh(geometry, material));
 
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["setlightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["changeLightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["setlightType"])('PointLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["changeLightType"])('PointLight', scene);
   Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["buildGui"])(scene);
 }
 
@@ -23345,7 +23346,7 @@ function loadModelThingies() {
   var loader = new three__WEBPACK_IMPORTED_MODULE_1__["GLTFLoader"]();
   loader.load('./models/piramidthing2.glb', function (gltf) {
     model = gltf.scene.children[2];
-    createGrid(28, 4, model);
+    createGrid(GridSize, GridSize, model);
   });
 }
 
@@ -23379,14 +23380,18 @@ function createGrid(x, y, model) {
   var xDistance = 2.1;
   var zDistance = 2.1; //initial offset so does not start in middle.
 
-  var xOffset = 0;
-  var yOffset = 0;
+  var xOffset = -GridSize;
+  var yOffset = -GridSize;
 
   for (var i = 0; i < x; i++) {
     for (var j = 0; j < y; j++) {
       var newModel = model.clone();
       newModel.position.x = xDistance * i + xOffset;
-      newModel.position.z = zDistance * j + yOffset; // // save meshes instead of adding to scene (for merging later)
+      newModel.position.z = zDistance * j + yOffset;
+      newModel.morphTargetInfluences[6] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(theData[i][2015 - j] / 1000000, 0, 4.4, -1, 2); // console.log((theData[i][2015 - j]) / 1000000);
+
+      newModel.morphTargetInfluences[2] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(theData[j][2015 - i] / 1000000, 0, 4.4, -1, 1); // console.log(theData[i][2015 - j]);
+      // // save meshes instead of adding to scene (for merging later)
       // meshes[count] = mesh;
 
       count++;
