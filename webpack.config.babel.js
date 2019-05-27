@@ -29,6 +29,7 @@ export default {
         boda2: path.join(__dirname, 'experiments/text/boda-2/main.js'),
         textBasic: path.join(__dirname, 'experiments/text/basic-text-scene/main.js'),
         explosion1: path.join(__dirname, 'experiments/explosion/v1/main.js'),
+        workshop1: path.join(__dirname, 'workshop/v3/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),
