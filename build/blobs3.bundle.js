@@ -102,7 +102,104 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
 
 
+ //
 
+var positions;
+var scales;
+var SEPARATION = 40;
+var AMOUNTX = 50;
+var AMOUNTY = 50;
+var camera, scene, renderer;
+var controls;
+var clock = new three__WEBPACK_IMPORTED_MODULE_1__["Clock"]();
+var tp;
+var particles,
+    count = 0;
+
+function init() {
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 10000); // camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 0, 10000 );
+
+  camera.position.x = -5837.563823462691;
+  camera.position.y = 300;
+  camera.position.z = 600;
+  scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
+  renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
+    antialias: true
+  });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  initControls();
+  var numParticles = AMOUNTX * AMOUNTY;
+  positions = new Float32Array(numParticles * 3); //*  *3, because xyz per dot
+
+  scales = new Float32Array(numParticles); //* scale per dot
+
+  var i = 0,
+      j = 0;
+
+  for (var ix = 0; ix < AMOUNTX; ix++) {
+    for (var iy = 0; iy < AMOUNTY; iy++) {
+      positions[i] = ix * SEPARATION - AMOUNTX * SEPARATION / 2; // x
+
+      positions[i + 1] = 0; // y
+
+      positions[i + 2] = iy * SEPARATION - AMOUNTY * SEPARATION / 2; // z
+
+      scales[j] = 80;
+      i += 3; // skip to nex pos
+
+      j++;
+    }
+  }
+
+  var geometry = new three__WEBPACK_IMPORTED_MODULE_1__["BufferGeometry"]();
+  geometry.addAttribute('position', new three__WEBPACK_IMPORTED_MODULE_1__["BufferAttribute"](positions, 3));
+  geometry.addAttribute('scale', new three__WEBPACK_IMPORTED_MODULE_1__["BufferAttribute"](scales, 1)); // got from example three dotwaves
+
+  var material = new three__WEBPACK_IMPORTED_MODULE_1__["ShaderMaterial"]({
+    uniforms: {
+      color: {
+        value: new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#7A57DA')
+      }
+    },
+    vertexShader: document.getElementById('vertexshader').textContent,
+    fragmentShader: document.getElementById('fragmentshader').textContent
+  });
+  particles = new three__WEBPACK_IMPORTED_MODULE_1__["Points"](geometry, material);
+  scene.add(particles);
+  scene.background = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#FAFDFF');
+  document.body.appendChild(renderer.domElement);
+  window.addEventListener('resize', onWindowResize, false);
+}
+
+function initControls() {
+  controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement);
+  controls.enableKeys = false;
+  controls.enablePan = true;
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  render();
+}
+
+function render() {
+  camera.lookAt(scene.position);
+  particles.geometry.attributes.position.needsUpdate = true;
+  particles.geometry.attributes.scale.needsUpdate = true;
+  renderer.render(scene, camera);
+  tp = clock.getDelta();
+  count += 0.1;
+}
+
+init();
+animate();
 
 /***/ }),
 
