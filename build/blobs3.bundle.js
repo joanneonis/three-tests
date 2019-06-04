@@ -102,22 +102,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
 
 
- //
 
+var yearSlider = document.querySelector('input');
 var positions;
 var scales;
-var SEPARATION = 40;
-var AMOUNTX = 50;
-var AMOUNTY = 50;
+var SEPARATION = 100;
+var AMOUNTX = 262; // replaced with countries
+
+var AMOUNTY = 215; // ?
+
+var currentYear = 2010;
 var camera, scene, renderer;
 var controls;
 var clock = new three__WEBPACK_IMPORTED_MODULE_1__["Clock"]();
 var tp;
 var particles,
     count = 0;
+var incomeData;
+var lifeData;
+var populationData;
 
 function init() {
-  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 10000); // camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 0, 10000 );
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000000); // camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 0, 10000 );
 
   camera.position.x = -5837.563823462691;
   camera.position.y = 300;
@@ -133,24 +139,7 @@ function init() {
   positions = new Float32Array(numParticles * 3); //*  *3, because xyz per dot
 
   scales = new Float32Array(numParticles); //* scale per dot
-
-  var i = 0,
-      j = 0;
-
-  for (var ix = 0; ix < AMOUNTX; ix++) {
-    for (var iy = 0; iy < AMOUNTY; iy++) {
-      positions[i] = ix * SEPARATION - AMOUNTX * SEPARATION / 2; // x
-
-      positions[i + 1] = 0; // y
-
-      positions[i + 2] = iy * SEPARATION - AMOUNTY * SEPARATION / 2; // z
-
-      scales[j] = 80;
-      i += 3; // skip to nex pos
-
-      j++;
-    }
-  }
+  // initParticles();
 
   var geometry = new three__WEBPACK_IMPORTED_MODULE_1__["BufferGeometry"]();
   geometry.addAttribute('position', new three__WEBPACK_IMPORTED_MODULE_1__["BufferAttribute"](positions, 3));
@@ -200,6 +189,69 @@ function render() {
 
 init();
 animate();
+
+var getJSON = function getJSON(url) {
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', url, true);
+    xhr.responseType = 'json';
+
+    xhr.onload = function () {
+      var status = xhr.status;
+
+      if (status == 200) {
+        resolve(xhr.response);
+      } else {
+        reject(status);
+      }
+    };
+
+    xhr.send();
+  });
+}; // var incomeData;
+// var lifeData;
+// var populationData;
+
+
+var promise1 = getJSON('./data/income.json');
+var promise2 = getJSON('./data/life.json');
+var promise3 = getJSON('./data/population.json');
+Promise.all([promise1, promise2, promise3]).then(function (data) {
+  incomeData = data[0];
+  lifeData = data[1];
+  populationData = data[2];
+  initParticles();
+}); // getJSON('./data/income.json').then(function(data) {
+// }, function(status) {
+// 	console.log('Something went wrong.', status);
+// });
+// initParticles(data);
+
+function initParticles() {
+  var i = 0,
+      j = 0;
+
+  for (var ix = 0; ix < AMOUNTX; ix++) {
+    for (var iy = 0; iy < AMOUNTY; iy++) {
+      var life = lifeData[ix] ? three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(lifeData[ix][currentYear], 1, 85, 0, AMOUNTX * SEPARATION) : 0;
+      positions[i] = ix * SEPARATION - AMOUNTX * SEPARATION / 2 + SEPARATION * AMOUNTX / 2; // x (but actually z)
+
+      positions[i + 1] = life; // y
+
+      positions[i + 2] = iy * SEPARATION - AMOUNTY * SEPARATION / 2; // z (but actually x)
+
+      scales[j] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(populationData[iy][currentYear], 50, 1376048943, 200, 3000);
+      i += 3; // skip to nex pos
+
+      j++;
+    }
+  }
+}
+
+yearSlider.addEventListener('input', function () {
+  currentYear = yearSlider.value;
+  initParticles();
+}, false);
 
 /***/ }),
 
