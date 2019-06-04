@@ -31,6 +31,8 @@ export default {
         // explosion1: path.join(__dirname, 'experiments/explosion/v1/main.js'),
         // workshop1: path.join(__dirname, 'workshop/v3/main.js'),
         blobs1: path.join(__dirname, 'experiments/blobs/v1/main.js'),
+        blobs2: path.join(__dirname, 'experiments/blobs/v2/main.js'),
+        blobs3: path.join(__dirname, 'experiments/blobs/v3/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),
