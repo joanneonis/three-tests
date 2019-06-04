@@ -121,13 +121,16 @@ var particles,
 var incomeData;
 var lifeData;
 var populationData;
+var cameraPos = {
+  x: -26314,
+  y: 28830,
+  z: -32931
+};
+var gui;
 
 function init() {
-  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000000); // camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 0, 10000 );
-
-  camera.position.x = -5837.563823462691;
-  camera.position.y = 300;
-  camera.position.z = 600;
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000000);
+  camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
   scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
   renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
     antialias: true
@@ -157,11 +160,17 @@ function init() {
   particles = new three__WEBPACK_IMPORTED_MODULE_1__["Points"](geometry, material);
   scene.add(particles);
   scene.background = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#FAFDFF');
-  document.body.appendChild(renderer.domElement);
+  document.querySelector('.container').appendChild(renderer.domElement);
   window.addEventListener('resize', onWindowResize, false);
 }
 
+function initGui() {
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+  initCameraGui();
+}
+
 function initControls() {
+  console.log(renderer.domElement);
   controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement);
   controls.enableKeys = false;
   controls.enablePan = true;
@@ -188,6 +197,7 @@ function render() {
 }
 
 init();
+initGui();
 animate();
 
 var getJSON = function getJSON(url) {
@@ -222,7 +232,7 @@ Promise.all([promise1, promise2, promise3]).then(function (data) {
   populationData = data[2];
   initParticles();
 }); // getJSON('./data/income.json').then(function(data) {
-// }, function(status) {
+// }, function(status) { 
 // 	console.log('Something went wrong.', status);
 // });
 // initParticles(data);
@@ -234,13 +244,15 @@ function initParticles() {
   for (var ix = 0; ix < AMOUNTX; ix++) {
     for (var iy = 0; iy < AMOUNTY; iy++) {
       var life = lifeData[ix] ? three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(lifeData[ix][currentYear], 1, 85, 0, AMOUNTX * SEPARATION) : 0;
+      var income = incomeData[iy] ? three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(incomeData[iy][currentYear], 1, 182668, 0, AMOUNTY * SEPARATION) : 0;
+      var population = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(populationData[iy][currentYear], 50, 1376048943, 200, 3000);
       positions[i] = ix * SEPARATION - AMOUNTX * SEPARATION / 2 + SEPARATION * AMOUNTX / 2; // x (but actually z)
 
       positions[i + 1] = life; // y
+      // positions[ i + 2 ] = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 ); // z (but actually x)
 
-      positions[i + 2] = iy * SEPARATION - AMOUNTY * SEPARATION / 2; // z (but actually x)
-
-      scales[j] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(populationData[iy][currentYear], 50, 1376048943, 200, 3000);
+      positions[i + 2] = income;
+      scales[j] = population;
       i += 3; // skip to nex pos
 
       j++;
@@ -248,10 +260,26 @@ function initParticles() {
   }
 }
 
+var yearbox = document.querySelector('.current-year');
+yearbox.innerHTML = currentYear;
 yearSlider.addEventListener('input', function () {
   currentYear = yearSlider.value;
+  yearbox.innerHTML = currentYear;
   initParticles();
 }, false);
+
+function initCameraGui() {
+  var cameraFolder = gui.addFolder('Camera');
+  cameraFolder.add(cameraPos, 'x', -100000, 100000).onChange(function (val) {
+    camera.position.x = val;
+  });
+  cameraFolder.add(cameraPos, 'y', -100000, 100000).onChange(function (val) {
+    camera.position.y = val;
+  });
+  cameraFolder.add(cameraPos, 'z', -100000, 100000).onChange(function (val) {
+    camera.position.z = val;
+  });
+}
 
 /***/ }),
 

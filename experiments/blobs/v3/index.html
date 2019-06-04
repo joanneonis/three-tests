@@ -6,8 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Data visualisation</title>
 	<style>
-			body { margin: 0; width: 100%; height: 100vh; }
-			canvas { width: 100%; height: 100vh; }
+			body { margin: 0; width: 100%; height: 100vh; overflow: hidden;}
+			canvas { width: 100%; height: calc(100vh - 25px); }
 
 			.slidecontainer {
   width: 100%;
@@ -21,7 +21,12 @@
   outline: none;
   opacity: 0.7;
   -webkit-transition: .2s;
-  transition: opacity .2s;
+	transition: opacity .2s;
+	margin-bottom: 50vh;
+	display: block;
+	margin-top: -17vh;
+	position: absolute;
+	z-index: 100000;
 }
 
 .slider:hover {
@@ -33,7 +38,7 @@
   appearance: none;
   width: 25px;
   height: 25px;
-  background: #4CAF50;
+  background: #7A57DA;
   cursor: pointer;
 }
 
@@ -43,10 +48,25 @@
   background: #4CAF50;
   cursor: pointer;
 }
+
+.current-year {
+    pointer-events: none;
+    position: absolute;
+    z-index: 29;
+    right: 20px;
+    bottom: 60px;
+    font-size: 100px;
+    font-family: sans-serif;
+    font-weight: bold;
+		opacity: 0.1;
+}
 	</style>
 </head>
 <body>
-	<input type="range" min="1800" max="2015" value="2000" class="slider">
+	<div class="container"></div>
+	<input type="range" min="1950" max="2015" value="2000" class="slider">
+	<div class="current-year"></div>
+
 
 	<script type="x-shader/x-vertex" id="vertexshader">
 	
