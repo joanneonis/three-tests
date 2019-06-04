@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Data visualisation</title>
+	<style>
+			body { margin: 0; width: 100%; height: 100vh; overflow: hidden;}
+			canvas { width: 100%; height: calc(100vh - 25px); }
+
+			.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+	transition: opacity .2s;
+	margin-bottom: 50vh;
+	display: block;
+	margin-top: -17vh;
+	position: absolute;
+	z-index: 100000;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #7A57DA;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.current-year {
+    pointer-events: none;
+    position: absolute;
+    z-index: 29;
+    right: 20px;
+    bottom: 60px;
+    font-size: 100px;
+    font-family: sans-serif;
+    font-weight: bold;
+		opacity: 0.1;
+}
+	</style>
+</head>
+<body>
+	<div class="container"></div>
+	<input type="range" min="1950" max="2015" value="2000" class="slider">
+	<div class="current-year"></div>
+
+
+	<script type="x-shader/x-vertex" id="vertexshader">
+	
+		attribute float scale;
+
+		void main() {
+
+			vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+
+			gl_PointSize = scale * ( 300.0 / - mvPosition.z );
+
+			gl_Position = projectionMatrix * mvPosition;
+
+		}
+
+	</script>
+
+	<script type="x-shader/x-fragment" id="fragmentshader">
+
+		uniform vec3 color;
+
+		void main() {
+
+			if ( length( gl_PointCoord - vec2( 0.5, 0.5 ) ) > 0.475 ) discard;
+
+			gl_FragColor = vec4( color, 1.0 );
+
+		}
+
+	</script>
+
+	<script src="./../../../build/blobs3.bundle.js"></script>
+</body>
+</html> 
