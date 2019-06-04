@@ -216,7 +216,10 @@ function loadModelThingies() {
 		goal = new THREE.Object3D;
 		goal.position.set(20, 20, 20);
     
-    model.add( goal );
+		model.add( goal );
+		
+		renderer.gammaOutput = true;
+		renderer.gammaFactor = 2.2;
 
 		// plaeObj(wheelObjects[2]);
 		resetWheel();
