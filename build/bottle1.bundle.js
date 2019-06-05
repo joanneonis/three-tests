@@ -81,102 +81,34 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/tractor/car-v3/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/bottle/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./assets/base.scss":
-/*!**************************!*\
-  !*** ./assets/base.scss ***!
-  \**************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js!../node_modules/sass-loader/lib/loader.js!./base.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./assets/base.scss");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./experiments/tractor/car-v3/main.js":
-/*!********************************************!*\
-  !*** ./experiments/tractor/car-v3/main.js ***!
-  \********************************************/
+/***/ "./experiments/bottle/main.js":
+/*!************************************!*\
+  !*** ./experiments/bottle/main.js ***!
+  \************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _assets_base_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../assets/base.scss */ "./assets/base.scss");
-/* harmony import */ var _assets_base_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_base_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prismjs/components/prism-core */ "./node_modules/prismjs/components/prism-core.js");
-/* harmony import */ var prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prismjs/components/prism-clike */ "./node_modules/prismjs/components/prism-clike.js");
-/* harmony import */ var prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_clike__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prismjs/components/prism-javascript */ "./node_modules/prismjs/components/prism-javascript.js");
-/* harmony import */ var prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_javascript__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prismjs/components/prism-css */ "./node_modules/prismjs/components/prism-css.js");
-/* harmony import */ var prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_css__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prismjs/components/prism-markup */ "./node_modules/prismjs/components/prism-markup.js");
-/* harmony import */ var prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prismjs_components_prism_markup__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var dat_gui__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dat.gui */ "./node_modules/dat.gui/build/dat.gui.module.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
-/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
-/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! three/examples/js/AnimationClipCreator */ "./node_modules/three/examples/js/AnimationClipCreator.js");
-/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../helpers/functions/lights */ "./helpers/functions/lights.js");
-/* eslint-disable no-unused-vars */
+/* harmony import */ var dat_gui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dat.gui */ "./node_modules/dat.gui/build/dat.gui.module.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
+/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
+/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var three_examples_js_loaders_ColladaLoader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/examples/js/loaders/ColladaLoader */ "./node_modules/three/examples/js/loaders/ColladaLoader.js");
+/* harmony import */ var three_examples_js_loaders_ColladaLoader__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_ColladaLoader__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
 
 
 
 
-
-
-
-
-
-
-
-
-prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1___default.a.highlightAll();
-var panelToggle = document.querySelector('.panel-toggle');
-var body = document.querySelector('body');
-var panelOpen = false;
-
-panelToggle.onclick = function () {
-  body.classList.toggle('panel-open');
-  panelOpen = !panelOpen;
-
-  if (panelOpen) {
-    panelToggle.textContent = 'Sluit proces';
-  } else {
-    panelToggle.textContent = 'Lees proces';
-  }
-}; //?--------------------------------------------------------------------
-//?		Base
-//?--------------------------------------------------------------------
 
 
 var renderer,
@@ -190,73 +122,27 @@ var cameraSettings = {
     y: 36,
     z: 36
   },
-  followTractor: false,
-  lookAt: true,
   all: 30
 };
 var controls;
-var tractorObj;
-var wheelObjects;
 var goal;
-var temp = new three__WEBPACK_IMPORTED_MODULE_7__["Vector3"]();
 var model;
-var blobbyMinSpeed = 0.1; //? test
-
-var tractor = {
-  x: 0,
-  y: 0,
-  vx: 0,
-  vy: 0,
-  ax: 0,
-  ay: 0,
-  vr: 0,
-  ar: 0,
-  sr: 0,
-  r: 0,
-  update: function update() {
-    if (tractorObj) {
-      this.vx = three__WEBPACK_IMPORTED_MODULE_7__["Math"].clamp(this.vx, -1.0, 1.0); //float (-1) otherwise it will see it as a boolean
-
-      this.vy = three__WEBPACK_IMPORTED_MODULE_7__["Math"].clamp(this.vy, -1.0, 1.0);
-      this.vr = three__WEBPACK_IMPORTED_MODULE_7__["Math"].clamp(this.vr, -10.0, 10.0);
-      var rotation = three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.vr) * 10;
-      rotateObject(tractorObj.parent, 0, rotation, 0);
-      tractorObj.parent.translateZ(this.vx);
-      wheelObjects[0].rotation.x += three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.vx) * 10;
-      wheelObjects[1].rotation.x += three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.vx) * 10;
-      var newX = three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.x) * 10; // Rolling
-
-      var newY = three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(this.vr) * 2; // Steering
-      // XZY (fix the gimbal problem  =)
-
-      var euler = new three__WEBPACK_IMPORTED_MODULE_7__["Euler"](newX, newY, 0, 'YXZ');
-      wheelObjects[2].setRotationFromEuler(euler);
-
-      if (Math.abs(this.vx) > blobbyMinSpeed) {
-        tractorObj.morphTargetInfluences[0] = this.vx;
-        tractorObj.morphTargetInfluences[2] = this.vr * 0.1;
-      }
-    }
-  }
-};
-var friction = 0.9;
-var rFriction = 0.9;
-var keys = []; //? end
+var canLabel, testingTex;
 
 function init() {
   initRenderer();
-  scene = new three__WEBPACK_IMPORTED_MODULE_7__["Scene"]();
-  camera = new three__WEBPACK_IMPORTED_MODULE_7__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000);
+  scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000);
   camera.position.set(cameraSettings.cameraPos.x, cameraSettings.cameraPos.y, cameraSettings.cameraPos.z);
   initControls(); // scene.add(new THREE.AxesHelper(10));
 
-  var bgColor = new three__WEBPACK_IMPORTED_MODULE_7__["Color"]('#a3e1fe');
-  var ambient = new three__WEBPACK_IMPORTED_MODULE_7__["AmbientLight"](); // ambient.castShadow = true;
+  var bgColor = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#a3e1fe'); // let ambient = new THREE.AmbientLight();
+  // ambient.castShadow = true;
+  // scene.add(ambient);
+  // let point = new THREE.PointLight();
+  // ambient.castShadow = true;
+  // scene.add(point);
 
-  scene.add(ambient);
-  var point = new three__WEBPACK_IMPORTED_MODULE_7__["PointLight"](); // ambient.castShadow = true;
-
-  scene.add(point);
   scene.background = bgColor;
   window.addEventListener('resize', onResize, false);
   scene.userData.activeLightSettings = {
@@ -264,20 +150,19 @@ function init() {
   };
   scene.userData.gui = gui; // Groundplane
 
-  var geometry = new three__WEBPACK_IMPORTED_MODULE_7__["PlaneGeometry"](5000, 2000, 32);
-  var material = new three__WEBPACK_IMPORTED_MODULE_7__["MeshBasicMaterial"]({
-    color: new three__WEBPACK_IMPORTED_MODULE_7__["Color"]('#87CBEB'),
-    side: three__WEBPACK_IMPORTED_MODULE_7__["DoubleSide"]
+  var geometry = new three__WEBPACK_IMPORTED_MODULE_1__["PlaneGeometry"](5000, 2000, 32);
+  var material = new three__WEBPACK_IMPORTED_MODULE_1__["MeshBasicMaterial"]({
+    color: new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#87CBEB'),
+    side: three__WEBPACK_IMPORTED_MODULE_1__["DoubleSide"]
   });
-  var plane = new three__WEBPACK_IMPORTED_MODULE_7__["Mesh"](geometry, material);
+  var plane = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](geometry, material);
   plane.position.y = 0;
   plane.rotation.x = -90 * (Math.PI / 180);
   plane.receiveShadow = true;
   plane.castShadow = false;
   scene.add(plane);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["setlightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["changeLightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["buildGui"])(scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["setlightType"])('DirectionalLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["changeLightType"])('DirectionalLight', scene);
 }
 
 function onResize() {
@@ -289,85 +174,91 @@ function onResize() {
 function render() {
   // controls.update();
   requestAnimationFrame(render);
-
-  if (goal && cameraSettings.followTractor) {
-    temp.setFromMatrixPosition(goal.matrixWorld);
-    camera.position.lerp(temp, 0.2);
-
-    if (cameraSettings.lookAt) {
-      camera.lookAt(model.position);
-    }
-  }
-
   renderer.render(scene, camera);
-  posCalcs();
 }
 
 function initGui() {
-  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_6__["GUI"]();
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
   initCameraGui();
 }
 
 initGui();
 init();
 render();
-loadModelThingies();
+loadModelThingies(); // loadModel2();
 
 function initRenderer() {
-  renderer = new three__WEBPACK_IMPORTED_MODULE_7__["WebGLRenderer"]({
+  renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
     canvas: theCanvas,
     antialias: true
   });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = three__WEBPACK_IMPORTED_MODULE_7__["PCFSoftShadowMap"];
+  renderer.shadowMap.type = three__WEBPACK_IMPORTED_MODULE_1__["PCFSoftShadowMap"];
 }
 
 function initControls() {
-  controls = new three__WEBPACK_IMPORTED_MODULE_7__["OrbitControls"](camera, renderer.domElement);
+  controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement);
   controls.minDistance = 0;
   controls.maxDistance = 700;
   controls.enableKeys = false;
 }
 
-function loadModelThingies() {
-  var loader = new three__WEBPACK_IMPORTED_MODULE_7__["GLTFLoader"]();
-  loader.load('trekker-morph-1-multipart.glb', function (gltf) {
-    model = gltf.scene;
-    model.traverse(function (node) {
-      if (node instanceof three__WEBPACK_IMPORTED_MODULE_7__["Mesh"]) {
-        node.castShadow = true;
-        node.receiveShadow = false;
-      }
-    });
-    tractorObj = model.children[0];
-    wheelObjects = [model.children[1], model.children[2], model.children[3]];
-    goal = new three__WEBPACK_IMPORTED_MODULE_7__["Object3D"]();
-    goal.position.set(20, 20, 20);
-    model.add(goal);
-    renderer.gammaOutput = true;
-    renderer.gammaFactor = 2.2; // plaeObj(wheelObjects[2]);
+function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
+  var halfSizeToFitOnScreen = sizeToFitOnScreen * 0.5;
+  var halfFovY = three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(camera.fov * .5);
+  var distance = halfSizeToFitOnScreen / Math.tan(halfFovY); // compute a unit vector that points in the direction the camera is now
+  // in the xz plane from the center of the box
 
-    resetWheel();
-    plaeObj(wheelObjects[2]);
-    var expressions = Object.keys(tractorObj.morphTargetDictionary);
-    var expressionFolder = gui.addFolder('Blob');
+  var direction = new three__WEBPACK_IMPORTED_MODULE_1__["Vector3"]().subVectors(camera.position, boxCenter).multiply(new three__WEBPACK_IMPORTED_MODULE_1__["Vector3"](1, 0, 1)).normalize(); // move the camera to a position distance units way from the center
+  // in whatever direction the camera was from the center already
 
-    for (var i = 0; i < expressions.length; i++) {
-      expressionFolder.add(tractorObj.morphTargetInfluences, i, 0, 1, 0.01).name(expressions[i]);
-    }
+  camera.position.copy(direction.multiplyScalar(distance).add(boxCenter)); // pick some near and far values for the frustum that
+  // will contain the box.
 
-    tractorObj.userData.velocity = 0;
-    model.castShadow = true;
-    scene.add(model);
-  });
+  camera.near = boxSize / 100;
+  camera.far = boxSize * 100;
+  camera.updateProjectionMatrix(); // point the camera to look at the center of the box
+
+  camera.lookAt(boxCenter.x, boxCenter.y, boxCenter.z);
 }
+
+function loadModelThingies() {
+  var loader = new three__WEBPACK_IMPORTED_MODULE_1__["GLTFLoader"]();
+  loader.load('./models/blikje2.glb', function (gltf) {
+    var root = gltf.scene;
+    canLabel = gltf.scene.children[2].children[1].children[0].children[0];
+    updateCanLabel();
+    scene.add(root); // renderer.gammaOutput = true;
+    // renderer.gammaFactor = 2.2;
+    // compute the box that contains all the stuff
+    // from root and below
+
+    var box = new three__WEBPACK_IMPORTED_MODULE_1__["Box3"]().setFromObject(root);
+    var boxSize = box.getSize(new three__WEBPACK_IMPORTED_MODULE_1__["Vector3"]()).length();
+    var boxCenter = box.getCenter(new three__WEBPACK_IMPORTED_MODULE_1__["Vector3"]()); // set the camera to frame the box
+    // frameArea(boxSize * 0.5, boxSize, boxCenter, camera);
+    // update the Trackball controls to handle the new size
+
+    controls.maxDistance = boxSize * 10;
+    controls.target.copy(boxCenter);
+    controls.update();
+  });
+} // function loadModel2() {
+// 	var loader = new THREE.ColladaLoader();
+// 	loader.load( './models/Coca_Cola.dae', function ( collada ) {
+// 		// var animations = collada.animations;
+// 		var bottle = collada.scene;
+// 		// mixer = new THREE.AnimationMixer( avatar );
+// 		// var action = mixer.clipAction( animations[ 0 ] ).play();
+// 		scene.add( bottle );
+// 	} );
+// }
+
 
 function initCameraGui() {
   var cameraFolder = gui.addFolder('Camera');
-  cameraFolder.add(cameraSettings, 'followTractor');
-  cameraFolder.add(cameraSettings, 'lookAt');
   cameraFolder.add(cameraSettings.cameraPos, 'x', -100, 100).onChange(function (val) {
     camera.position.x = val;
   });
@@ -386,83 +277,12 @@ function initCameraGui() {
   });
 }
 
-function posCalcs() {
-  if (keys[37]) {
-    tractor.ar += 0.05;
-    tractor.sr += 0.05;
-  } else if (keys[39]) {
-    tractor.ar -= 0.05;
-    tractor.sr -= 0.05;
-  } else {
-    tractor.ar = 0;
-  }
-
-  if (keys[38]) {
-    tractor.ax += 0.005;
-    tractor.ay += 0.005;
-  } else if (keys[40]) {
-    tractor.ax -= 0.005;
-    tractor.ay -= 0.005;
-  } else {
-    tractor.ax = 0;
-    tractor.ay = 0;
-  }
-
-  updatePosition(tractor);
-  tractor.update();
-}
-
-document.addEventListener('keydown', function (e) {
-  keys[e.which] = true;
-});
-document.addEventListener('keyup', function (e) {
-  keys[e.which] = false;
-});
-
-function applyFriction(obj) {
-  obj.vx *= friction;
-  obj.vy *= friction;
-  obj.vr *= rFriction;
-}
-
-function updatePosition(obj) {
-  //update velocity
-  obj.vx += obj.ax;
-  obj.vy += obj.ay;
-  obj.vr += obj.ar;
-  applyFriction(obj); //update position
-
-  obj.x += obj.vx;
-  obj.y += obj.vy;
-  obj.r += obj.vr;
-}
-
-function plaeObj(object) {
-  var objFolder = gui.addFolder('place');
-  objFolder.add(object.position, 'x', -10, 10, .3);
-  objFolder.add(object.position, 'y', -10, 10, .3);
-  objFolder.add(object.position, 'z', -10, 10, .3);
-  objFolder.add(object.rotation, 'x', -10, 10, .3);
-  objFolder.add(object.rotation, 'y', -10, 10, .3);
-  objFolder.add(object.rotation, 'z', -10, 10, .3);
-}
-
-function resetWheel() {
-  wheelObjects[0].geometry.center();
-  wheelObjects[1].geometry.center();
-  wheelObjects[2].geometry.center();
-  wheelObjects[0].position.set(3.6, 3.4, -4.8);
-  wheelObjects[1].position.set(-3.6, 3.9, -5.4);
-  wheelObjects[2].position.set(0, 2.1, 4.5);
-}
-
-function rotateObject(object) {
-  var degreeX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var degreeY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-  var degreeZ = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-  object.rotateX(three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(degreeX));
-  object.rotateY(three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(degreeY));
-  object.rotateZ(three__WEBPACK_IMPORTED_MODULE_7__["Math"].degToRad(degreeZ));
+function updateCanLabel() {
+  var map = new three__WEBPACK_IMPORTED_MODULE_1__["TextureLoader"]().load('textures/cokecan.jpg');
+  canLabel.material.needsUpdate = true;
+  canLabel.material.map = map;
+  canLabel.material.map.flipY = false;
+  canLabel.material.metalness = 0.3;
 }
 
 /***/ }),
@@ -957,120 +777,6 @@ function _typeof(obj) {
 }
 
 module.exports = _typeof;
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./assets/base.scss":
-/*!*********************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./assets/base.scss ***!
-  \*********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
-// Imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900);", ""]);
-
-// Module
-exports.push([module.i, "body {\n  font-family: 'Lato', sans-serif; }\n\n* {\n  box-sizing: border-box;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\np {\n  margin-top: 0;\n  line-height: 1.5;\n  font-weight: 300; }\n  p.intro {\n    font-size: 1.1em;\n    font-weight: 400;\n    color: #505050;\n    margin-bottom: 1.6em; }\n\nh1 {\n  font-weight: 900;\n  font-size: 3.4em;\n  margin-bottom: 0.2em;\n  margin-top: 0.1em; }\n\nh2 {\n  font-weight: 900;\n  font-size: 2.8em;\n  margin-bottom: 0em;\n  margin-top: 0.1em; }\n\nh3 {\n  font-weight: 900;\n  font-size: 2.1em;\n  margin-bottom: 0.3em;\n  margin-top: 1em; }\n\nh4 {\n  font-weight: 600;\n  font-size: 1em;\n  margin-bottom: 0.3em;\n  margin-top: 0.6em; }\n\nh5 {\n  font-size: 1em;\n  margin-bottom: 0.5em; }\n\n.meta {\n  color: #505050; }\n\np code {\n  background: #efefef;\n  display: inline-block;\n  padding: 0px 3px;\n  border: 1px solid #d2d2d2;\n  border-radius: 3px;\n  color: #545454; }\n\n.info-panel {\n  max-width: 50vw;\n  width: 100%;\n  position: absolute;\n  z-index: 999;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  background: #fff;\n  padding: 100px;\n  overflow: auto;\n  transform: translate3d(50vw, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open .info-panel {\n    transform: translate3d(0, 0, 0); }\n  .info-panel__inner > *:not(pre) {\n    max-width: 800px; }\n  .info-panel ul {\n    margin: 0.7em 0 2.2em 0; }\n    .info-panel ul li {\n      font-weight: 300;\n      margin-bottom: .8em; }\n\npre.code-highlight[class*=\"language-\"] {\n  margin: 4em;\n  margin-left: -100px;\n  margin-right: -100px; }\n\n.panel-toggle {\n  position: absolute;\n  right: 50px;\n  z-index: 90;\n  bottom: 50px;\n  transform: translate3d(0, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open .panel-toggle {\n    transform: translate3d(-50vw, 0, 0); }\n\ncanvas {\n  transform: translate3d(0, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open canvas {\n    transform: translate3d(-25vw, 0, 0); }\n\n.panel-toggle {\n  background: #fff;\n  border: none;\n  -webkit-appearance: none;\n  box-shadow: none;\n  font-size: 1.4em;\n  padding: 17px 30px;\n  border-radius: 100px;\n  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05); }\n  .panel-toggle:focus {\n    outline: none; }\n\nfigure {\n  margin: 0 0 1em 0; }\n  figure img,\n  figure video {\n    max-width: 100%; }\n  figure figcaption {\n    margin-top: 10px;\n    font-style: italic; }\n\n.video-wrapper {\n  position: relative;\n  padding-bottom: 56.25%;\n  /* 16:9 */\n  padding-top: 25px;\n  height: 0; }\n  .video-wrapper iframe {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%; }\n\n/*\n\nName:       Base16 harmonic16 Dark\nAuthor:     Jannik Siebert (https://github.com/janniks)\n\nPrism template by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/prism/)\nOriginal Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)\n\n*/\ncode[class*=\"language-\"],\npre[class*=\"language-\"] {\n  font-family: Consolas, Menlo, Monaco, \"Andale Mono WT\", \"Andale Mono\", \"Lucida Console\", \"Lucida Sans Typewriter\", \"DejaVu Sans Mono\", \"Bitstream Vera Sans Mono\", \"Liberation Mono\", \"Nimbus Mono L\", \"Courier New\", Courier, monospace;\n  font-size: 14px;\n  line-height: 1.375;\n  direction: ltr;\n  text-align: left;\n  white-space: pre;\n  word-spacing: normal;\n  word-break: normal;\n  -moz-tab-size: 4;\n  -o-tab-size: 4;\n  tab-size: 4;\n  -webkit-hyphens: none;\n  -ms-hyphens: none;\n  hyphens: none;\n  background: #0b1c2c;\n  color: #cbd6e2; }\n\npre[class*=\"language-\"]::-moz-selection, pre[class*=\"language-\"] ::-moz-selection,\ncode[class*=\"language-\"]::-moz-selection, code[class*=\"language-\"] ::-moz-selection {\n  text-shadow: none;\n  background: #aabcce; }\n\npre[class*=\"language-\"]::selection, pre[class*=\"language-\"] ::selection,\ncode[class*=\"language-\"]::selection, code[class*=\"language-\"] ::selection {\n  text-shadow: none;\n  background: #aabcce; }\n\n/* Code blocks */\npre[class*=\"language-\"] {\n  padding: 1em;\n  margin: .5em 0;\n  overflow: auto; }\n\n/* Inline code */\n:not(pre) > code[class*=\"language-\"] {\n  padding: .1em;\n  border-radius: .3em; }\n\n.token.comment,\n.token.prolog,\n.token.doctype,\n.token.cdata {\n  color: #627e99; }\n\n.token.punctuation {\n  color: #cbd6e2; }\n\n.token.namespace {\n  opacity: .7; }\n\n.token.operator,\n.token.boolean,\n.token.number {\n  color: #bfbf56; }\n\n.token.property {\n  color: #8bbf56; }\n\n.token.tag {\n  color: #8b56bf; }\n\n.token.string {\n  color: #568bbf; }\n\n.token.selector {\n  color: #bf568b; }\n\n.token.attr-name {\n  color: #bfbf56; }\n\n.token.entity,\n.token.url,\n.language-css .token.string,\n.style .token.string {\n  color: #568bbf; }\n\n.token.attr-value,\n.token.keyword,\n.token.control,\n.token.directive,\n.token.unit {\n  color: #56bf8b; }\n\n.token.statement,\n.token.regex,\n.token.atrule {\n  color: #568bbf; }\n\n.token.placeholder,\n.token.variable {\n  color: #8b56bf; }\n\n.token.deleted {\n  text-decoration: line-through; }\n\n.token.inserted {\n  border-bottom: 1px dotted #f7f9fb;\n  text-decoration: none; }\n\n.token.italic {\n  font-style: italic; }\n\n.token.important,\n.token.bold {\n  font-weight: bold; }\n\n.token.important {\n  color: #bf8b56; }\n\n.token.entity {\n  cursor: help; }\n\npre > code.highlight {\n  outline: 0.4em solid #bf8b56;\n  outline-offset: .4em; }\n\n.line-numbers .line-numbers-rows {\n  border-right-color: #223b54 !important; }\n\n.line-numbers-rows > span:before {\n  color: #405c79 !important; }\n\n.line-highlight {\n  background: rgba(247, 249, 251, 0.2) !important;\n  background: -webkit-linear-gradient(left, rgba(247, 249, 251, 0.2) 70%, rgba(247, 249, 251, 0)) !important;\n  background: linear-gradient(to right, rgba(247, 249, 251, 0.2) 70%, rgba(247, 249, 251, 0)) !important; }\n\n.info {\n  position: absolute;\n  z-index: 2;\n  left: 50px;\n  top: 50px;\n  width: 240px;\n  padding: 20px;\n  background: rgba(255, 255, 255, 0.6);\n  border-radius: 5px; }\n  .info p {\n    margin: 0;\n    color: #3ca9dc;\n    font-weight: 700; }\n\n.thumb-list {\n  display: flex;\n  flex-flow: wrap;\n  list-style: none;\n  margin: 0 -10px 60px -10px;\n  padding: 0; }\n  .thumb-list li {\n    position: relative;\n    width: calc(100% / 3);\n    padding: 10px; }\n    @media screen and (max-width: 1200px) {\n      .thumb-list li {\n        width: 50%; } }\n    .thumb-list li a {\n      display: inline-block;\n      height: 100%;\n      width: 100%;\n      border-radius: 30px;\n      overflow: hidden; }\n    .thumb-list li:hover img {\n      transform: scale(1.2); }\n  .thumb-list img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    transform: scale(1);\n    transition: transform .3s; }\n  .thumb-list span {\n    position: absolute;\n    padding: 8px;\n    background: #ffffffe0;\n    left: 20px;\n    top: 20px;\n    border-radius: 40px;\n    color: black;\n    font-weight: 600;\n    font-size: 0.8em; }\n\n.unavailable img {\n  -webkit-filter: grayscale(100%);\n  filter: grayscale(100%);\n  opacity: 0.7; }\n\n.container {\n  padding: 100px 20px; }\n  .container__inner {\n    max-width: 1200px;\n    margin: auto; }\n", ""]);
-
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/runtime/api.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function (useSourceMap) {
-  var list = []; // return the list of modules as css string
-
-  list.toString = function toString() {
-    return this.map(function (item) {
-      var content = cssWithMappingToString(item, useSourceMap);
-
-      if (item[2]) {
-        return '@media ' + item[2] + '{' + content + '}';
-      } else {
-        return content;
-      }
-    }).join('');
-  }; // import a list of modules into the list
-
-
-  list.i = function (modules, mediaQuery) {
-    if (typeof modules === 'string') {
-      modules = [[null, modules, '']];
-    }
-
-    var alreadyImportedModules = {};
-
-    for (var i = 0; i < this.length; i++) {
-      var id = this[i][0];
-
-      if (id != null) {
-        alreadyImportedModules[id] = true;
-      }
-    }
-
-    for (i = 0; i < modules.length; i++) {
-      var item = modules[i]; // skip already imported module
-      // this implementation is not 100% perfect for weird media query combinations
-      // when a module is imported multiple times with different media queries.
-      // I hope this will never occur (Hey this way we have smaller bundles)
-
-      if (item[0] == null || !alreadyImportedModules[item[0]]) {
-        if (mediaQuery && !item[2]) {
-          item[2] = mediaQuery;
-        } else if (mediaQuery) {
-          item[2] = '(' + item[2] + ') and (' + mediaQuery + ')';
-        }
-
-        list.push(item);
-      }
-    }
-  };
-
-  return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-  var content = item[1] || '';
-  var cssMapping = item[3];
-
-  if (!cssMapping) {
-    return content;
-  }
-
-  if (useSourceMap && typeof btoa === 'function') {
-    var sourceMapping = toComment(cssMapping);
-    var sourceURLs = cssMapping.sources.map(function (source) {
-      return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
-    });
-    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-  }
-
-  return [content].join('\n');
-} // Adapted from convert-source-map (MIT)
-
-
-function toComment(sourceMap) {
-  // eslint-disable-next-line no-undef
-  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-  var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-  return '/*# ' + data + ' */';
-}
 
 /***/ }),
 
@@ -3615,1391 +3321,6 @@ var index = {
 
 /***/ }),
 
-/***/ "./node_modules/prismjs/components/prism-clike.js":
-/*!********************************************************!*\
-  !*** ./node_modules/prismjs/components/prism-clike.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-Prism.languages.clike = {
-	'comment': [
-		{
-			pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,
-			lookbehind: true
-		},
-		{
-			pattern: /(^|[^\\:])\/\/.*/,
-			lookbehind: true,
-			greedy: true
-		}
-	],
-	'string': {
-		pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
-		greedy: true
-	},
-	'class-name': {
-		pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[\w.\\]+/i,
-		lookbehind: true,
-		inside: {
-			punctuation: /[.\\]/
-		}
-	},
-	'keyword': /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
-	'boolean': /\b(?:true|false)\b/,
-	'function': /\w+(?=\()/,
-	'number': /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,
-	'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
-	'punctuation': /[{}[\];(),.:]/
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/prismjs/components/prism-core.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/prismjs/components/prism-core.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var _self = (typeof window !== 'undefined')
-	? window   // if in browser
-	: (
-		(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope)
-		? self // if in worker
-		: {}   // if in node js
-	);
-
-/**
- * Prism: Lightweight, robust, elegant syntax highlighting
- * MIT license http://www.opensource.org/licenses/mit-license.php/
- * @author Lea Verou http://lea.verou.me
- */
-
-var Prism = (function (_self){
-
-// Private helper vars
-var lang = /\blang(?:uage)?-([\w-]+)\b/i;
-var uniqueId = 0;
-
-var _ = {
-	manual: _self.Prism && _self.Prism.manual,
-	disableWorkerMessageHandler: _self.Prism && _self.Prism.disableWorkerMessageHandler,
-	util: {
-		encode: function (tokens) {
-			if (tokens instanceof Token) {
-				return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
-			} else if (Array.isArray(tokens)) {
-				return tokens.map(_.util.encode);
-			} else {
-				return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
-			}
-		},
-
-		type: function (o) {
-			return Object.prototype.toString.call(o).slice(8, -1);
-		},
-
-		objId: function (obj) {
-			if (!obj['__id']) {
-				Object.defineProperty(obj, '__id', { value: ++uniqueId });
-			}
-			return obj['__id'];
-		},
-
-		// Deep clone a language definition (e.g. to extend it)
-		clone: function deepClone(o, visited) {
-			var clone, id, type = _.util.type(o);
-			visited = visited || {};
-
-			switch (type) {
-				case 'Object':
-					id = _.util.objId(o);
-					if (visited[id]) {
-						return visited[id];
-					}
-					clone = {};
-					visited[id] = clone;
-
-					for (var key in o) {
-						if (o.hasOwnProperty(key)) {
-							clone[key] = deepClone(o[key], visited);
-						}
-					}
-
-					return clone;
-
-				case 'Array':
-					id = _.util.objId(o);
-					if (visited[id]) {
-						return visited[id];
-					}
-					clone = [];
-					visited[id] = clone;
-
-					o.forEach(function (v, i) {
-						clone[i] = deepClone(v, visited);
-					});
-
-					return clone;
-
-				default:
-					return o;
-			}
-		}
-	},
-
-	languages: {
-		extend: function (id, redef) {
-			var lang = _.util.clone(_.languages[id]);
-
-			for (var key in redef) {
-				lang[key] = redef[key];
-			}
-
-			return lang;
-		},
-
-		/**
-		 * Insert a token before another token in a language literal
-		 * As this needs to recreate the object (we cannot actually insert before keys in object literals),
-		 * we cannot just provide an object, we need an object and a key.
-		 * @param inside The key (or language id) of the parent
-		 * @param before The key to insert before.
-		 * @param insert Object with the key/value pairs to insert
-		 * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
-		 */
-		insertBefore: function (inside, before, insert, root) {
-			root = root || _.languages;
-			var grammar = root[inside];
-			var ret = {};
-
-			for (var token in grammar) {
-				if (grammar.hasOwnProperty(token)) {
-
-					if (token == before) {
-						for (var newToken in insert) {
-							if (insert.hasOwnProperty(newToken)) {
-								ret[newToken] = insert[newToken];
-							}
-						}
-					}
-
-					// Do not insert token which also occur in insert. See #1525
-					if (!insert.hasOwnProperty(token)) {
-						ret[token] = grammar[token];
-					}
-				}
-			}
-
-			var old = root[inside];
-			root[inside] = ret;
-
-			// Update references in other language definitions
-			_.languages.DFS(_.languages, function(key, value) {
-				if (value === old && key != inside) {
-					this[key] = ret;
-				}
-			});
-
-			return ret;
-		},
-
-		// Traverse a language definition with Depth First Search
-		DFS: function DFS(o, callback, type, visited) {
-			visited = visited || {};
-
-			var objId = _.util.objId;
-
-			for (var i in o) {
-				if (o.hasOwnProperty(i)) {
-					callback.call(o, i, o[i], type || i);
-
-					var property = o[i],
-					    propertyType = _.util.type(property);
-
-					if (propertyType === 'Object' && !visited[objId(property)]) {
-						visited[objId(property)] = true;
-						DFS(property, callback, null, visited);
-					}
-					else if (propertyType === 'Array' && !visited[objId(property)]) {
-						visited[objId(property)] = true;
-						DFS(property, callback, i, visited);
-					}
-				}
-			}
-		}
-	},
-	plugins: {},
-
-	highlightAll: function(async, callback) {
-		_.highlightAllUnder(document, async, callback);
-	},
-
-	highlightAllUnder: function(container, async, callback) {
-		var env = {
-			callback: callback,
-			selector: 'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'
-		};
-
-		_.hooks.run("before-highlightall", env);
-
-		var elements = env.elements || container.querySelectorAll(env.selector);
-
-		for (var i=0, element; element = elements[i++];) {
-			_.highlightElement(element, async === true, env.callback);
-		}
-	},
-
-	highlightElement: function(element, async, callback) {
-		// Find language
-		var language, grammar, parent = element;
-
-		while (parent && !lang.test(parent.className)) {
-			parent = parent.parentNode;
-		}
-
-		if (parent) {
-			language = (parent.className.match(lang) || [,''])[1].toLowerCase();
-			grammar = _.languages[language];
-		}
-
-		// Set language on the element, if not present
-		element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
-
-		if (element.parentNode) {
-			// Set language on the parent, for styling
-			parent = element.parentNode;
-
-			if (/pre/i.test(parent.nodeName)) {
-				parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
-			}
-		}
-
-		var code = element.textContent;
-
-		var env = {
-			element: element,
-			language: language,
-			grammar: grammar,
-			code: code
-		};
-
-		var insertHighlightedCode = function (highlightedCode) {
-			env.highlightedCode = highlightedCode;
-
-			_.hooks.run('before-insert', env);
-
-			env.element.innerHTML = env.highlightedCode;
-
-			_.hooks.run('after-highlight', env);
-			_.hooks.run('complete', env);
-			callback && callback.call(env.element);
-		}
-
-		_.hooks.run('before-sanity-check', env);
-
-		if (!env.code) {
-			_.hooks.run('complete', env);
-			return;
-		}
-
-		_.hooks.run('before-highlight', env);
-
-		if (!env.grammar) {
-			insertHighlightedCode(_.util.encode(env.code));
-			return;
-		}
-
-		if (async && _self.Worker) {
-			var worker = new Worker(_.filename);
-
-			worker.onmessage = function(evt) {
-				insertHighlightedCode(evt.data);
-			};
-
-			worker.postMessage(JSON.stringify({
-				language: env.language,
-				code: env.code,
-				immediateClose: true
-			}));
-		}
-		else {
-			insertHighlightedCode(_.highlight(env.code, env.grammar, env.language));
-		}
-	},
-
-	highlight: function (text, grammar, language) {
-		var env = {
-			code: text,
-			grammar: grammar,
-			language: language
-		};
-		_.hooks.run('before-tokenize', env);
-		env.tokens = _.tokenize(env.code, env.grammar);
-		_.hooks.run('after-tokenize', env);
-		return Token.stringify(_.util.encode(env.tokens), env.language);
-	},
-
-	matchGrammar: function (text, strarr, grammar, index, startPos, oneshot, target) {
-		for (var token in grammar) {
-			if(!grammar.hasOwnProperty(token) || !grammar[token]) {
-				continue;
-			}
-
-			if (token == target) {
-				return;
-			}
-
-			var patterns = grammar[token];
-			patterns = (_.util.type(patterns) === "Array") ? patterns : [patterns];
-
-			for (var j = 0; j < patterns.length; ++j) {
-				var pattern = patterns[j],
-					inside = pattern.inside,
-					lookbehind = !!pattern.lookbehind,
-					greedy = !!pattern.greedy,
-					lookbehindLength = 0,
-					alias = pattern.alias;
-
-				if (greedy && !pattern.pattern.global) {
-					// Without the global flag, lastIndex won't work
-					var flags = pattern.pattern.toString().match(/[imuy]*$/)[0];
-					pattern.pattern = RegExp(pattern.pattern.source, flags + "g");
-				}
-
-				pattern = pattern.pattern || pattern;
-
-				// Don’t cache length as it changes during the loop
-				for (var i = index, pos = startPos; i < strarr.length; pos += strarr[i].length, ++i) {
-
-					var str = strarr[i];
-
-					if (strarr.length > text.length) {
-						// Something went terribly wrong, ABORT, ABORT!
-						return;
-					}
-
-					if (str instanceof Token) {
-						continue;
-					}
-
-					if (greedy && i != strarr.length - 1) {
-						pattern.lastIndex = pos;
-						var match = pattern.exec(text);
-						if (!match) {
-							break;
-						}
-
-						var from = match.index + (lookbehind ? match[1].length : 0),
-						    to = match.index + match[0].length,
-						    k = i,
-						    p = pos;
-
-						for (var len = strarr.length; k < len && (p < to || (!strarr[k].type && !strarr[k - 1].greedy)); ++k) {
-							p += strarr[k].length;
-							// Move the index i to the element in strarr that is closest to from
-							if (from >= p) {
-								++i;
-								pos = p;
-							}
-						}
-
-						// If strarr[i] is a Token, then the match starts inside another Token, which is invalid
-						if (strarr[i] instanceof Token) {
-							continue;
-						}
-
-						// Number of tokens to delete and replace with the new match
-						delNum = k - i;
-						str = text.slice(pos, p);
-						match.index -= pos;
-					} else {
-						pattern.lastIndex = 0;
-
-						var match = pattern.exec(str),
-							delNum = 1;
-					}
-
-					if (!match) {
-						if (oneshot) {
-							break;
-						}
-
-						continue;
-					}
-
-					if(lookbehind) {
-						lookbehindLength = match[1] ? match[1].length : 0;
-					}
-
-					var from = match.index + lookbehindLength,
-					    match = match[0].slice(lookbehindLength),
-					    to = from + match.length,
-					    before = str.slice(0, from),
-					    after = str.slice(to);
-
-					var args = [i, delNum];
-
-					if (before) {
-						++i;
-						pos += before.length;
-						args.push(before);
-					}
-
-					var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias, match, greedy);
-
-					args.push(wrapped);
-
-					if (after) {
-						args.push(after);
-					}
-
-					Array.prototype.splice.apply(strarr, args);
-
-					if (delNum != 1)
-						_.matchGrammar(text, strarr, grammar, i, pos, true, token);
-
-					if (oneshot)
-						break;
-				}
-			}
-		}
-	},
-
-	tokenize: function(text, grammar) {
-		var strarr = [text];
-
-		var rest = grammar.rest;
-
-		if (rest) {
-			for (var token in rest) {
-				grammar[token] = rest[token];
-			}
-
-			delete grammar.rest;
-		}
-
-		_.matchGrammar(text, strarr, grammar, 0, 0, false);
-
-		return strarr;
-	},
-
-	hooks: {
-		all: {},
-
-		add: function (name, callback) {
-			var hooks = _.hooks.all;
-
-			hooks[name] = hooks[name] || [];
-
-			hooks[name].push(callback);
-		},
-
-		run: function (name, env) {
-			var callbacks = _.hooks.all[name];
-
-			if (!callbacks || !callbacks.length) {
-				return;
-			}
-
-			for (var i=0, callback; callback = callbacks[i++];) {
-				callback(env);
-			}
-		}
-	},
-
-	Token: Token
-};
-
-_self.Prism = _;
-
-function Token(type, content, alias, matchedStr, greedy) {
-	this.type = type;
-	this.content = content;
-	this.alias = alias;
-	// Copy of the full string this token was created from
-	this.length = (matchedStr || "").length|0;
-	this.greedy = !!greedy;
-}
-
-Token.stringify = function(o, language, parent) {
-	if (typeof o == 'string') {
-		return o;
-	}
-
-	if (Array.isArray(o)) {
-		return o.map(function(element) {
-			return Token.stringify(element, language, o);
-		}).join('');
-	}
-
-	var env = {
-		type: o.type,
-		content: Token.stringify(o.content, language, parent),
-		tag: 'span',
-		classes: ['token', o.type],
-		attributes: {},
-		language: language,
-		parent: parent
-	};
-
-	if (o.alias) {
-		var aliases = Array.isArray(o.alias) ? o.alias : [o.alias];
-		Array.prototype.push.apply(env.classes, aliases);
-	}
-
-	_.hooks.run('wrap', env);
-
-	var attributes = Object.keys(env.attributes).map(function(name) {
-		return name + '="' + (env.attributes[name] || '').replace(/"/g, '&quot;') + '"';
-	}).join(' ');
-
-	return '<' + env.tag + ' class="' + env.classes.join(' ') + '"' + (attributes ? ' ' + attributes : '') + '>' + env.content + '</' + env.tag + '>';
-
-};
-
-if (!_self.document) {
-	if (!_self.addEventListener) {
-		// in Node.js
-		return _;
-	}
-
-	if (!_.disableWorkerMessageHandler) {
-		// In worker
-		_self.addEventListener('message', function (evt) {
-			var message = JSON.parse(evt.data),
-				lang = message.language,
-				code = message.code,
-				immediateClose = message.immediateClose;
-
-			_self.postMessage(_.highlight(code, _.languages[lang], lang));
-			if (immediateClose) {
-				_self.close();
-			}
-		}, false);
-	}
-
-	return _;
-}
-
-//Get current script and highlight
-var script = document.currentScript || [].slice.call(document.getElementsByTagName("script")).pop();
-
-if (script) {
-	_.filename = script.src;
-
-	if (!_.manual && !script.hasAttribute('data-manual')) {
-		if(document.readyState !== "loading") {
-			if (window.requestAnimationFrame) {
-				window.requestAnimationFrame(_.highlightAll);
-			} else {
-				window.setTimeout(_.highlightAll, 16);
-			}
-		}
-		else {
-			document.addEventListener('DOMContentLoaded', _.highlightAll);
-		}
-	}
-}
-
-return _;
-
-})(_self);
-
-if ( true && module.exports) {
-	module.exports = Prism;
-}
-
-// hack for components to work correctly in node.js
-if (typeof global !== 'undefined') {
-	global.Prism = Prism;
-}
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
-
-/***/ }),
-
-/***/ "./node_modules/prismjs/components/prism-css.js":
-/*!******************************************************!*\
-  !*** ./node_modules/prismjs/components/prism-css.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-(function (Prism) {
-
-	var string = /("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/;
-
-	Prism.languages.css = {
-		'comment': /\/\*[\s\S]*?\*\//,
-		'atrule': {
-			pattern: /@[\w-]+?[\s\S]*?(?:;|(?=\s*\{))/i,
-			inside: {
-				'rule': /@[\w-]+/
-				// See rest below
-			}
-		},
-		'url': RegExp('url\\((?:' + string.source + '|.*?)\\)', 'i'),
-		'selector': RegExp('[^{}\\s](?:[^{};"\']|' + string.source + ')*?(?=\\s*\\{)'),
-		'string': {
-			pattern: string,
-			greedy: true
-		},
-		'property': /[-_a-z\xA0-\uFFFF][-\w\xA0-\uFFFF]*(?=\s*:)/i,
-		'important': /!important\b/i,
-		'function': /[-a-z0-9]+(?=\()/i,
-		'punctuation': /[(){};:,]/
-	};
-
-	Prism.languages.css['atrule'].inside.rest = Prism.languages.css;
-
-	var markup = Prism.languages.markup;
-	if (markup) {
-		markup.tag.addInlined('style', 'css');
-
-		Prism.languages.insertBefore('inside', 'attr-value', {
-			'style-attr': {
-				pattern: /\s*style=("|')(?:\\[\s\S]|(?!\1)[^\\])*\1/i,
-				inside: {
-					'attr-name': {
-						pattern: /^\s*style/i,
-						inside: markup.tag.inside
-					},
-					'punctuation': /^\s*=\s*['"]|['"]\s*$/,
-					'attr-value': {
-						pattern: /.+/i,
-						inside: Prism.languages.css
-					}
-				},
-				alias: 'language-css'
-			}
-		}, markup.tag);
-	}
-
-}(Prism));
-
-
-/***/ }),
-
-/***/ "./node_modules/prismjs/components/prism-javascript.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/prismjs/components/prism-javascript.js ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-Prism.languages.javascript = Prism.languages.extend('clike', {
-	'class-name': [
-		Prism.languages.clike['class-name'],
-		{
-			pattern: /(^|[^$\w\xA0-\uFFFF])[_$A-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\.(?:prototype|constructor))/,
-			lookbehind: true
-		}
-	],
-	'keyword': [
-		{
-			pattern: /((?:^|})\s*)(?:catch|finally)\b/,
-			lookbehind: true
-		},
-		{
-			pattern: /(^|[^.])\b(?:as|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,
-			lookbehind: true
-		},
-	],
-	'number': /\b(?:(?:0[xX][\dA-Fa-f]+|0[bB][01]+|0[oO][0-7]+)n?|\d+n|NaN|Infinity)\b|(?:\b\d+\.?\d*|\B\.\d+)(?:[Ee][+-]?\d+)?/,
-	// Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
-	'function': /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
-	'operator': /-[-=]?|\+[+=]?|!=?=?|<<?=?|>>?>?=?|=(?:==?|>)?|&[&=]?|\|[|=]?|\*\*?=?|\/=?|~|\^=?|%=?|\?|\.{3}/
-});
-
-Prism.languages.javascript['class-name'][0].pattern = /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/
-
-Prism.languages.insertBefore('javascript', 'keyword', {
-	'regex': {
-		pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s])\s*)\/(\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})\]]))/,
-		lookbehind: true,
-		greedy: true
-	},
-	// This must be declared before keyword because we use "function" inside the look-forward
-	'function-variable': {
-		pattern: /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)\s*=>))/,
-		alias: 'function'
-	},
-	'parameter': [
-		{
-			pattern: /(function(?:\s+[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)?\s*\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\))/,
-			lookbehind: true,
-			inside: Prism.languages.javascript
-		},
-		{
-			pattern: /[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*=>)/i,
-			inside: Prism.languages.javascript
-		},
-		{
-			pattern: /(\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*=>)/,
-			lookbehind: true,
-			inside: Prism.languages.javascript
-		},
-		{
-			pattern: /((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*\s*)\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*\{)/,
-			lookbehind: true,
-			inside: Prism.languages.javascript
-		}
-	],
-	'constant': /\b[A-Z](?:[A-Z_]|\dx?)*\b/
-});
-
-Prism.languages.insertBefore('javascript', 'string', {
-	'template-string': {
-		pattern: /`(?:\\[\s\S]|\${[^}]+}|[^\\`])*`/,
-		greedy: true,
-		inside: {
-			'interpolation': {
-				pattern: /\${[^}]+}/,
-				inside: {
-					'interpolation-punctuation': {
-						pattern: /^\${|}$/,
-						alias: 'punctuation'
-					},
-					rest: Prism.languages.javascript
-				}
-			},
-			'string': /[\s\S]+/
-		}
-	}
-});
-
-if (Prism.languages.markup) {
-	Prism.languages.markup.tag.addInlined('script', 'javascript');
-}
-
-Prism.languages.js = Prism.languages.javascript;
-
-
-/***/ }),
-
-/***/ "./node_modules/prismjs/components/prism-markup.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/prismjs/components/prism-markup.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-Prism.languages.markup = {
-	'comment': /<!--[\s\S]*?-->/,
-	'prolog': /<\?[\s\S]+?\?>/,
-	'doctype': /<!DOCTYPE[\s\S]+?>/i,
-	'cdata': /<!\[CDATA\[[\s\S]*?]]>/i,
-	'tag': {
-		pattern: /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/i,
-		greedy: true,
-		inside: {
-			'tag': {
-				pattern: /^<\/?[^\s>\/]+/i,
-				inside: {
-					'punctuation': /^<\/?/,
-					'namespace': /^[^\s>\/:]+:/
-				}
-			},
-			'attr-value': {
-				pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/i,
-				inside: {
-					'punctuation': [
-						/^=/,
-						{
-							pattern: /^(\s*)["']|["']$/,
-							lookbehind: true
-						}
-					]
-				}
-			},
-			'punctuation': /\/?>/,
-			'attr-name': {
-				pattern: /[^\s>\/]+/,
-				inside: {
-					'namespace': /^[^\s>\/:]+:/
-				}
-			}
-
-		}
-	},
-	'entity': /&#?[\da-z]{1,8};/i
-};
-
-Prism.languages.markup['tag'].inside['attr-value'].inside['entity'] =
-	Prism.languages.markup['entity'];
-
-// Plugin to make entity title show the real entity, idea by Roman Komarov
-Prism.hooks.add('wrap', function(env) {
-
-	if (env.type === 'entity') {
-		env.attributes['title'] = env.content.replace(/&amp;/, '&');
-	}
-});
-
-Object.defineProperty(Prism.languages.markup.tag, 'addInlined', {
-	/**
-	 * Adds an inlined language to markup.
-	 *
-	 * An example of an inlined language is CSS with `<style>` tags.
-	 *
-	 * @param {string} tagName The name of the tag that contains the inlined language. This name will be treated as
-	 * case insensitive.
-	 * @param {string} lang The language key.
-	 * @example
-	 * addInlined('style', 'css');
-	 */
-	value: function addInlined(tagName, lang) {
-		var includedCdataInside = {};
-		includedCdataInside['language-' + lang] = {
-			pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
-			lookbehind: true,
-			inside: Prism.languages[lang]
-		};
-		includedCdataInside['cdata'] = /^<!\[CDATA\[|\]\]>$/i;
-
-		var inside = {
-			'included-cdata': {
-				pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
-				inside: includedCdataInside
-			}
-		};
-		inside['language-' + lang] = {
-			pattern: /[\s\S]+/,
-			inside: Prism.languages[lang]
-		};
-
-		var def = {};
-		def[tagName] = {
-			pattern: RegExp(/(<__[\s\S]*?>)(?:<!\[CDATA\[[\s\S]*?\]\]>\s*|[\s\S])*?(?=<\/__>)/.source.replace(/__/g, tagName), 'i'),
-			lookbehind: true,
-			greedy: true,
-			inside: inside
-		};
-
-		Prism.languages.insertBefore('markup', 'cdata', def);
-	}
-});
-
-Prism.languages.xml = Prism.languages.extend('markup', {});
-Prism.languages.html = Prism.languages.markup;
-Prism.languages.mathml = Prism.languages.markup;
-Prism.languages.svg = Prism.languages.markup;
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/lib/addStyles.js":
-/*!****************************************************!*\
-  !*** ./node_modules/style-loader/lib/addStyles.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-
-var stylesInDom = {};
-
-var	memoize = function (fn) {
-	var memo;
-
-	return function () {
-		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-		return memo;
-	};
-};
-
-var isOldIE = memoize(function () {
-	// Test for IE <= 9 as proposed by Browserhacks
-	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-	// Tests for existence of standard globals is to allow style-loader
-	// to operate correctly into non-standard environments
-	// @see https://github.com/webpack-contrib/style-loader/issues/177
-	return window && document && document.all && !window.atob;
-});
-
-var getTarget = function (target, parent) {
-  if (parent){
-    return parent.querySelector(target);
-  }
-  return document.querySelector(target);
-};
-
-var getElement = (function (fn) {
-	var memo = {};
-
-	return function(target, parent) {
-                // If passing function in options, then use it for resolve "head" element.
-                // Useful for Shadow Root style i.e
-                // {
-                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
-                // }
-                if (typeof target === 'function') {
-                        return target();
-                }
-                if (typeof memo[target] === "undefined") {
-			var styleTarget = getTarget.call(this, target, parent);
-			// Special case to return head of iframe instead of iframe itself
-			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
-				try {
-					// This will throw an exception if access to iframe is blocked
-					// due to cross-origin restrictions
-					styleTarget = styleTarget.contentDocument.head;
-				} catch(e) {
-					styleTarget = null;
-				}
-			}
-			memo[target] = styleTarget;
-		}
-		return memo[target]
-	};
-})();
-
-var singleton = null;
-var	singletonCounter = 0;
-var	stylesInsertedAtTop = [];
-
-var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
-
-module.exports = function(list, options) {
-	if (typeof DEBUG !== "undefined" && DEBUG) {
-		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-
-	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
-
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the <head> element
-        if (!options.insertInto) options.insertInto = "head";
-
-	// By default, add <style> tags to the bottom of the target
-	if (!options.insertAt) options.insertAt = "bottom";
-
-	var styles = listToStyles(list, options);
-
-	addStylesToDom(styles, options);
-
-	return function update (newList) {
-		var mayRemove = [];
-
-		for (var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-
-		if(newList) {
-			var newStyles = listToStyles(newList, options);
-			addStylesToDom(newStyles, options);
-		}
-
-		for (var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-
-			if(domStyle.refs === 0) {
-				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
-
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-};
-
-function addStylesToDom (styles, options) {
-	for (var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-
-		if(domStyle) {
-			domStyle.refs++;
-
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles (list, options) {
-	var styles = [];
-	var newStyles = {};
-
-	for (var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = options.base ? item[0] + options.base : item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-
-		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
-		else newStyles[id].parts.push(part);
-	}
-
-	return styles;
-}
-
-function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
-
-	if (!target) {
-		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-	}
-
-	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
-
-	if (options.insertAt === "top") {
-		if (!lastStyleElementInsertedAtTop) {
-			target.insertBefore(style, target.firstChild);
-		} else if (lastStyleElementInsertedAtTop.nextSibling) {
-			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			target.appendChild(style);
-		}
-		stylesInsertedAtTop.push(style);
-	} else if (options.insertAt === "bottom") {
-		target.appendChild(style);
-	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
-		var nextSibling = getElement(options.insertAt.before, target);
-		target.insertBefore(style, nextSibling);
-	} else {
-		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
-	}
-}
-
-function removeStyleElement (style) {
-	if (style.parentNode === null) return false;
-	style.parentNode.removeChild(style);
-
-	var idx = stylesInsertedAtTop.indexOf(style);
-	if(idx >= 0) {
-		stylesInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement (options) {
-	var style = document.createElement("style");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-
-	if(options.attrs.nonce === undefined) {
-		var nonce = getNonce();
-		if (nonce) {
-			options.attrs.nonce = nonce;
-		}
-	}
-
-	addAttrs(style, options.attrs);
-	insertStyleElement(options, style);
-
-	return style;
-}
-
-function createLinkElement (options) {
-	var link = document.createElement("link");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-	options.attrs.rel = "stylesheet";
-
-	addAttrs(link, options.attrs);
-	insertStyleElement(options, link);
-
-	return link;
-}
-
-function addAttrs (el, attrs) {
-	Object.keys(attrs).forEach(function (key) {
-		el.setAttribute(key, attrs[key]);
-	});
-}
-
-function getNonce() {
-	if (false) {}
-
-	return __webpack_require__.nc;
-}
-
-function addStyle (obj, options) {
-	var style, update, remove, result;
-
-	// If a transform function was defined, run it on the css
-	if (options.transform && obj.css) {
-	    result = typeof options.transform === 'function'
-		 ? options.transform(obj.css) 
-		 : options.transform.default(obj.css);
-
-	    if (result) {
-	    	// If transform returns a value, use that instead of the original css.
-	    	// This allows running runtime transformations on the css.
-	    	obj.css = result;
-	    } else {
-	    	// If the transform function returns a falsy value, don't add this css.
-	    	// This allows conditional loading of css
-	    	return function() {
-	    		// noop
-	    	};
-	    }
-	}
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-
-		style = singleton || (singleton = createStyleElement(options));
-
-		update = applyToSingletonTag.bind(null, style, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-
-	} else if (
-		obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function"
-	) {
-		style = createLinkElement(options);
-		update = updateLink.bind(null, style, options);
-		remove = function () {
-			removeStyleElement(style);
-
-			if(style.href) URL.revokeObjectURL(style.href);
-		};
-	} else {
-		style = createStyleElement(options);
-		update = applyToTag.bind(null, style);
-		remove = function () {
-			removeStyleElement(style);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle (newObj) {
-		if (newObj) {
-			if (
-				newObj.css === obj.css &&
-				newObj.media === obj.media &&
-				newObj.sourceMap === obj.sourceMap
-			) {
-				return;
-			}
-
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag (style, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (style.styleSheet) {
-		style.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = style.childNodes;
-
-		if (childNodes[index]) style.removeChild(childNodes[index]);
-
-		if (childNodes.length) {
-			style.insertBefore(cssNode, childNodes[index]);
-		} else {
-			style.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag (style, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		style.setAttribute("media", media)
-	}
-
-	if(style.styleSheet) {
-		style.styleSheet.cssText = css;
-	} else {
-		while(style.firstChild) {
-			style.removeChild(style.firstChild);
-		}
-
-		style.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink (link, options, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	/*
-		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
-		and there is no publicPath defined then lets turn convertToAbsoluteUrls
-		on by default.  Otherwise default to the convertToAbsoluteUrls option
-		directly
-	*/
-	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
-
-	if (options.convertToAbsoluteUrls || autoFixUrls) {
-		css = fixUrls(css);
-	}
-
-	if (sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = link.href;
-
-	link.href = URL.createObjectURL(blob);
-
-	if(oldSrc) URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/lib/urls.js":
-/*!***********************************************!*\
-  !*** ./node_modules/style-loader/lib/urls.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-/**
- * When source maps are enabled, `style-loader` uses a link element with a data-uri to
- * embed the css on the page. This breaks all relative urls because now they are relative to a
- * bundle instead of the current page.
- *
- * One solution is to only use full urls, but that may be impossible.
- *
- * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
- *
- * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
- *
- */
-
-module.exports = function (css) {
-  // get current location
-  var location = typeof window !== "undefined" && window.location;
-
-  if (!location) {
-    throw new Error("fixUrls requires window.location");
-  }
-
-	// blank or null?
-	if (!css || typeof css !== "string") {
-	  return css;
-  }
-
-  var baseUrl = location.protocol + "//" + location.host;
-  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
-
-	// convert each url(...)
-	/*
-	This regular expression is just a way to recursively match brackets within
-	a string.
-
-	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
-	   (  = Start a capturing group
-	     (?:  = Start a non-capturing group
-	         [^)(]  = Match anything that isn't a parentheses
-	         |  = OR
-	         \(  = Match a start parentheses
-	             (?:  = Start another non-capturing groups
-	                 [^)(]+  = Match anything that isn't a parentheses
-	                 |  = OR
-	                 \(  = Match a start parentheses
-	                     [^)(]*  = Match anything that isn't a parentheses
-	                 \)  = Match a end parentheses
-	             )  = End Group
-              *\) = Match anything and then a close parens
-          )  = Close non-capturing group
-          *  = Match anything
-       )  = Close capturing group
-	 \)  = Match a close parens
-
-	 /gi  = Get all matches, not the first.  Be case insensitive.
-	 */
-	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
-		// strip quotes (if they exist)
-		var unquotedOrigUrl = origUrl
-			.trim()
-			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
-			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
-
-		// already a full url? no change
-		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
-		  return fullMatch;
-		}
-
-		// convert the url to a full url
-		var newUrl;
-
-		if (unquotedOrigUrl.indexOf("//") === 0) {
-		  	//TODO: should we add protocol?
-			newUrl = unquotedOrigUrl;
-		} else if (unquotedOrigUrl.indexOf("/") === 0) {
-			// path should be relative to the base url
-			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
-		} else {
-			// path should be relative to current directory
-			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
-		}
-
-		// send back the fixed url(...)
-		return "url(" + JSON.stringify(newUrl) + ")";
-	});
-
-	// send back the fixed css
-	return fixedCss;
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/three/build/three.min.js":
 /*!***********************************************!*\
   !*** ./node_modules/three/build/three.min.js ***!
@@ -5992,132 +4313,6 @@ k.BinaryTextureLoader=function(a){console.warn("THREE.BinaryTextureLoader has be
 return a.center()}};k.Projector=function(){console.error("THREE.Projector has been moved to /examples/js/renderers/Projector.js.");this.projectVector=function(a,b){console.warn("THREE.Projector: .projectVector() is now vector.project().");a.project(b)};this.unprojectVector=function(a,b){console.warn("THREE.Projector: .unprojectVector() is now vector.unproject().");a.unproject(b)};this.pickingRay=function(){console.error("THREE.Projector: .pickingRay() is now raycaster.setFromCamera().")}};k.CanvasRenderer=
 function(){console.error("THREE.CanvasRenderer has been removed")};k.JSONLoader=function(){console.error("THREE.JSONLoader has been removed.")};k.SceneUtils={createMultiMaterialObject:function(){console.error("THREE.SceneUtils has been moved to /examples/js/utils/SceneUtils.js")},detach:function(){console.error("THREE.SceneUtils has been moved to /examples/js/utils/SceneUtils.js")},attach:function(){console.error("THREE.SceneUtils has been moved to /examples/js/utils/SceneUtils.js")}};k.LensFlare=
 function(){console.error("THREE.LensFlare has been moved to /examples/js/objects/Lensflare.js")};Object.defineProperty(k,"__esModule",{value:!0})});
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js")))
-
-/***/ }),
-
-/***/ "./node_modules/three/examples/js/AnimationClipCreator.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/three/examples/js/AnimationClipCreator.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(THREE) {/**
- *
- * Creator of typical test AnimationClips / KeyframeTracks
- *
- * @author Ben Houston / http://clara.io/
- * @author David Sarno / http://lighthaus.us/
- */
-
-THREE.AnimationClipCreator = function () {};
-
-THREE.AnimationClipCreator.CreateRotationAnimation = function ( period, axis ) {
-
-	var times = [ 0, period ], values = [ 0, 360 ];
-
-	axis = axis || 'x';
-	var trackName = '.rotation[' + axis + ']';
-
-	var track = new THREE.NumberKeyframeTrack( trackName, times, values );
-
-	return new THREE.AnimationClip( null, period, [ track ] );
-
-};
-
-THREE.AnimationClipCreator.CreateScaleAxisAnimation = function ( period, axis ) {
-
-	var times = [ 0, period ], values = [ 0, 1 ];
-
-	axis = axis || 'x';
-	var trackName = '.scale[' + axis + ']';
-
-	var track = new THREE.NumberKeyframeTrack( trackName, times, values );
-
-	return new THREE.AnimationClip( null, period, [ track ] );
-
-};
-
-THREE.AnimationClipCreator.CreateShakeAnimation = function ( duration, shakeScale ) {
-
-	var times = [], values = [], tmp = new THREE.Vector3();
-
-	for ( var i = 0; i < duration * 10; i ++ ) {
-
-		times.push( i / 10 );
-
-		tmp.set( Math.random() * 2.0 - 1.0, Math.random() * 2.0 - 1.0, Math.random() * 2.0 - 1.0 ).
-			multiply( shakeScale ).
-			toArray( values, values.length );
-
-	}
-
-	var trackName = '.position';
-
-	var track = new THREE.VectorKeyframeTrack( trackName, times, values );
-
-	return new THREE.AnimationClip( null, duration, [ track ] );
-
-};
-
-
-THREE.AnimationClipCreator.CreatePulsationAnimation = function ( duration, pulseScale ) {
-
-	var times = [], values = [], tmp = new THREE.Vector3();
-
-	for ( var i = 0; i < duration * 10; i ++ ) {
-
-		times.push( i / 10 );
-
-		var scaleFactor = Math.random() * pulseScale;
-		tmp.set( scaleFactor, scaleFactor, scaleFactor ).
-			toArray( values, values.length );
-
-	}
-
-	var trackName = '.scale';
-
-	var track = new THREE.VectorKeyframeTrack( trackName, times, values );
-
-	return new THREE.AnimationClip( null, duration, [ track ] );
-
-};
-
-
-THREE.AnimationClipCreator.CreateVisibilityAnimation = function ( duration ) {
-
-	var times = [ 0, duration / 2, duration ], values = [ true, false, true ];
-
-	var trackName = '.visible';
-
-	var track = new THREE.BooleanKeyframeTrack( trackName, times, values );
-
-	return new THREE.AnimationClip( null, duration, [ track ] );
-
-};
-
-
-THREE.AnimationClipCreator.CreateMaterialColorAnimation = function ( duration, colors ) {
-
-	var times = [], values = [],
-		timeStep = duration / colors.length;
-
-	for ( var i = 0; i <= colors.length; i ++ ) {
-
-		times.push( i * timeStep );
-		values.push( colors[ i % colors.length ] );
-
-	}
-
-	var trackName = '.material[0].color';
-
-	var track = new THREE.ColorKeyframeTrack( trackName, times, values );
-
-	return new THREE.AnimationClip( null, duration, [ track ] );
-
-};
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js")))
 
@@ -7200,6 +5395,3936 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 	}
 
 } );
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js")))
+
+/***/ }),
+
+/***/ "./node_modules/three/examples/js/loaders/ColladaLoader.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/three/examples/js/loaders/ColladaLoader.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(THREE) {/**
+ * @author mrdoob / http://mrdoob.com/
+ * @author Mugen87 / https://github.com/Mugen87
+ */
+
+THREE.ColladaLoader = function ( manager ) {
+
+	this.manager = ( manager !== undefined ) ? manager : THREE.DefaultLoadingManager;
+
+};
+
+THREE.ColladaLoader.prototype = {
+
+	constructor: THREE.ColladaLoader,
+
+	crossOrigin: 'anonymous',
+
+	load: function ( url, onLoad, onProgress, onError ) {
+
+		var scope = this;
+
+		var path = ( scope.path === undefined ) ? THREE.LoaderUtils.extractUrlBase( url ) : scope.path;
+
+		var loader = new THREE.FileLoader( scope.manager );
+		loader.setPath( scope.path );
+		loader.load( url, function ( text ) {
+
+			onLoad( scope.parse( text, path ) );
+
+		}, onProgress, onError );
+
+	},
+
+	setPath: function ( value ) {
+
+		this.path = value;
+		return this;
+
+	},
+
+	setResourcePath: function ( value ) {
+
+		this.resourcePath = value;
+		return this;
+
+	},
+
+	options: {
+
+		set convertUpAxis( value ) {
+
+			console.warn( 'THREE.ColladaLoader: options.convertUpAxis() has been removed. Up axis is converted automatically.' );
+
+		}
+
+	},
+
+	setCrossOrigin: function ( value ) {
+
+		this.crossOrigin = value;
+		return this;
+
+	},
+
+	parse: function ( text, path ) {
+
+		function getElementsByTagName( xml, name ) {
+
+			// Non recursive xml.getElementsByTagName() ...
+
+			var array = [];
+			var childNodes = xml.childNodes;
+
+			for ( var i = 0, l = childNodes.length; i < l; i ++ ) {
+
+				var child = childNodes[ i ];
+
+				if ( child.nodeName === name ) {
+
+					array.push( child );
+
+				}
+
+			}
+
+			return array;
+
+		}
+
+		function parseStrings( text ) {
+
+			if ( text.length === 0 ) return [];
+
+			var parts = text.trim().split( /\s+/ );
+			var array = new Array( parts.length );
+
+			for ( var i = 0, l = parts.length; i < l; i ++ ) {
+
+				array[ i ] = parts[ i ];
+
+			}
+
+			return array;
+
+		}
+
+		function parseFloats( text ) {
+
+			if ( text.length === 0 ) return [];
+
+			var parts = text.trim().split( /\s+/ );
+			var array = new Array( parts.length );
+
+			for ( var i = 0, l = parts.length; i < l; i ++ ) {
+
+				array[ i ] = parseFloat( parts[ i ] );
+
+			}
+
+			return array;
+
+		}
+
+		function parseInts( text ) {
+
+			if ( text.length === 0 ) return [];
+
+			var parts = text.trim().split( /\s+/ );
+			var array = new Array( parts.length );
+
+			for ( var i = 0, l = parts.length; i < l; i ++ ) {
+
+				array[ i ] = parseInt( parts[ i ] );
+
+			}
+
+			return array;
+
+		}
+
+		function parseId( text ) {
+
+			return text.substring( 1 );
+
+		}
+
+		function generateId() {
+
+			return 'three_default_' + ( count ++ );
+
+		}
+
+		function isEmpty( object ) {
+
+			return Object.keys( object ).length === 0;
+
+		}
+
+		// asset
+
+		function parseAsset( xml ) {
+
+			return {
+				unit: parseAssetUnit( getElementsByTagName( xml, 'unit' )[ 0 ] ),
+				upAxis: parseAssetUpAxis( getElementsByTagName( xml, 'up_axis' )[ 0 ] )
+			};
+
+		}
+
+		function parseAssetUnit( xml ) {
+
+			if ( ( xml !== undefined ) && ( xml.hasAttribute( 'meter' ) === true ) ) {
+
+				return parseFloat( xml.getAttribute( 'meter' ) );
+
+			} else {
+
+				return 1; // default 1 meter
+
+			}
+
+		}
+
+		function parseAssetUpAxis( xml ) {
+
+			return xml !== undefined ? xml.textContent : 'Y_UP';
+
+		}
+
+		// library
+
+		function parseLibrary( xml, libraryName, nodeName, parser ) {
+
+			var library = getElementsByTagName( xml, libraryName )[ 0 ];
+
+			if ( library !== undefined ) {
+
+				var elements = getElementsByTagName( library, nodeName );
+
+				for ( var i = 0; i < elements.length; i ++ ) {
+
+					parser( elements[ i ] );
+
+				}
+
+			}
+
+		}
+
+		function buildLibrary( data, builder ) {
+
+			for ( var name in data ) {
+
+				var object = data[ name ];
+				object.build = builder( data[ name ] );
+
+			}
+
+		}
+
+		// get
+
+		function getBuild( data, builder ) {
+
+			if ( data.build !== undefined ) return data.build;
+
+			data.build = builder( data );
+
+			return data.build;
+
+		}
+
+		// animation
+
+		function parseAnimation( xml ) {
+
+			var data = {
+				sources: {},
+				samplers: {},
+				channels: {}
+			};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				var id;
+
+				switch ( child.nodeName ) {
+
+					case 'source':
+						id = child.getAttribute( 'id' );
+						data.sources[ id ] = parseSource( child );
+						break;
+
+					case 'sampler':
+						id = child.getAttribute( 'id' );
+						data.samplers[ id ] = parseAnimationSampler( child );
+						break;
+
+					case 'channel':
+						id = child.getAttribute( 'target' );
+						data.channels[ id ] = parseAnimationChannel( child );
+						break;
+
+					default:
+						console.log( child );
+
+				}
+
+			}
+
+			library.animations[ xml.getAttribute( 'id' ) ] = data;
+
+		}
+
+		function parseAnimationSampler( xml ) {
+
+			var data = {
+				inputs: {},
+			};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'input':
+						var id = parseId( child.getAttribute( 'source' ) );
+						var semantic = child.getAttribute( 'semantic' );
+						data.inputs[ semantic ] = id;
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseAnimationChannel( xml ) {
+
+			var data = {};
+
+			var target = xml.getAttribute( 'target' );
+
+			// parsing SID Addressing Syntax
+
+			var parts = target.split( '/' );
+
+			var id = parts.shift();
+			var sid = parts.shift();
+
+			// check selection syntax
+
+			var arraySyntax = ( sid.indexOf( '(' ) !== - 1 );
+			var memberSyntax = ( sid.indexOf( '.' ) !== - 1 );
+
+			if ( memberSyntax ) {
+
+				//  member selection access
+
+				parts = sid.split( '.' );
+				sid = parts.shift();
+				data.member = parts.shift();
+
+			} else if ( arraySyntax ) {
+
+				// array-access syntax. can be used to express fields in one-dimensional vectors or two-dimensional matrices.
+
+				var indices = sid.split( '(' );
+				sid = indices.shift();
+
+				for ( var i = 0; i < indices.length; i ++ ) {
+
+					indices[ i ] = parseInt( indices[ i ].replace( /\)/, '' ) );
+
+				}
+
+				data.indices = indices;
+
+			}
+
+			data.id = id;
+			data.sid = sid;
+
+			data.arraySyntax = arraySyntax;
+			data.memberSyntax = memberSyntax;
+
+			data.sampler = parseId( xml.getAttribute( 'source' ) );
+
+			return data;
+
+		}
+
+		function buildAnimation( data ) {
+
+			var tracks = [];
+
+			var channels = data.channels;
+			var samplers = data.samplers;
+			var sources = data.sources;
+
+			for ( var target in channels ) {
+
+				if ( channels.hasOwnProperty( target ) ) {
+
+					var channel = channels[ target ];
+					var sampler = samplers[ channel.sampler ];
+
+					var inputId = sampler.inputs.INPUT;
+					var outputId = sampler.inputs.OUTPUT;
+
+					var inputSource = sources[ inputId ];
+					var outputSource = sources[ outputId ];
+
+					var animation = buildAnimationChannel( channel, inputSource, outputSource );
+
+					createKeyframeTracks( animation, tracks );
+
+				}
+
+			}
+
+			return tracks;
+
+		}
+
+		function getAnimation( id ) {
+
+			return getBuild( library.animations[ id ], buildAnimation );
+
+		}
+
+		function buildAnimationChannel( channel, inputSource, outputSource ) {
+
+			var node = library.nodes[ channel.id ];
+			var object3D = getNode( node.id );
+
+			var transform = node.transforms[ channel.sid ];
+			var defaultMatrix = node.matrix.clone().transpose();
+
+			var time, stride;
+			var i, il, j, jl;
+
+			var data = {};
+
+			// the collada spec allows the animation of data in various ways.
+			// depending on the transform type (matrix, translate, rotate, scale), we execute different logic
+
+			switch ( transform ) {
+
+				case 'matrix':
+
+					for ( i = 0, il = inputSource.array.length; i < il; i ++ ) {
+
+						time = inputSource.array[ i ];
+						stride = i * outputSource.stride;
+
+						if ( data[ time ] === undefined ) data[ time ] = {};
+
+						if ( channel.arraySyntax === true ) {
+
+							var value = outputSource.array[ stride ];
+							var index = channel.indices[ 0 ] + 4 * channel.indices[ 1 ];
+
+							data[ time ][ index ] = value;
+
+						} else {
+
+							for ( j = 0, jl = outputSource.stride; j < jl; j ++ ) {
+
+								data[ time ][ j ] = outputSource.array[ stride + j ];
+
+							}
+
+						}
+
+					}
+
+					break;
+
+				case 'translate':
+					console.warn( 'THREE.ColladaLoader: Animation transform type "%s" not yet implemented.', transform );
+					break;
+
+				case 'rotate':
+					console.warn( 'THREE.ColladaLoader: Animation transform type "%s" not yet implemented.', transform );
+					break;
+
+				case 'scale':
+					console.warn( 'THREE.ColladaLoader: Animation transform type "%s" not yet implemented.', transform );
+					break;
+
+			}
+
+			var keyframes = prepareAnimationData( data, defaultMatrix );
+
+			var animation = {
+				name: object3D.uuid,
+				keyframes: keyframes
+			};
+
+			return animation;
+
+		}
+
+		function prepareAnimationData( data, defaultMatrix ) {
+
+			var keyframes = [];
+
+			// transfer data into a sortable array
+
+			for ( var time in data ) {
+
+				keyframes.push( { time: parseFloat( time ), value: data[ time ] } );
+
+			}
+
+			// ensure keyframes are sorted by time
+
+			keyframes.sort( ascending );
+
+			// now we clean up all animation data, so we can use them for keyframe tracks
+
+			for ( var i = 0; i < 16; i ++ ) {
+
+				transformAnimationData( keyframes, i, defaultMatrix.elements[ i ] );
+
+			}
+
+			return keyframes;
+
+			// array sort function
+
+			function ascending( a, b ) {
+
+				return a.time - b.time;
+
+			}
+
+		}
+
+		var position = new THREE.Vector3();
+		var scale = new THREE.Vector3();
+		var quaternion = new THREE.Quaternion();
+
+		function createKeyframeTracks( animation, tracks ) {
+
+			var keyframes = animation.keyframes;
+			var name = animation.name;
+
+			var times = [];
+			var positionData = [];
+			var quaternionData = [];
+			var scaleData = [];
+
+			for ( var i = 0, l = keyframes.length; i < l; i ++ ) {
+
+				var keyframe = keyframes[ i ];
+
+				var time = keyframe.time;
+				var value = keyframe.value;
+
+				matrix.fromArray( value ).transpose();
+				matrix.decompose( position, quaternion, scale );
+
+				times.push( time );
+				positionData.push( position.x, position.y, position.z );
+				quaternionData.push( quaternion.x, quaternion.y, quaternion.z, quaternion.w );
+				scaleData.push( scale.x, scale.y, scale.z );
+
+			}
+
+			if ( positionData.length > 0 ) tracks.push( new THREE.VectorKeyframeTrack( name + '.position', times, positionData ) );
+			if ( quaternionData.length > 0 ) tracks.push( new THREE.QuaternionKeyframeTrack( name + '.quaternion', times, quaternionData ) );
+			if ( scaleData.length > 0 ) tracks.push( new THREE.VectorKeyframeTrack( name + '.scale', times, scaleData ) );
+
+			return tracks;
+
+		}
+
+		function transformAnimationData( keyframes, property, defaultValue ) {
+
+			var keyframe;
+
+			var empty = true;
+			var i, l;
+
+			// check, if values of a property are missing in our keyframes
+
+			for ( i = 0, l = keyframes.length; i < l; i ++ ) {
+
+				keyframe = keyframes[ i ];
+
+				if ( keyframe.value[ property ] === undefined ) {
+
+					keyframe.value[ property ] = null; // mark as missing
+
+				} else {
+
+					empty = false;
+
+				}
+
+			}
+
+			if ( empty === true ) {
+
+				// no values at all, so we set a default value
+
+				for ( i = 0, l = keyframes.length; i < l; i ++ ) {
+
+					keyframe = keyframes[ i ];
+
+					keyframe.value[ property ] = defaultValue;
+
+				}
+
+			} else {
+
+				// filling gaps
+
+				createMissingKeyframes( keyframes, property );
+
+			}
+
+		}
+
+		function createMissingKeyframes( keyframes, property ) {
+
+			var prev, next;
+
+			for ( var i = 0, l = keyframes.length; i < l; i ++ ) {
+
+				var keyframe = keyframes[ i ];
+
+				if ( keyframe.value[ property ] === null ) {
+
+					prev = getPrev( keyframes, i, property );
+					next = getNext( keyframes, i, property );
+
+					if ( prev === null ) {
+
+						keyframe.value[ property ] = next.value[ property ];
+						continue;
+
+					}
+
+					if ( next === null ) {
+
+						keyframe.value[ property ] = prev.value[ property ];
+						continue;
+
+					}
+
+					interpolate( keyframe, prev, next, property );
+
+				}
+
+			}
+
+		}
+
+		function getPrev( keyframes, i, property ) {
+
+			while ( i >= 0 ) {
+
+				var keyframe = keyframes[ i ];
+
+				if ( keyframe.value[ property ] !== null ) return keyframe;
+
+				i --;
+
+			}
+
+			return null;
+
+		}
+
+		function getNext( keyframes, i, property ) {
+
+			while ( i < keyframes.length ) {
+
+				var keyframe = keyframes[ i ];
+
+				if ( keyframe.value[ property ] !== null ) return keyframe;
+
+				i ++;
+
+			}
+
+			return null;
+
+		}
+
+		function interpolate( key, prev, next, property ) {
+
+			if ( ( next.time - prev.time ) === 0 ) {
+
+				key.value[ property ] = prev.value[ property ];
+				return;
+
+			}
+
+			key.value[ property ] = ( ( key.time - prev.time ) * ( next.value[ property ] - prev.value[ property ] ) / ( next.time - prev.time ) ) + prev.value[ property ];
+
+		}
+
+		// animation clips
+
+		function parseAnimationClip( xml ) {
+
+			var data = {
+				name: xml.getAttribute( 'id' ) || 'default',
+				start: parseFloat( xml.getAttribute( 'start' ) || 0 ),
+				end: parseFloat( xml.getAttribute( 'end' ) || 0 ),
+				animations: []
+			};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'instance_animation':
+						data.animations.push( parseId( child.getAttribute( 'url' ) ) );
+						break;
+
+				}
+
+			}
+
+			library.clips[ xml.getAttribute( 'id' ) ] = data;
+
+		}
+
+		function buildAnimationClip( data ) {
+
+			var tracks = [];
+
+			var name = data.name;
+			var duration = ( data.end - data.start ) || - 1;
+			var animations = data.animations;
+
+			for ( var i = 0, il = animations.length; i < il; i ++ ) {
+
+				var animationTracks = getAnimation( animations[ i ] );
+
+				for ( var j = 0, jl = animationTracks.length; j < jl; j ++ ) {
+
+					tracks.push( animationTracks[ j ] );
+
+				}
+
+			}
+
+			return new THREE.AnimationClip( name, duration, tracks );
+
+		}
+
+		function getAnimationClip( id ) {
+
+			return getBuild( library.clips[ id ], buildAnimationClip );
+
+		}
+
+		// controller
+
+		function parseController( xml ) {
+
+			var data = {};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'skin':
+						// there is exactly one skin per controller
+						data.id = parseId( child.getAttribute( 'source' ) );
+						data.skin = parseSkin( child );
+						break;
+
+					case 'morph':
+						data.id = parseId( child.getAttribute( 'source' ) );
+						console.warn( 'THREE.ColladaLoader: Morph target animation not supported yet.' );
+						break;
+
+				}
+
+			}
+
+			library.controllers[ xml.getAttribute( 'id' ) ] = data;
+
+		}
+
+		function parseSkin( xml ) {
+
+			var data = {
+				sources: {}
+			};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'bind_shape_matrix':
+						data.bindShapeMatrix = parseFloats( child.textContent );
+						break;
+
+					case 'source':
+						var id = child.getAttribute( 'id' );
+						data.sources[ id ] = parseSource( child );
+						break;
+
+					case 'joints':
+						data.joints = parseJoints( child );
+						break;
+
+					case 'vertex_weights':
+						data.vertexWeights = parseVertexWeights( child );
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseJoints( xml ) {
+
+			var data = {
+				inputs: {}
+			};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'input':
+						var semantic = child.getAttribute( 'semantic' );
+						var id = parseId( child.getAttribute( 'source' ) );
+						data.inputs[ semantic ] = id;
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseVertexWeights( xml ) {
+
+			var data = {
+				inputs: {}
+			};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'input':
+						var semantic = child.getAttribute( 'semantic' );
+						var id = parseId( child.getAttribute( 'source' ) );
+						var offset = parseInt( child.getAttribute( 'offset' ) );
+						data.inputs[ semantic ] = { id: id, offset: offset };
+						break;
+
+					case 'vcount':
+						data.vcount = parseInts( child.textContent );
+						break;
+
+					case 'v':
+						data.v = parseInts( child.textContent );
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function buildController( data ) {
+
+			var build = {
+				id: data.id
+			};
+
+			var geometry = library.geometries[ build.id ];
+
+			if ( data.skin !== undefined ) {
+
+				build.skin = buildSkin( data.skin );
+
+				// we enhance the 'sources' property of the corresponding geometry with our skin data
+
+				geometry.sources.skinIndices = build.skin.indices;
+				geometry.sources.skinWeights = build.skin.weights;
+
+			}
+
+			return build;
+
+		}
+
+		function buildSkin( data ) {
+
+			var BONE_LIMIT = 4;
+
+			var build = {
+				joints: [], // this must be an array to preserve the joint order
+				indices: {
+					array: [],
+					stride: BONE_LIMIT
+				},
+				weights: {
+					array: [],
+					stride: BONE_LIMIT
+				}
+			};
+
+			var sources = data.sources;
+			var vertexWeights = data.vertexWeights;
+
+			var vcount = vertexWeights.vcount;
+			var v = vertexWeights.v;
+			var jointOffset = vertexWeights.inputs.JOINT.offset;
+			var weightOffset = vertexWeights.inputs.WEIGHT.offset;
+
+			var jointSource = data.sources[ data.joints.inputs.JOINT ];
+			var inverseSource = data.sources[ data.joints.inputs.INV_BIND_MATRIX ];
+
+			var weights = sources[ vertexWeights.inputs.WEIGHT.id ].array;
+			var stride = 0;
+
+			var i, j, l;
+
+			// procces skin data for each vertex
+
+			for ( i = 0, l = vcount.length; i < l; i ++ ) {
+
+				var jointCount = vcount[ i ]; // this is the amount of joints that affect a single vertex
+				var vertexSkinData = [];
+
+				for ( j = 0; j < jointCount; j ++ ) {
+
+					var skinIndex = v[ stride + jointOffset ];
+					var weightId = v[ stride + weightOffset ];
+					var skinWeight = weights[ weightId ];
+
+					vertexSkinData.push( { index: skinIndex, weight: skinWeight } );
+
+					stride += 2;
+
+				}
+
+				// we sort the joints in descending order based on the weights.
+				// this ensures, we only procced the most important joints of the vertex
+
+				vertexSkinData.sort( descending );
+
+				// now we provide for each vertex a set of four index and weight values.
+				// the order of the skin data matches the order of vertices
+
+				for ( j = 0; j < BONE_LIMIT; j ++ ) {
+
+					var d = vertexSkinData[ j ];
+
+					if ( d !== undefined ) {
+
+						build.indices.array.push( d.index );
+						build.weights.array.push( d.weight );
+
+					} else {
+
+						build.indices.array.push( 0 );
+						build.weights.array.push( 0 );
+
+					}
+
+				}
+
+			}
+
+			// setup bind matrix
+
+			if ( data.bindShapeMatrix ) {
+
+				build.bindMatrix = new THREE.Matrix4().fromArray( data.bindShapeMatrix ).transpose();
+
+			} else {
+
+				build.bindMatrix = new THREE.Matrix4().identity();
+
+			}
+
+			// process bones and inverse bind matrix data
+
+			for ( i = 0, l = jointSource.array.length; i < l; i ++ ) {
+
+				var name = jointSource.array[ i ];
+				var boneInverse = new THREE.Matrix4().fromArray( inverseSource.array, i * inverseSource.stride ).transpose();
+
+				build.joints.push( { name: name, boneInverse: boneInverse } );
+
+			}
+
+			return build;
+
+			// array sort function
+
+			function descending( a, b ) {
+
+				return b.weight - a.weight;
+
+			}
+
+		}
+
+		function getController( id ) {
+
+			return getBuild( library.controllers[ id ], buildController );
+
+		}
+
+		// image
+
+		function parseImage( xml ) {
+
+			var data = {
+				init_from: getElementsByTagName( xml, 'init_from' )[ 0 ].textContent
+			};
+
+			library.images[ xml.getAttribute( 'id' ) ] = data;
+
+		}
+
+		function buildImage( data ) {
+
+			if ( data.build !== undefined ) return data.build;
+
+			return data.init_from;
+
+		}
+
+		function getImage( id ) {
+
+			var data = library.images[ id ];
+
+			if ( data !== undefined ) {
+
+				return getBuild( data, buildImage );
+
+			}
+
+			console.warn( 'THREE.ColladaLoader: Couldn\'t find image with ID:', id );
+
+			return null;
+
+		}
+
+		// effect
+
+		function parseEffect( xml ) {
+
+			var data = {};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'profile_COMMON':
+						data.profile = parseEffectProfileCOMMON( child );
+						break;
+
+				}
+
+			}
+
+			library.effects[ xml.getAttribute( 'id' ) ] = data;
+
+		}
+
+		function parseEffectProfileCOMMON( xml ) {
+
+			var data = {
+				surfaces: {},
+				samplers: {}
+			};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'newparam':
+						parseEffectNewparam( child, data );
+						break;
+
+					case 'technique':
+						data.technique = parseEffectTechnique( child );
+						break;
+
+					case 'extra':
+						data.extra = parseEffectExtra( child );
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseEffectNewparam( xml, data ) {
+
+			var sid = xml.getAttribute( 'sid' );
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'surface':
+						data.surfaces[ sid ] = parseEffectSurface( child );
+						break;
+
+					case 'sampler2D':
+						data.samplers[ sid ] = parseEffectSampler( child );
+						break;
+
+				}
+
+			}
+
+		}
+
+		function parseEffectSurface( xml ) {
+
+			var data = {};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'init_from':
+						data.init_from = child.textContent;
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseEffectSampler( xml ) {
+
+			var data = {};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'source':
+						data.source = child.textContent;
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseEffectTechnique( xml ) {
+
+			var data = {};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'constant':
+					case 'lambert':
+					case 'blinn':
+					case 'phong':
+						data.type = child.nodeName;
+						data.parameters = parseEffectParameters( child );
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseEffectParameters( xml ) {
+
+			var data = {};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'emission':
+					case 'diffuse':
+					case 'specular':
+					case 'bump':
+					case 'ambient':
+					case 'shininess':
+					case 'transparency':
+						data[ child.nodeName ] = parseEffectParameter( child );
+						break;
+					case 'transparent':
+						data[ child.nodeName ] = {
+							opaque: child.getAttribute( 'opaque' ),
+							data: parseEffectParameter( child )
+						};
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseEffectParameter( xml ) {
+
+			var data = {};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'color':
+						data[ child.nodeName ] = parseFloats( child.textContent );
+						break;
+
+					case 'float':
+						data[ child.nodeName ] = parseFloat( child.textContent );
+						break;
+
+					case 'texture':
+						data[ child.nodeName ] = { id: child.getAttribute( 'texture' ), extra: parseEffectParameterTexture( child ) };
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseEffectParameterTexture( xml ) {
+
+			var data = {
+				technique: {}
+			};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'extra':
+						parseEffectParameterTextureExtra( child, data );
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseEffectParameterTextureExtra( xml, data ) {
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'technique':
+						parseEffectParameterTextureExtraTechnique( child, data );
+						break;
+
+				}
+
+			}
+
+		}
+
+		function parseEffectParameterTextureExtraTechnique( xml, data ) {
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'repeatU':
+					case 'repeatV':
+					case 'offsetU':
+					case 'offsetV':
+						data.technique[ child.nodeName ] = parseFloat( child.textContent );
+						break;
+
+					case 'wrapU':
+					case 'wrapV':
+
+						// some files have values for wrapU/wrapV which become NaN via parseInt
+
+						if ( child.textContent.toUpperCase() === 'TRUE' ) {
+
+							data.technique[ child.nodeName ] = 1;
+
+						} else if ( child.textContent.toUpperCase() === 'FALSE' ) {
+
+							data.technique[ child.nodeName ] = 0;
+
+						} else {
+
+							data.technique[ child.nodeName ] = parseInt( child.textContent );
+
+						}
+
+						break;
+
+				}
+
+			}
+
+		}
+
+		function parseEffectExtra( xml ) {
+
+			var data = {};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'technique':
+						data.technique = parseEffectExtraTechnique( child );
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseEffectExtraTechnique( xml ) {
+
+			var data = {};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'double_sided':
+						data[ child.nodeName ] = parseInt( child.textContent );
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function buildEffect( data ) {
+
+			return data;
+
+		}
+
+		function getEffect( id ) {
+
+			return getBuild( library.effects[ id ], buildEffect );
+
+		}
+
+		// material
+
+		function parseMaterial( xml ) {
+
+			var data = {
+				name: xml.getAttribute( 'name' )
+			};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'instance_effect':
+						data.url = parseId( child.getAttribute( 'url' ) );
+						break;
+
+				}
+
+			}
+
+			library.materials[ xml.getAttribute( 'id' ) ] = data;
+
+		}
+
+		function getTextureLoader( image ) {
+
+			var loader;
+
+			var extension = image.slice( ( image.lastIndexOf( '.' ) - 1 >>> 0 ) + 2 ); // http://www.jstips.co/en/javascript/get-file-extension/
+			extension = extension.toLowerCase();
+
+			switch ( extension ) {
+
+				case 'tga':
+					loader = tgaLoader;
+					break;
+
+				default:
+					loader = textureLoader;
+
+			}
+
+			return loader;
+
+		}
+
+		function buildMaterial( data ) {
+
+			var effect = getEffect( data.url );
+			var technique = effect.profile.technique;
+			var extra = effect.profile.extra;
+
+			var material;
+
+			switch ( technique.type ) {
+
+				case 'phong':
+				case 'blinn':
+					material = new THREE.MeshPhongMaterial();
+					break;
+
+				case 'lambert':
+					material = new THREE.MeshLambertMaterial();
+					break;
+
+				default:
+					material = new THREE.MeshBasicMaterial();
+					break;
+
+			}
+
+			material.name = data.name || '';
+
+			function getTexture( textureObject ) {
+
+				var sampler = effect.profile.samplers[ textureObject.id ];
+				var image = null;
+
+				// get image
+
+				if ( sampler !== undefined ) {
+
+					var surface = effect.profile.surfaces[ sampler.source ];
+					image = getImage( surface.init_from );
+
+				} else {
+
+					console.warn( 'THREE.ColladaLoader: Undefined sampler. Access image directly (see #12530).' );
+					image = getImage( textureObject.id );
+
+				}
+
+				// create texture if image is avaiable
+
+				if ( image !== null ) {
+
+					var loader = getTextureLoader( image );
+
+					if ( loader !== undefined ) {
+
+						var texture = loader.load( image );
+
+						var extra = textureObject.extra;
+
+						if ( extra !== undefined && extra.technique !== undefined && isEmpty( extra.technique ) === false ) {
+
+							var technique = extra.technique;
+
+							texture.wrapS = technique.wrapU ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
+							texture.wrapT = technique.wrapV ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
+
+							texture.offset.set( technique.offsetU || 0, technique.offsetV || 0 );
+							texture.repeat.set( technique.repeatU || 1, technique.repeatV || 1 );
+
+						} else {
+
+							texture.wrapS = THREE.RepeatWrapping;
+							texture.wrapT = THREE.RepeatWrapping;
+
+						}
+
+						return texture;
+
+					} else {
+
+						console.warn( 'THREE.ColladaLoader: Loader for texture %s not found.', image );
+
+						return null;
+
+					}
+
+				} else {
+
+					console.warn( 'THREE.ColladaLoader: Couldn\'t create texture with ID:', textureObject.id );
+
+					return null;
+
+				}
+
+			}
+
+			var parameters = technique.parameters;
+
+			for ( var key in parameters ) {
+
+				var parameter = parameters[ key ];
+
+				switch ( key ) {
+
+					case 'diffuse':
+						if ( parameter.color ) material.color.fromArray( parameter.color );
+						if ( parameter.texture ) material.map = getTexture( parameter.texture );
+						break;
+					case 'specular':
+						if ( parameter.color && material.specular ) material.specular.fromArray( parameter.color );
+						if ( parameter.texture ) material.specularMap = getTexture( parameter.texture );
+						break;
+					case 'bump':
+						if ( parameter.texture ) material.normalMap = getTexture( parameter.texture );
+						break;
+					case 'ambient':
+						if ( parameter.texture ) material.lightMap = getTexture( parameter.texture );
+						break;
+					case 'shininess':
+						if ( parameter.float && material.shininess ) material.shininess = parameter.float;
+						break;
+					case 'emission':
+						if ( parameter.color && material.emissive ) material.emissive.fromArray( parameter.color );
+						if ( parameter.texture ) material.emissiveMap = getTexture( parameter.texture );
+						break;
+
+				}
+
+			}
+
+			//
+
+			var transparent = parameters[ 'transparent' ];
+			var transparency = parameters[ 'transparency' ];
+
+			// <transparency> does not exist but <transparent>
+
+			if ( transparency === undefined && transparent ) {
+
+				transparency = {
+					float: 1
+				};
+
+			}
+
+			// <transparent> does not exist but <transparency>
+
+			if ( transparent === undefined && transparency ) {
+
+				transparent = {
+					opaque: 'A_ONE',
+					data: {
+						color: [ 1, 1, 1, 1 ]
+					} };
+
+			}
+
+			if ( transparent && transparency ) {
+
+				// handle case if a texture exists but no color
+
+				if ( transparent.data.texture ) {
+
+					// we do not set an alpha map (see #13792)
+
+					material.transparent = true;
+
+				} else {
+
+					var color = transparent.data.color;
+
+					switch ( transparent.opaque ) {
+
+						case 'A_ONE':
+							material.opacity = color[ 3 ] * transparency.float;
+							break;
+						case 'RGB_ZERO':
+							material.opacity = 1 - ( color[ 0 ] * transparency.float );
+							break;
+						case 'A_ZERO':
+							material.opacity = 1 - ( color[ 3 ] * transparency.float );
+							break;
+						case 'RGB_ONE':
+							material.opacity = color[ 0 ] * transparency.float;
+							break;
+						default:
+							console.warn( 'THREE.ColladaLoader: Invalid opaque type "%s" of transparent tag.', transparent.opaque );
+
+					}
+
+					if ( material.opacity < 1 ) material.transparent = true;
+
+				}
+
+			}
+
+			//
+
+			if ( extra !== undefined && extra.technique !== undefined && extra.technique.double_sided === 1 ) {
+
+				material.side = THREE.DoubleSide;
+
+			}
+
+			return material;
+
+		}
+
+		function getMaterial( id ) {
+
+			return getBuild( library.materials[ id ], buildMaterial );
+
+		}
+
+		// camera
+
+		function parseCamera( xml ) {
+
+			var data = {
+				name: xml.getAttribute( 'name' )
+			};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'optics':
+						data.optics = parseCameraOptics( child );
+						break;
+
+				}
+
+			}
+
+			library.cameras[ xml.getAttribute( 'id' ) ] = data;
+
+		}
+
+		function parseCameraOptics( xml ) {
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				switch ( child.nodeName ) {
+
+					case 'technique_common':
+						return parseCameraTechnique( child );
+
+				}
+
+			}
+
+			return {};
+
+		}
+
+		function parseCameraTechnique( xml ) {
+
+			var data = {};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				switch ( child.nodeName ) {
+
+					case 'perspective':
+					case 'orthographic':
+
+						data.technique = child.nodeName;
+						data.parameters = parseCameraParameters( child );
+
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseCameraParameters( xml ) {
+
+			var data = {};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				switch ( child.nodeName ) {
+
+					case 'xfov':
+					case 'yfov':
+					case 'xmag':
+					case 'ymag':
+					case 'znear':
+					case 'zfar':
+					case 'aspect_ratio':
+						data[ child.nodeName ] = parseFloat( child.textContent );
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function buildCamera( data ) {
+
+			var camera;
+
+			switch ( data.optics.technique ) {
+
+				case 'perspective':
+					camera = new THREE.PerspectiveCamera(
+						data.optics.parameters.yfov,
+						data.optics.parameters.aspect_ratio,
+						data.optics.parameters.znear,
+						data.optics.parameters.zfar
+					);
+					break;
+
+				case 'orthographic':
+					var ymag = data.optics.parameters.ymag;
+					var xmag = data.optics.parameters.xmag;
+					var aspectRatio = data.optics.parameters.aspect_ratio;
+
+					xmag = ( xmag === undefined ) ? ( ymag * aspectRatio ) : xmag;
+					ymag = ( ymag === undefined ) ? ( xmag / aspectRatio ) : ymag;
+
+					xmag *= 0.5;
+					ymag *= 0.5;
+
+					camera = new THREE.OrthographicCamera(
+						- xmag, xmag, ymag, - ymag, // left, right, top, bottom
+						data.optics.parameters.znear,
+						data.optics.parameters.zfar
+					);
+					break;
+
+				default:
+					camera = new THREE.PerspectiveCamera();
+					break;
+
+			}
+
+			camera.name = data.name || '';
+
+			return camera;
+
+		}
+
+		function getCamera( id ) {
+
+			var data = library.cameras[ id ];
+
+			if ( data !== undefined ) {
+
+				return getBuild( data, buildCamera );
+
+			}
+
+			console.warn( 'THREE.ColladaLoader: Couldn\'t find camera with ID:', id );
+
+			return null;
+
+		}
+
+		// light
+
+		function parseLight( xml ) {
+
+			var data = {};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'technique_common':
+						data = parseLightTechnique( child );
+						break;
+
+				}
+
+			}
+
+			library.lights[ xml.getAttribute( 'id' ) ] = data;
+
+		}
+
+		function parseLightTechnique( xml ) {
+
+			var data = {};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'directional':
+					case 'point':
+					case 'spot':
+					case 'ambient':
+
+						data.technique = child.nodeName;
+						data.parameters = parseLightParameters( child );
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseLightParameters( xml ) {
+
+			var data = {};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'color':
+						var array = parseFloats( child.textContent );
+						data.color = new THREE.Color().fromArray( array );
+						break;
+
+					case 'falloff_angle':
+						data.falloffAngle = parseFloat( child.textContent );
+						break;
+
+					case 'quadratic_attenuation':
+						var f = parseFloat( child.textContent );
+						data.distance = f ? Math.sqrt( 1 / f ) : 0;
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function buildLight( data ) {
+
+			var light;
+
+			switch ( data.technique ) {
+
+				case 'directional':
+					light = new THREE.DirectionalLight();
+					break;
+
+				case 'point':
+					light = new THREE.PointLight();
+					break;
+
+				case 'spot':
+					light = new THREE.SpotLight();
+					break;
+
+				case 'ambient':
+					light = new THREE.AmbientLight();
+					break;
+
+			}
+
+			if ( data.parameters.color ) light.color.copy( data.parameters.color );
+			if ( data.parameters.distance ) light.distance = data.parameters.distance;
+
+			return light;
+
+		}
+
+		function getLight( id ) {
+
+			var data = library.lights[ id ];
+
+			if ( data !== undefined ) {
+
+				return getBuild( data, buildLight );
+
+			}
+
+			console.warn( 'THREE.ColladaLoader: Couldn\'t find light with ID:', id );
+
+			return null;
+
+		}
+
+		// geometry
+
+		function parseGeometry( xml ) {
+
+			var data = {
+				name: xml.getAttribute( 'name' ),
+				sources: {},
+				vertices: {},
+				primitives: []
+			};
+
+			var mesh = getElementsByTagName( xml, 'mesh' )[ 0 ];
+
+			// the following tags inside geometry are not supported yet (see https://github.com/mrdoob/three.js/pull/12606): convex_mesh, spline, brep
+			if ( mesh === undefined ) return;
+
+			for ( var i = 0; i < mesh.childNodes.length; i ++ ) {
+
+				var child = mesh.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				var id = child.getAttribute( 'id' );
+
+				switch ( child.nodeName ) {
+
+					case 'source':
+						data.sources[ id ] = parseSource( child );
+						break;
+
+					case 'vertices':
+						// data.sources[ id ] = data.sources[ parseId( getElementsByTagName( child, 'input' )[ 0 ].getAttribute( 'source' ) ) ];
+						data.vertices = parseGeometryVertices( child );
+						break;
+
+					case 'polygons':
+						console.warn( 'THREE.ColladaLoader: Unsupported primitive type: ', child.nodeName );
+						break;
+
+					case 'lines':
+					case 'linestrips':
+					case 'polylist':
+					case 'triangles':
+						data.primitives.push( parseGeometryPrimitive( child ) );
+						break;
+
+					default:
+						console.log( child );
+
+				}
+
+			}
+
+			library.geometries[ xml.getAttribute( 'id' ) ] = data;
+
+		}
+
+		function parseSource( xml ) {
+
+			var data = {
+				array: [],
+				stride: 3
+			};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'float_array':
+						data.array = parseFloats( child.textContent );
+						break;
+
+					case 'Name_array':
+						data.array = parseStrings( child.textContent );
+						break;
+
+					case 'technique_common':
+						var accessor = getElementsByTagName( child, 'accessor' )[ 0 ];
+
+						if ( accessor !== undefined ) {
+
+							data.stride = parseInt( accessor.getAttribute( 'stride' ) );
+
+						}
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseGeometryVertices( xml ) {
+
+			var data = {};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				data[ child.getAttribute( 'semantic' ) ] = parseId( child.getAttribute( 'source' ) );
+
+			}
+
+			return data;
+
+		}
+
+		function parseGeometryPrimitive( xml ) {
+
+			var primitive = {
+				type: xml.nodeName,
+				material: xml.getAttribute( 'material' ),
+				count: parseInt( xml.getAttribute( 'count' ) ),
+				inputs: {},
+				stride: 0,
+				hasUV: false
+			};
+
+			for ( var i = 0, l = xml.childNodes.length; i < l; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'input':
+						var id = parseId( child.getAttribute( 'source' ) );
+						var semantic = child.getAttribute( 'semantic' );
+						var offset = parseInt( child.getAttribute( 'offset' ) );
+						var set = parseInt( child.getAttribute( 'set' ) );
+						var inputname = ( set > 0 ? semantic + set : semantic );
+						primitive.inputs[ inputname ] = { id: id, offset: offset };
+						primitive.stride = Math.max( primitive.stride, offset + 1 );
+						if ( semantic === 'TEXCOORD' ) primitive.hasUV = true;
+						break;
+
+					case 'vcount':
+						primitive.vcount = parseInts( child.textContent );
+						break;
+
+					case 'p':
+						primitive.p = parseInts( child.textContent );
+						break;
+
+				}
+
+			}
+
+			return primitive;
+
+		}
+
+		function groupPrimitives( primitives ) {
+
+			var build = {};
+
+			for ( var i = 0; i < primitives.length; i ++ ) {
+
+				var primitive = primitives[ i ];
+
+				if ( build[ primitive.type ] === undefined ) build[ primitive.type ] = [];
+
+				build[ primitive.type ].push( primitive );
+
+			}
+
+			return build;
+
+		}
+
+		function checkUVCoordinates( primitives ) {
+
+			var count = 0;
+
+			for ( var i = 0, l = primitives.length; i < l; i ++ ) {
+
+				var primitive = primitives[ i ];
+
+				if ( primitive.hasUV === true ) {
+
+					count ++;
+
+				}
+
+			}
+
+			if ( count > 0 && count < primitives.length ) {
+
+				primitives.uvsNeedsFix = true;
+
+			}
+
+		}
+
+		function buildGeometry( data ) {
+
+			var build = {};
+
+			var sources = data.sources;
+			var vertices = data.vertices;
+			var primitives = data.primitives;
+
+			if ( primitives.length === 0 ) return {};
+
+			// our goal is to create one buffer geometry for a single type of primitives
+			// first, we group all primitives by their type
+
+			var groupedPrimitives = groupPrimitives( primitives );
+
+			for ( var type in groupedPrimitives ) {
+
+				var primitiveType = groupedPrimitives[ type ];
+
+				// second, ensure consistent uv coordinates for each type of primitives (polylist,triangles or lines)
+
+				checkUVCoordinates( primitiveType );
+
+				// third, create a buffer geometry for each type of primitives
+
+				build[ type ] = buildGeometryType( primitiveType, sources, vertices );
+
+			}
+
+			return build;
+
+		}
+
+		function buildGeometryType( primitives, sources, vertices ) {
+
+			var build = {};
+
+			var position = { array: [], stride: 0 };
+			var normal = { array: [], stride: 0 };
+			var uv = { array: [], stride: 0 };
+			var uv2 = { array: [], stride: 0 };
+			var color = { array: [], stride: 0 };
+
+			var skinIndex = { array: [], stride: 4 };
+			var skinWeight = { array: [], stride: 4 };
+
+			var geometry = new THREE.BufferGeometry();
+
+			var materialKeys = [];
+
+			var start = 0;
+
+			for ( var p = 0; p < primitives.length; p ++ ) {
+
+				var primitive = primitives[ p ];
+				var inputs = primitive.inputs;
+
+				// groups
+
+				var count = 0;
+
+				switch ( primitive.type ) {
+
+					case 'lines':
+					case 'linestrips':
+						count = primitive.count * 2;
+						break;
+
+					case 'triangles':
+						count = primitive.count * 3;
+						break;
+
+					case 'polylist':
+
+						for ( var g = 0; g < primitive.count; g ++ ) {
+
+							var vc = primitive.vcount[ g ];
+
+							switch ( vc ) {
+
+								case 3:
+									count += 3; // single triangle
+									break;
+
+								case 4:
+									count += 6; // quad, subdivided into two triangles
+									break;
+
+								default:
+									count += ( vc - 2 ) * 3; // polylist with more than four vertices
+									break;
+
+							}
+
+						}
+
+						break;
+
+					default:
+						console.warn( 'THREE.ColladaLoader: Unknow primitive type:', primitive.type );
+
+				}
+
+				geometry.addGroup( start, count, p );
+				start += count;
+
+				// material
+
+				if ( primitive.material ) {
+
+					materialKeys.push( primitive.material );
+
+				}
+
+				// geometry data
+
+				for ( var name in inputs ) {
+
+					var input = inputs[ name ];
+
+					switch ( name )	{
+
+						case 'VERTEX':
+							for ( var key in vertices ) {
+
+								var id = vertices[ key ];
+
+								switch ( key ) {
+
+									case 'POSITION':
+										var prevLength = position.array.length;
+										buildGeometryData( primitive, sources[ id ], input.offset, position.array );
+										position.stride = sources[ id ].stride;
+
+										if ( sources.skinWeights && sources.skinIndices ) {
+
+											buildGeometryData( primitive, sources.skinIndices, input.offset, skinIndex.array );
+											buildGeometryData( primitive, sources.skinWeights, input.offset, skinWeight.array );
+
+										}
+
+										// see #3803
+
+										if ( primitive.hasUV === false && primitives.uvsNeedsFix === true ) {
+
+											var count = ( position.array.length - prevLength ) / position.stride;
+
+											for ( var i = 0; i < count; i ++ ) {
+
+												// fill missing uv coordinates
+
+												uv.array.push( 0, 0 );
+
+											}
+
+										}
+										break;
+
+									case 'NORMAL':
+										buildGeometryData( primitive, sources[ id ], input.offset, normal.array );
+										normal.stride = sources[ id ].stride;
+										break;
+
+									case 'COLOR':
+										buildGeometryData( primitive, sources[ id ], input.offset, color.array );
+										color.stride = sources[ id ].stride;
+										break;
+
+									case 'TEXCOORD':
+										buildGeometryData( primitive, sources[ id ], input.offset, uv.array );
+										uv.stride = sources[ id ].stride;
+										break;
+
+									case 'TEXCOORD1':
+										buildGeometryData( primitive, sources[ id ], input.offset, uv2.array );
+										uv.stride = sources[ id ].stride;
+										break;
+
+									default:
+										console.warn( 'THREE.ColladaLoader: Semantic "%s" not handled in geometry build process.', key );
+
+								}
+
+							}
+							break;
+
+						case 'NORMAL':
+							buildGeometryData( primitive, sources[ input.id ], input.offset, normal.array );
+							normal.stride = sources[ input.id ].stride;
+							break;
+
+						case 'COLOR':
+							buildGeometryData( primitive, sources[ input.id ], input.offset, color.array );
+							color.stride = sources[ input.id ].stride;
+							break;
+
+						case 'TEXCOORD':
+							buildGeometryData( primitive, sources[ input.id ], input.offset, uv.array );
+							uv.stride = sources[ input.id ].stride;
+							break;
+
+						case 'TEXCOORD1':
+							buildGeometryData( primitive, sources[ input.id ], input.offset, uv2.array );
+							uv2.stride = sources[ input.id ].stride;
+							break;
+
+					}
+
+				}
+
+			}
+
+			// build geometry
+
+			if ( position.array.length > 0 ) geometry.addAttribute( 'position', new THREE.Float32BufferAttribute( position.array, position.stride ) );
+			if ( normal.array.length > 0 ) geometry.addAttribute( 'normal', new THREE.Float32BufferAttribute( normal.array, normal.stride ) );
+			if ( color.array.length > 0 ) geometry.addAttribute( 'color', new THREE.Float32BufferAttribute( color.array, color.stride ) );
+			if ( uv.array.length > 0 ) geometry.addAttribute( 'uv', new THREE.Float32BufferAttribute( uv.array, uv.stride ) );
+			if ( uv2.array.length > 0 ) geometry.addAttribute( 'uv2', new THREE.Float32BufferAttribute( uv2.array, uv2.stride ) );
+
+			if ( skinIndex.array.length > 0 ) geometry.addAttribute( 'skinIndex', new THREE.Float32BufferAttribute( skinIndex.array, skinIndex.stride ) );
+			if ( skinWeight.array.length > 0 ) geometry.addAttribute( 'skinWeight', new THREE.Float32BufferAttribute( skinWeight.array, skinWeight.stride ) );
+
+			build.data = geometry;
+			build.type = primitives[ 0 ].type;
+			build.materialKeys = materialKeys;
+
+			return build;
+
+		}
+
+		function buildGeometryData( primitive, source, offset, array ) {
+
+			var indices = primitive.p;
+			var stride = primitive.stride;
+			var vcount = primitive.vcount;
+
+			function pushVector( i ) {
+
+				var index = indices[ i + offset ] * sourceStride;
+				var length = index + sourceStride;
+
+				for ( ; index < length; index ++ ) {
+
+					array.push( sourceArray[ index ] );
+
+				}
+
+			}
+
+			var sourceArray = source.array;
+			var sourceStride = source.stride;
+
+			if ( primitive.vcount !== undefined ) {
+
+				var index = 0;
+
+				for ( var i = 0, l = vcount.length; i < l; i ++ ) {
+
+					var count = vcount[ i ];
+
+					if ( count === 4 ) {
+
+						var a = index + stride * 0;
+						var b = index + stride * 1;
+						var c = index + stride * 2;
+						var d = index + stride * 3;
+
+						pushVector( a ); pushVector( b ); pushVector( d );
+						pushVector( b ); pushVector( c ); pushVector( d );
+
+					} else if ( count === 3 ) {
+
+						var a = index + stride * 0;
+						var b = index + stride * 1;
+						var c = index + stride * 2;
+
+						pushVector( a ); pushVector( b ); pushVector( c );
+
+					} else if ( count > 4 ) {
+
+						for ( var k = 1, kl = ( count - 2 ); k <= kl; k ++ ) {
+
+							var a = index + stride * 0;
+							var b = index + stride * k;
+							var c = index + stride * ( k + 1 );
+
+							pushVector( a ); pushVector( b ); pushVector( c );
+
+						}
+
+					}
+
+					index += stride * count;
+
+				}
+
+			} else {
+
+				for ( var i = 0, l = indices.length; i < l; i += stride ) {
+
+					pushVector( i );
+
+				}
+
+			}
+
+		}
+
+		function getGeometry( id ) {
+
+			return getBuild( library.geometries[ id ], buildGeometry );
+
+		}
+
+		// kinematics
+
+		function parseKinematicsModel( xml ) {
+
+			var data = {
+				name: xml.getAttribute( 'name' ) || '',
+				joints: {},
+				links: []
+			};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'technique_common':
+						parseKinematicsTechniqueCommon( child, data );
+						break;
+
+				}
+
+			}
+
+			library.kinematicsModels[ xml.getAttribute( 'id' ) ] = data;
+
+		}
+
+		function buildKinematicsModel( data ) {
+
+			if ( data.build !== undefined ) return data.build;
+
+			return data;
+
+		}
+
+		function getKinematicsModel( id ) {
+
+			return getBuild( library.kinematicsModels[ id ], buildKinematicsModel );
+
+		}
+
+		function parseKinematicsTechniqueCommon( xml, data ) {
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'joint':
+						data.joints[ child.getAttribute( 'sid' ) ] = parseKinematicsJoint( child );
+						break;
+
+					case 'link':
+						data.links.push( parseKinematicsLink( child ) );
+						break;
+
+				}
+
+			}
+
+		}
+
+		function parseKinematicsJoint( xml ) {
+
+			var data;
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'prismatic':
+					case 'revolute':
+						data = parseKinematicsJointParameter( child );
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseKinematicsJointParameter( xml, data ) {
+
+			var data = {
+				sid: xml.getAttribute( 'sid' ),
+				name: xml.getAttribute( 'name' ) || '',
+				axis: new THREE.Vector3(),
+				limits: {
+					min: 0,
+					max: 0
+				},
+				type: xml.nodeName,
+				static: false,
+				zeroPosition: 0,
+				middlePosition: 0
+			};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'axis':
+						var array = parseFloats( child.textContent );
+						data.axis.fromArray( array );
+						break;
+					case 'limits':
+						var max = child.getElementsByTagName( 'max' )[ 0 ];
+						var min = child.getElementsByTagName( 'min' )[ 0 ];
+
+						data.limits.max = parseFloat( max.textContent );
+						data.limits.min = parseFloat( min.textContent );
+						break;
+
+				}
+
+			}
+
+			// if min is equal to or greater than max, consider the joint static
+
+			if ( data.limits.min >= data.limits.max ) {
+
+				data.static = true;
+
+			}
+
+			// calculate middle position
+
+			data.middlePosition = ( data.limits.min + data.limits.max ) / 2.0;
+
+			return data;
+
+		}
+
+		function parseKinematicsLink( xml ) {
+
+			var data = {
+				sid: xml.getAttribute( 'sid' ),
+				name: xml.getAttribute( 'name' ) || '',
+				attachments: [],
+				transforms: []
+			};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'attachment_full':
+						data.attachments.push( parseKinematicsAttachment( child ) );
+						break;
+
+					case 'matrix':
+					case 'translate':
+					case 'rotate':
+						data.transforms.push( parseKinematicsTransform( child ) );
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseKinematicsAttachment( xml ) {
+
+			var data = {
+				joint: xml.getAttribute( 'joint' ).split( '/' ).pop(),
+				transforms: [],
+				links: []
+			};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'link':
+						data.links.push( parseKinematicsLink( child ) );
+						break;
+
+					case 'matrix':
+					case 'translate':
+					case 'rotate':
+						data.transforms.push( parseKinematicsTransform( child ) );
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function parseKinematicsTransform( xml ) {
+
+			var data = {
+				type: xml.nodeName
+			};
+
+			var array = parseFloats( xml.textContent );
+
+			switch ( data.type ) {
+
+				case 'matrix':
+					data.obj = new THREE.Matrix4();
+					data.obj.fromArray( array ).transpose();
+					break;
+
+				case 'translate':
+					data.obj = new THREE.Vector3();
+					data.obj.fromArray( array );
+					break;
+
+				case 'rotate':
+					data.obj = new THREE.Vector3();
+					data.obj.fromArray( array );
+					data.angle = THREE.Math.degToRad( array[ 3 ] );
+					break;
+
+			}
+
+			return data;
+
+		}
+
+		// physics
+
+		function parsePhysicsModel( xml ) {
+
+			var data = {
+				name: xml.getAttribute( 'name' ) || '',
+				rigidBodies: {}
+			};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'rigid_body':
+						data.rigidBodies[ child.getAttribute( 'name' ) ] = {};
+						parsePhysicsRigidBody( child, data.rigidBodies[ child.getAttribute( 'name' ) ] );
+						break;
+
+				}
+
+			}
+
+			library.physicsModels[ xml.getAttribute( 'id' ) ] = data;
+
+		}
+
+		function parsePhysicsRigidBody( xml, data ) {
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'technique_common':
+						parsePhysicsTechniqueCommon( child, data );
+						break;
+
+				}
+
+			}
+
+		}
+
+		function parsePhysicsTechniqueCommon( xml, data ) {
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'inertia':
+						data.inertia = parseFloats( child.textContent );
+						break;
+
+					case 'mass':
+						data.mass = parseFloats( child.textContent )[ 0 ];
+						break;
+
+				}
+
+			}
+
+		}
+
+		// scene
+
+		function parseKinematicsScene( xml ) {
+
+			var data = {
+				bindJointAxis: []
+			};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'bind_joint_axis':
+						data.bindJointAxis.push( parseKinematicsBindJointAxis( child ) );
+						break;
+
+				}
+
+			}
+
+			library.kinematicsScenes[ parseId( xml.getAttribute( 'url' ) ) ] = data;
+
+		}
+
+		function parseKinematicsBindJointAxis( xml ) {
+
+			var data = {
+				target: xml.getAttribute( 'target' ).split( '/' ).pop()
+			};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'axis':
+						var param = child.getElementsByTagName( 'param' )[ 0 ];
+						data.axis = param.textContent;
+						var tmpJointIndex = data.axis.split( 'inst_' ).pop().split( 'axis' )[ 0 ];
+						data.jointIndex = tmpJointIndex.substr( 0, tmpJointIndex.length - 1 );
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function buildKinematicsScene( data ) {
+
+			if ( data.build !== undefined ) return data.build;
+
+			return data;
+
+		}
+
+		function getKinematicsScene( id ) {
+
+			return getBuild( library.kinematicsScenes[ id ], buildKinematicsScene );
+
+		}
+
+		function setupKinematics() {
+
+			var kinematicsModelId = Object.keys( library.kinematicsModels )[ 0 ];
+			var kinematicsSceneId = Object.keys( library.kinematicsScenes )[ 0 ];
+			var visualSceneId = Object.keys( library.visualScenes )[ 0 ];
+
+			if ( kinematicsModelId === undefined || kinematicsSceneId === undefined ) return;
+
+			var kinematicsModel = getKinematicsModel( kinematicsModelId );
+			var kinematicsScene = getKinematicsScene( kinematicsSceneId );
+			var visualScene = getVisualScene( visualSceneId );
+
+			var bindJointAxis = kinematicsScene.bindJointAxis;
+			var jointMap = {};
+
+			for ( var i = 0, l = bindJointAxis.length; i < l; i ++ ) {
+
+				var axis = bindJointAxis[ i ];
+
+				// the result of the following query is an element of type 'translate', 'rotate','scale' or 'matrix'
+
+				var targetElement = collada.querySelector( '[sid="' + axis.target + '"]' );
+
+				if ( targetElement ) {
+
+					// get the parent of the transfrom element
+
+					var parentVisualElement = targetElement.parentElement;
+
+					// connect the joint of the kinematics model with the element in the visual scene
+
+					connect( axis.jointIndex, parentVisualElement );
+
+				}
+
+			}
+
+			function connect( jointIndex, visualElement ) {
+
+				var visualElementName = visualElement.getAttribute( 'name' );
+				var joint = kinematicsModel.joints[ jointIndex ];
+
+				visualScene.traverse( function ( object ) {
+
+					if ( object.name === visualElementName ) {
+
+						jointMap[ jointIndex ] = {
+							object: object,
+							transforms: buildTransformList( visualElement ),
+							joint: joint,
+							position: joint.zeroPosition
+						};
+
+					}
+
+				} );
+
+			}
+
+			var m0 = new THREE.Matrix4();
+
+			kinematics = {
+
+				joints: kinematicsModel && kinematicsModel.joints,
+
+				getJointValue: function ( jointIndex ) {
+
+					var jointData = jointMap[ jointIndex ];
+
+					if ( jointData ) {
+
+						return jointData.position;
+
+					} else {
+
+						console.warn( 'THREE.ColladaLoader: Joint ' + jointIndex + ' doesn\'t exist.' );
+
+					}
+
+				},
+
+				setJointValue: function ( jointIndex, value ) {
+
+					var jointData = jointMap[ jointIndex ];
+
+					if ( jointData ) {
+
+						var joint = jointData.joint;
+
+						if ( value > joint.limits.max || value < joint.limits.min ) {
+
+							console.warn( 'THREE.ColladaLoader: Joint ' + jointIndex + ' value ' + value + ' outside of limits (min: ' + joint.limits.min + ', max: ' + joint.limits.max + ').' );
+
+						} else if ( joint.static ) {
+
+							console.warn( 'THREE.ColladaLoader: Joint ' + jointIndex + ' is static.' );
+
+						} else {
+
+							var object = jointData.object;
+							var axis = joint.axis;
+							var transforms = jointData.transforms;
+
+							matrix.identity();
+
+							// each update, we have to apply all transforms in the correct order
+
+							for ( var i = 0; i < transforms.length; i ++ ) {
+
+								var transform = transforms[ i ];
+
+								// if there is a connection of the transform node with a joint, apply the joint value
+
+								if ( transform.sid && transform.sid.indexOf( jointIndex ) !== - 1 ) {
+
+									switch ( joint.type ) {
+
+										case 'revolute':
+											matrix.multiply( m0.makeRotationAxis( axis, THREE.Math.degToRad( value ) ) );
+											break;
+
+										case 'prismatic':
+											matrix.multiply( m0.makeTranslation( axis.x * value, axis.y * value, axis.z * value ) );
+											break;
+
+										default:
+											console.warn( 'THREE.ColladaLoader: Unknown joint type: ' + joint.type );
+											break;
+
+									}
+
+								} else {
+
+									switch ( transform.type ) {
+
+										case 'matrix':
+											matrix.multiply( transform.obj );
+											break;
+
+										case 'translate':
+											matrix.multiply( m0.makeTranslation( transform.obj.x, transform.obj.y, transform.obj.z ) );
+											break;
+
+										case 'scale':
+											matrix.scale( transform.obj );
+											break;
+
+										case 'rotate':
+											matrix.multiply( m0.makeRotationAxis( transform.obj, transform.angle ) );
+											break;
+
+									}
+
+								}
+
+							}
+
+							object.matrix.copy( matrix );
+							object.matrix.decompose( object.position, object.quaternion, object.scale );
+
+							jointMap[ jointIndex ].position = value;
+
+						}
+
+					} else {
+
+						console.log( 'THREE.ColladaLoader: ' + jointIndex + ' does not exist.' );
+
+					}
+
+				}
+
+			};
+
+		}
+
+		function buildTransformList( node ) {
+
+			var transforms = [];
+
+			var xml = collada.querySelector( '[id="' + node.id + '"]' );
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'matrix':
+						var array = parseFloats( child.textContent );
+						var matrix = new THREE.Matrix4().fromArray( array ).transpose();
+						transforms.push( {
+							sid: child.getAttribute( 'sid' ),
+							type: child.nodeName,
+							obj: matrix
+						} );
+						break;
+
+					case 'translate':
+					case 'scale':
+						var array = parseFloats( child.textContent );
+						var vector = new THREE.Vector3().fromArray( array );
+						transforms.push( {
+							sid: child.getAttribute( 'sid' ),
+							type: child.nodeName,
+							obj: vector
+						} );
+						break;
+
+					case 'rotate':
+						var array = parseFloats( child.textContent );
+						var vector = new THREE.Vector3().fromArray( array );
+						var angle = THREE.Math.degToRad( array[ 3 ] );
+						transforms.push( {
+							sid: child.getAttribute( 'sid' ),
+							type: child.nodeName,
+							obj: vector,
+							angle: angle
+						} );
+						break;
+
+				}
+
+			}
+
+			return transforms;
+
+		}
+
+		// nodes
+
+		function prepareNodes( xml ) {
+
+			var elements = xml.getElementsByTagName( 'node' );
+
+			// ensure all node elements have id attributes
+
+			for ( var i = 0; i < elements.length; i ++ ) {
+
+				var element = elements[ i ];
+
+				if ( element.hasAttribute( 'id' ) === false ) {
+
+					element.setAttribute( 'id', generateId() );
+
+				}
+
+			}
+
+		}
+
+		var matrix = new THREE.Matrix4();
+		var vector = new THREE.Vector3();
+
+		function parseNode( xml ) {
+
+			var data = {
+				name: xml.getAttribute( 'name' ) || '',
+				type: xml.getAttribute( 'type' ),
+				id: xml.getAttribute( 'id' ),
+				sid: xml.getAttribute( 'sid' ),
+				matrix: new THREE.Matrix4(),
+				nodes: [],
+				instanceCameras: [],
+				instanceControllers: [],
+				instanceLights: [],
+				instanceGeometries: [],
+				instanceNodes: [],
+				transforms: {}
+			};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				if ( child.nodeType !== 1 ) continue;
+
+				switch ( child.nodeName ) {
+
+					case 'node':
+						data.nodes.push( child.getAttribute( 'id' ) );
+						parseNode( child );
+						break;
+
+					case 'instance_camera':
+						data.instanceCameras.push( parseId( child.getAttribute( 'url' ) ) );
+						break;
+
+					case 'instance_controller':
+						data.instanceControllers.push( parseNodeInstance( child ) );
+						break;
+
+					case 'instance_light':
+						data.instanceLights.push( parseId( child.getAttribute( 'url' ) ) );
+						break;
+
+					case 'instance_geometry':
+						data.instanceGeometries.push( parseNodeInstance( child ) );
+						break;
+
+					case 'instance_node':
+						data.instanceNodes.push( parseId( child.getAttribute( 'url' ) ) );
+						break;
+
+					case 'matrix':
+						var array = parseFloats( child.textContent );
+						data.matrix.multiply( matrix.fromArray( array ).transpose() );
+						data.transforms[ child.getAttribute( 'sid' ) ] = child.nodeName;
+						break;
+
+					case 'translate':
+						var array = parseFloats( child.textContent );
+						vector.fromArray( array );
+						data.matrix.multiply( matrix.makeTranslation( vector.x, vector.y, vector.z ) );
+						data.transforms[ child.getAttribute( 'sid' ) ] = child.nodeName;
+						break;
+
+					case 'rotate':
+						var array = parseFloats( child.textContent );
+						var angle = THREE.Math.degToRad( array[ 3 ] );
+						data.matrix.multiply( matrix.makeRotationAxis( vector.fromArray( array ), angle ) );
+						data.transforms[ child.getAttribute( 'sid' ) ] = child.nodeName;
+						break;
+
+					case 'scale':
+						var array = parseFloats( child.textContent );
+						data.matrix.scale( vector.fromArray( array ) );
+						data.transforms[ child.getAttribute( 'sid' ) ] = child.nodeName;
+						break;
+
+					case 'extra':
+						break;
+
+					default:
+						console.log( child );
+
+				}
+
+			}
+
+			if ( hasNode( data.id ) ) {
+
+				console.warn( 'THREE.ColladaLoader: There is already a node with ID %s. Exclude current node from further processing.', data.id );
+
+			} else {
+
+				library.nodes[ data.id ] = data;
+
+			}
+
+			return data;
+
+		}
+
+		function parseNodeInstance( xml ) {
+
+			var data = {
+				id: parseId( xml.getAttribute( 'url' ) ),
+				materials: {},
+				skeletons: []
+			};
+
+			for ( var i = 0; i < xml.childNodes.length; i ++ ) {
+
+				var child = xml.childNodes[ i ];
+
+				switch ( child.nodeName ) {
+
+					case 'bind_material':
+						var instances = child.getElementsByTagName( 'instance_material' );
+
+						for ( var j = 0; j < instances.length; j ++ ) {
+
+							var instance = instances[ j ];
+							var symbol = instance.getAttribute( 'symbol' );
+							var target = instance.getAttribute( 'target' );
+
+							data.materials[ symbol ] = parseId( target );
+
+						}
+
+						break;
+
+					case 'skeleton':
+						data.skeletons.push( parseId( child.textContent ) );
+						break;
+
+					default:
+						break;
+
+				}
+
+			}
+
+			return data;
+
+		}
+
+		function buildSkeleton( skeletons, joints ) {
+
+			var boneData = [];
+			var sortedBoneData = [];
+
+			var i, j, data;
+
+			// a skeleton can have multiple root bones. collada expresses this
+			// situtation with multiple "skeleton" tags per controller instance
+
+			for ( i = 0; i < skeletons.length; i ++ ) {
+
+				var skeleton = skeletons[ i ];
+
+				var root;
+
+				if ( hasNode( skeleton ) ) {
+
+					root = getNode( skeleton );
+					buildBoneHierarchy( root, joints, boneData );
+
+				} else if ( hasVisualScene( skeleton ) ) {
+
+					// handle case where the skeleton refers to the visual scene (#13335)
+
+					var visualScene = library.visualScenes[ skeleton ];
+					var children = visualScene.children;
+
+					for ( var j = 0; j < children.length; j ++ ) {
+
+						var child = children[ j ];
+
+						if ( child.type === 'JOINT' ) {
+
+							var root = getNode( child.id );
+							buildBoneHierarchy( root, joints, boneData );
+
+						}
+
+					}
+
+				} else {
+
+					console.error( 'THREE.ColladaLoader: Unable to find root bone of skeleton with ID:', skeleton );
+
+				}
+
+			}
+
+			// sort bone data (the order is defined in the corresponding controller)
+
+			for ( i = 0; i < joints.length; i ++ ) {
+
+				for ( j = 0; j < boneData.length; j ++ ) {
+
+					data = boneData[ j ];
+
+					if ( data.bone.name === joints[ i ].name ) {
+
+						sortedBoneData[ i ] = data;
+						data.processed = true;
+						break;
+
+					}
+
+				}
+
+			}
+
+			// add unprocessed bone data at the end of the list
+
+			for ( i = 0; i < boneData.length; i ++ ) {
+
+				data = boneData[ i ];
+
+				if ( data.processed === false ) {
+
+					sortedBoneData.push( data );
+					data.processed = true;
+
+				}
+
+			}
+
+			// setup arrays for skeleton creation
+
+			var bones = [];
+			var boneInverses = [];
+
+			for ( i = 0; i < sortedBoneData.length; i ++ ) {
+
+				data = sortedBoneData[ i ];
+
+				bones.push( data.bone );
+				boneInverses.push( data.boneInverse );
+
+			}
+
+			return new THREE.Skeleton( bones, boneInverses );
+
+		}
+
+		function buildBoneHierarchy( root, joints, boneData ) {
+
+			// setup bone data from visual scene
+
+			root.traverse( function ( object ) {
+
+				if ( object.isBone === true ) {
+
+					var boneInverse;
+
+					// retrieve the boneInverse from the controller data
+
+					for ( var i = 0; i < joints.length; i ++ ) {
+
+						var joint = joints[ i ];
+
+						if ( joint.name === object.name ) {
+
+							boneInverse = joint.boneInverse;
+							break;
+
+						}
+
+					}
+
+					if ( boneInverse === undefined ) {
+
+						// Unfortunately, there can be joints in the visual scene that are not part of the
+						// corresponding controller. In this case, we have to create a dummy boneInverse matrix
+						// for the respective bone. This bone won't affect any vertices, because there are no skin indices
+						// and weights defined for it. But we still have to add the bone to the sorted bone list in order to
+						// ensure a correct animation of the model.
+
+						boneInverse = new THREE.Matrix4();
+
+					}
+
+					boneData.push( { bone: object, boneInverse: boneInverse, processed: false } );
+
+				}
+
+			} );
+
+		}
+
+		function buildNode( data ) {
+
+			var objects = [];
+
+			var matrix = data.matrix;
+			var nodes = data.nodes;
+			var type = data.type;
+			var instanceCameras = data.instanceCameras;
+			var instanceControllers = data.instanceControllers;
+			var instanceLights = data.instanceLights;
+			var instanceGeometries = data.instanceGeometries;
+			var instanceNodes = data.instanceNodes;
+
+			// nodes
+
+			for ( var i = 0, l = nodes.length; i < l; i ++ ) {
+
+				objects.push( getNode( nodes[ i ] ) );
+
+			}
+
+			// instance cameras
+
+			for ( var i = 0, l = instanceCameras.length; i < l; i ++ ) {
+
+				var instanceCamera = getCamera( instanceCameras[ i ] );
+
+				if ( instanceCamera !== null ) {
+
+					objects.push( instanceCamera.clone() );
+
+				}
+
+			}
+
+			// instance controllers
+
+			for ( var i = 0, l = instanceControllers.length; i < l; i ++ ) {
+
+				var instance = instanceControllers[ i ];
+				var controller = getController( instance.id );
+				var geometries = getGeometry( controller.id );
+				var newObjects = buildObjects( geometries, instance.materials );
+
+				var skeletons = instance.skeletons;
+				var joints = controller.skin.joints;
+
+				var skeleton = buildSkeleton( skeletons, joints );
+
+				for ( var j = 0, jl = newObjects.length; j < jl; j ++ ) {
+
+					var object = newObjects[ j ];
+
+					if ( object.isSkinnedMesh ) {
+
+						object.bind( skeleton, controller.skin.bindMatrix );
+						object.normalizeSkinWeights();
+
+					}
+
+					objects.push( object );
+
+				}
+
+			}
+
+			// instance lights
+
+			for ( var i = 0, l = instanceLights.length; i < l; i ++ ) {
+
+				var instanceLight = getLight( instanceLights[ i ] );
+
+				if ( instanceLight !== null ) {
+
+					objects.push( instanceLight.clone() );
+
+				}
+
+			}
+
+			// instance geometries
+
+			for ( var i = 0, l = instanceGeometries.length; i < l; i ++ ) {
+
+				var instance = instanceGeometries[ i ];
+
+				// a single geometry instance in collada can lead to multiple object3Ds.
+				// this is the case when primitives are combined like triangles and lines
+
+				var geometries = getGeometry( instance.id );
+				var newObjects = buildObjects( geometries, instance.materials );
+
+				for ( var j = 0, jl = newObjects.length; j < jl; j ++ ) {
+
+					objects.push( newObjects[ j ] );
+
+				}
+
+			}
+
+			// instance nodes
+
+			for ( var i = 0, l = instanceNodes.length; i < l; i ++ ) {
+
+				objects.push( getNode( instanceNodes[ i ] ).clone() );
+
+			}
+
+			var object;
+
+			if ( nodes.length === 0 && objects.length === 1 ) {
+
+				object = objects[ 0 ];
+
+			} else {
+
+				object = ( type === 'JOINT' ) ? new THREE.Bone() : new THREE.Group();
+
+				for ( var i = 0; i < objects.length; i ++ ) {
+
+					object.add( objects[ i ] );
+
+				}
+
+			}
+
+			if ( object.name === '' ) {
+
+				object.name = ( type === 'JOINT' ) ? data.sid : data.name;
+
+			}
+
+			object.matrix.copy( matrix );
+			object.matrix.decompose( object.position, object.quaternion, object.scale );
+
+			return object;
+
+		}
+
+		var fallbackMaterial = new THREE.MeshBasicMaterial( { color: 0xff00ff } );
+
+		function resolveMaterialBinding( keys, instanceMaterials ) {
+
+			var materials = [];
+
+			for ( var i = 0, l = keys.length; i < l; i ++ ) {
+
+				var id = instanceMaterials[ keys[ i ] ];
+
+				if ( id === undefined ) {
+
+					console.warn( 'THREE.ColladaLoader: Material with key %s not found. Apply fallback material.', keys[ i ] );
+					materials.push( fallbackMaterial );
+
+				} else {
+
+					materials.push( getMaterial( id ) );
+
+				}
+
+			}
+
+			return materials;
+
+		}
+
+		function buildObjects( geometries, instanceMaterials ) {
+
+			var objects = [];
+
+			for ( var type in geometries ) {
+
+				var geometry = geometries[ type ];
+
+				var materials = resolveMaterialBinding( geometry.materialKeys, instanceMaterials );
+
+				// handle case if no materials are defined
+
+				if ( materials.length === 0 ) {
+
+					if ( type === 'lines' || type === 'linestrips' ) {
+
+						materials.push( new THREE.LineBasicMaterial() );
+
+					} else {
+
+						materials.push( new THREE.MeshPhongMaterial() );
+
+					}
+
+				}
+
+				// regard skinning
+
+				var skinning = ( geometry.data.attributes.skinIndex !== undefined );
+
+				if ( skinning ) {
+
+					for ( var i = 0, l = materials.length; i < l; i ++ ) {
+
+						materials[ i ].skinning = true;
+
+					}
+
+				}
+
+				// choose between a single or multi materials (material array)
+
+				var material = ( materials.length === 1 ) ? materials[ 0 ] : materials;
+
+				// now create a specific 3D object
+
+				var object;
+
+				switch ( type ) {
+
+					case 'lines':
+						object = new THREE.LineSegments( geometry.data, material );
+						break;
+
+					case 'linestrips':
+						object = new THREE.Line( geometry.data, material );
+						break;
+
+					case 'triangles':
+					case 'polylist':
+						if ( skinning ) {
+
+							object = new THREE.SkinnedMesh( geometry.data, material );
+
+						} else {
+
+							object = new THREE.Mesh( geometry.data, material );
+
+						}
+						break;
+
+				}
+
+				objects.push( object );
+
+			}
+
+			return objects;
+
+		}
+
+		function hasNode( id ) {
+
+			return library.nodes[ id ] !== undefined;
+
+		}
+
+		function getNode( id ) {
+
+			return getBuild( library.nodes[ id ], buildNode );
+
+		}
+
+		// visual scenes
+
+		function parseVisualScene( xml ) {
+
+			var data = {
+				name: xml.getAttribute( 'name' ),
+				children: []
+			};
+
+			prepareNodes( xml );
+
+			var elements = getElementsByTagName( xml, 'node' );
+
+			for ( var i = 0; i < elements.length; i ++ ) {
+
+				data.children.push( parseNode( elements[ i ] ) );
+
+			}
+
+			library.visualScenes[ xml.getAttribute( 'id' ) ] = data;
+
+		}
+
+		function buildVisualScene( data ) {
+
+			var group = new THREE.Group();
+			group.name = data.name;
+
+			var children = data.children;
+
+			for ( var i = 0; i < children.length; i ++ ) {
+
+				var child = children[ i ];
+
+				group.add( getNode( child.id ) );
+
+			}
+
+			return group;
+
+		}
+
+		function hasVisualScene( id ) {
+
+			return library.visualScenes[ id ] !== undefined;
+
+		}
+
+		function getVisualScene( id ) {
+
+			return getBuild( library.visualScenes[ id ], buildVisualScene );
+
+		}
+
+		// scenes
+
+		function parseScene( xml ) {
+
+			var instance = getElementsByTagName( xml, 'instance_visual_scene' )[ 0 ];
+			return getVisualScene( parseId( instance.getAttribute( 'url' ) ) );
+
+		}
+
+		function setupAnimations() {
+
+			var clips = library.clips;
+
+			if ( isEmpty( clips ) === true ) {
+
+				if ( isEmpty( library.animations ) === false ) {
+
+					// if there are animations but no clips, we create a default clip for playback
+
+					var tracks = [];
+
+					for ( var id in library.animations ) {
+
+						var animationTracks = getAnimation( id );
+
+						for ( var i = 0, l = animationTracks.length; i < l; i ++ ) {
+
+							tracks.push( animationTracks[ i ] );
+
+						}
+
+					}
+
+					animations.push( new THREE.AnimationClip( 'default', - 1, tracks ) );
+
+				}
+
+			} else {
+
+				for ( var id in clips ) {
+
+					animations.push( getAnimationClip( id ) );
+
+				}
+
+			}
+
+		}
+
+		if ( text.length === 0 ) {
+
+			return { scene: new THREE.Scene() };
+
+		}
+
+		var xml = new DOMParser().parseFromString( text, 'application/xml' );
+
+		var collada = getElementsByTagName( xml, 'COLLADA' )[ 0 ];
+
+		// metadata
+
+		var version = collada.getAttribute( 'version' );
+		console.log( 'THREE.ColladaLoader: File version', version );
+
+		var asset = parseAsset( getElementsByTagName( collada, 'asset' )[ 0 ] );
+		var textureLoader = new THREE.TextureLoader( this.manager );
+		textureLoader.setPath( this.resourcePath || path ).setCrossOrigin( this.crossOrigin );
+
+		var tgaLoader;
+
+		if ( THREE.TGALoader ) {
+
+			tgaLoader = new THREE.TGALoader( this.manager );
+			tgaLoader.setPath( this.resourcePath || path );
+
+		}
+
+		//
+
+		var animations = [];
+		var kinematics = {};
+		var count = 0;
+
+		//
+
+		var library = {
+			animations: {},
+			clips: {},
+			controllers: {},
+			images: {},
+			effects: {},
+			materials: {},
+			cameras: {},
+			lights: {},
+			geometries: {},
+			nodes: {},
+			visualScenes: {},
+			kinematicsModels: {},
+			physicsModels: {},
+			kinematicsScenes: {}
+		};
+
+		parseLibrary( collada, 'library_animations', 'animation', parseAnimation );
+		parseLibrary( collada, 'library_animation_clips', 'animation_clip', parseAnimationClip );
+		parseLibrary( collada, 'library_controllers', 'controller', parseController );
+		parseLibrary( collada, 'library_images', 'image', parseImage );
+		parseLibrary( collada, 'library_effects', 'effect', parseEffect );
+		parseLibrary( collada, 'library_materials', 'material', parseMaterial );
+		parseLibrary( collada, 'library_cameras', 'camera', parseCamera );
+		parseLibrary( collada, 'library_lights', 'light', parseLight );
+		parseLibrary( collada, 'library_geometries', 'geometry', parseGeometry );
+		parseLibrary( collada, 'library_nodes', 'node', parseNode );
+		parseLibrary( collada, 'library_visual_scenes', 'visual_scene', parseVisualScene );
+		parseLibrary( collada, 'library_kinematics_models', 'kinematics_model', parseKinematicsModel );
+		parseLibrary( collada, 'library_physics_models', 'physics_model', parsePhysicsModel );
+		parseLibrary( collada, 'scene', 'instance_kinematics_scene', parseKinematicsScene );
+
+		buildLibrary( library.animations, buildAnimation );
+		buildLibrary( library.clips, buildAnimationClip );
+		buildLibrary( library.controllers, buildController );
+		buildLibrary( library.images, buildImage );
+		buildLibrary( library.effects, buildEffect );
+		buildLibrary( library.materials, buildMaterial );
+		buildLibrary( library.cameras, buildCamera );
+		buildLibrary( library.lights, buildLight );
+		buildLibrary( library.geometries, buildGeometry );
+		buildLibrary( library.visualScenes, buildVisualScene );
+
+		setupAnimations();
+		setupKinematics();
+
+		var scene = parseScene( getElementsByTagName( collada, 'scene' )[ 0 ] );
+
+		if ( asset.upAxis === 'Z_UP' ) {
+
+			scene.quaternion.setFromEuler( new THREE.Euler( - Math.PI / 2, 0, 0 ) );
+
+		}
+
+		scene.scale.multiplyScalar( asset.unit );
+
+		return {
+			animations: animations,
+			kinematics: kinematics,
+			library: library,
+			scene: scene
+		};
+
+	}
+
+};
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js")))
 
@@ -25087,38 +27212,7 @@ function arrayMax( array ) {
 
 
 
-/***/ }),
-
-/***/ "./node_modules/webpack/buildin/global.js":
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
 /***/ })
 
 /******/ });
-//# sourceMappingURL=car3.bundle.js.map
+//# sourceMappingURL=bottle1.bundle.js.map
