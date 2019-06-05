@@ -3,6 +3,7 @@ import * as THREE from 'three';
 
 import 'three/examples/js/controls/OrbitControls';
 import 'three/examples/js/loaders/GLTFLoader';
+import 'three/examples/js/loaders/ColladaLoader';
 
 import { setlightType, buildGui, changeLightType } from '../../helpers/functions/lights';
 
@@ -24,6 +25,7 @@ var controls;
 var goal;
 
 var model;
+var canLabel, testingTex;
 
 function init() {
 
@@ -40,13 +42,13 @@ function init() {
 
 	let bgColor = new THREE.Color('#a3e1fe');
 
-	let ambient = new THREE.AmbientLight();
+	// let ambient = new THREE.AmbientLight();
 	// ambient.castShadow = true;
-	scene.add(ambient);
+	// scene.add(ambient);
 
-	let point = new THREE.PointLight();
+	// let point = new THREE.PointLight();
 	// ambient.castShadow = true;
-	scene.add(point);
+	// scene.add(point);
 
 	scene.background = bgColor;
 
@@ -96,6 +98,7 @@ initGui();
 init();
 render();
 loadModelThingies();
+// loadModel2();
 
 function initRenderer() {
 	renderer = new THREE.WebGLRenderer({
@@ -144,20 +147,18 @@ function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
 function loadModelThingies() {
 	var loader = new THREE.GLTFLoader();
 
-	loader.load('./models/flesje3.gltf', 
+	loader.load('./models/blikje2.glb', 
 		function ( gltf ) {
 
-			console.log(gltf.scene.children[6]);
 			let root = gltf.scene;
+			canLabel = gltf.scene.children[2].children[1].children[0].children[0];
+
+			updateCanLabel();
 
 			scene.add( root );
 
-			gltf.animations; // Array<THREE.AnimationClip>
-			gltf.scene; // THREE.Scene
-			gltf.scenes; // Array<THREE.Scene>
-			gltf.cameras; // Array<THREE.Camera>
-			gltf.asset; // Object
-
+			// renderer.gammaOutput = true;
+			// renderer.gammaFactor = 2.2;
 
       // compute the box that contains all the stuff
       // from root and below
@@ -167,7 +168,7 @@ function loadModelThingies() {
       const boxCenter = box.getCenter(new THREE.Vector3());
 
       // set the camera to frame the box
-      frameArea(boxSize * 0.5, boxSize, boxCenter, camera);
+      // frameArea(boxSize * 0.5, boxSize, boxCenter, camera);
 
       // update the Trackball controls to handle the new size
       controls.maxDistance = boxSize * 10;
@@ -177,6 +178,21 @@ function loadModelThingies() {
 		},
 	);
 }
+
+// function loadModel2() {
+// 	var loader = new THREE.ColladaLoader();
+// 	loader.load( './models/Coca_Cola.dae', function ( collada ) {
+
+// 		// var animations = collada.animations;
+// 		var bottle = collada.scene;
+
+// 		// mixer = new THREE.AnimationMixer( avatar );
+// 		// var action = mixer.clipAction( animations[ 0 ] ).play();
+
+// 		scene.add( bottle );
+
+// 	} );
+// }
 
 function initCameraGui() {
 	var cameraFolder = gui.addFolder('Camera');
@@ -190,4 +206,13 @@ function initCameraGui() {
 			goal.position.set(val, val, val);
 		}
 	});
+}
+
+function updateCanLabel() {
+	var map = new THREE.TextureLoader().load('textures/cokecan.jpg');
+
+	canLabel.material.needsUpdate = true;
+	canLabel.material.map = map;
+	canLabel.material.map.flipY = false;
+	canLabel.material.metalness = 0.3;
 }
