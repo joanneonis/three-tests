@@ -36,6 +36,7 @@ export default {
         // bottle1: path.join(__dirname, 'experiments/bottle/main.js'),
         skeleton1: path.join(__dirname, 'experiments/skeleton/v1/main.js'),
         skeleton2: path.join(__dirname, 'experiments/skeleton/v2/main.js'),
+        skeleton3: path.join(__dirname, 'experiments/skeleton/v3/main.js'),
     },
     output: {
         path: path.join(__dirname, 'build'),

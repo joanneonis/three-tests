@@ -81,14 +81,14 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/skeleton/v2/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/skeleton/v3/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./experiments/skeleton/v2/main.js":
+/***/ "./experiments/skeleton/v3/main.js":
 /*!*****************************************!*\
-  !*** ./experiments/skeleton/v2/main.js ***!
+  !*** ./experiments/skeleton/v3/main.js ***!
   \*****************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -109,6 +109,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var container, stats, clock, gui, mixer, actions, activeAction, previousAction;
 var camera, scene, renderer, model, face;
+var skeletonHelper;
 var api = {
   state: 'Walking'
 };
@@ -145,10 +146,20 @@ function init() {
   scene.add(grid); // model
 
   var loader = new three__WEBPACK_IMPORTED_MODULE_1__["GLTFLoader"]();
-  loader.load('../assets/models/RobotExpressive/RobotExpressive.glb', function (gltf) {
+  loader.load('../assets/models/pre-rigged-1.glb', function (gltf) {
     model = gltf.scene;
     scene.add(model);
-    createGUI(model, gltf.animations);
+    createGUI(model);
+    skeletonHelper = new three__WEBPACK_IMPORTED_MODULE_1__["SkeletonHelper"](model);
+    skeletonHelper.material.linewidth = 2;
+    scene.add(skeletonHelper);
+    setupDatGui();
+    model.traverse(function (node) {
+      if (node instanceof three__WEBPACK_IMPORTED_MODULE_1__["Bone"]) {
+        console.log(node);
+      }
+    });
+    console.log(model);
   }, undefined, function (e) {
     console.error(e);
   });
@@ -166,76 +177,52 @@ function init() {
   container.appendChild(stats.dom);
 }
 
-function createGUI(model, animations) {
-  var states = ['Idle', 'Walking', 'Running', 'Dance', 'Death', 'Sitting', 'Standing'];
-  var emotes = ['Jump', 'Yes', 'No', 'Wave', 'Punch', 'ThumbsUp'];
-  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
-  mixer = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationMixer"](model);
-  actions = {};
+function setupDatGui() {
+  var folder = gui.addFolder("General Options"); // folder.add( state, "animateBones" );
+  // folder.__controllers[ 0 ].name( "Animate Bones" );
+  // folder.add( model, "pose" );
+  // folder.__controllers[ 1 ].name( ".pose()" );
 
-  for (var i = 0; i < animations.length; i++) {
-    var clip = animations[i];
-    var action = mixer.clipAction(clip);
-    actions[clip.name] = action;
+  var bones = model.children[1].skeleton.bones;
 
-    if (emotes.indexOf(clip.name) >= 0 || states.indexOf(clip.name) >= 4) {
-      action.clampWhenFinished = true;
-      action.loop = three__WEBPACK_IMPORTED_MODULE_1__["LoopOnce"];
-    }
-  } // states
+  for (var i = 0; i < bones.length; i++) {
+    var bone = bones[i];
+    folder = gui.addFolder("Bone " + bones[i].name);
+    folder.add(bone.position, 'x', -10 + bone.position.x, 10 + bone.position.x);
+    folder.add(bone.position, 'y', -10 + bone.position.y, 10 + bone.position.y);
+    folder.add(bone.position, 'z', -10 + bone.position.z, 10 + bone.position.z);
+    folder.add(bone.rotation, 'x', -Math.PI * 0.5, Math.PI * 0.5);
+    folder.add(bone.rotation, 'y', -Math.PI * 0.5, Math.PI * 0.5);
+    folder.add(bone.rotation, 'z', -Math.PI * 0.5, Math.PI * 0.5);
+    folder.add(bone.scale, 'x', 0, 2);
+    folder.add(bone.scale, 'y', 0, 2);
+    folder.add(bone.scale, 'z', 0, 2);
 
+    folder.__controllers[0].name("position.x");
 
-  var statesFolder = gui.addFolder('States');
-  var clipCtrl = statesFolder.add(api, 'state').options(states);
-  clipCtrl.onChange(function () {
-    fadeToAction(api.state, 0.5);
-  });
-  statesFolder.open(); // emotes
+    folder.__controllers[1].name("position.y");
 
-  var emoteFolder = gui.addFolder('Emotes');
+    folder.__controllers[2].name("position.z");
 
-  function createEmoteCallback(name) {
-    api[name] = function () {
-      fadeToAction(name, 0.2);
-      mixer.addEventListener('finished', restoreState);
-    };
+    folder.__controllers[3].name("rotation.x");
 
-    emoteFolder.add(api, name);
+    folder.__controllers[4].name("rotation.y");
+
+    folder.__controllers[5].name("rotation.z");
+
+    folder.__controllers[6].name("scale.x");
+
+    folder.__controllers[7].name("scale.y");
+
+    folder.__controllers[8].name("scale.z");
   }
-
-  function restoreState() {
-    mixer.removeEventListener('finished', restoreState);
-    fadeToAction(api.state, 0.2);
-  }
-
-  for (var i = 0; i < emotes.length; i++) {
-    createEmoteCallback(emotes[i]);
-  }
-
-  emoteFolder.open(); // expressions
-
-  face = model.getObjectByName('Head_2');
-  var expressions = Object.keys(face.morphTargetDictionary);
-  var expressionFolder = gui.addFolder('Expressions');
-
-  for (var i = 0; i < expressions.length; i++) {
-    expressionFolder.add(face.morphTargetInfluences, i, 0, 1, 0.01).name(expressions[i]);
-  }
-
-  activeAction = actions['Walking'];
-  activeAction.play();
-  expressionFolder.open();
 }
 
-function fadeToAction(name, duration) {
-  previousAction = activeAction;
-  activeAction = actions[name];
-
-  if (previousAction !== activeAction) {
-    previousAction.fadeOut(duration);
-  }
-
-  activeAction.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).fadeIn(duration).play();
+function createGUI(model, animations) {
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+  mixer = new three__WEBPACK_IMPORTED_MODULE_1__["AnimationMixer"](model);
+  actions = {}; // var foreArm = model.getObjectByName( 'forearm.R' );
+  // console.log(foreArm);
 }
 
 function onWindowResize() {
@@ -246,8 +233,8 @@ function onWindowResize() {
 
 
 function animate() {
-  var dt = clock.getDelta();
-  if (mixer) mixer.update(dt);
+  // var dt = clock.getDelta();
+  // if ( mixer ) mixer.update( dt );
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
   stats.update();
@@ -8072,4 +8059,4 @@ THREE.GLTFLoader = ( function () {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=skeleton2.bundle.js.map
+//# sourceMappingURL=skeleton3.bundle.js.map
