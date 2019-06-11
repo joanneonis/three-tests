@@ -108,6 +108,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var container, stats, clock, gui, mixer, actions, activeAction, previousAction;
+var skeletonHelper;
 var camera, scene, renderer, model, face;
 var api = {
   state: 'Walking'
