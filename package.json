@@ -5,6 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "@babel/runtime": "^7.4.4",
+    "@tensorflow-models/posenet": "^1.0.3",
+    "@tensorflow/tfjs": "^1.1.2",
     "@tweenjs/tween.js": "^17.3.0",
     "@xailabs/three-renderer-stats": "^1.0.4",
     "babel-loader": "^8.0.5",
