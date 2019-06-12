@@ -113,6 +113,7 @@ var skeletonHelper;
 var api = {
   state: 'Walking'
 };
+var controls;
 init();
 animate();
 
@@ -171,7 +172,8 @@ function init() {
   renderer.gammaOutput = true;
   renderer.gammaFactor = 2.2;
   container.appendChild(renderer.domElement);
-  window.addEventListener('resize', onWindowResize, false); // stats
+  window.addEventListener('resize', onWindowResize, false);
+  initControls(); // stats
 
   stats = new Stats();
   container.appendChild(stats.dom);
@@ -238,6 +240,11 @@ function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
   stats.update();
+}
+
+function initControls() {
+  controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement);
+  controls.enableKeys = false;
 }
 
 /***/ }),
