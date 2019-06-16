@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+		<div id="info">
+			<a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> webgl - exporter - gltf<br/><br/>
+			<button id="export_scene">Export Scene1</button>
+			<button id="export_scenes">Export Scene1 and Scene 2</button>
+			<button id="export_object">Export Sphere</button><br/>
+			<button id="export_obj">Export WaltHead</button>
+			<button id="export_objects">Export Sphere and Grid</button>
+			<button id="export_scene_object">Export Scene1 and Sphere</button>
+			<br/><br/>
+			<label><input id="option_trs" name="trs" type="checkbox"/>TRS</label>
+			<label><input id="option_visible" name="visible" type="checkbox" checked="checked"/>Only Visible</label>
+			<label><input id="option_drawrange" name="visible" type="checkbox" checked="checked"/>Truncate drawRange</label><br/>
+			<label><input id="option_binary" name="visible" type="checkbox">Binary (<code>.glb</code>)</label>
+			<label><input id="option_forceindices" name="visible" type="checkbox">Force indices</label>
+			<label><input id="option_forcepot" name="visible" type="checkbox">Force POT textures</label>
+		</div>
+		<script src="../../build/workshop3.bundle.js"></script>
+</body>
+</html>
