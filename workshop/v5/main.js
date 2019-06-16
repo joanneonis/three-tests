@@ -8,7 +8,27 @@ import 'three/examples/js/loaders/OBJLoader';
 import 'three/examples/js/exporters/OBJExporter';
 import 'three/examples/js/exporters/GLTFExporter';
 
+import { setlightType, buildGui, changeLightType } from '../../helpers/functions/lights';
+
 let options;
+
+var gui;
+
+var cameraSettings = {
+	cameraPos: {x: 58, y: 36, z: 36},
+	followTractor: false,
+	lookAt: true,
+	all: 30,
+};
+
+var controls;
+var model;
+let meshes = [];
+let mesh;
+let theData;
+let GridSize = 15;
+let group;
+let theCanvas;
 
 function exportGLTF( input ) {
 
@@ -25,56 +45,18 @@ function exportGLTF( input ) {
 	gltfExporter.parse( input, function ( result ) {
 
 		if ( result instanceof ArrayBuffer ) {
-
 			saveArrayBuffer( result, 'scene.glb' );
-
 		} else {
-
 			var output = JSON.stringify( result, null, 2 );
-			console.log( output );
 			saveString( output, 'scene.gltf' );
-
 		}
 
 	}, options );
-
 }
 
 document.getElementById( 'export_scene' ).addEventListener( 'click', function () {
-
-	exportGLTF( scene1 );
-
-} );
-
-document.getElementById( 'export_scenes' ).addEventListener( 'click', function () {
-
-	exportGLTF( [ scene1, scene2 ] );
-
-} );
-
-document.getElementById( 'export_object' ).addEventListener( 'click', function () {
-
-	exportGLTF( sphere );
-
-} );
-
-document.getElementById( 'export_obj' ).addEventListener( 'click', function () {
-
-	exportGLTF( waltHead );
-
-} );
-
-document.getElementById( 'export_objects' ).addEventListener( 'click', function () {
-
-	exportGLTF( [ sphere, gridHelper ] );
-
-} );
-
-document.getElementById( 'export_scene_object' ).addEventListener( 'click', function () {
-
-	exportGLTF( [ scene1, gridHelper ] );
-
-} );
+	exportGLTF( group );
+});
 
 
 var link = document.createElement( 'a' );
@@ -92,31 +74,52 @@ function save( blob, filename ) {
 }
 
 function saveString( text, filename ) {
-
 	save( new Blob( [ text ], { type: 'text/plain' } ), filename );
-
 }
 
 
 function saveArrayBuffer( buffer, filename ) {
-
 	save( new Blob( [ buffer ], { type: 'application/octet-stream' } ), filename );
-
 }
 
-// if ( WEBGL.isWebGLAvailable() === false ) {
-
-// 	document.body.appendChild( WEBGL.getWebGLErrorMessage() );
-
-// }
 
 var container;
 
-var camera, scene1, scene2, renderer;
-var gridHelper, sphere, waltHead;
+var camera, scene, renderer;
+
+function initGui() {
+	gui = new dat.GUI();
+
+	initCameraGui();
+}
+
+initGui();
 
 init();
-animate();
+render();
+
+loadJSON(function(response) {
+// Parse JSON string into object
+	theData = JSON.parse(response);
+
+	loadModelThingies();
+});
+
+function loadJSON(callback) {   
+
+	var xobj = new XMLHttpRequest();
+			xobj.overrideMimeType("application/json");
+	xobj.open('GET', './data/per-region.json', true); // Replace 'my_data' with the path to your file
+	xobj.onreadystatechange = function () {
+				if (xobj.readyState == 4 && xobj.status == "200") {
+					// Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+					callback(xobj.responseText);
+				}
+	};
+	xobj.send(null);  
+}
+
+
 
 function init() {
 
@@ -124,42 +127,143 @@ function init() {
 	document.body.appendChild( container );
 
 	
+	initRenderer();
+
+	scene = new THREE.Scene();
+	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+	camera.position.set(cameraSettings.cameraPos.x, cameraSettings.cameraPos.y, cameraSettings.cameraPos.z);
+	
+	initControls();
+
+	
+	scene.add(new THREE.AxesHelper(100));
+
+	let bgColor = new THREE.Color('#a3e1fe');
+
+	let ambient = new THREE.AmbientLight();
+	scene.add(ambient);
+
+	// let point = new THREE.PointLight();
+	// scene.add(point);
+
+	scene.background = bgColor;
+
+	window.addEventListener('resize', onResize, false);
+
+	scene.userData.activeLightSettings = { type: 'PointLight' };
+	scene.userData.gui = gui;
+
+
+	setlightType('PointLight', scene);
+	changeLightType('PointLight', scene);
+	buildGui(scene);
 
 	container.appendChild( renderer.domElement );
 
-	//
-
-	window.addEventListener( 'resize', onWindowResize, false );
-
 }
 
-function onWindowResize() {
 
+function render() {
+	requestAnimationFrame(render);
+	renderer.render( scene, camera );
+}
+
+
+function initRenderer() {
+	renderer = new THREE.WebGLRenderer({
+		canvas: theCanvas, 
+		antialias: true
+	});
+	renderer.setPixelRatio(window.devicePixelRatio);
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.shadowMap.enabled = true;
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+}
+
+function initControls() {
+	controls = new THREE.OrbitControls(camera, renderer.domElement);
+	controls.minDistance = 0;
+	controls.maxDistance = 700;
+	controls.enableKeys = false;
+}
+
+function loadModelThingies() {
+	var loader = new THREE.GLTFLoader();
+
+	loader.load('./models/piramidthing2.glb', function (gltf) {
+		model = gltf.scene.children[2];
+
+		createGrid(GridSize, GridSize, model);
+	});
+}
+function onResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
 
-	renderer.setSize( window.innerWidth, window.innerHeight );
-
+	renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-//
-
-function animate() {
-
-	requestAnimationFrame( animate );
-
-	render();
-
+function initCameraGui() {
+	var cameraFolder = gui.addFolder('Camera');
+	cameraFolder.add(cameraSettings.cameraPos, 'x', -100, 100).onChange((val) => { camera.position.x = val });
+	cameraFolder.add(cameraSettings.cameraPos, 'y', -100, 100).onChange((val) => { camera.position.y = val });
+	cameraFolder.add(cameraSettings.cameraPos, 'z', -100, 100).onChange((val) => { camera.position.z = val });
+	cameraFolder.add(cameraSettings, 'all', -100, 100, 0.1).onChange((val) => {
+		camera.position.set(val, val, val);
+	});
 }
 
-function render() {
 
-	var timer = Date.now() * 0.0001;
+function createGrid(x, y, model) {
+	group = new THREE.Group();
 
-	camera.position.x = Math.cos( timer ) * 800;
-	camera.position.z = Math.sin( timer ) * 800;
+	let count = 0;
+	var xDistance = 2.1;
+	var zDistance = 2.1;
 
-	camera.lookAt( scene1.position );
-	renderer.render( scene1, camera );
+	//initial offset so does not start in middle.
+	var xOffset = -GridSize;
+	var yOffset = -GridSize;
 
+	for (var i = 0; i < x; i++) {
+		for (var j = 0; j < y; j++) {
+			var newModel = model.clone();
+
+			newModel.position.x = (xDistance * i) + xOffset;
+			newModel.position.z = (zDistance * j) + yOffset;
+
+			newModel.morphTargetInfluences[6] = THREE.Math.mapLinear((theData[i][2015 - j]) / 1000000, 0, 4.4, -1, 3);
+			newModel.morphTargetInfluences[0] = THREE.Math.mapLinear((theData[j][2015 - i]) / 1000000, 0, 4.4, 0, 1);
+
+			count++;
+
+			meshes[count] = newModel; 
+
+			newModel.updateMatrix();
+			newModel.matrixAutoUpdate = false;
+			group.add(newModel);
+		}
+	}
+
+	scene.add(group);
+	// createSingle();
 }
+
+function createSingle() {
+	var singleGeometry = new THREE.Geometry();
+
+	meshes.forEach(element => {
+		element.matrixWorldNeedsUpdate = true;
+		element.updateMatrix();
+		// element.updateMorphTargets();
+		// console.log(element);
+		// element.applyMatrix( element.matrix )
+		// element.applyMatrix();
+		var geom = new THREE.Geometry().fromBufferGeometry( element.geometry );
+		singleGeometry.merge(geom, element.matrix);
+	});
+	
+	var material = new THREE.MeshPhongMaterial({color: 'rgba(200, 200, 200)'});
+	mesh = new THREE.Mesh(singleGeometry, material);
+	scene.add(mesh);	
+} 
