@@ -26701,7 +26701,11 @@ function init() {
   scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AxesHelper"](100));
   var bgColor = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#a3e1fe');
   var ambient = new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"]();
-  scene.add(ambient); // let point = new THREE.PointLight();
+  scene.add(ambient);
+  var point = new three__WEBPACK_IMPORTED_MODULE_1__["PointLight"]();
+  point.position.set(70, 100, 100);
+  point.intensity = .3;
+  scene.add(point); // let point = new THREE.PointLight();
   // scene.add(point);
 
   scene.background = bgColor;
@@ -26709,10 +26713,10 @@ function init() {
   scene.userData.activeLightSettings = {
     type: 'PointLight'
   };
-  scene.userData.gui = gui;
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_8__["setlightType"])('PointLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_8__["changeLightType"])('PointLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_8__["buildGui"])(scene);
+  scene.userData.gui = gui; // setlightType('PointLight', scene);
+  // changeLightType('PointLight', scene);
+  // buildGui(scene);
+
   container.appendChild(renderer.domElement);
 }
 
@@ -26743,6 +26747,7 @@ function loadModelThingies() {
   var loader = new three__WEBPACK_IMPORTED_MODULE_1__["GLTFLoader"]();
   loader.load('./models/piramidthing2.glb', function (gltf) {
     model = gltf.scene.children[2];
+    console.log('orig', gltf);
     createGrid(GridSize, GridSize, model);
   });
 }
@@ -26780,15 +26785,24 @@ function createGrid(x, y, model) {
 
   for (var i = 0; i < x; i++) {
     for (var j = 0; j < y; j++) {
-      var newModel = model.clone();
+      var newModel = model.clone(); // todo (on download, to save speed in browser!)
+
+      newModel.traverse(function (node) {
+        if (node.isMesh) {
+          node.geometry = node.geometry.clone();
+        }
+      });
       newModel.position.x = xDistance * i + xOffset;
       newModel.position.z = zDistance * j + yOffset;
-      newModel.morphTargetInfluences[6] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(theData[i][2015 - j] / 1000000, 0, 4.4, -1, 3);
-      newModel.morphTargetInfluences[0] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(theData[j][2015 - i] / 1000000, 0, 4.4, 0, 1);
-      count++;
+      newModel.morphTargetInfluences[6] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(theData[i][2015] / 1000000, 0, 4.4, -1, 3);
+      newModel.morphTargetInfluences[0] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(theData[j][2015] / 1000000, 0, 4.4, 0, 1); // newModel.morphTargetInfluences[1] = THREE.Math.mapLinear((theData[j][2015 - i]) / 1000000, 0, 4.4, -1, 1);
+
+      console.log(theData[i][2015]);
+      count++; // setMorphGui(count, newModel);
+
       meshes[count] = newModel;
       newModel.updateMatrix();
-      newModel.matrixAutoUpdate = false;
+      newModel.matrixAutoUpdate = true;
       group.add(newModel);
     }
   }
@@ -26813,6 +26827,15 @@ function createSingle() {
   });
   mesh = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](singleGeometry, material);
   scene.add(mesh);
+}
+
+function setMorphGui(numbr, newMesh) {
+  var expressions = Object.keys(newMesh.morphTargetDictionary);
+  var expressionFolder = gui.addFolder("blob ".concat(numbr));
+
+  for (var i = 0; i < expressions.length; i++) {
+    expressionFolder.add(newMesh.morphTargetInfluences, i, -1, 2, 0.01).name(expressions[i]);
+  }
 }
 
 /***/ })

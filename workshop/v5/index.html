@@ -4,18 +4,48 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+	<title>Tile - Generator</title>
+
+	<style>
+		body { margin: 0; width: 100%; height: 100vh; overflow: hidden; }
+		canvas { width: 100%; height: 100%; }
+
+		#info {
+			position: absolute;
+			padding: 20px;
+		}
+
+		#info div {
+			margin-top: 18px;
+		}
+
+		button {
+			-webkit-appearance: none;
+			background: #FF9800;
+			border: none;
+			outline: none;
+			color: white;
+			font-size: 16px;
+			border-radius: 70px;
+			padding: 11px 20px;
+		}
+
+		label {
+			font-family: sans-serif;
+			padding: 5px;
+			display: inline-block;
+		}
+	</style>
 </head>
 <body>
 		<div id="info">
-			<button id="export_scene">Export Scene1</button>
-			<br/><br/>
 			<label><input id="option_trs" name="trs" type="checkbox"/>TRS</label>
 			<label><input id="option_visible" name="visible" type="checkbox" checked="checked"/>Only Visible</label>
 			<label><input id="option_drawrange" name="visible" type="checkbox" checked="checked"/>Truncate drawRange</label><br/>
 			<label><input id="option_binary" name="visible" type="checkbox">Binary (<code>.glb</code>)</label>
 			<label><input id="option_forceindices" name="visible" type="checkbox">Force indices</label>
 			<label><input id="option_forcepot" name="visible" type="checkbox">Force POT textures</label>
+			<div><button id="export_scene">Export Tile</button></div>
 		</div>
 		<script src="../../build/workshop3.bundle.js"></script>
 </body>
