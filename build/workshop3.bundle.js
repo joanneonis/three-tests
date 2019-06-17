@@ -26794,8 +26794,10 @@ function createGrid(x, y, model) {
       });
       newModel.position.x = xDistance * i + xOffset;
       newModel.position.z = zDistance * j + yOffset;
-      newModel.morphTargetInfluences[6] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(theData[i][2015] / 1000000, 0, 4.4, -1, 3);
-      newModel.morphTargetInfluences[0] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(theData[j][2015] / 1000000, 0, 4.4, 0, 1); // newModel.morphTargetInfluences[1] = THREE.Math.mapLinear((theData[j][2015 - i]) / 1000000, 0, 4.4, -1, 1);
+      newModel.morphTargetInfluences[6] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(theData[i][2015 - i] / 1000000, 0, 4.4, -1, 3);
+      newModel.morphTargetInfluences[0] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(theData[j][2015 - j] / 1000000, 0, 4.4, 0, 1);
+      newModel.morphTargetInfluences[1] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(theData[i][2015 - i] / 1000000, 0, 4.4, -1, 1);
+      newModel.morphTargetInfluences[4] = three__WEBPACK_IMPORTED_MODULE_1__["Math"].mapLinear(theData[i][2015 - i] / 1000000, 0, 4.4, -1, 1); // newModel.morphTargetInfluences[7] = THREE.Math.mapLinear((theData[i][2015 - i]) / 1000000, 0, 4.4, -1, 1);
 
       console.log(theData[i][2015]);
       count++; // setMorphGui(count, newModel);
