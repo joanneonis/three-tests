@@ -106,11 +106,11 @@ var vid = document.getElementById('videoel');
 var vid_width = vid.width;
 var vid_height = vid.height;
 var overlay = document.getElementById('overlay');
-var overlayCC = overlay.getContext('2d');
 var trackingStarted;
 var ctrack;
 var emotionData;
 var ec;
+var proportion;
 var ctx; // d3 Only
 
 var svg;
@@ -140,8 +140,13 @@ function () {
       delete emotionModel['fear'];
       ec = new emotionClassifier();
       ec.init(emotionModel);
-      emotionData = ec.getBlank();
-      this.d3Vis();
+      window.ec = ec;
+      emotionData = ec.getBlank(); // this.d3Vis();
+    }
+  }, {
+    key: "getClamTracker",
+    value: function getClamTracker() {
+      return ctrack;
     }
   }, {
     key: "getEc",
@@ -172,10 +177,19 @@ function () {
     value: function adjustVideoProportions() {
       // resize overlay and video if proportions are different
       // keep same height, just change width
-      var proportion = vid.videoWidth / vid.videoHeight;
+      proportion = vid.videoWidth / vid.videoHeight;
       vid_width = Math.round(vid_height * proportion);
       vid.width = vid_width;
       overlay.width = vid_width;
+    }
+  }, {
+    key: "getVidProportions",
+    value: function getVidProportions() {
+      return {
+        videoWidth: vid_width,
+        videoHeight: vid_height,
+        proportions: proportion
+      };
     }
   }, {
     key: "gumSuccess",
@@ -240,32 +254,7 @@ function () {
       });
       ctrack.init(pModel);
       trackingStarted = false;
-    }
-  }, {
-    key: "drawLoop",
-    value: function drawLoop() {
-      requestAnimationFrame(ctx.drawLoop);
-      overlayCC.clearRect(0, 0, vid_width, vid_height); //psrElement.innerHTML = "score :" + ctrack.getScore().toFixed(4);
-
-      if (ctrack.getCurrentPosition()) {
-        ctrack.draw(overlay);
-      }
-
-      var cp = ctrack.getCurrentParameters();
-      var er = ec.meanPredict(cp);
-
-      if (er) {
-        console.log(er);
-        ctx.updateData(er);
-
-        for (var i = 0; i < er.length; i++) {
-          if (er[i].value > 0.4) {
-            document.getElementById('icon' + (i + 1)).style.visibility = 'visible';
-          } else {
-            document.getElementById('icon' + (i + 1)).style.visibility = 'hidden';
-          }
-        }
-      }
+      window.ctrack = ctrack;
     }
   }, {
     key: "startVideo",
@@ -275,63 +264,95 @@ function () {
 
       ctrack.start(vid);
       trackingStarted = true; // start loop to draw face
+      // this.drawLoop();
+    } // static d3Vis() {
+    // 	var barWidth = 30;
+    // 	var formatPercent = d3.format(".0%");
+    // 	var x = d3.scale.linear()
+    // 		.domain([0, Clam.getEmotions().length]).range([margin.left, width + margin.left]);
+    // 	var y = d3.scale.linear()
+    // 		.domain([0, 1]).range([0, height]);
+    // 	svg = d3.select("#emotion_chart").append("svg")
+    // 		.attr("width", width + margin.left + margin.right)
+    // 		.attr("height", height + margin.top + margin.bottom)
+    // 	svg.selectAll("rect").
+    // 	data(emotionData).
+    // 	enter().
+    // 	append("svg:rect").
+    // 	attr("x", function (datum, index) {
+    // 		return x(index);
+    // 	}).
+    // 	attr("y", function (datum) {
+    // 		return height - y(datum.value);
+    // 	}).
+    // 	attr("height", function (datum) {
+    // 		return y(datum.value);
+    // 	}).
+    // 	attr("width", barWidth).
+    // 	attr("fill", "#2d578b");
+    // 	svg.selectAll("text.labels").
+    // 	data(emotionData).
+    // 	enter().
+    // 	append("svg:text").
+    // 	attr("x", function (datum, index) {
+    // 		return x(index) + barWidth;
+    // 	}).
+    // 	attr("y", function (datum) {
+    // 		return height - y(datum.value);
+    // 	}).
+    // 	attr("dx", -barWidth / 2).
+    // 	attr("dy", "1.2em").
+    // 	attr("text-anchor", "middle").
+    // 	text(function (datum) {
+    // 		return datum.value;
+    // 	}).
+    // 	attr("fill", "white").
+    // 	attr("class", "labels");
+    // 	svg.selectAll("text.yAxis").
+    // 	data(emotionData).
+    // 	enter().append("svg:text").
+    // 	attr("x", function (datum, index) {
+    // 		return x(index) + barWidth;
+    // 	}).
+    // 	attr("y", height).
+    // 	attr("dx", -barWidth / 2).
+    // 	attr("text-anchor", "middle").
+    // 	attr("style", "font-size: 12").
+    // 	text(function (datum) {
+    // 		return datum.emotion;
+    // 	}).
+    // 	attr("transform", "translate(0, 18)").
+    // 	attr("class", "yAxis");
+    // }
+    // static updateData(data) {
+    // 	var y = d3.scale.linear()
+    // 		.domain([0, 1]).range([0, height]);
+    // 	// update
+    // 	if (!svg) { return; }
+    // 	var rects = svg.selectAll("rect")
+    // 		.data(data)
+    // 		.attr("y", function (datum) {
+    // 			return height - y(datum.value);
+    // 		})
+    // 		.attr("height", function (datum) {
+    // 			return y(datum.value);
+    // 		});
+    // 	var texts = svg.selectAll("text.labels")
+    // 		.data(data)
+    // 		.attr("y", function (datum) {
+    // 			return height - y(datum.value);
+    // 		})
+    // 		.text(function (datum) {
+    // 			return datum.value.toFixed(1);
+    // 		});
+    // 	// enter
+    // 	rects.enter().append("svg:rect");
+    // 	texts.enter().append("svg:text");
+    // 	// exit
+    // 	rects.exit().remove();
+    // 	texts.exit().remove();
+    // }
 
-      this.drawLoop();
-    }
-  }, {
-    key: "d3Vis",
-    value: function d3Vis() {
-      var barWidth = 30;
-      var formatPercent = d3.format(".0%");
-      var x = d3.scale.linear().domain([0, Clam.getEmotions().length]).range([margin.left, width + margin.left]);
-      var y = d3.scale.linear().domain([0, 1]).range([0, height]);
-      svg = d3.select("#emotion_chart").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
-      svg.selectAll("rect").data(emotionData).enter().append("svg:rect").attr("x", function (datum, index) {
-        return x(index);
-      }).attr("y", function (datum) {
-        return height - y(datum.value);
-      }).attr("height", function (datum) {
-        return y(datum.value);
-      }).attr("width", barWidth).attr("fill", "#2d578b");
-      svg.selectAll("text.labels").data(emotionData).enter().append("svg:text").attr("x", function (datum, index) {
-        return x(index) + barWidth;
-      }).attr("y", function (datum) {
-        return height - y(datum.value);
-      }).attr("dx", -barWidth / 2).attr("dy", "1.2em").attr("text-anchor", "middle").text(function (datum) {
-        return datum.value;
-      }).attr("fill", "white").attr("class", "labels");
-      svg.selectAll("text.yAxis").data(emotionData).enter().append("svg:text").attr("x", function (datum, index) {
-        return x(index) + barWidth;
-      }).attr("y", height).attr("dx", -barWidth / 2).attr("text-anchor", "middle").attr("style", "font-size: 12").text(function (datum) {
-        return datum.emotion;
-      }).attr("transform", "translate(0, 18)").attr("class", "yAxis");
-    }
-  }, {
-    key: "updateData",
-    value: function updateData(data) {
-      var y = d3.scale.linear().domain([0, 1]).range([0, height]); // update
-
-      if (!svg) {
-        return;
-      }
-
-      var rects = svg.selectAll("rect").data(data).attr("y", function (datum) {
-        return height - y(datum.value);
-      }).attr("height", function (datum) {
-        return y(datum.value);
-      });
-      var texts = svg.selectAll("text.labels").data(data).attr("y", function (datum) {
-        return height - y(datum.value);
-      }).text(function (datum) {
-        return datum.value.toFixed(1);
-      }); // enter
-
-      rects.enter().append("svg:rect");
-      texts.enter().append("svg:text"); // exit
-
-      rects.exit().remove();
-      texts.exit().remove();
-    }
   }]);
 
   return Clam;
@@ -354,9 +375,105 @@ __webpack_require__.r(__webpack_exports__);
  // console.log(Clam.init());
 
 _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].init();
+var overlay = document.getElementById('overlay');
+var overlayCC = overlay.getContext('2d');
+var videoInfo;
+var emotionData;
+var ctrack;
+var ec; // d3
+
+var svg;
 document.getElementById('startbutton').addEventListener('click', function () {
   _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].startVideo();
+  emotionData = _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].getEmotionData();
+  videoInfo = _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].getVidProportions();
+  ctrack = window.ctrack;
+  ec = window.ec;
+  drawLoop();
+  d3Vis();
 });
+
+function drawLoop() {
+  requestAnimationFrame(drawLoop);
+  overlayCC.clearRect(0, 0, videoInfo.videoWidth, videoInfo.videoHeight); //psrElement.innerHTML = "score :" + ctrack.getScore().toFixed(4);
+
+  if (ctrack.getCurrentPosition()) {
+    ctrack.draw(overlay);
+  }
+
+  var cp = ctrack.getCurrentParameters();
+  var er = ec.meanPredict(cp);
+
+  if (er) {
+    console.log(er);
+    updateData(er);
+
+    for (var i = 0; i < er.length; i++) {
+      if (er[i].value > 0.4) {
+        document.getElementById('icon' + (i + 1)).style.visibility = 'visible';
+      } else {
+        document.getElementById('icon' + (i + 1)).style.visibility = 'hidden';
+      }
+    }
+  }
+}
+
+var margin = {
+  top: 20,
+  right: 20,
+  bottom: 10,
+  left: 40
+},
+    width = 400 - margin.left - margin.right,
+    height = 100 - margin.top - margin.bottom;
+var barWidth = 30;
+var formatPercent = d3.format(".0%");
+
+function d3Vis() {
+  var x = d3.scale.linear().domain([0, _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].getEmotions().length]).range([margin.left, width + margin.left]);
+  var y = d3.scale.linear().domain([0, 1]).range([0, height]);
+  svg = d3.select("#emotion_chart").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
+  svg.selectAll("rect").data(emotionData).enter().append("svg:rect").attr("x", function (datum, index) {
+    return x(index);
+  }).attr("y", function (datum) {
+    return height - y(datum.value);
+  }).attr("height", function (datum) {
+    return y(datum.value);
+  }).attr("width", barWidth).attr("fill", "#2d578b");
+  svg.selectAll("text.labels").data(emotionData).enter().append("svg:text").attr("x", function (datum, index) {
+    return x(index) + barWidth;
+  }).attr("y", function (datum) {
+    return height - y(datum.value);
+  }).attr("dx", -barWidth / 2).attr("dy", "1.2em").attr("text-anchor", "middle").text(function (datum) {
+    return datum.value;
+  }).attr("fill", "white").attr("class", "labels");
+  svg.selectAll("text.yAxis").data(emotionData).enter().append("svg:text").attr("x", function (datum, index) {
+    return x(index) + barWidth;
+  }).attr("y", height).attr("dx", -barWidth / 2).attr("text-anchor", "middle").attr("style", "font-size: 12").text(function (datum) {
+    return datum.emotion;
+  }).attr("transform", "translate(0, 18)").attr("class", "yAxis");
+}
+
+function updateData(data) {
+  var y = d3.scale.linear().domain([0, 1]).range([0, height]); // update
+
+  var rects = svg.selectAll("rect").data(data).attr("y", function (datum) {
+    return height - y(datum.value);
+  }).attr("height", function (datum) {
+    return y(datum.value);
+  });
+  var texts = svg.selectAll("text.labels").data(data).attr("y", function (datum) {
+    return height - y(datum.value);
+  }).text(function (datum) {
+    return datum.value.toFixed(1);
+  }); // enter
+
+  rects.enter().append("svg:rect");
+  texts.enter().append("svg:text"); // exit
+
+  rects.exit().remove();
+  texts.exit().remove();
+}
 
 /***/ }),
 
