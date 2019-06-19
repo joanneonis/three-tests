@@ -22,7 +22,6 @@
 			transform : scaleX(-1);
 			-ms-filter : fliph; /*IE*/
 			filter : fliph; /*IE*/
-			
 		}
 		#videoel {
 			-o-transform : scaleX(-1);
@@ -30,18 +29,14 @@
 			transform : scaleX(-1);
 			-ms-filter : fliph; /*IE*/
 			filter : fliph; /*IE*/
-			
 		}
 		#container {
-			position : relative;
-			width : 370px;
-			/*margin : 0px auto;*/
-		}
-		#content {
-			margin-top : 50px;
-			margin-left : auto;
-			margin-right : auto;
-			max-width: 600px;
+			position: fixed;
+			width: 400px;
+			left: 0;
+			right: 0;
+			top: 30px;
+			margin: auto;
 		}
 		h2 {
 			font-weight : 400;
@@ -54,7 +49,10 @@
 			text-align : center;
 		}
 		#emotion_container {
-			width: 600px;
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			width: 400px;
 		}
 		#emotion_icons {
 			height: 50px;
@@ -82,10 +80,7 @@
 	</style>
 </head>
 <body>
-	<h1>Hoi</h1>
 	<div id="content">
-		<h2>Emotion detection example</h2>
-		<p>This a test of emotion detection based on parameter output from <em>clmtrackr</em>.</p>
 		<div id="container">
 			<video id="videoel" width="400" height="300" preload="auto" loop playsinline autoplay>
 			</video>

@@ -383,6 +383,7 @@ var ctrack;
 var ec; // d3
 
 var svg;
+var emotionStates;
 document.getElementById('startbutton').addEventListener('click', function () {
   _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].startVideo();
   emotionData = _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].getEmotionData();
@@ -402,14 +403,13 @@ function drawLoop() {
   }
 
   var cp = ctrack.getCurrentParameters();
-  var er = ec.meanPredict(cp);
+  emotionStates = ec.meanPredict(cp);
 
-  if (er) {
-    console.log(er);
-    updateData(er);
+  if (emotionStates) {
+    updateData(emotionStates);
 
-    for (var i = 0; i < er.length; i++) {
-      if (er[i].value > 0.4) {
+    for (var i = 0; i < emotionStates.length; i++) {
+      if (emotionStates[i].value > 0.4) {
         document.getElementById('icon' + (i + 1)).style.visibility = 'visible';
       } else {
         document.getElementById('icon' + (i + 1)).style.visibility = 'hidden';
