@@ -77,6 +77,14 @@
 			fill : steelblue;
 			fill-opacity : .9;
 		}
+		canvas#gl-canvas {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			left: 0;
+			right: 0;
+		}
 	</style>
 </head>
 <body>
@@ -99,6 +107,7 @@
 			<input class="btn" type="button" value="wait, loading video" disabled="disabled" id="startbutton"></input>
 		</div>
 
+		<canvas id="gl-canvas"></canvas>
 
 	<script src="../assets/clmtracker-sources/js/libs/utils.js"></script>
 	<script src="../assets/clmtracker-sources/build/clmtrackr.js"></script>

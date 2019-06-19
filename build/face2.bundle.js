@@ -399,7 +399,37 @@ var ctrack;
 var ec; // d3
 
 var svg;
-var emotionStates;
+var emotionStates; //?--------------------------------------------------------------------
+//?		Three
+//?--------------------------------------------------------------------
+
+var suzanne;
+var renderer,
+    scene,
+    camera,
+    theCanvas = document.getElementById('gl-canvas');
+var gui;
+var cameraSettings = {
+  cameraPos: {
+    x: 6,
+    y: 6,
+    z: 6
+  },
+  followTractor: false,
+  lookAt: true,
+  all: 30
+};
+var controls;
+var goal;
+var temp = new three__WEBPACK_IMPORTED_MODULE_2__["Vector3"]();
+var model;
+initGui();
+init(); // render();
+
+loadModelThingies(); //?--------------------------------------------------------------------
+//?		Webcam
+//?--------------------------------------------------------------------
+
 document.getElementById('startbutton').addEventListener('click', function () {
   _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].startVideo();
   emotionData = _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].getEmotionData();
@@ -412,6 +442,7 @@ document.getElementById('startbutton').addEventListener('click', function () {
 
 function drawLoop() {
   requestAnimationFrame(drawLoop);
+  renderer.render(scene, camera);
   overlayCC.clearRect(0, 0, videoInfo.videoWidth, videoInfo.videoHeight); //psrElement.innerHTML = "score :" + ctrack.getScore().toFixed(4);
 
   if (ctrack.getCurrentPosition()) {
@@ -423,6 +454,7 @@ function drawLoop() {
 
   if (emotionStates) {
     updateData(emotionStates);
+    updateFacialExpression(emotionStates);
 
     for (var i = 0; i < emotionStates.length; i++) {
       if (emotionStates[i].value > 0.4) {
@@ -432,7 +464,10 @@ function drawLoop() {
       }
     }
   }
-}
+} //?--------------------------------------------------------------------
+//?		D3
+//?--------------------------------------------------------------------
+
 
 var margin = {
   top: 20,
@@ -489,6 +524,134 @@ function updateData(data) {
 
   rects.exit().remove();
   texts.exit().remove();
+} //?--------------------------------------------------------------------
+//?		Three
+//?--------------------------------------------------------------------
+
+
+function init() {
+  initRenderer();
+  scene = new three__WEBPACK_IMPORTED_MODULE_2__["Scene"]();
+  camera = new three__WEBPACK_IMPORTED_MODULE_2__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000);
+  camera.position.set(cameraSettings.cameraPos.x, cameraSettings.cameraPos.y, cameraSettings.cameraPos.z);
+  initControls(); // scene.add(new THREE.AxesHelper(10));
+
+  var bgColor = new three__WEBPACK_IMPORTED_MODULE_2__["Color"]('#a3e1fe'); // let ambient = new THREE.AmbientLight();
+  // ambient.castShadow = true;
+  // scene.add(ambient);
+  // let point = new THREE.PointLight();
+  // ambient.castShadow = true;
+  // scene.add(point);
+
+  scene.background = bgColor;
+  window.addEventListener('resize', onResize, false);
+  scene.userData.activeLightSettings = {
+    type: 'Spotlight'
+  };
+  scene.userData.gui = gui;
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["setlightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["changeLightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["buildGui"])(scene);
+}
+
+function onResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+} // function render() {
+// 	// controls.update();
+// 	requestAnimationFrame(render);
+// 	renderer.render(scene, camera);
+// }
+
+
+function initGui() {
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_1__["GUI"]();
+  initCameraGui();
+} // initGui();
+// init();
+// // render();
+// loadModelThingies();
+
+
+function initRenderer() {
+  renderer = new three__WEBPACK_IMPORTED_MODULE_2__["WebGLRenderer"]({
+    canvas: theCanvas,
+    antialias: true
+  });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = three__WEBPACK_IMPORTED_MODULE_2__["PCFSoftShadowMap"];
+}
+
+function initControls() {
+  controls = new three__WEBPACK_IMPORTED_MODULE_2__["OrbitControls"](camera, renderer.domElement);
+  controls.minDistance = 0;
+  controls.maxDistance = 700;
+  controls.enableKeys = false;
+}
+
+function loadModelThingies() {
+  var loader = new three__WEBPACK_IMPORTED_MODULE_2__["GLTFLoader"]();
+  loader.load('../assets/suzanne2/v6.glb', function (gltf) {
+    model = gltf.scene;
+    console.log(model);
+    suzanne = model.children[0].children[1]; // console.log(model.children[0].children[1].children[0].skeleton.bones);
+    // model.traverse( function( node ) {
+    // 	if ( node instanceof THREE.Mesh ) { node.castShadow = true; node.receiveShadow = false; }
+    // } );
+
+    var expressions = Object.keys(suzanne.morphTargetDictionary);
+    var expressionFolder = gui.addFolder('Blob');
+
+    for (var i = 0; i < expressions.length; i++) {
+      expressionFolder.add(suzanne.morphTargetInfluences, i, 0, 1, 0.01).name(expressions[i]);
+    }
+
+    rotateObject(suzanne, -35, 42, 25); // model.castShadow = true;
+    // setupDatGui();
+
+    scene.add(suzanne);
+  });
+}
+
+function rotateObject(object) {
+  var degreeX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var degreeY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var degreeZ = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+  object.rotateX(three__WEBPACK_IMPORTED_MODULE_2__["Math"].degToRad(degreeX));
+  object.rotateY(three__WEBPACK_IMPORTED_MODULE_2__["Math"].degToRad(degreeY));
+  object.rotateZ(three__WEBPACK_IMPORTED_MODULE_2__["Math"].degToRad(degreeZ));
+}
+
+function updateFacialExpression(expression) {
+  console.log(expression); // suzanne.morphTargetInfluences[2] = THREE.Math.mapLinear(expression[0].value, 0, 1, );
+
+  suzanne.morphTargetInfluences[2] = expression[0].value * 2;
+  suzanne.morphTargetInfluences[3] = expression[2].value * 1;
+}
+
+function initCameraGui() {
+  var cameraFolder = gui.addFolder('Camera');
+  cameraFolder.add(cameraSettings, 'followTractor');
+  cameraFolder.add(cameraSettings, 'lookAt');
+  cameraFolder.add(cameraSettings.cameraPos, 'x', -100, 100).onChange(function (val) {
+    camera.position.x = val;
+  });
+  cameraFolder.add(cameraSettings.cameraPos, 'y', -100, 100).onChange(function (val) {
+    camera.position.y = val;
+  });
+  cameraFolder.add(cameraSettings.cameraPos, 'z', -100, 100).onChange(function (val) {
+    camera.position.z = val;
+  });
+  cameraFolder.add(cameraSettings, 'all', -100, 100, 0.1).onChange(function (val) {
+    camera.position.set(val, val, val);
+
+    if (cameraSettings.followTractor) {
+      goal.position.set(val, val, val);
+    }
+  });
 }
 
 /***/ }),
