@@ -81,414 +81,168 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/face/v2/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./experiments/face/tests/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./experiments/face/v2/clmtracker.js":
-/*!*******************************************!*\
-  !*** ./experiments/face/v2/clmtracker.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Clam; });
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
-
-
-var vid = document.getElementById('videoel');
-var vid_width = vid.width;
-var vid_height = vid.height;
-var overlay = document.getElementById('overlay');
-var trackingStarted;
-var ctrack;
-var emotionData;
-var ec;
-var proportion;
-var ctx; // d3 Only
-
-var svg;
-var margin = {
-  top: 20,
-  right: 20,
-  bottom: 10,
-  left: 40
-};
-var width = 400 - margin.left - margin.right;
-var height = 100 - margin.top - margin.bottom;
-
-var Clam =
-/*#__PURE__*/
-function () {
-  function Clam() {
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, Clam);
-  }
-
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(Clam, null, [{
-    key: "init",
-    value: function init() {
-      ctx = this;
-      this.mediaCheck();
-      this.reguliseEyebrows();
-      delete emotionModel['disgusted'];
-      delete emotionModel['fear'];
-      ec = new emotionClassifier();
-      ec.init(emotionModel);
-      window.ec = ec;
-      emotionData = ec.getBlank(); // this.d3Vis();
-    }
-  }, {
-    key: "getClamTracker",
-    value: function getClamTracker() {
-      return ctrack;
-    }
-  }, {
-    key: "getEc",
-    value: function getEc() {
-      return ec;
-    }
-  }, {
-    key: "getEmotions",
-    value: function getEmotions() {
-      return ec.getEmotions();
-    }
-  }, {
-    key: "getEmotionData",
-    value: function getEmotionData() {
-      return emotionData;
-    }
-    /********** check and set up video/webcam **********/
-
-  }, {
-    key: "enablestart",
-    value: function enablestart() {
-      var startbutton = document.getElementById('startbutton');
-      startbutton.value = "start";
-      startbutton.disabled = null;
-    }
-  }, {
-    key: "adjustVideoProportions",
-    value: function adjustVideoProportions() {
-      // resize overlay and video if proportions are different
-      // keep same height, just change width
-      proportion = vid.videoWidth / vid.videoHeight;
-      vid_width = Math.round(vid_height * proportion);
-      vid.width = vid_width;
-      overlay.width = vid_width;
-    }
-  }, {
-    key: "getVidProportions",
-    value: function getVidProportions() {
-      return {
-        videoWidth: vid_width,
-        videoHeight: vid_height,
-        proportions: proportion
-      };
-    }
-  }, {
-    key: "gumSuccess",
-    value: function gumSuccess(stream) {
-      // add camera stream if getUserMedia succeeded
-      if ("srcObject" in vid) {
-        vid.srcObject = stream;
-      } else {
-        vid.src = window.URL && window.URL.createObjectURL(stream);
-      }
-
-      vid.onloadedmetadata = function () {
-        ctx.adjustVideoProportions();
-        vid.play();
-      };
-
-      vid.onresize = function () {
-        ctx.adjustVideoProportions();
-
-        if (trackingStarted) {
-          ctrack.stop();
-          ctrack.reset();
-          ctrack.start(vid);
-        }
-      };
-    }
-  }, {
-    key: "gumFail",
-    value: function gumFail() {
-      alert("There was some problem trying to fetch video from your webcam. If you have a webcam, please make sure to accept when the browser asks for access to your webcam.");
-    }
-  }, {
-    key: "mediaCheck",
-    value: function mediaCheck() {
-      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-      window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL; // check for camerasupport
-
-      if (navigator.mediaDevices) {
-        navigator.mediaDevices.getUserMedia({
-          video: true
-        }).then(this.gumSuccess)["catch"](this.gumFail);
-      } else if (navigator.getUserMedia) {
-        navigator.getUserMedia({
-          video: true
-        }, this.gumSuccess, this.gumFail);
-      } else {
-        alert("This demo depends on getUserMedia, which your browser does not seem to support. :(");
-      }
-
-      vid.addEventListener('canplay', this.enablestart, false);
-    }
-    /*********** setup of emotion detection *************/
-
-  }, {
-    key: "reguliseEyebrows",
-    value: function reguliseEyebrows() {
-      // set eigenvector 9 and 11 to not be regularized. This is to better detect motion of the eyebrows
-      pModel.shapeModel.nonRegularizedVectors.push(9);
-      pModel.shapeModel.nonRegularizedVectors.push(11);
-      ctrack = new clm.tracker({
-        useWebGL: true
-      });
-      ctrack.init(pModel);
-      trackingStarted = false;
-      window.ctrack = ctrack;
-    }
-  }, {
-    key: "startVideo",
-    value: function startVideo() {
-      // start video
-      vid.play(); // start tracking
-
-      ctrack.start(vid);
-      trackingStarted = true; // start loop to draw face
-      // this.drawLoop();
-    } // static d3Vis() {
-    // 	var barWidth = 30;
-    // 	var formatPercent = d3.format(".0%");
-    // 	var x = d3.scale.linear()
-    // 		.domain([0, Clam.getEmotions().length]).range([margin.left, width + margin.left]);
-    // 	var y = d3.scale.linear()
-    // 		.domain([0, 1]).range([0, height]);
-    // 	svg = d3.select("#emotion_chart").append("svg")
-    // 		.attr("width", width + margin.left + margin.right)
-    // 		.attr("height", height + margin.top + margin.bottom)
-    // 	svg.selectAll("rect").
-    // 	data(emotionData).
-    // 	enter().
-    // 	append("svg:rect").
-    // 	attr("x", function (datum, index) {
-    // 		return x(index);
-    // 	}).
-    // 	attr("y", function (datum) {
-    // 		return height - y(datum.value);
-    // 	}).
-    // 	attr("height", function (datum) {
-    // 		return y(datum.value);
-    // 	}).
-    // 	attr("width", barWidth).
-    // 	attr("fill", "#2d578b");
-    // 	svg.selectAll("text.labels").
-    // 	data(emotionData).
-    // 	enter().
-    // 	append("svg:text").
-    // 	attr("x", function (datum, index) {
-    // 		return x(index) + barWidth;
-    // 	}).
-    // 	attr("y", function (datum) {
-    // 		return height - y(datum.value);
-    // 	}).
-    // 	attr("dx", -barWidth / 2).
-    // 	attr("dy", "1.2em").
-    // 	attr("text-anchor", "middle").
-    // 	text(function (datum) {
-    // 		return datum.value;
-    // 	}).
-    // 	attr("fill", "white").
-    // 	attr("class", "labels");
-    // 	svg.selectAll("text.yAxis").
-    // 	data(emotionData).
-    // 	enter().append("svg:text").
-    // 	attr("x", function (datum, index) {
-    // 		return x(index) + barWidth;
-    // 	}).
-    // 	attr("y", height).
-    // 	attr("dx", -barWidth / 2).
-    // 	attr("text-anchor", "middle").
-    // 	attr("style", "font-size: 12").
-    // 	text(function (datum) {
-    // 		return datum.emotion;
-    // 	}).
-    // 	attr("transform", "translate(0, 18)").
-    // 	attr("class", "yAxis");
-    // }
-    // static updateData(data) {
-    // 	var y = d3.scale.linear()
-    // 		.domain([0, 1]).range([0, height]);
-    // 	// update
-    // 	if (!svg) { return; }
-    // 	var rects = svg.selectAll("rect")
-    // 		.data(data)
-    // 		.attr("y", function (datum) {
-    // 			return height - y(datum.value);
-    // 		})
-    // 		.attr("height", function (datum) {
-    // 			return y(datum.value);
-    // 		});
-    // 	var texts = svg.selectAll("text.labels")
-    // 		.data(data)
-    // 		.attr("y", function (datum) {
-    // 			return height - y(datum.value);
-    // 		})
-    // 		.text(function (datum) {
-    // 			return datum.value.toFixed(1);
-    // 		});
-    // 	// enter
-    // 	rects.enter().append("svg:rect");
-    // 	texts.enter().append("svg:text");
-    // 	// exit
-    // 	rects.exit().remove();
-    // 	texts.exit().remove();
-    // }
-
-  }]);
-
-  return Clam;
-}();
-
-
-
-/***/ }),
-
-/***/ "./experiments/face/v2/main.js":
-/*!*************************************!*\
-  !*** ./experiments/face/v2/main.js ***!
-  \*************************************/
+/***/ "./experiments/face/tests/main.js":
+/*!****************************************!*\
+  !*** ./experiments/face/tests/main.js ***!
+  \****************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _clmtracker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./clmtracker */ "./experiments/face/v2/clmtracker.js");
-/* harmony import */ var dat_gui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dat.gui */ "./node_modules/dat.gui/build/dat.gui.module.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
-/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
-/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/examples/js/AnimationClipCreator */ "./node_modules/three/examples/js/AnimationClipCreator.js");
-/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../helpers/functions/lights */ "./helpers/functions/lights.js");
+/* harmony import */ var dat_gui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dat.gui */ "./node_modules/dat.gui/build/dat.gui.module.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.min.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three/examples/js/controls/OrbitControls */ "./node_modules/three/examples/js/controls/OrbitControls.js");
+/* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
+/* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/examples/js/AnimationClipCreator */ "./node_modules/three/examples/js/AnimationClipCreator.js");
+/* harmony import */ var three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_AnimationClipCreator__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../helpers/functions/lights */ "./helpers/functions/lights.js");
 
 
 
 
 
+ //?--------------------------------------------------------------------
+//?		Base
+//?--------------------------------------------------------------------
 
- // console.log(Clam.init());
+var suzanne;
+var renderer,
+    scene,
+    camera,
+    theCanvas = document.getElementById('gl-canvas');
+var gui;
+var cameraSettings = {
+  cameraPos: {
+    x: 58,
+    y: 36,
+    z: 36
+  },
+  followTractor: false,
+  lookAt: true,
+  all: 30
+};
+var controls;
+var goal;
+var temp = new three__WEBPACK_IMPORTED_MODULE_1__["Vector3"]();
+var model;
 
-_clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].init();
-var overlay = document.getElementById('overlay');
-var overlayCC = overlay.getContext('2d');
-var videoInfo;
-var emotionData;
-var ctrack;
-var ec; // d3
+function init() {
+  initRenderer();
+  scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](75, window.innerWidth / window.innerHeight, 1, 1000);
+  camera.position.set(cameraSettings.cameraPos.x, cameraSettings.cameraPos.y, cameraSettings.cameraPos.z);
+  initControls(); // scene.add(new THREE.AxesHelper(10));
 
-var svg;
-var emotionStates;
-document.getElementById('startbutton').addEventListener('click', function () {
-  _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].startVideo();
-  emotionData = _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].getEmotionData();
-  videoInfo = _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].getVidProportions();
-  ctrack = window.ctrack;
-  ec = window.ec;
-  drawLoop();
-  d3Vis();
-});
+  var bgColor = new three__WEBPACK_IMPORTED_MODULE_1__["Color"]('#a3e1fe'); // let ambient = new THREE.AmbientLight();
+  // ambient.castShadow = true;
+  // scene.add(ambient);
+  // let point = new THREE.PointLight();
+  // ambient.castShadow = true;
+  // scene.add(point);
 
-function drawLoop() {
-  requestAnimationFrame(drawLoop);
-  overlayCC.clearRect(0, 0, videoInfo.videoWidth, videoInfo.videoHeight); //psrElement.innerHTML = "score :" + ctrack.getScore().toFixed(4);
-
-  if (ctrack.getCurrentPosition()) {
-    ctrack.draw(overlay);
-  }
-
-  var cp = ctrack.getCurrentParameters();
-  emotionStates = ec.meanPredict(cp);
-
-  if (emotionStates) {
-    updateData(emotionStates);
-
-    for (var i = 0; i < emotionStates.length; i++) {
-      if (emotionStates[i].value > 0.4) {
-        document.getElementById('icon' + (i + 1)).style.visibility = 'visible';
-      } else {
-        document.getElementById('icon' + (i + 1)).style.visibility = 'hidden';
-      }
-    }
-  }
+  scene.background = bgColor;
+  window.addEventListener('resize', onResize, false);
+  scene.userData.activeLightSettings = {
+    type: 'Spotlight'
+  };
+  scene.userData.gui = gui;
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["setlightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["changeLightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["buildGui"])(scene);
 }
 
-var margin = {
-  top: 20,
-  right: 20,
-  bottom: 10,
-  left: 40
-},
-    width = 400 - margin.left - margin.right,
-    height = 100 - margin.top - margin.bottom;
-var barWidth = 30;
-var formatPercent = d3.format(".0%");
-
-function d3Vis() {
-  var x = d3.scale.linear().domain([0, _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].getEmotions().length]).range([margin.left, width + margin.left]);
-  var y = d3.scale.linear().domain([0, 1]).range([0, height]);
-  svg = d3.select("#emotion_chart").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
-  svg.selectAll("rect").data(emotionData).enter().append("svg:rect").attr("x", function (datum, index) {
-    return x(index);
-  }).attr("y", function (datum) {
-    return height - y(datum.value);
-  }).attr("height", function (datum) {
-    return y(datum.value);
-  }).attr("width", barWidth).attr("fill", "#2d578b");
-  svg.selectAll("text.labels").data(emotionData).enter().append("svg:text").attr("x", function (datum, index) {
-    return x(index) + barWidth;
-  }).attr("y", function (datum) {
-    return height - y(datum.value);
-  }).attr("dx", -barWidth / 2).attr("dy", "1.2em").attr("text-anchor", "middle").text(function (datum) {
-    return datum.value;
-  }).attr("fill", "white").attr("class", "labels");
-  svg.selectAll("text.yAxis").data(emotionData).enter().append("svg:text").attr("x", function (datum, index) {
-    return x(index) + barWidth;
-  }).attr("y", height).attr("dx", -barWidth / 2).attr("text-anchor", "middle").attr("style", "font-size: 12").text(function (datum) {
-    return datum.emotion;
-  }).attr("transform", "translate(0, 18)").attr("class", "yAxis");
+function onResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function updateData(data) {
-  var y = d3.scale.linear().domain([0, 1]).range([0, height]); // update
+function render() {
+  // controls.update();
+  requestAnimationFrame(render);
+  renderer.render(scene, camera);
+}
 
-  var rects = svg.selectAll("rect").data(data).attr("y", function (datum) {
-    return height - y(datum.value);
-  }).attr("height", function (datum) {
-    return y(datum.value);
+function initGui() {
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
+  initCameraGui();
+}
+
+initGui();
+init();
+render();
+loadModelThingies();
+
+function initRenderer() {
+  renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
+    canvas: theCanvas,
+    antialias: true
   });
-  var texts = svg.selectAll("text.labels").data(data).attr("y", function (datum) {
-    return height - y(datum.value);
-  }).text(function (datum) {
-    return datum.value.toFixed(1);
-  }); // enter
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = three__WEBPACK_IMPORTED_MODULE_1__["PCFSoftShadowMap"];
+}
 
-  rects.enter().append("svg:rect");
-  texts.enter().append("svg:text"); // exit
+function initControls() {
+  controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement);
+  controls.minDistance = 0;
+  controls.maxDistance = 700;
+  controls.enableKeys = false;
+}
 
-  rects.exit().remove();
-  texts.exit().remove();
+function loadModelThingies() {
+  var loader = new three__WEBPACK_IMPORTED_MODULE_1__["GLTFLoader"]();
+  loader.load('../assets/suzanne2/v5.glb', function (gltf) {
+    model = gltf.scene;
+    console.log(model);
+    suzanne = model.children[0].children[1]; // console.log(model.children[0].children[1].children[0].skeleton.bones);
+    // model.traverse( function( node ) {
+    // 	if ( node instanceof THREE.Mesh ) { node.castShadow = true; node.receiveShadow = false; }
+    // } );
+
+    var expressions = Object.keys(suzanne.morphTargetDictionary);
+    var expressionFolder = gui.addFolder('Blob');
+
+    for (var i = 0; i < expressions.length; i++) {
+      expressionFolder.add(suzanne.morphTargetInfluences, i, 0, 1, 0.01).name(expressions[i]);
+    } // model.castShadow = true;
+    // setupDatGui();
+
+
+    scene.add(suzanne);
+  });
+}
+
+function initCameraGui() {
+  var cameraFolder = gui.addFolder('Camera');
+  cameraFolder.add(cameraSettings, 'followTractor');
+  cameraFolder.add(cameraSettings, 'lookAt');
+  cameraFolder.add(cameraSettings.cameraPos, 'x', -100, 100).onChange(function (val) {
+    camera.position.x = val;
+  });
+  cameraFolder.add(cameraSettings.cameraPos, 'y', -100, 100).onChange(function (val) {
+    camera.position.y = val;
+  });
+  cameraFolder.add(cameraSettings.cameraPos, 'z', -100, 100).onChange(function (val) {
+    camera.position.z = val;
+  });
+  cameraFolder.add(cameraSettings, 'all', -100, 100, 0.1).onChange(function (val) {
+    camera.position.set(val, val, val);
+
+    if (cameraSettings.followTractor) {
+      goal.position.set(val, val, val);
+    }
+  });
 }
 
 /***/ }),
@@ -867,33 +621,6 @@ function _classCallCheck(instance, Constructor) {
 }
 
 module.exports = _classCallCheck;
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/createClass.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/createClass.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-module.exports = _createClass;
 
 /***/ }),
 
@@ -23644,4 +23371,4 @@ function arrayMax( array ) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=face2.bundle.js.map
+//# sourceMappingURL=facetests.bundle.js.map

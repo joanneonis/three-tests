@@ -1,4 +1,13 @@
 import Clam from './clmtracker';
+import * as dat from 'dat.gui';
+import * as THREE from 'three';
+
+import 'three/examples/js/controls/OrbitControls';
+import 'three/examples/js/loaders/GLTFLoader';
+import 'three/examples/js/AnimationClipCreator';
+
+import { setlightType, buildGui, changeLightType } from '../../../helpers/functions/lights';
+
 
 // console.log(Clam.init());
 Clam.init();
