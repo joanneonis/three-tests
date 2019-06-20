@@ -19,6 +19,8 @@ var emotionData;
 var ctrack;
 var ec;
 
+var currentFacePositions;
+
 // d3
 var svg;
 
@@ -28,6 +30,7 @@ var emotionStates;
 //?		Three
 //?--------------------------------------------------------------------
 var suzanne;
+var suzanneInitRot;
 
 var renderer,
 		scene,
@@ -76,6 +79,9 @@ function drawLoop() {
 	//psrElement.innerHTML = "score :" + ctrack.getScore().toFixed(4);
 	if (ctrack.getCurrentPosition()) {
 		ctrack.draw(overlay);
+		currentFacePositions = ctrack.getCurrentPosition();
+
+		getRotation();
 	}
 	var cp = ctrack.getCurrentParameters();
 	emotionStates = ec.meanPredict(cp);
@@ -291,6 +297,8 @@ function loadModelThingies() {
 		
 		suzanne = model.children[0].children[1];
 
+		buildPosGui();
+
 		var expressions = Object.keys( suzanne.morphTargetDictionary );
 		var expressionFolder = gui.addFolder('Blob');
 		for ( var i = 0; i < expressions.length; i++ ) {
@@ -299,6 +307,7 @@ function loadModelThingies() {
 
 
 		rotateObject(suzanne, -35, 42, 25);
+		suzanneInitRot = suzanne.rotation.y;
 
 		// model.castShadow = true;
 		// setupDatGui();
@@ -338,6 +347,46 @@ function initCameraGui() {
 	});
 }
 
-// function getRotation() {
+function getRotation() {
+	// console.log(difference(currentFacePositions[23][1], currentFacePositions[28][1]));
+	// console.log(difference(currentFacePositions[23][0], currentFacePositions[28][0]));
+	// console.log('------');
 
-// }
+	// var difX = difference(currentFacePositions[23][0], currentFacePositions[28][0]);
+	// var difY = difference(currentFacePositions[23][1], currentFacePositions[28][1]);
+
+	// var rotateHead = difference(difX, difY);	
+
+
+	// // console.log(rotateHead);
+	// console.log(currentFacePositions[23][1] - currentFacePositions[28][1]);
+	// console.log('------');
+
+	// if (currentFacePositions[23][1] - currentFacePositions[28][1] > 0) {
+	// 	// rotateObject(suzanne, 0, rotateHead, 0);
+	// 	// suzanne.rotation.y = rotateHead;
+
+	// } else {
+	// 	// suzanne.rotation.y = -rotateHead;
+	// 	// rotateObject(suzanne, 0, -rotateHead, 0);
+	// }
+	var newRot = (suzanneInitRot / 2) - (currentFacePositions[23][1] - currentFacePositions[28][1]) / 100;
+
+	suzanne.rotation.z = newRot;
+}
+
+function difference(a, b) { return Math.abs(a - b); }
+
+function buildPosGui() {
+	var posFolder = gui.addFolder('Position Suzanne');
+	posFolder.add(suzanne.rotation, 'x', -10, 10, 0.1).onChange((val) => { suzanne.rotation.x = val });
+	posFolder.add(suzanne.rotation, 'y', -10, 10, 0.1).onChange((val) => { suzanne.rotation.y = val });
+	posFolder.add(suzanne.rotation, 'z', -10, 10, 0.1).onChange((val) => { suzanne.rotation.z = val });
+	// posFolder.add(suzanne, 'all', -100, 100, 0.1).onChange((val) => {
+	// 	camera.position.set(val, val, val);
+
+	// 	if (cameraSettings.followTractor) {
+	// 		goal.position.set(val, val, val);
+	// 	}
+	// });
+}
