@@ -308,7 +308,11 @@ var emotionStates; //?----------------------------------------------------------
 //?--------------------------------------------------------------------
 
 var suzanne;
+var suzanneGroup;
 var suzanneInitRot;
+var suzanneInitRotX;
+var suzanneInitRotZ;
+var eyes;
 var renderer,
     scene,
     camera,
@@ -355,6 +359,7 @@ function drawLoop() {
     currentFacePositions = ctrack.getCurrentPosition();
     getRotation();
     getDistance();
+    getNod();
   }
 
   var cp = ctrack.getCurrentParameters();
@@ -502,10 +507,17 @@ function initControls() {
 
 function loadModelThingies() {
   var loader = new three__WEBPACK_IMPORTED_MODULE_2__["GLTFLoader"]();
-  loader.load('../assets/suzanne2/test.glb', function (gltf) {
+  loader.load('../assets/suzanne2/v9.glb', function (gltf) {
     model = gltf.scene;
+    console.log(model);
     suzanne = model.children[0].children[1];
-    suzanne.scale.set(3, 3, 3);
+    suzanneGroup = model;
+    suzanne.geometry.computeBoundingBox();
+    suzanneGroup.scale.set(2, 2, 2);
+    model.children[4].children[0].material = new three__WEBPACK_IMPORTED_MODULE_2__["MeshStandardMaterial"]();
+    model.children[4].children[0].material.color = new three__WEBPACK_IMPORTED_MODULE_2__["Color"]('#F6F6F6');
+    model.children[5].children[0].material = new three__WEBPACK_IMPORTED_MODULE_2__["MeshStandardMaterial"]();
+    model.children[5].children[0].material.color = new three__WEBPACK_IMPORTED_MODULE_2__["Color"]('#F6F6F6');
     buildPosGui();
     var expressions = Object.keys(suzanne.morphTargetDictionary);
     var expressionFolder = gui.addFolder('Blob');
@@ -514,11 +526,13 @@ function loadModelThingies() {
       expressionFolder.add(suzanne.morphTargetInfluences, i, 0, 1, 0.01).name(expressions[i]);
     }
 
-    rotateObject(suzanne, -35, 42, 25);
-    suzanneInitRot = suzanne.rotation.y; // model.castShadow = true;
+    rotateObject(suzanneGroup, -35, 42, 25);
+    suzanneInitRot = suzanneGroup.rotation.y;
+    suzanneInitRotX = suzanneGroup.rotation.x;
+    suzanneInitRotZ = suzanneGroup.rotation.z; // model.castShadow = true;
     // setupDatGui();
 
-    scene.add(suzanne);
+    scene.add(model);
   });
 }
 
@@ -534,6 +548,7 @@ function rotateObject(object) {
 function updateFacialExpression(expression) {
   // console.log(expression);
   // suzanne.morphTargetInfluences[2] = THREE.Math.mapLinear(expression[0].value, 0, 1, );
+  suzanne.morphTargetInfluences[5] = expression[1].value * 1;
   suzanne.morphTargetInfluences[2] = expression[0].value * 2;
   suzanne.morphTargetInfluences[3] = expression[2].value * 1;
   suzanne.morphTargetInfluences[4] = expression[3].value * 1;
@@ -564,21 +579,28 @@ function initCameraGui() {
 function getRotation() {
   var factor = 60;
   var newRot = suzanneInitRot / 2 - (currentFacePositions[23][1] - currentFacePositions[28][1]) / factor;
-  suzanne.rotation.z = newRot;
+  suzanneGroup.rotation.z = newRot;
 }
 
 function getDistance() {
   var eyeDis = currentFacePositions[23][0] - currentFacePositions[28][0];
-  var factor = 2; // console.log(eyeDis);
-  // suzanne.position.x = -(eyeDis / 10);
-  // suzanne.position.z = -(eyeDis / 10);
+  var factor = 2;
 
   if (eyeDis < -20 && eyeDis > -80) {
     var mappedDis = three__WEBPACK_IMPORTED_MODULE_2__["Math"].mapLinear(eyeDis, -20, -80, -10, 2);
-    suzanne.position.x = mappedDis / factor;
-    suzanne.position.z = mappedDis / factor;
-    suzanne.position.y = mappedDis / factor;
+    suzanneGroup.position.x = mappedDis / factor;
+    suzanneGroup.position.z = mappedDis / factor;
+    suzanneGroup.position.y = mappedDis / factor;
   }
+}
+
+function getNod() {// var nod = currentFacePositions[47][1] - currentFacePositions[7][1];
+  // var factor = 80;
+  // var newRot = ( (nod) / factor);
+  // // console.log(newRot);
+  // var mappedNewRot = THREE.Math.mapLinear(newRot, -0.3, -0.5, -.5, .5);
+  // suzanne.rotation.x = suzanneInitRotX - mappedNewRot;
+  // suzanne.rotation.y = suzanneInitRotZ - mappedNewRot;
 }
 
 function difference(a, b) {
@@ -587,14 +609,14 @@ function difference(a, b) {
 
 function buildPosGui() {
   var posFolder = gui.addFolder('Position Suzanne');
-  posFolder.add(suzanne.position, 'x', -10, 10, 0.1).onChange(function (val) {
-    suzanne.position.x = val;
+  posFolder.add(suzanne.rotation, 'x', -10, 10, 0.1).onChange(function (val) {
+    suzanneGroup.rotation.x = val;
   });
-  posFolder.add(suzanne.position, 'y', -10, 10, 0.1).onChange(function (val) {
-    suzanne.position.y = val;
+  posFolder.add(suzanne.rotation, 'y', -10, 10, 0.1).onChange(function (val) {
+    suzanneGroup.rotation.y = val;
   });
-  posFolder.add(suzanne.position, 'z', -10, 10, 0.1).onChange(function (val) {
-    suzanne.position.z = val;
+  posFolder.add(suzanne.rotation, 'z', -10, 10, 0.1).onChange(function (val) {
+    suzanneGroup.rotation.z = val;
   }); // posFolder.add(suzanne, 'all', -100, 100, 0.1).onChange((val) => {
   // 	camera.position.set(val, val, val);
   // 	if (cameraSettings.followTractor) {
