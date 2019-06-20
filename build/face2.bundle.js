@@ -354,6 +354,7 @@ function drawLoop() {
     ctrack.draw(overlay);
     currentFacePositions = ctrack.getCurrentPosition();
     getRotation();
+    getDistance();
   }
 
   var cp = ctrack.getCurrentParameters();
@@ -443,7 +444,7 @@ function init() {
   camera.position.set(cameraSettings.cameraPos.x, cameraSettings.cameraPos.y, cameraSettings.cameraPos.z);
   initControls(); // scene.add(new THREE.AxesHelper(10));
 
-  var bgColor = new three__WEBPACK_IMPORTED_MODULE_2__["Color"]('#a3e1fe'); // let ambient = new THREE.AmbientLight();
+  var bgColor = new three__WEBPACK_IMPORTED_MODULE_2__["Color"]('#41454F'); // let ambient = new THREE.AmbientLight();
   // ambient.castShadow = true;
   // scene.add(ambient);
   // let point = new THREE.PointLight();
@@ -504,6 +505,7 @@ function loadModelThingies() {
   loader.load('../assets/suzanne2/test.glb', function (gltf) {
     model = gltf.scene;
     suzanne = model.children[0].children[1];
+    suzanne.scale.set(3, 3, 3);
     buildPosGui();
     var expressions = Object.keys(suzanne.morphTargetDictionary);
     var expressionFolder = gui.addFolder('Blob');
@@ -560,24 +562,23 @@ function initCameraGui() {
 }
 
 function getRotation() {
-  // console.log(difference(currentFacePositions[23][1], currentFacePositions[28][1]));
-  // console.log(difference(currentFacePositions[23][0], currentFacePositions[28][0]));
-  // console.log('------');
-  // var difX = difference(currentFacePositions[23][0], currentFacePositions[28][0]);
-  // var difY = difference(currentFacePositions[23][1], currentFacePositions[28][1]);
-  // var rotateHead = difference(difX, difY);	
-  // // console.log(rotateHead);
-  // console.log(currentFacePositions[23][1] - currentFacePositions[28][1]);
-  // console.log('------');
-  // if (currentFacePositions[23][1] - currentFacePositions[28][1] > 0) {
-  // 	// rotateObject(suzanne, 0, rotateHead, 0);
-  // 	// suzanne.rotation.y = rotateHead;
-  // } else {
-  // 	// suzanne.rotation.y = -rotateHead;
-  // 	// rotateObject(suzanne, 0, -rotateHead, 0);
-  // }
-  var newRot = suzanneInitRot / 2 - (currentFacePositions[23][1] - currentFacePositions[28][1]) / 100;
+  var factor = 60;
+  var newRot = suzanneInitRot / 2 - (currentFacePositions[23][1] - currentFacePositions[28][1]) / factor;
   suzanne.rotation.z = newRot;
+}
+
+function getDistance() {
+  var eyeDis = currentFacePositions[23][0] - currentFacePositions[28][0];
+  var factor = 2; // console.log(eyeDis);
+  // suzanne.position.x = -(eyeDis / 10);
+  // suzanne.position.z = -(eyeDis / 10);
+
+  if (eyeDis < -20 && eyeDis > -80) {
+    var mappedDis = three__WEBPACK_IMPORTED_MODULE_2__["Math"].mapLinear(eyeDis, -20, -80, -10, 2);
+    suzanne.position.x = mappedDis / factor;
+    suzanne.position.z = mappedDis / factor;
+    suzanne.position.y = mappedDis / factor;
+  }
 }
 
 function difference(a, b) {
@@ -586,14 +587,14 @@ function difference(a, b) {
 
 function buildPosGui() {
   var posFolder = gui.addFolder('Position Suzanne');
-  posFolder.add(suzanne.rotation, 'x', -10, 10, 0.1).onChange(function (val) {
-    suzanne.rotation.x = val;
+  posFolder.add(suzanne.position, 'x', -10, 10, 0.1).onChange(function (val) {
+    suzanne.position.x = val;
   });
-  posFolder.add(suzanne.rotation, 'y', -10, 10, 0.1).onChange(function (val) {
-    suzanne.rotation.y = val;
+  posFolder.add(suzanne.position, 'y', -10, 10, 0.1).onChange(function (val) {
+    suzanne.position.y = val;
   });
-  posFolder.add(suzanne.rotation, 'z', -10, 10, 0.1).onChange(function (val) {
-    suzanne.rotation.z = val;
+  posFolder.add(suzanne.position, 'z', -10, 10, 0.1).onChange(function (val) {
+    suzanne.position.z = val;
   }); // posFolder.add(suzanne, 'all', -100, 100, 0.1).onChange((val) => {
   // 	camera.position.set(val, val, val);
   // 	if (cameraSettings.followTractor) {
