@@ -594,14 +594,9 @@ function initControls() {
 
 function loadModelThingies() {
   var loader = new three__WEBPACK_IMPORTED_MODULE_2__["GLTFLoader"]();
-  loader.load('../assets/suzanne2/v6.glb', function (gltf) {
+  loader.load('../assets/suzanne2/test.glb', function (gltf) {
     model = gltf.scene;
-    console.log(model);
-    suzanne = model.children[0].children[1]; // console.log(model.children[0].children[1].children[0].skeleton.bones);
-    // model.traverse( function( node ) {
-    // 	if ( node instanceof THREE.Mesh ) { node.castShadow = true; node.receiveShadow = false; }
-    // } );
-
+    suzanne = model.children[0].children[1];
     var expressions = Object.keys(suzanne.morphTargetDictionary);
     var expressionFolder = gui.addFolder('Blob');
 
@@ -626,10 +621,11 @@ function rotateObject(object) {
 }
 
 function updateFacialExpression(expression) {
-  console.log(expression); // suzanne.morphTargetInfluences[2] = THREE.Math.mapLinear(expression[0].value, 0, 1, );
-
+  // console.log(expression);
+  // suzanne.morphTargetInfluences[2] = THREE.Math.mapLinear(expression[0].value, 0, 1, );
   suzanne.morphTargetInfluences[2] = expression[0].value * 2;
   suzanne.morphTargetInfluences[3] = expression[2].value * 1;
+  suzanne.morphTargetInfluences[4] = expression[3].value * 1;
 }
 
 function initCameraGui() {
@@ -652,7 +648,8 @@ function initCameraGui() {
       goal.position.set(val, val, val);
     }
   });
-}
+} // function getRotation() {
+// }
 
 /***/ }),
 
