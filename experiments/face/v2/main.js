@@ -26,6 +26,10 @@ var svg;
 
 var emotionStates;
 
+var prevRot;
+var activeCorner;
+var prevCorner;
+
 //?--------------------------------------------------------------------
 //?		Three
 //?--------------------------------------------------------------------
@@ -89,6 +93,8 @@ function drawLoop() {
 		getDistance();
 		getNod();
 	}
+
+	lookAtCorner();
 	var cp = ctrack.getCurrentParameters();
 	emotionStates = ec.meanPredict(cp);
 
@@ -408,9 +414,9 @@ function buildPosGui() {
 	var rotation = { all: 0};
 
 	var posFolder = gui.addFolder('Position Suzanne');
-	posFolder.add(eyeR.rotation, 'x', -10, 10, 0.1).onChange((val) => { eyeR.rotation.x = val });
-	posFolder.add(eyeR.rotation, 'y', -10, 10, 0.1).onChange((val) => { eyeR.rotation.y = val });
-	posFolder.add(eyeR.rotation, 'z', -10, 10, 0.1).onChange((val) => { eyeR.rotation.z = val });
+	posFolder.add(suzanneGroup.rotation, 'x', -10, 10, 0.1).onChange((val) => { suzanneGroup.rotation.x = val });
+	posFolder.add(suzanneGroup.rotation, 'y', -10, 10, 0.1).onChange((val) => { suzanneGroup.rotation.y = val });
+	posFolder.add(suzanneGroup.rotation, 'z', -10, 10, 0.1).onChange((val) => { suzanneGroup.rotation.z = val });
 	posFolder.add(rotation, 'all', -10, 10, 0.1).onChange((val) => {
 		rotateObject(eyeR, val, val, val);
 		// rotateObject(eyeL, val, val, val);
@@ -432,8 +438,19 @@ document.addEventListener('mousemove', (evt) => {
 		rotateEyes(x / rect.width , y / rect.height);
 	}
 
-	
+	if (!suzanneGroup) { return }
 
+	if (x > rect.width / 2 && y < rect.height / 2) {
+		console.log('top right');
+	} else if (x < rect.width / 2 && y < rect.height / 2) {
+		console.log('top left');
+		activeCorner = 'tl';
+	} else if (x > rect.width / 2 && y > rect.height / 2) {
+		console.log('bottom right');
+		activeCorner = 'br';
+	} else if (x < rect.width / 2 && y > rect.height / 2) {
+		console.log('bottom left');
+	}
 });
 
 function rotateEyes(x, y) {
@@ -443,4 +460,22 @@ function rotateEyes(x, y) {
 		eyeL.rotation.x = THREE.Math.mapLinear(y, 1, 0, 0.7, -0.2);
 		eyeL.rotation.y = THREE.Math.mapLinear(x, 0, 1, -0.9, 0.9);
 	}
+}
+
+function lookAtCorner() {
+	// if (activeCorner != prevCorner) {
+	// 	prevRot = suzanneGroup.rotation.y;
+	// }
+
+	// prevCorner = activeCorner;
+
+	// switch (activeCorner) {
+	// 	case 'tl': 
+	// 		// suzanneGroup.rotation.y = THREE.Math.lerp(prevRot, -0.4, 0.01);
+	// 		suzanneGroup.rotation.y -= 0.01 * vel;
+	// 	break;
+	// 	case 'br':
+	// 		// suzanneGroup.rotation.y = THREE.Math.lerp(prevRot, -1.3, 0.01);
+	// 	break;
+	// }
 }
