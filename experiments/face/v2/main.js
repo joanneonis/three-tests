@@ -11,7 +11,7 @@ import { setlightType, buildGui, changeLightType } from '../../../helpers/functi
 
 // console.log(Clam.init());
 Clam.init();
-
+var glCanvas = document.getElementById('gl-canvas');
 var overlay = document.getElementById('overlay');
 var overlayCC = overlay.getContext('2d');
 var videoInfo;
@@ -32,10 +32,9 @@ var emotionStates;
 var suzanne;
 var suzanneGroup;
 var suzanneInitRot;
-var suzanneInitRotX;
-var suzanneInitRotZ;
 
-var eyes;
+var eyeR;
+var eyeL;
 
 var renderer,
 		scene,
@@ -301,20 +300,21 @@ function loadModelThingies() {
 
 	loader.load('../assets/suzanne2/v9.glb', function (gltf) {
 		model = gltf.scene; 
-		console.log(model);
 		
 		suzanne = model.children[0].children[1];
 		suzanneGroup = model;
 
 		suzanne.geometry.computeBoundingBox();
 
-
 		suzanneGroup.scale.set(2, 2, 2);
 
-		model.children[4].children[0].material = new THREE.MeshStandardMaterial();
-		model.children[4].children[0].material.color = new THREE.Color('#F6F6F6');
-		model.children[5].children[0].material = new THREE.MeshStandardMaterial();
-		model.children[5].children[0].material.color = new THREE.Color('#F6F6F6');
+		eyeR = model.children[4];
+		eyeL = model.children[5];
+
+		eyeR.children[0].material = new THREE.MeshStandardMaterial();
+		eyeR.children[0].material.color = new THREE.Color('#F6F6F6');
+		eyeL.children[0].material = new THREE.MeshStandardMaterial();
+		eyeL.children[0].material.color = new THREE.Color('#F6F6F6');
 
 		buildPosGui();
 
@@ -327,8 +327,6 @@ function loadModelThingies() {
 
 		rotateObject(suzanneGroup, -35, 42, 25);
 		suzanneInitRot = suzanneGroup.rotation.y;
-		suzanneInitRotX = suzanneGroup.rotation.x;
-		suzanneInitRotZ = suzanneGroup.rotation.z;
 
 		// model.castShadow = true;
 		// setupDatGui();
@@ -407,15 +405,42 @@ function getNod() {
 function difference(a, b) { return Math.abs(a - b); }
 
 function buildPosGui() {
-	var posFolder = gui.addFolder('Position Suzanne');
-	posFolder.add(suzanne.rotation, 'x', -10, 10, 0.1).onChange((val) => { suzanneGroup.rotation.x = val });
-	posFolder.add(suzanne.rotation, 'y', -10, 10, 0.1).onChange((val) => { suzanneGroup.rotation.y = val });
-	posFolder.add(suzanne.rotation, 'z', -10, 10, 0.1).onChange((val) => { suzanneGroup.rotation.z = val });
-	// posFolder.add(suzanne, 'all', -100, 100, 0.1).onChange((val) => {
-	// 	camera.position.set(val, val, val);
+	var rotation = { all: 0};
 
-	// 	if (cameraSettings.followTractor) {
-	// 		goal.position.set(val, val, val);
-	// 	}
-	// });
+	var posFolder = gui.addFolder('Position Suzanne');
+	posFolder.add(eyeR.rotation, 'x', -10, 10, 0.1).onChange((val) => { eyeR.rotation.x = val });
+	posFolder.add(eyeR.rotation, 'y', -10, 10, 0.1).onChange((val) => { eyeR.rotation.y = val });
+	posFolder.add(eyeR.rotation, 'z', -10, 10, 0.1).onChange((val) => { eyeR.rotation.z = val });
+	posFolder.add(rotation, 'all', -10, 10, 0.1).onChange((val) => {
+		rotateObject(eyeR, val, val, val);
+		// rotateObject(eyeL, val, val, val);
+	});
+}
+
+document.addEventListener('mousemove', (evt) => {
+	var outOfBounds = false;
+	var rect = glCanvas.getBoundingClientRect();
+	var x = evt.clientX - rect.left;
+	var y = evt.clientY - rect.top;
+
+	if (
+		x > rect.width || x < 0 ||
+		y > rect.height || y < 0
+	) {
+		outOfBounds = true;
+	} else {
+		rotateEyes(x / rect.width , y / rect.height);
+	}
+
+	
+
+});
+
+function rotateEyes(x, y) {
+	if (eyeR) {
+		eyeR.rotation.x = THREE.Math.mapLinear(y, 1, 0, 0.7, -0.2);
+		eyeR.rotation.y = THREE.Math.mapLinear(x, 0, 1, -0.9, 0.9);
+		eyeL.rotation.x = THREE.Math.mapLinear(y, 1, 0, 0.7, -0.2);
+		eyeL.rotation.y = THREE.Math.mapLinear(x, 0, 1, -0.9, 0.9);
+	}
 }

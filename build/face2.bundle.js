@@ -294,6 +294,7 @@ __webpack_require__.r(__webpack_exports__);
  // console.log(Clam.init());
 
 _clmtracker__WEBPACK_IMPORTED_MODULE_0__["default"].init();
+var glCanvas = document.getElementById('gl-canvas');
 var overlay = document.getElementById('overlay');
 var overlayCC = overlay.getContext('2d');
 var videoInfo;
@@ -310,9 +311,8 @@ var emotionStates; //?----------------------------------------------------------
 var suzanne;
 var suzanneGroup;
 var suzanneInitRot;
-var suzanneInitRotX;
-var suzanneInitRotZ;
-var eyes;
+var eyeR;
+var eyeL;
 var renderer,
     scene,
     camera,
@@ -509,15 +509,16 @@ function loadModelThingies() {
   var loader = new three__WEBPACK_IMPORTED_MODULE_2__["GLTFLoader"]();
   loader.load('../assets/suzanne2/v9.glb', function (gltf) {
     model = gltf.scene;
-    console.log(model);
     suzanne = model.children[0].children[1];
     suzanneGroup = model;
     suzanne.geometry.computeBoundingBox();
     suzanneGroup.scale.set(2, 2, 2);
-    model.children[4].children[0].material = new three__WEBPACK_IMPORTED_MODULE_2__["MeshStandardMaterial"]();
-    model.children[4].children[0].material.color = new three__WEBPACK_IMPORTED_MODULE_2__["Color"]('#F6F6F6');
-    model.children[5].children[0].material = new three__WEBPACK_IMPORTED_MODULE_2__["MeshStandardMaterial"]();
-    model.children[5].children[0].material.color = new three__WEBPACK_IMPORTED_MODULE_2__["Color"]('#F6F6F6');
+    eyeR = model.children[4];
+    eyeL = model.children[5];
+    eyeR.children[0].material = new three__WEBPACK_IMPORTED_MODULE_2__["MeshStandardMaterial"]();
+    eyeR.children[0].material.color = new three__WEBPACK_IMPORTED_MODULE_2__["Color"]('#F6F6F6');
+    eyeL.children[0].material = new three__WEBPACK_IMPORTED_MODULE_2__["MeshStandardMaterial"]();
+    eyeL.children[0].material.color = new three__WEBPACK_IMPORTED_MODULE_2__["Color"]('#F6F6F6');
     buildPosGui();
     var expressions = Object.keys(suzanne.morphTargetDictionary);
     var expressionFolder = gui.addFolder('Blob');
@@ -527,9 +528,7 @@ function loadModelThingies() {
     }
 
     rotateObject(suzanneGroup, -35, 42, 25);
-    suzanneInitRot = suzanneGroup.rotation.y;
-    suzanneInitRotX = suzanneGroup.rotation.x;
-    suzanneInitRotZ = suzanneGroup.rotation.z; // model.castShadow = true;
+    suzanneInitRot = suzanneGroup.rotation.y; // model.castShadow = true;
     // setupDatGui();
 
     scene.add(model);
@@ -608,21 +607,46 @@ function difference(a, b) {
 }
 
 function buildPosGui() {
+  var rotation = {
+    all: 0
+  };
   var posFolder = gui.addFolder('Position Suzanne');
-  posFolder.add(suzanne.rotation, 'x', -10, 10, 0.1).onChange(function (val) {
-    suzanneGroup.rotation.x = val;
+  posFolder.add(eyeR.rotation, 'x', -10, 10, 0.1).onChange(function (val) {
+    eyeR.rotation.x = val;
   });
-  posFolder.add(suzanne.rotation, 'y', -10, 10, 0.1).onChange(function (val) {
-    suzanneGroup.rotation.y = val;
+  posFolder.add(eyeR.rotation, 'y', -10, 10, 0.1).onChange(function (val) {
+    eyeR.rotation.y = val;
   });
-  posFolder.add(suzanne.rotation, 'z', -10, 10, 0.1).onChange(function (val) {
-    suzanneGroup.rotation.z = val;
-  }); // posFolder.add(suzanne, 'all', -100, 100, 0.1).onChange((val) => {
-  // 	camera.position.set(val, val, val);
-  // 	if (cameraSettings.followTractor) {
-  // 		goal.position.set(val, val, val);
-  // 	}
-  // });
+  posFolder.add(eyeR.rotation, 'z', -10, 10, 0.1).onChange(function (val) {
+    eyeR.rotation.z = val;
+  });
+  posFolder.add(rotation, 'all', -10, 10, 0.1).onChange(function (val) {
+    rotateObject(eyeR, val, val, val); // rotateObject(eyeL, val, val, val);
+  });
+}
+
+document.addEventListener('mousemove', function (evt) {
+  var outOfBounds = false;
+  var rect = glCanvas.getBoundingClientRect();
+  var x = evt.clientX - rect.left;
+  var y = evt.clientY - rect.top;
+
+  if (x > rect.width || x < 0 || y > rect.height || y < 0) {
+    outOfBounds = true;
+  } else {
+    rotateEyes(x / rect.width, y / rect.height);
+  } // console.log(x, y);
+  // rotateEyes(getMousePos(e));
+
+});
+
+function rotateEyes(x, y) {
+  if (eyeR) {
+    eyeR.rotation.x = three__WEBPACK_IMPORTED_MODULE_2__["Math"].mapLinear(y, 1, 0, 0.7, -0.2);
+    eyeR.rotation.y = three__WEBPACK_IMPORTED_MODULE_2__["Math"].mapLinear(x, 0, 1, -0.9, 0.9);
+    eyeL.rotation.x = three__WEBPACK_IMPORTED_MODULE_2__["Math"].mapLinear(y, 1, 0, 0.7, -0.2);
+    eyeL.rotation.y = three__WEBPACK_IMPORTED_MODULE_2__["Math"].mapLinear(x, 0, 1, -0.9, 0.9);
+  }
 }
 
 /***/ }),
