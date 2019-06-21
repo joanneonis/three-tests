@@ -94,13 +94,8 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
-// Imports
-var urlEscape = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/url-escape.js */ "./node_modules/css-loader/dist/runtime/url-escape.js");
-var ___CSS_LOADER_URL___0___ = urlEscape(__webpack_require__(/*! ../font/renomono-webfont.woff2 */ "./try/assets/font/renomono-webfont.woff2"));
-var ___CSS_LOADER_URL___1___ = urlEscape(__webpack_require__(/*! ../font/renomono-webfont.woff */ "./try/assets/font/renomono-webfont.woff"));
-
 // Module
-exports.push([module.i, "@font-face {\n  font-family: 'reno_monoregular';\n  src: url(" + ___CSS_LOADER_URL___0___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL___1___ + ") format(\"woff\");\n  font-weight: normal;\n  font-style: normal; }\n", ""]);
+exports.push([module.i, "body {\n  background: red; }\n", ""]);
 
 
 
@@ -199,37 +194,6 @@ function toComment(sourceMap) {
   var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
   return '/*# ' + data + ' */';
 }
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/runtime/url-escape.js":
-/*!************************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/url-escape.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function escape(url, needQuotes) {
-  if (typeof url !== 'string') {
-    return url;
-  } // If url is already wrapped in quotes, remove them
-
-
-  if (/^['"].*['"]$/.test(url)) {
-    url = url.slice(1, -1);
-  } // Should url be wrapped?
-  // See https://drafts.csswg.org/css-values-3/#urls
-
-
-  if (/["'() \t\n]/.test(url) || needQuotes) {
-    return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"';
-  }
-
-  return url;
-};
 
 /***/ }),
 
@@ -742,28 +706,6 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ "./try/assets/font/renomono-webfont.woff":
-/*!***********************************************!*\
-  !*** ./try/assets/font/renomono-webfont.woff ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-throw new Error("Module parse failed: Unexpected character '\u0000' (1:4)\nYou may need an appropriate loader to handle this file type.\n(Source code omitted for this binary file)");
-
-/***/ }),
-
-/***/ "./try/assets/font/renomono-webfont.woff2":
-/*!************************************************!*\
-  !*** ./try/assets/font/renomono-webfont.woff2 ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-throw new Error("Module parse failed: Unexpected character '\u0000' (1:4)\nYou may need an appropriate loader to handle this file type.\n(Source code omitted for this binary file)");
-
-/***/ }),
-
 /***/ "./try/assets/scss/main.scss":
 /*!***********************************!*\
   !*** ./try/assets/scss/main.scss ***!
@@ -795,4 +737,4 @@ if(false) {}
 /***/ })
 
 /******/ });
-//# sourceMappingURL=style.bundle.js.map
+//# sourceMappingURL=trystyle.bundle.js.map

@@ -44,6 +44,8 @@ export default {
         face1: path.join(__dirname, 'experiments/face/v1/main.js'),
         face2: path.join(__dirname, 'experiments/face/v2/main.js'),
         facetests: path.join(__dirname, 'experiments/face/tests/main.js'),
+        try: path.join(__dirname, 'try/main.js'),
+        // trystyle: path.join(__dirname, 'try/assets/scss/main.scss'),
     },
     output: {
         path: path.join(__dirname, 'build'),
