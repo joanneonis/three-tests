@@ -5,176 +5,253 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>wiki</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+	<style>
+		@font-face {
+			font-family: 'reno_monoregular';
+			src: url('../try/assets/font/renomono-webfont.woff2') format('woff2'),
+					url('../try/assets/font/renomono-webfont.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		} 
+
+		h1, h2, h3 {
+			font-family: 'reno_monoregular';
+		}
+
+		p, a {
+			font-family: 'Roboto', sans-serif;
+			font-weight: 200;
+			text-decoration: none;
+		}
+
+			ul {
+    			display: flex;
+					flex-flow: row;
+					padding: 0;
+					margin: 0;
+					flex-wrap: wrap; 
+			}
+
+			img {
+					width: 100%;
+					height: auto;
+			}
+
+			li {width: calc(100% / 4);display: block;padding: 10px;}
+
+			@media only screen and (max-width: 800px) {
+				li {width: 100%; margin-bottom: 50px;}
+			}
+
+			figure {
+					padding: 0;
+					margin: 0;
+					margin-bottom: 7px;
+			}
+
+			* {
+					box-sizing: border-box;
+			}
+
+			.container {
+					max-width: 1100px;
+					margin: auto;
+			}
+
+			.container > div {
+					margin-top: 11vh;
+					border-bottom: 1px solid #ccc;
+    			padding-bottom: 10vh;
+			}
+	</style>
 </head>
 <body>
-	<div>
-		<h1>Tools</h1>
-		<ul>
-			<li>
-				<a href="https://chrome.google.com/webstore/detail/shader-editor/ggeaidddejpbakgafapihjbgdlbbbpob?hl=en">
-					Live editing shaders (Chrome)
-				</a>
-			</li>
-			<li>
-				<a href="https://developer.mozilla.org/en-US/docs/Tools/Shader_Editor">
-					Live editing shaders (Firefox)(Built-in)
-				</a>
-			</li>
-			<li>
-				<a href="https://threejs.org/editor/">
-					Three.js own webeditor
-				</a>
-			</li>
-			<li>
-				<a href="http://shapesmith.net/">
-					opensource 3d modelling in your browser (holes and everything)
-				</a>
-			</li>
-		</ul>
-	</div>
-	<div>
-		<h1>Good to know</h1>
-		<ul>
-			<li>
-				<a href="https://blendersushi.blogspot.com/2012/07/vfx-voronoi-cage.html">
-					Voronoi (fracturing)
-				</a>
-			</li>
-			<li>
-				<a href="https://www.clicktorelease.com/blog/experiments-with-perlin-noise/">
-					Perlin noise
-				</a>
-			</li>
-			<li>
-				<a href="https://www.youtube.com/watch?v=JKB4aPUkCJw">
-					Morphtargers & dictionary blender
-				</a>
-			</li>
-			<li>
-				<a href="https://www.youtube.com/watch?v=zc8b2Jo7mno">
-					Gimbal, euler, gimlock problem (multiple rotations)
-				</a>
-			</li>
-			<li>
-				<a href="https://www.youtube.com/watch?v=DUcPXLI9ATk&t=1s">
-					Lettice
-				</a>
-			</li>
-			<li>
-				<a href="https://www.youtube.com/watch?v=Ar9eIn4z6XE&feature=youtu.be">
-					Unity (node based) shader editor
-				</a>
-			</li>
-		</ul>
-		<h3>Bit more advanced...</h3>
-		<ul>
-			<li>
-				<a href="http://hecodes.com/2016/07/mesh-manipulation-using-mean-values-coordinates-in-three-js/">
-					Mean values
-				</a>
-			</li>
-		</ul>
-	</div>
+	<div class="container">
+			<div>
+					<h1>Tools</h1>
+					<ul>
+							<li><a href="https://chrome.google.com/webstore/detail/threejs-inspector/dnhjfclbfhcbcdfpjaeacomhbdfjbebi?hl=en"><figure><img src="./assets/shadereditor.jpg" /></figure>three inspector chrome extension</a></li>
+							<li><a href="https://threejs.org/editor/"><figure><img src="./assets/three-editor.png" /></figure>Three's own webeditor</a></li>
+							<li><a href="https://www.vectary.com/"><figure><img src="./assets/vectary.png" /></figure>Vectary paid webeditor</a></li>
+							<li><a href="http://sea3d.poonya.com/flow/"><figure><img src="./assets/node.png" /></figure>Node based Material editor</a></li>
+							<li><a href="https://www.clicktorelease.com/code/spherical-normal-mapping/#"><figure><img src="./assets/material.png" /></figure>Material tool</a></li>
+							<li><a href="https://youtu.be/Ar9eIn4z6XE"><figure><img src="./assets/unity.png" /></figure>Unity shadergraph</a></li>
+						<li>
+							<a href="https://developer.mozilla.org/en-US/docs/Tools/Shader_Editor">
+								<figure><img src="./assets/shader-editor-loaded.png" /></figure>
+								Live editing shaders (Firefox)(Built-in)
+							</a>
+						</li>
+						<li>
+							<figure><img src="./assets/variablesren.png" /></figure>
+							<a href="http://shapesmith.net/">
+								opensource 3d modelling in your browser (holes and everything)
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<h1>Good to know</h1>
+					<ul>
+						<li>
+							<a href="https://blendersushi.blogspot.com/2012/07/vfx-voronoi-cage.html">
+								<figure><img src="./assets/voronoi.png" /></figure>
+								Voronoi (fracturing)
+							</a>
+						</li>
+						<li>
+							<a href="https://www.clicktorelease.com/blog/experiments-with-perlin-noise/">
+								<figure><img src="./assets/exp.png" /></figure>
+								Perlin noise
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/watch?v=JKB4aPUkCJw">
+								<figure><img src="./assets/anima.png" /></figure>
+								Morphtargers & dictionary blender
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/watch?v=zc8b2Jo7mno">
+								<figure><img src="./assets/eurol.png" /></figure>
+								Gimbal, euler, gimlock problem (multiple rotations)
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/watch?v=DUcPXLI9ATk&t=1s">
+								<figure><img src="./assets/lettice.png" /></figure>
+								Lettice
+							</a>
+						</li>
+					</ul>
 
-	<div>
-		<h1>Libraries</h1>
-		<ul>
-			<li>
-				<a href="https://www.youtube.com/watch?v=9oGQucDOaoY&feature=youtu.be">
-					DomGL rendering
-				</a>
-			</li>
-			<li>
-				<a href="https://github.com/bebraw/jswiki/wiki/Physics-libraries">
-					List of physics libraries (2D & 3D)
-				</a>
-			</li>
-		</ul>
-	</div>
-
-	<div>
-		<h1>Cool opensource experiments</h1>
-		<ul>
-			<li>
-				<a href="https://github.com/zz85/threejs-path-flow">
-					Path flow (and bend)
-				</a>
-			</li>
-			<li>
-				<a href="http://musicvizz.com/">
-					MusicVizz (little three.js music visualisations)
-				</a>
-			</li>
-			<li>
-				<a href="https://codepen.io/collection/APjjyy/">
-					Webgl wonderland
-				</a>
-			</li>
-		</ul>
-	</div>
-
-	<div>
-		<h1>Libraries</h1>
-		<ul>
+					<br><br>
+					<h3>Bit more advanced...</h3>
+					<ul>
+						<li>
+							<a href="http://hecodes.com/2016/07/mesh-manipulation-using-mean-values-coordinates-in-three-js/">
+								<figure><img src="./assets/mean.gif" /></figure>
+								Mean values
+							</a>
+						</li>
+					</ul>
+				</div>
 			
-		</ul>
-	</div>
-
-	<div>
-		<h1>3D model sources</h1>
-		<ul>
-			<li>
-				<a href="">
-					Poly
-				</a>
-			</li>
-			<li>
-				<a href="https://free3d.com/">
-					Free 3D
-				</a>
-			</li>
-		</ul>
-	</div>
-
-	<div>
-		<h1>Performance</h1>
-		<ul>
-			<li>
-				<a href="https://github.com/google/draco">
-					3D data compression (draco)
-				</a>
-				<a href="https://github.com/google/draco/tree/master/javascript/example">
-					Draco example
-				</a>
-			</li>
-			<li>
-				<a href="https://www.khronos.org/gltf/">
-					GLTF complete list (viewer, optimise, tools)
-				</a>
-				<a href="https://gltf-viewer.donmccurdy.com/">
-					Online gltf (glb) viewer and 
-				</a>
-				<a href="https://github.com/KhronosGroup/glTF-Blender-IO">
-					The exporter for blender 2.8+
-				</a>
-			</li>
-			<li>
-				<a href="https://github.com/schteppe/cannon.js/blob/master/examples/worker.html">
-					work with workers for perfomance (especially with physics)
-				</a>
-			</li>
-		</ul>
-	</div>
-
-	<div>
-		<h1>Need help?</h1>
-		<ul>
-			<li>
-				<a href="https://discourse.threejs.org/">
-					Stack for three.js
-				</a>
-			</li>
-		</ul>
+				<div>
+					<h1>Libraries & starters</h1>
+					<ul>
+						<li>
+							<a href="https://github.com/bebraw/jswiki/wiki/Physics-libraries">
+								<figure><img src="./assets/libs.png" /></figure>
+								List of physics libraries (2D & 3D)
+							</a>
+						</li>
+						<li><a href="https://www.youtube.com/watch?v=9oGQucDOaoY&feature=youtu.be"><figure><img src="./assets/dom.png" /></figure>Dom rendering</a></li>
+						<li><a href="https://github.com/pinqy520/three-typescript-starter"><figure><img src="./assets/typescript.png" /></figure>Typescript starter</a></li>
+			
+					</ul>
+				</div>
+			
+				<div>
+					<h1>Cool opensource experiments</h1>
+					<ul>
+						<li>
+							<a href="https://github.com/zz85/threejs-path-flow">
+								<figure><img src="./assets/path.gif" /></figure>
+								Path flow (and bend)
+							</a>
+						</li>
+						<li>
+							<a href="http://musicvizz.com/">
+								<figure><img src="./assets/music.png" /></figure>
+								MusicVizz (little three.js music visualisations)
+							</a>
+						</li>
+						<li>
+							<a href="https://codepen.io/collection/APjjyy/">
+								<figure><img src="./assets/wonder.png" /></figure>
+								Webgl wonderland
+							</a>
+						</li>
+						<li><a href="https://stemkoski.github.io/Three.js/"><figure><img src="./assets/exam.png" /></figure>tests</a></li>
+						<li><a href="https://codepen.io/PierfrancescoSoffritti/pen/wobPVJ?editors=1010"><figure><img src="./assets/anim.png" /></figure>animating alpha map</a></li>
+						<li><a href="https://tympanus.net/codrops/2019/04/10/how-to-create-a-sticky-image-effect-with-three-js/"><figure><img src="./assets/sticky.png" /></figure>Sticky image</a></li>
+			
+					</ul>
+				</div>
+			
+				<div>
+					<h1>3D model sources</h1>
+					<ul>
+						<li>
+							<a href="">
+								<figure><img src="./assets/poly.png" /></figure>
+								Poly
+							</a>
+						</li>
+						<li><a href="https://free3d.com/"><figure><img src="./assets/3d.png" /></figure>Free3D</a></li>
+			
+					</ul>
+				</div>
+			
+				<div>
+					<h1>Performance</h1>
+					<ul>
+						<li>
+							<a href="https://github.com/google/draco">
+								<figure><img src="./assets/draco.png" /></figure>
+								3D data compression (draco)
+							</a>
+						</li>
+						<li>
+							<a href="https://www.khronos.org/gltf/">
+								<figure><img src="./assets/gltf.jpg" /></figure>
+								GLTF complete list (viewer, optimise, tools)
+							</a>
+							<a href="https://gltf-viewer.donmccurdy.com/">
+								Online gltf (glb) viewer and 
+							</a>
+							<a href="https://github.com/KhronosGroup/glTF-Blender-IO">
+								The exporter for blender 2.8+
+							</a>
+						</li>
+						<li>
+							<a href="https://github.com/schteppe/cannon.js/blob/master/examples/worker.html">
+								<figure><img src="./assets/cannon.png" /></figure>
+								work with workers for perfomance (especially with physics)
+							</a>
+						</li>
+					</ul>
+				</div>
+			
+				<div>
+					<h1>Tutorials & help</h1>
+					<ul>
+							<li><a href="https://www.youtube.com/watch?v=ABV1mK1CGOY&list=PL08jItIqOb2qyMOhtEUoLh100KpccQiRf"><figure><img src="./assets/cj.png" /></figure>CJ gammon</a></li>
+							<li><a href="http://davidscottlyons.com/threejs-intro/"><figure><img src="./assets/david.png" /></figure>David Scott Lyons slides</a></li>
+							<li><a href="https://discourse.threejs.org/"><figure><img src="./assets/forum.png" /></figure>three forum</a></li>
+			
+					</ul>
+				</div>
+			
+				<div>
+					<h1>
+						Reading
+					</h1>
+					<ul>
+							<li><a href="https://www.awwwards.com/the-rise-of-shaders-filters-and-effects-in-web-projects.html"><figure><img src="./assets/rise.png" /></figure>Rise of shaders</a></li>
+							<li><a href="https://www.awwwards.com/orano-from-immersive-garden-wins-site-of-the-month-novemeber.html"><figure><img src="./assets/case.png" /></figure>Case study Orano</a></li>
+					</ul>
+				</div>
+			
+				<div>
+					<h1>Inspiratie</h1>
+					<ul>
+							<li><a href="https://www.awwwards.com/awwwards/collections/three-js"><figure><img src="./assets/aww.png" /></figure>Awwwards collection</a></li>
+			
+					</ul>
+				</div>
 	</div>
 </body>
 </html>

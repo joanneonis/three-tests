@@ -4,7 +4,20 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Probeer het zelf!</title>
+	<div>
+		<input type="button" id="timeScaleSlowBtn" value="slow down">
+		<input type="button" id="timeScaleNormalBtn" value="normal speed">
+		<input type="button" id="timeScaleFastBtn" value="speed up">
+
+		<input type="button" id="reverseBtn" value="reverse animation">
+		<input type="button" id="restartBtn" value="Restart animation">
+
+		<div class="form-select">
+			<select id="easings">
+				<option value="" disabled="disabled" selected="selected">Choose easing</option>
+			</select>
+		</div>
+	</div>
 	<style>
 		@font-face {
 			font-family: 'reno_monoregular';
@@ -13,12 +26,57 @@
 			font-weight: normal;
 			font-style: normal;
 		} 
+		body { margin: 0; width: 100%; height: 100vh; overflow: hidden; }
+		canvas { width: 100%; height: 100%; }
+		
+		/* .super-ugly-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.super-ugly-overlay div:before {
+    content: '';
+		display: block;
+    background: rgba(0,0,0,.5);
+    width: calc(100% - 280px);
+    height: 100vh;
+    position: absolute;
+}
+.super-ugly-overlay div:after {
+    content: '';
+		display: block;
+    background: rgba(0,0,0,.5);
+    position: absolute;
+    height: calc(100vh - 350px);
+    width: 280px;
+    right: 0;
+    bottom: 0;
+}
+
+.super-ugly-overlay span {
+    color: white;
+    position: absolute;
+    right: 280px;
+    top: 0;
+    padding: 50px;
+    max-width: 300px;
+    font-family: sans-serif;
+} */
 	</style>
 </head>
 <body>
-	<h1>
-		Probeer het zelf
-	</h1>
+	<!-- <div class="super-ugly-overlay">
+		<div>
+			<span>
+				goedemorgen
+			</span>
+		</div>
+	</div> -->
+	<canvas id="gl-canvas"></canvas>
+
 	<script src="./../build/try.bundle.js"></script>
 </body>
 </html>
