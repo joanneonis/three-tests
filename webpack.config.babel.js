@@ -42,6 +42,7 @@ export default {
         // skeleton4: path.join(__dirname, 'experiments/skeleton/v4/main.js'),
         // cameratest: path.join(__dirname, 'experiments/skeleton/v4/camera-test.js'),
         face1: path.join(__dirname, 'experiments/face/v1/main.js'),
+        geometries: path.join(__dirname, 'basics/geometries/main.js'),
         face2: path.join(__dirname, 'experiments/face/v2/main.js'),
         facetests: path.join(__dirname, 'experiments/face/tests/main.js'),
         try: path.join(__dirname, 'try/main.js'),

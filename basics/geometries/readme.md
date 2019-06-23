@@ -1,0 +1,6 @@
+- double sided with flat shapes
+- center shapes pivotpoint
+- extruding
+- bevels
+- all basic shapes
+- Used grid ideas from three examples, smart part: setting viewports from boundingboxes during animationrequest
