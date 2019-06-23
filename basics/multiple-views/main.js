@@ -8,6 +8,7 @@ import {
 
 //?--------------------------------------------------------------------
 //?		Base
+//?  used this example: https://github.com/mrdoob/three.js/blob/master/examples/webgl_camera_array.html
 //?--------------------------------------------------------------------
 
 var renderer,
