@@ -1,0 +1,81 @@
+// .form-select {
+// 	@include user-select(none);
+
+// 	background: #ffffff;
+// 	overflow: hidden;
+// 	border: 1px solid #cbcbcb;
+// 	border-radius: 3px;
+// 	box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.07);
+
+// 	@include single-transition(box-shadow, 0.2s);
+
+// 	&:focus,
+// 	&:hover {
+// 			box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+// 	}
+
+// 	&:after {
+// 			content: '▾';
+// 			position: absolute;
+// 			top: 0;
+// 			right: 12px;
+// 			z-index: 1;
+// 			color: #bbbbbb;
+// 			line-height: 40px;
+// 			font-size: 14px;
+
+// 			.ie & {
+// 					display: none;
+// 			}
+// 	}
+// }
+
+// select {
+// 	position: relative;
+// 	background: transparent;
+// 	background-image: none;
+// 	display: block;
+// 	width: 100%;
+// 	outline: none;
+// 	color: #888888;
+// 	cursor: pointer;
+// 	z-index: 2;
+// 	border: none;
+// 	padding: 10px 10px 10px 5px;
+// 	// This is so hacky.. (for Firefox)
+// 	// Removes the default select arrow.
+// 	text-overflow: '';
+// 	text-indent: 5px;
+// 	// End of brutal hack
+
+// 	@include appearance(none);
+
+// 	&[multiple=multiple] {
+// 			height: auto;
+// 			border: 1px solid #cbcbcb;
+// 			border-radius: 3px;
+// 			box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.07);
+
+// 			@include single-transition(box-shadow, 0.2s);
+
+// 			&:hover {
+// 					border-color: #cccccc;
+// 					box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+// 			}
+// 	}
+
+// 	option[disabled] {
+// 			color: #eeeeee;
+// 			text-shadow: none;
+// 			border: none;
+// 	}
+// }
+
+// select:-moz-focusring {
+// 	color: transparent;
+// 	text-shadow: 0 0 0 #888888;
+// }
+
+// select::-ms-expand {
+// 	display: none;
+// }

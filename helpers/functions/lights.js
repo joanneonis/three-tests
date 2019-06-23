@@ -24,7 +24,6 @@ export function changeLightType(type, scene) {
 	)
 	.onChange((val) => {
 		setlightType(val, scene); 
-		// render(); //!idk
 	}
 	);
 }
@@ -41,7 +40,6 @@ export function buildGui(scene) {
 			if (key === 'color' || key === 'groundColor') {
 				scene.userData.lightsGui.addColor(settings, key).onChange((val) => {
 					scene.userData.activeLightSettings.light[key].setHex(val);
-					// render(); //!idk
 				});
 			} else if(key === 'position') {
 				createGuiSetting(scene, settings[key], 'x', key, scene.userData.activeLightSettings);
