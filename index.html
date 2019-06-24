@@ -1,253 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Basics</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 	<style>
-    body { margin: 0; width: 100%; }
-  </style>
+		@font-face {
+			font-family: 'reno_monoregular';
+			src: url('./try/assets/font/renomono-webfont.woff2') format('woff2'),
+				url('./try/assets/font/renomono-webfont.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		h1,
+		h2,
+		h3 {
+			font-family: 'reno_monoregular';
+		}
+
+		p,
+		a {
+			font-weight: 200;
+			text-decoration: none;
+		}
+
+
+		body {
+			margin: 0;
+			width: 100%;
+			font-family: 'Roboto', sans-serif;
+		}
+	</style>
 </head>
+
 <body>
 	<section class="container">
 		<div class="container__inner">
-				<h1>Three basics</h1>
-				<br>
-				<ul class="thumb-list">
-					<li>
-						<a href="./basics/download">
-							<img src="./assets/thumbs/download.png" alt="">
-							<span>Download</span>
-						</a>
-					</li>
-					<li>
-						<a href="./basics/lights">
-							<img src="./assets/thumbs/lights.png" alt="">
-							<span>Lights</span>
-						</a>
-					</li>
-					<li>
-						<a href="./basics/multiple-views">
-							<img src="./assets/thumbs/mutliple-cameras.png" alt="">
-							<span>Multiple views</span>
-						</a>
-					</li>
-					<li>
-						<a href="./basics/cameras">
-							<img src="./assets/thumbs/cameras.png" alt="">
-							<span>Cameras</span>
-						</a>
-					</li>
-					<li>
-						<a href="./basics/geometries">
-							<img src="./assets/thumbs-2/geometries.png" alt="">
-							<span>geometries</span>
-						</a>
-					</li>
-					<li>
-						<a href="./basics/materials">
-							<img src="./assets/thumbs/material.png" alt="">
-							<span>Materials</span>
-						</a>
-					</li>
-					<li>
-						<a href="./basics/shaders">
-							<img src="./assets/thumbs/shader.png" alt="">
-							<span>Shaders</span>
-						</a>
-					</li>
-					<li>
-						<a href="./basics/modal-loaders">
-							<img src="./assets/thumbs/model.png" alt="">
-							<span>Model loader</span>
-						</a>
-					</li>
-					<li>
-						<a href="./basics/bloom">
-							<img src="./assets/thumbs/bloom.png" alt="">
-							<span>Postprocessing: bloom</span>
-						</a>
-					</li>
-				</ul>
-			
+			<section class="step intro active">
 				<h1>Experiments</h1>
-				<br>
-				<ul class="thumb-list">
-					<li>
-						<a href="./experiments/text/boda-2">
-							<img src="./assets/thumbs-2/boda.png" alt="">
-							<span>boda</span>
+				<p>Probeer zelf!</p>
+			</section>
+			<section class="step work-section">
+				<a href="/experiments/face/v2/" class="work-section__img">
+					<img src="./index-files/assets/monkey.png">
+				</a>
+				<div class="work-section__tools">
+					<div class="work-section__info">
+						<span>Na-apen</span>
+						<a href="/experiments/face/v2/">
+							<span>Probeer</span>
+							<span class="icon"><span class="arrow"></span></span>
 						</a>
-					</li>
-					<li>
-							<a href="./experiments/text/boda">
-								<img src="./assets/thumbs-2/boda2.png" alt="">
-								<span>boda</span>
-							</a>
-						</li>
-					<li>
-						<a href="./experiments/bottle">
-							<img src="./assets/thumbs-2/bottle.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/blobs/v3/">
-							<img src="./assets/thumbs-2/data.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/explosion/v1">
-							<img src="./assets/thumbs-2/explosion.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/face/v1">
-							<img src="./assets/thumbs-2/face.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/text/layered">
-							<img src="./assets/thumbs-2/levels.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/blobs/v2">
-							<img src="./assets/thumbs-2/meta.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/blobs/v1/">
-							<img src="./assets/thumbs-2/physics.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/">
-							<img src="./assets/thumbs-2/skeleton-v0.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/skeleton/v3">
-							<img src="./assets/thumbs-2/skeleton.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/text/sobel-text">
-							<img src="./assets/thumbs-2/sobel.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/sound/v1">
-							<img src="./assets/thumbs-2/sound-v0.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/sound/v2">
-							<img src="./assets/thumbs-2/sound-v2.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/sound/v3">
-							<img src="./assets/thumbs-2/sound.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./workshop/v5">
-							<img src="./assets/thumbs-2/tile.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-						<a href="./experiments/tractor/car-v1/">
-							<img src="./assets/thumbs-2/tractor-v1.png" alt="">
-							<span>boda</span>
-						</a>
-					</li>
-					<li>
-							<a href="./experiments/tractor/car-v2/">
-								<img src="./assets/thumbs-2/tractor-v2.png" alt="">
-								<span>boda</span>
-							</a>
-						</li>
-						<li>
-								<a href="./experiments/tractor/car-v3/">
-									<img src="./assets/thumbs-2/tractor-v3.png" alt="">
-									<span>boda</span>
+					</div>
+					<div class="work-section__versions">
+						<span>Andere versies</span>
+						<ul>
+							<li>
+								<a href="/experiments/skeleton/v1/">
+									<img src="./index-files/assets/thumbs/skeleton-v0.png" alt="">
 								</a>
 							</li>
 							<li>
-								<a href="./experiments/text/facetunnel">
-									<img src="./assets/thumbs-2/tunnel.png" alt="">
-									<span>boda</span>
+								<a href="./experiments/skeleton/v3">
+									<img src="./index-files/assets/thumbs/skeleton.png" alt="">
 								</a>
 							</li>
 							<li>
-								<a href="http://localhost:8080/experiments/face/v2/">
-									<img src="./assets/thumbs-2/ape.png" alt="">
-									<span>boda</span>
+								<a href="http://localhost:8080/experiments/face/v1/">
+									<img src="./index-files/assets/thumbs/face.png" alt="">
 								</a>
 							</li>
-				</ul>
-				<!-- <ul class="thumb-list">
-					<li>
-						<a href="./experiments/tractor/car-v3">
-							<img src="./assets/thumbs/trekker.png" alt="">
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="step work-section">
+				<a href="/experiments/text/boda/" class="work-section__img">
+					<img src="./index-files/assets/boda1.png">
+				</a>
+				<div class="work-section__tools">
+					<div class="work-section__info">
+						<span>Neon</span>
+						<a href="/experiments/text/boda/">
+							<span>Probeer</span>
+							<span class="icon"><span class="arrow"></span></span>
+						</a>
+					</div>
+					<div class="work-section__versions">
+						<span>Andere versies</span>
+						<ul>
+							<li>
+								<a href="./experiments/text/boda-2">
+									<img src="./index-files/assets/thumbs/boda0.png" alt="">
+								</a>
+							</li>
+							<li>
+								<a href=./experiments/text/sobel-text"">
+									<img src="./index-files/assets/thumbs/sobel.png" alt="">
+								</a>
+							</li>
+							<li>
+								<a href="./experiments/text/layered">
+									<img src="./index-files/assets/thumbs/levels.png" alt="">
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="step work-section">
+				<a href="/experiments/tractor/car-v3/" class="work-section__img">
+					<img src="./index-files/assets/trekker.png">
+				</a>
+				<div class="work-section__tools">
+						<div class="work-section__info">
 							<span>Trekker</span>
+							<a href="/experiments/tractor/car-v3/"">
+								<span>Probeer</span>
+								<span class="icon"><span class="arrow"></span></span>
+							</a>
+						</div>
+						<div class="work-section__versions">
+							<span>Andere versies</span>
+							<ul>
+								<li>
+									<a href="./experiments/tractor/car-v1/">
+										<img src="./index-files/assets/thumbs/tractor-v1.png" alt="">
+									</a>
+								</li>
+								<li>
+									<a href="./experiments/tractor/car-v2/">
+										<img src="./index-files/assets/thumbs/tractor-v2.png" alt="">
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+			</section>
+
+			<section class="step work-section">
+				<a href="/experiments/text/facetunnel/" class="work-section__img">
+					<img src="./index-files/assets/tunnel.png">
+				</a>
+				<div class="work-section__tools">
+						<div class="work-section__info">
+								<span>Oneindige tunnel</span>
+								<a href="/experiments/text/facetunnel/">
+									<span>Probeer</span>
+									<span class="icon"><span class="arrow"></span></span>
+								</a>
+							</div>
+							<div class="work-section__versions">
+									<span>Andere versies</span>
+									<ul>
+										<li>
+											<a href="/experiments/sound/v2/">
+												<img src="./index-files/assets/thumbs/sound-v2.png" alt="">
+											</a>
+										</li>
+										<li>
+											<a href="/experiments/sound/v3/">
+												<img src="./index-files/assets/thumbs/sound.png" alt="">
+											</a>
+										</li>
+										<li>
+												<a href="./experiments/blobs/v3/">
+													<img src="./index-files/assets/thumbs/data.png" alt="">
+												</a>
+											</li>
+											<li>
+												<a href="./workshop/v5">
+													<img src="./index-files/assets/thumbs/tile.png" alt="">
+												</a>
+											</li>
+									</ul>
+									
+								</div>
+				</div>
+			</section>
+
+			<section class="step work-section">
+				<a href="/experiments/blobs/v2/" class="work-section__img">
+					<img src="./index-files/assets/blobs.png">
+				</a>
+
+				<div class="work-section__tools">
+					<div class="work-section__info">
+						<span>Blobs</span>
+						<a href="/experiments/blobs/v2/">
+							<span>Probeer</span>
+							<span class="icon"><span class="arrow"></span></span>
 						</a>
-					</li>
-					<li class="unavailable">
-						<a href="./experiments/sound/v3">
-							<img src="./assets/thumbs/coming/sound.png" alt="">
-							<span>Sound (failed)</span>
-						</a>
-					</li>
-					<li class="">
-						<a href="./experiments/text/facetunnel">
-							<img src="./assets/thumbs/tunnel.png" alt="">
-							<span>Face Tunnel</span>
-						</a>
-					</li>
-					<li class="unavailable">
-						<a href="./experiments/text/layered">
-							<img src="./assets/thumbs/levels.png" alt="">
-							<span>Text (under construction)</span>
-						</a>
-					</li>
-					<li class="">
-						<a href="./experiments/text/sobel-text">
-							<img src="./assets/thumbs/sobel.png" alt="">
-							<span>...</span>
-						</a>
-					</li>
-					<li class="">
-						<a href="./experiments/text/boda">
-							<img src="./assets/thumbs/boda.png" alt="">
-							<span>...</span>
-						</a>
-					</li>
-					<li class="unavailable">
-						<a>
-							<img src="./assets/thumbs/coming/shoe.png" alt="">
-							<span>...</span>
-						</a>
-					</li>
-				</ul> -->
+					</div>
+					<div class="work-section__versions">
+						<span>Andere versies</span>
+						<ul>
+							<li>
+								<a href="./experiments/blobs/v1/">
+									<img src="./index-files/assets/thumbs/physics.png" alt="">
+								</a>
+							</li>
+							<li>
+								<a href="./experiments/explosion/v1">
+									<img src="./index-files/assets/thumbs/explosion.png" alt="">
+								</a>
+							</li>
+							<li>
+								<a href="./experiments/bottle">
+									<img src="./index-files/assets/thumbs/bottle.png" alt="">
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
 		</div>
 	</section>
 	<!-- <canvas id="theCanvas"></canvas> -->
-	<script src="./build/base.bundle.js"></script>
+	<!-- <script src="./build/base.bundle.js"></script> -->
+	<script src="./build/index.bundle.js"></script>
+
+	<script src="./index-files/scrollama.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+
+			// instantiate the scrollama
+			const scroller = scrollama();
+
+			// setup the instance, pass callback functions
+			scroller
+				.setup({
+					step: '.step',
+					offset: .2,
+					order: false,
+				})
+				.onStepEnter(response => {
+					// { element, index, direction }
+					response.element.classList.add('active');
+				})
+				.onStepExit(response => {
+					// { element, index, direction }
+					response.element.classList.remove('active');
+				});
+
+			// setup resize event
+			window.addEventListener('resize', scroller.resize);
+		});
+	</script>
 </body>
+
 </html>

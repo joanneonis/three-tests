@@ -1,0 +1,47 @@
+
+// (original) Arrow from
+// https://codepen.io/BrunoDZN/pen/BvGLjL
+.icon {
+	position: absolute;
+	top: 58%;
+	transform: translate(0%, -50%) scale(0.25);
+	width: 70px;
+	height: 60px;
+	cursor: pointer;
+	left: 64px;
+}
+
+
+$arrow-width: 2px;
+$arrow-size: 3px;
+
+.arrow {
+  position: absolute;
+	top: 25px;
+	width: 180%;
+  height: $arrow-size;
+  background-color: $font-color;
+	animation: arrow 700ms linear infinite;
+	
+	&::after {
+		content: '';
+		position: absolute;
+		width: 28%;
+    height: 3px;
+    top: -12px;
+    right: -8px;
+		background-color: $font-color;
+		transform: rotate(45deg);
+	}
+	
+	&::before {
+		content: '';
+		position: absolute;
+		width: 28%;
+    height: 3px;
+    top: 12px;
+    right: -8px;
+		background-color: $font-color;
+		transform: rotate(-45deg);
+	}
+}

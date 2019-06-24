@@ -81,20 +81,35 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./assets/base.scss");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./index-files/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./assets/base.scss":
-/*!**************************!*\
-  !*** ./assets/base.scss ***!
-  \**************************/
+/***/ "./index-files/main.js":
+/*!*****************************!*\
+  !*** ./index-files/main.js ***!
+  \*****************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scss/main.scss */ "./index-files/scss/main.scss");
+/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_0__);
+
+
+/***/ }),
+
+/***/ "./index-files/scss/main.scss":
+/*!************************************!*\
+  !*** ./index-files/scss/main.scss ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js!../node_modules/sass-loader/lib/loader.js!./base.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./assets/base.scss");
+var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!../../node_modules/sass-loader/lib/loader.js!./main.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./index-files/scss/main.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -108,7 +123,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -116,19 +131,16 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./assets/base.scss":
-/*!*********************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./assets/base.scss ***!
-  \*********************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./index-files/scss/main.scss":
+/*!*******************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./index-files/scss/main.scss ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
-// Imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900);", ""]);
-
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "body {\n  font-family: 'Lato', sans-serif; }\n\n* {\n  box-sizing: border-box;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\np {\n  margin-top: 0;\n  line-height: 1.5;\n  font-weight: 300; }\n  p.intro {\n    font-size: 1.1em;\n    font-weight: 400;\n    color: #505050;\n    margin-bottom: 1.6em; }\n\nh1 {\n  font-weight: 900;\n  font-size: 3.4em;\n  margin-bottom: 0.2em;\n  margin-top: 0.1em; }\n\nh2 {\n  font-weight: 900;\n  font-size: 2.8em;\n  margin-bottom: 0em;\n  margin-top: 0.1em; }\n\nh3 {\n  font-weight: 900;\n  font-size: 2.1em;\n  margin-bottom: 0.3em;\n  margin-top: 1em; }\n\nh4 {\n  font-weight: 600;\n  font-size: 1em;\n  margin-bottom: 0.3em;\n  margin-top: 0.6em; }\n\nh5 {\n  font-size: 1em;\n  margin-bottom: 0.5em; }\n\n.meta {\n  color: #505050; }\n\np code {\n  background: #efefef;\n  display: inline-block;\n  padding: 0px 3px;\n  border: 1px solid #d2d2d2;\n  border-radius: 3px;\n  color: #545454; }\n\n.info-panel {\n  max-width: 50vw;\n  width: 100%;\n  position: absolute;\n  z-index: 999;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  background: #fff;\n  padding: 100px;\n  overflow: auto;\n  transform: translate3d(50vw, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open .info-panel {\n    transform: translate3d(0, 0, 0); }\n  .info-panel__inner > *:not(pre) {\n    max-width: 800px; }\n  .info-panel ul {\n    margin: 0.7em 0 2.2em 0; }\n    .info-panel ul li {\n      font-weight: 300;\n      margin-bottom: .8em; }\n\npre.code-highlight[class*=\"language-\"] {\n  margin: 4em;\n  margin-left: -100px;\n  margin-right: -100px; }\n\n.panel-toggle {\n  position: absolute;\n  right: 50px;\n  z-index: 90;\n  bottom: 50px;\n  transform: translate3d(0, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open .panel-toggle {\n    transform: translate3d(-50vw, 0, 0); }\n\ncanvas {\n  transform: translate3d(0, 0, 0);\n  transition: transform 0.4s ease-out; }\n  .panel-open canvas {\n    transform: translate3d(-25vw, 0, 0); }\n\n.panel-toggle {\n  background: #fff;\n  border: none;\n  -webkit-appearance: none;\n  box-shadow: none;\n  font-size: 1.4em;\n  padding: 17px 30px;\n  border-radius: 100px;\n  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05); }\n  .panel-toggle:focus {\n    outline: none; }\n\nfigure {\n  margin: 0 0 1em 0; }\n  figure img,\n  figure video {\n    max-width: 100%; }\n  figure figcaption {\n    margin-top: 10px;\n    font-style: italic; }\n\n.video-wrapper {\n  position: relative;\n  padding-bottom: 56.25%;\n  /* 16:9 */\n  padding-top: 25px;\n  height: 0; }\n  .video-wrapper iframe {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%; }\n\n/*\n\nName:       Base16 harmonic16 Dark\nAuthor:     Jannik Siebert (https://github.com/janniks)\n\nPrism template by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/prism/)\nOriginal Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)\n\n*/\ncode[class*=\"language-\"],\npre[class*=\"language-\"] {\n  font-family: Consolas, Menlo, Monaco, \"Andale Mono WT\", \"Andale Mono\", \"Lucida Console\", \"Lucida Sans Typewriter\", \"DejaVu Sans Mono\", \"Bitstream Vera Sans Mono\", \"Liberation Mono\", \"Nimbus Mono L\", \"Courier New\", Courier, monospace;\n  font-size: 14px;\n  line-height: 1.375;\n  direction: ltr;\n  text-align: left;\n  white-space: pre;\n  word-spacing: normal;\n  word-break: normal;\n  -moz-tab-size: 4;\n  -o-tab-size: 4;\n  tab-size: 4;\n  -webkit-hyphens: none;\n  -ms-hyphens: none;\n  hyphens: none;\n  background: #0b1c2c;\n  color: #cbd6e2; }\n\npre[class*=\"language-\"]::-moz-selection, pre[class*=\"language-\"] ::-moz-selection,\ncode[class*=\"language-\"]::-moz-selection, code[class*=\"language-\"] ::-moz-selection {\n  text-shadow: none;\n  background: #aabcce; }\n\npre[class*=\"language-\"]::selection, pre[class*=\"language-\"] ::selection,\ncode[class*=\"language-\"]::selection, code[class*=\"language-\"] ::selection {\n  text-shadow: none;\n  background: #aabcce; }\n\n/* Code blocks */\npre[class*=\"language-\"] {\n  padding: 1em;\n  margin: .5em 0;\n  overflow: auto; }\n\n/* Inline code */\n:not(pre) > code[class*=\"language-\"] {\n  padding: .1em;\n  border-radius: .3em; }\n\n.token.comment,\n.token.prolog,\n.token.doctype,\n.token.cdata {\n  color: #627e99; }\n\n.token.punctuation {\n  color: #cbd6e2; }\n\n.token.namespace {\n  opacity: .7; }\n\n.token.operator,\n.token.boolean,\n.token.number {\n  color: #bfbf56; }\n\n.token.property {\n  color: #8bbf56; }\n\n.token.tag {\n  color: #8b56bf; }\n\n.token.string {\n  color: #568bbf; }\n\n.token.selector {\n  color: #bf568b; }\n\n.token.attr-name {\n  color: #bfbf56; }\n\n.token.entity,\n.token.url,\n.language-css .token.string,\n.style .token.string {\n  color: #568bbf; }\n\n.token.attr-value,\n.token.keyword,\n.token.control,\n.token.directive,\n.token.unit {\n  color: #56bf8b; }\n\n.token.statement,\n.token.regex,\n.token.atrule {\n  color: #568bbf; }\n\n.token.placeholder,\n.token.variable {\n  color: #8b56bf; }\n\n.token.deleted {\n  text-decoration: line-through; }\n\n.token.inserted {\n  border-bottom: 1px dotted #f7f9fb;\n  text-decoration: none; }\n\n.token.italic {\n  font-style: italic; }\n\n.token.important,\n.token.bold {\n  font-weight: bold; }\n\n.token.important {\n  color: #bf8b56; }\n\n.token.entity {\n  cursor: help; }\n\npre > code.highlight {\n  outline: 0.4em solid #bf8b56;\n  outline-offset: .4em; }\n\n.line-numbers .line-numbers-rows {\n  border-right-color: #223b54 !important; }\n\n.line-numbers-rows > span:before {\n  color: #405c79 !important; }\n\n.line-highlight {\n  background: rgba(247, 249, 251, 0.2) !important;\n  background: -webkit-linear-gradient(left, rgba(247, 249, 251, 0.2) 70%, rgba(247, 249, 251, 0)) !important;\n  background: linear-gradient(to right, rgba(247, 249, 251, 0.2) 70%, rgba(247, 249, 251, 0)) !important; }\n\n.info {\n  position: absolute;\n  z-index: 2;\n  left: 50px;\n  top: 50px;\n  width: 240px;\n  padding: 20px;\n  background: rgba(255, 255, 255, 0.6);\n  border-radius: 5px; }\n  .info p {\n    margin: 0;\n    color: #3ca9dc;\n    font-weight: 700; }\n\n.thumb-list {\n  display: flex;\n  flex-flow: wrap;\n  list-style: none;\n  margin: 0 -10px 60px -10px;\n  padding: 0; }\n  .thumb-list li {\n    position: relative;\n    width: calc(100% / 3);\n    padding: 10px; }\n    @media screen and (max-width: 1200px) {\n      .thumb-list li {\n        width: 50%; } }\n    .thumb-list li a {\n      display: inline-block;\n      height: 100%;\n      width: 100%;\n      border-radius: 30px;\n      overflow: hidden; }\n    .thumb-list li:hover img {\n      transform: scale(1.2); }\n  .thumb-list img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    transform: scale(1);\n    transition: transform .3s; }\n  .thumb-list span {\n    position: absolute;\n    padding: 8px;\n    background: #ffffffe0;\n    left: 20px;\n    top: 20px;\n    border-radius: 40px;\n    color: black;\n    font-weight: 600;\n    font-size: 0.8em; }\n\n.unavailable img {\n  -webkit-filter: grayscale(100%);\n  filter: grayscale(100%);\n  opacity: 0.7; }\n\n.container {\n  padding: 100px 20px; }\n  .container__inner {\n    max-width: 1200px;\n    margin: auto; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nbody {\n  color: #3559A9;\n  background: #F1F1F3; }\n\nh1 {\n  font-size: 35px;\n  margin-bottom: 0.3em; }\n\np {\n  line-height: 1.5; }\n\n.container {\n  padding: 30px; }\n  .container__inner {\n    max-width: 1200px;\n    margin: auto; }\n\n.work-section {\n  margin-bottom: 10vh; }\n  .work-section__img {\n    margin: 0; }\n    .work-section__img img {\n      width: 100%; }\n  .work-section__info {\n    background: white;\n    padding: 30px 50px;\n    margin: 0px 0 0 20px;\n    position: relative;\n    display: inline-block; }\n    .work-section__info > span {\n      font-family: 'reno_monoregular'; }\n    .work-section__info a {\n      margin-right: 50px;\n      margin-left: 10vw;\n      position: relative;\n      cursor: pointer;\n      font-family: 'reno_monoregular'; }\n      .work-section__info a:visited {\n        color: #3559A9; }\n      .work-section__info a .icon {\n        transition: margin .2s; }\n      .work-section__info a:hover .icon {\n        margin-left: 10px; }\n\n.work-section__versions {\n  display: flex;\n  align-items: center; }\n  .work-section__versions > span {\n    display: inline-block;\n    margin: 30px 10px 10px; }\n  .work-section__versions ul {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n    display: flex; }\n  .work-section__versions li {\n    width: 120px;\n    margin-left: 7px; }\n  .work-section__versions a {\n    display: block;\n    overflow: hidden;\n    border-radius: 100%;\n    border: 2px solid white;\n    height: 120px; }\n  .work-section__versions img {\n    width: 120px;\n    height: 120px;\n    object-fit: cover; }\n\n.work-section__tools {\n  display: flex;\n  width: 100%;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: -50px; }\n\n.intro {\n  max-width: 570px;\n  padding: 10vh 0 5vh 0; }\n\n.icon {\n  position: absolute;\n  top: 58%;\n  transform: translate(0%, -50%) scale(0.25);\n  width: 70px;\n  height: 60px;\n  cursor: pointer;\n  left: 64px; }\n\n.arrow {\n  position: absolute;\n  top: 25px;\n  width: 180%;\n  height: 3px;\n  background-color: #3559A9;\n  animation: arrow 700ms linear infinite; }\n  .arrow::after {\n    content: '';\n    position: absolute;\n    width: 28%;\n    height: 3px;\n    top: -12px;\n    right: -8px;\n    background-color: #3559A9;\n    transform: rotate(45deg); }\n  .arrow::before {\n    content: '';\n    position: absolute;\n    width: 28%;\n    height: 3px;\n    top: 12px;\n    right: -8px;\n    background-color: #3559A9;\n    transform: rotate(-45deg); }\n", ""]);
 
 
 
@@ -740,4 +752,4 @@ module.exports = function (css) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=style.bundle.js.map
+//# sourceMappingURL=index.bundle.js.map

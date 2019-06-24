@@ -1,0 +1,19 @@
+* {
+	box-sizing: border-box;
+}
+
+$font-color: #3559A9;
+
+body {
+	color: $font-color;
+	background: #F1F1F3;
+}
+
+h1 {
+	font-size: 35px;
+	margin-bottom: 0.3em;
+}
+
+p {
+	line-height: 1.5;
+}

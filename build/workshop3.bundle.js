@@ -311,7 +311,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function changeLightType(type, scene) {
   scene.userData.gui.add(scene.userData.activeLightSettings, 'type', ['SpotLight', 'PointLight', 'HemisphereLight', 'DirectionalLight', 'AmbientLight']).onChange(function (val) {
-    setlightType(val, scene); // render(); //!idk
+    setlightType(val, scene);
   });
 }
 function buildGui(scene) {
@@ -327,7 +327,7 @@ function buildGui(scene) {
     Object.keys(settings).forEach(function (key) {
       if (key === 'color' || key === 'groundColor') {
         scene.userData.lightsGui.addColor(settings, key).onChange(function (val) {
-          scene.userData.activeLightSettings.light[key].setHex(val); // render(); //!idk
+          scene.userData.activeLightSettings.light[key].setHex(val);
         });
       } else if (key === 'position') {
         createGuiSetting(scene, settings[key], 'x', key, scene.userData.activeLightSettings);

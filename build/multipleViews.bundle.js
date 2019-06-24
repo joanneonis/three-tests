@@ -151,6 +151,7 @@ __webpack_require__.r(__webpack_exports__);
 
  //?--------------------------------------------------------------------
 //?		Base
+//?  used this example: https://github.com/mrdoob/three.js/blob/master/examples/webgl_camera_array.html
 //?--------------------------------------------------------------------
 
 var renderer,

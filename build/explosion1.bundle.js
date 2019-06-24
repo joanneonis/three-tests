@@ -119,7 +119,7 @@ function init() {
   initRenderer();
   scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
   camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](70, window.innerWidth / window.innerHeight, 1, 1000);
-  camera.position.z = 500;
+  camera.position.z = 5;
   initControls();
   var light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 1);
   light.position.set(5, 3, 5);
