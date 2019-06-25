@@ -10,7 +10,7 @@ import {
 
 import 'three/examples/js/loaders/GLTFLoader';
 
-import 'three/examples/js/AnimationClipCreator';
+// import 'three/examples/js/AnimationClipCreator';
 
 // import { loadModel } from '../../helpers/functions/load-model';
 import { setlightType, buildGui, changeLightType } from '../../../helpers/functions/lights';

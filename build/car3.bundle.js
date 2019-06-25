@@ -144,8 +144,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
 /* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_9__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'three/examples/js/AnimationClipCreator'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../helpers/functions/lights */ "./helpers/functions/lights.js");
+/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../helpers/functions/lights */ "./helpers/functions/lights.js");
 /* eslint-disable no-unused-vars */
 
 
@@ -156,7 +155,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+ // import 'three/examples/js/AnimationClipCreator';
 
 
 prismjs_components_prism_core__WEBPACK_IMPORTED_MODULE_1___default.a.highlightAll();
@@ -274,9 +273,9 @@ function init() {
   plane.receiveShadow = true;
   plane.castShadow = false;
   scene.add(plane);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["setlightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["changeLightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_11__["buildGui"])(scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_10__["setlightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_10__["changeLightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_10__["buildGui"])(scene);
 }
 
 function onResize() {

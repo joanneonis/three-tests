@@ -282,13 +282,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
 /* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_4__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'three/examples/js/AnimationClipCreator'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../helpers/functions/lights */ "./helpers/functions/lights.js");
+/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../helpers/functions/lights */ "./helpers/functions/lights.js");
 
 
 
 
-
+ // import 'three/examples/js/AnimationClipCreator';
 
  // console.log(Clam.init());
 
@@ -467,9 +466,9 @@ function init() {
     type: 'Spotlight'
   };
   scene.userData.gui = gui;
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["setlightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["changeLightType"])('HemisphereLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["buildGui"])(scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["setlightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["changeLightType"])('HemisphereLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_5__["buildGui"])(scene);
 }
 
 function onResize() {

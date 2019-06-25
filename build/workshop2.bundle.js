@@ -25723,17 +25723,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three/examples/js/loaders/GLTFLoader */ "./node_modules/three/examples/js/loaders/GLTFLoader.js");
 /* harmony import */ var three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_3__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'three/examples/js/AnimationClipCreator'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var three_examples_js_exporters_OBJExporter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/examples/js/exporters/OBJExporter */ "./node_modules/three/examples/js/exporters/OBJExporter.js");
-/* harmony import */ var three_examples_js_exporters_OBJExporter__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_exporters_OBJExporter__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var three_examples_js_exporters_GLTFExporter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! three/examples/js/exporters/GLTFExporter */ "./node_modules/three/examples/js/exporters/GLTFExporter.js");
-/* harmony import */ var three_examples_js_exporters_GLTFExporter__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_exporters_GLTFExporter__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
+/* harmony import */ var three_examples_js_exporters_OBJExporter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three/examples/js/exporters/OBJExporter */ "./node_modules/three/examples/js/exporters/OBJExporter.js");
+/* harmony import */ var three_examples_js_exporters_OBJExporter__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_exporters_OBJExporter__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var three_examples_js_exporters_GLTFExporter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three/examples/js/exporters/GLTFExporter */ "./node_modules/three/examples/js/exporters/GLTFExporter.js");
+/* harmony import */ var three_examples_js_exporters_GLTFExporter__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(three_examples_js_exporters_GLTFExporter__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helpers/functions/lights */ "./helpers/functions/lights.js");
 /* eslint-disable no-unused-vars */
 
 
 
-
+ // import 'three/examples/js/AnimationClipCreator';
 
 
 
@@ -25798,9 +25797,9 @@ function init() {
   // });
   // scene.add(new THREE.Mesh(geometry, material));
 
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_7__["setlightType"])('PointLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_7__["changeLightType"])('PointLight', scene);
-  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_7__["buildGui"])(scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["setlightType"])('PointLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["changeLightType"])('PointLight', scene);
+  Object(_helpers_functions_lights__WEBPACK_IMPORTED_MODULE_6__["buildGui"])(scene);
 }
 
 function onResize() {
