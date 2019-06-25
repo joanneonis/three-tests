@@ -47,6 +47,7 @@ export default {
         // facetests: path.join(__dirname, 'experiments/face/tests/main.js'),
         // try: path.join(__dirname, 'try/main.js'),
         index: path.join(__dirname, 'index-files/main.js'),
+        webvr: path.join(__dirname, 'webvr/main.js'),
         // trystyle: path.join(__dirname, 'try/assets/scss/main.scss'),
     },
     output: {
