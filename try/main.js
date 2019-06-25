@@ -144,7 +144,7 @@ function initControls() {
 function loadModelThingies() {
 	var loader = new THREE.GLTFLoader();
 
-	loader.load('./assets/models/cube - v2.glb', function (gltf) {
+	loader.load('./assets/blender/cube - v5.glb', function (gltf) {
 		var model = gltf.scene;
 
 		model.traverse( function( node ) {

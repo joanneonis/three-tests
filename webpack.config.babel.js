@@ -45,7 +45,7 @@ export default {
         // geometries: path.join(__dirname, 'basics/geometries/main.js'),
         // face2: path.join(__dirname, 'experiments/face/v2/main.js'),
         // facetests: path.join(__dirname, 'experiments/face/tests/main.js'),
-        // try: path.join(__dirname, 'try/main.js'),
+        try: path.join(__dirname, 'try/main.js'),
         index: path.join(__dirname, 'index-files/main.js'),
         webvr: path.join(__dirname, 'webvr/main.js'),
         // trystyle: path.join(__dirname, 'try/assets/scss/main.scss'),
