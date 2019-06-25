@@ -108,13 +108,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-/* <script src="js/MarchingCubes.js"></script>
-<script src="js/ShaderToon.js"></script>
-
-<script src="js/WebGL.js"></script>
-<script src="js/libs/stats.min.js"></script>
-<script src="js/libs/dat.gui.min.js"></script> */
+ // from example https://threejs.org/examples/?q=MarchingCubes#webgl_marchingcubes
 
 var container;
 var camera, scene, renderer;
@@ -352,10 +346,10 @@ function setupGui() {
 
   effectController = {
     material: "multiColors",
-    speed: 1.0,
-    numBlobs: 10,
+    speed: 0.55,
+    numBlobs: 9,
     resolution: 50,
-    isolation: 80,
+    isolation: 60,
     floor: true,
     wallx: false,
     wallz: false,
@@ -370,40 +364,37 @@ function setupGui() {
     lz: 1.0,
     dummy: function dummy() {}
   };
-  var h, m_h, m_s, m_l;
-  var gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"](); // material (type)
-
-  h = gui.addFolder("Materials");
-
-  for (var m in materials) {
-    effectController[m] = createHandler(m);
-    h.add(effectController, m).name(m);
-  } // material (color)
-
-
-  h = gui.addFolder("Material color");
-  m_h = h.add(effectController, "hue", 0.0, 1.0, 0.025);
-  m_s = h.add(effectController, "saturation", 0.0, 1.0, 0.025);
-  m_l = h.add(effectController, "lightness", 0.0, 1.0, 0.025); // light (point)
-
-  h = gui.addFolder("Point light color");
-  h.add(effectController, "lhue", 0.0, 1.0, 0.025).name("hue");
-  h.add(effectController, "lsaturation", 0.0, 1.0, 0.025).name("saturation");
-  h.add(effectController, "llightness", 0.0, 1.0, 0.025).name("lightness"); // light (directional)
-
-  h = gui.addFolder("Directional light orientation");
-  h.add(effectController, "lx", -1.0, 1.0, 0.025).name("x");
-  h.add(effectController, "ly", -1.0, 1.0, 0.025).name("y");
-  h.add(effectController, "lz", -1.0, 1.0, 0.025).name("z"); // simulation
-
-  h = gui.addFolder("Simulation");
-  h.add(effectController, "speed", 0.1, 8.0, 0.05);
-  h.add(effectController, "numBlobs", 1, 50, 1);
-  h.add(effectController, "resolution", 14, 100, 1);
-  h.add(effectController, "isolation", 10, 300, 1);
-  h.add(effectController, "floor");
-  h.add(effectController, "wallx");
-  h.add(effectController, "wallz");
+  var h, m_h, m_s, m_l; // var gui = new dat.GUI();
+  // // material (type)
+  // h = gui.addFolder( "Materials" );
+  // for ( var m in materials ) {
+  // 	effectController[ m ] = createHandler( m );
+  // 	h.add( effectController, m ).name( m );
+  // }
+  // // material (color)
+  // h = gui.addFolder( "Material color" );
+  // m_h = h.add( effectController, "hue", 0.0, 1.0, 0.025 );
+  // m_s = h.add( effectController, "saturation", 0.0, 1.0, 0.025 );
+  // m_l = h.add( effectController, "lightness", 0.0, 1.0, 0.025 );
+  // // light (point)
+  // h = gui.addFolder( "Point light color" );
+  // h.add( effectController, "lhue", 0.0, 1.0, 0.025 ).name( "hue" );
+  // h.add( effectController, "lsaturation", 0.0, 1.0, 0.025 ).name( "saturation" );
+  // h.add( effectController, "llightness", 0.0, 1.0, 0.025 ).name( "lightness" );
+  // // light (directional)
+  // h = gui.addFolder( "Directional light orientation" );
+  // h.add( effectController, "lx", - 1.0, 1.0, 0.025 ).name( "x" );
+  // h.add( effectController, "ly", - 1.0, 1.0, 0.025 ).name( "y" );
+  // h.add( effectController, "lz", - 1.0, 1.0, 0.025 ).name( "z" );
+  // // simulation
+  // h = gui.addFolder( "Simulation" );
+  // h.add( effectController, "speed", 0.1, 8.0, 0.05 );
+  // h.add( effectController, "numBlobs", 1, 50, 1 );
+  // h.add( effectController, "resolution", 14, 100, 1 );
+  // h.add( effectController, "isolation", 10, 300, 1 );
+  // h.add( effectController, "floor" );
+  // h.add( effectController, "wallx" );
+  // h.add( effectController, "wallz" );
 } // this controls content of marching cubes voxel field
 
 
@@ -426,9 +417,9 @@ function updateCubes(object, time, numblobs, floor, wallx, wallz) {
     } else {
       object.addBall(ballx, bally, ballz, strength, subtract);
     }
-  }
+  } // if ( floor ) object.addPlaneY( 2, 12 );
 
-  if (floor) object.addPlaneY(2, 12);
+
   if (wallz) object.addPlaneZ(2, 12);
   if (wallx) object.addPlaneX(2, 12);
 } //
