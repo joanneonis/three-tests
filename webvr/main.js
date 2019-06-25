@@ -1,7 +1,7 @@
 
 import * as THREE from 'three';
 // import 'three/examples/js/vr/HelioWebXRPolyfill';
-import * as WEBVR from 'three/examples/js/vr/WebVR';
+// import * as WEBVR from 'three/examples/js/vr/WebVR';
 import 'three/examples/js/objects/Lensflare';
 import 'three/examples/js/objects/Reflector';
 
@@ -115,7 +115,8 @@ function init() {
 	renderer.vr.enabled = true;
 	document.body.appendChild(renderer.domElement);
 
-	// document.body.appendChild(WEBVR.createButton(renderer));
+	document.body.appendChild(WEBVR.createButton(renderer));
+	// console.log(WEBVR);
 
 	//
 
