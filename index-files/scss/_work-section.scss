@@ -72,12 +72,18 @@ $thumb-size: 120px;
 		border-radius: 100%;
 		border: 2px solid white;
 		height: $thumb-size;
+		background: $font-color;
+
+		&:hover img {
+			opacity: .2;
+		}
 	}
 
 	img {
 		width: $thumb-size;
 		height: $thumb-size;
 		object-fit: cover;
+		transition: opacity .2s;
 	}
 }
 

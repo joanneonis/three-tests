@@ -77,6 +77,9 @@ document.getElementById('startbutton').addEventListener('click', function () {
 	ec = window.ec;
 	drawLoop();
 	d3Vis();
+
+	this.style.display = "none";
+	console.log(this);	
 });
 
 function drawLoop() {
@@ -233,7 +236,7 @@ function init() {
 	
 	// scene.add(new THREE.AxesHelper(10));
 
-	let bgColor = new THREE.Color('#41454F');
+	let bgColor = new THREE.Color('#41454F'); 
 
 	// let ambient = new THREE.AmbientLight();
 	// ambient.castShadow = true;
@@ -260,7 +263,7 @@ function onResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
 
-	renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+	renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 // function render() {
@@ -289,7 +292,7 @@ function initRenderer() {
 		antialias: true
 	});
 	renderer.setPixelRatio(window.devicePixelRatio);
-	renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.shadowMap.enabled = true;
 	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 }

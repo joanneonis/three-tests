@@ -33,10 +33,11 @@
 		#container {
 			position: fixed;
 			width: 400px;
-			left: 0;
-			right: 0;
+			left: 30px;
 			top: 30px;
 			margin: auto;
+			z-index: 20;
+			transform: scale(0.8) translate(-20%, -20%);
 		}
 		h2 {
 			font-weight : 400;
@@ -53,6 +54,7 @@
 			left: 0;
 			bottom: 0;
 			width: 400px;
+			z-index: 10;
 		}
 		#emotion_icons {
 			height: 50px;
@@ -84,6 +86,27 @@
 			margin: auto;
 			left: 0;
 			right: 0;
+			cursor: grab;
+		}
+
+		#controls {
+				position: absolute;
+				z-index: 2;
+				bottom: 0;
+				right: 0;
+				left: 0;
+				top: 0;
+				max-height: 70px;
+				margin: auto;
+				padding: 40px;
+		}
+
+		input[type="button" i] {
+				border: none;
+				padding: 20px 30px;
+				border-radius: 50px;
+				font-size: 30px;
+				line-height: 1;
 		}
 	</style>
 </head>
