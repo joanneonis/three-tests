@@ -2,3 +2,19 @@
 	max-width: 570px;
 	padding: 10vh 0 5vh 0;
 }
+
+.wiki {
+	text-align: center;
+	padding-bottom: 10vh;
+
+	.intro { margin: auto; }
+
+	a {
+		text-decoration: underline;
+		font-family: 'reno_monoregular';
+	
+		&:visited {
+			color: $font-color;
+		}
+	}	
+}
