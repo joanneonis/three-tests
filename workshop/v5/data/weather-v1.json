@@ -1,0 +1,2922 @@
+[
+	{
+		"AvarageTemperature": 289,
+		"AvarageWind": 34,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 100,
+		"WindStoot": 170
+	},
+	{
+		"AvarageTemperature": 272,
+		"AvarageWind": 24,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 80,
+		"WindStoot": 150
+	},
+	{
+		"AvarageTemperature": 266,
+		"AvarageWind": 21,
+		"AvarageRain": 0,
+		"LowWind": 80,
+		"HighWind": 120,
+		"WindStoot": 210
+	},
+	{
+		"AvarageTemperature": 259,
+		"AvarageWind": 17,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 100,
+		"WindStoot": 190
+	},
+	{
+		"AvarageTemperature": 255,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 90,
+		"WindStoot": 160
+	},
+	{
+		"AvarageTemperature": 251,
+		"AvarageWind": 32,
+		"AvarageRain": 265,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 249,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 50,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 249,
+		"AvarageWind": 23,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 232,
+		"AvarageWind": 30,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 231,
+		"AvarageWind": 32,
+		"AvarageRain": 19,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 229,
+		"AvarageWind": 23,
+		"AvarageRain": 1,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": 227,
+		"AvarageWind": 21,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 20,
+		"WindStoot": 40
+	},
+	{
+		"AvarageTemperature": 227,
+		"AvarageWind": 18,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 227,
+		"AvarageWind": 29,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 225,
+		"AvarageWind": 15,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 90,
+		"WindStoot": 170
+	},
+	{
+		"AvarageTemperature": 224,
+		"AvarageWind": 29,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 80,
+		"WindStoot": 190
+	},
+	{
+		"AvarageTemperature": 224,
+		"AvarageWind": 13,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 223,
+		"AvarageWind": 19,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 190,
+		"WindStoot": 340
+	},
+	{
+		"AvarageTemperature": 221,
+		"AvarageWind": 23,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 220,
+		"AvarageWind": 30,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 217,
+		"AvarageWind": 42,
+		"AvarageRain": 2,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 216,
+		"AvarageWind": 27,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 216,
+		"AvarageWind": 28,
+		"AvarageRain": 131,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 214,
+		"AvarageWind": 33,
+		"AvarageRain": 0,
+		"LowWind": 50,
+		"HighWind": 100,
+		"WindStoot": 190
+	},
+	{
+		"AvarageTemperature": 213,
+		"AvarageWind": 32,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 213,
+		"AvarageWind": 48,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 20,
+		"WindStoot": 40
+	},
+	{
+		"AvarageTemperature": 212,
+		"AvarageWind": 17,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 90,
+		"WindStoot": 160
+	},
+	{
+		"AvarageTemperature": 211,
+		"AvarageWind": 34,
+		"AvarageRain": 0,
+		"LowWind": 50,
+		"HighWind": 80,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 211,
+		"AvarageWind": 17,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 110,
+		"WindStoot": 170
+	},
+	{
+		"AvarageTemperature": 210,
+		"AvarageWind": 31,
+		"AvarageRain": -1,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 210,
+		"AvarageWind": 16,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 90,
+		"WindStoot": 160
+	},
+	{
+		"AvarageTemperature": 209,
+		"AvarageWind": 28,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 207,
+		"AvarageWind": 20,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 206,
+		"AvarageWind": 37,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 206,
+		"AvarageWind": 27,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 80,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 205,
+		"AvarageWind": 39,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 204,
+		"AvarageWind": 33,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 204,
+		"AvarageWind": 42,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 203,
+		"AvarageWind": 23,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": 202,
+		"AvarageWind": 26,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 202,
+		"AvarageWind": 13,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 201,
+		"AvarageWind": 31,
+		"AvarageRain": 4,
+		"LowWind": 40,
+		"HighWind": 90,
+		"WindStoot": 160
+	},
+	{
+		"AvarageTemperature": 201,
+		"AvarageWind": 17,
+		"AvarageRain": 155,
+		"LowWind": 10,
+		"HighWind": 70,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 201,
+		"AvarageWind": 41,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 201,
+		"AvarageWind": 48,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 200,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 80,
+		"WindStoot": 150
+	},
+	{
+		"AvarageTemperature": 200,
+		"AvarageWind": 46,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 197,
+		"AvarageWind": 27,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 197,
+		"AvarageWind": 37,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 197,
+		"AvarageWind": 36,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": 197,
+		"AvarageWind": 20,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 197,
+		"AvarageWind": 45,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 194,
+		"AvarageWind": 37,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 194,
+		"AvarageWind": 30,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 194,
+		"AvarageWind": 22,
+		"AvarageRain": 114,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 150
+	},
+	{
+		"AvarageTemperature": 193,
+		"AvarageWind": 38,
+		"AvarageRain": -1,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 193,
+		"AvarageWind": 33,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 193,
+		"AvarageWind": 43,
+		"AvarageRain": 108,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 193,
+		"AvarageWind": 38,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 192,
+		"AvarageWind": 32,
+		"AvarageRain": 0,
+		"LowWind": 60,
+		"HighWind": 90,
+		"WindStoot": 180
+	},
+	{
+		"AvarageTemperature": 192,
+		"AvarageWind": 19,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 80,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 191,
+		"AvarageWind": 42,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 191,
+		"AvarageWind": 21,
+		"AvarageRain": 37,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 191,
+		"AvarageWind": 28,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 191,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 191,
+		"AvarageWind": 42,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 191,
+		"AvarageWind": 40,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 90,
+		"WindStoot": 160
+	},
+	{
+		"AvarageTemperature": 190,
+		"AvarageWind": 46,
+		"AvarageRain": 7,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 190,
+		"AvarageWind": 29,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 190,
+		"AvarageWind": 27,
+		"AvarageRain": 1,
+		"LowWind": 10,
+		"HighWind": 70,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 189,
+		"AvarageWind": 20,
+		"AvarageRain": 16,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 189,
+		"AvarageWind": 30,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 189,
+		"AvarageWind": 50,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 188,
+		"AvarageWind": 26,
+		"AvarageRain": 6,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 187,
+		"AvarageWind": 32,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 70,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 187,
+		"AvarageWind": 32,
+		"AvarageRain": -1,
+		"LowWind": 70,
+		"HighWind": 90,
+		"WindStoot": 170
+	},
+	{
+		"AvarageTemperature": 186,
+		"AvarageWind": 24,
+		"AvarageRain": -1,
+		"LowWind": 40,
+		"HighWind": 90,
+		"WindStoot": 170
+	},
+	{
+		"AvarageTemperature": 186,
+		"AvarageWind": 36,
+		"AvarageRain": 21,
+		"LowWind": 10,
+		"HighWind": 70,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 186,
+		"AvarageWind": 10,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 80,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 185,
+		"AvarageWind": 41,
+		"AvarageRain": 1,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 185,
+		"AvarageWind": 33,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 185,
+		"AvarageWind": 33,
+		"AvarageRain": 47,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 184,
+		"AvarageWind": 10,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 183,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 183,
+		"AvarageWind": 30,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 183,
+		"AvarageWind": 26,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 183,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 181,
+		"AvarageWind": 14,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 181,
+		"AvarageWind": 33,
+		"AvarageRain": 1,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 180,
+		"AvarageWind": 33,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 178,
+		"AvarageWind": 26,
+		"AvarageRain": 110,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 177,
+		"AvarageWind": 29,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 177,
+		"AvarageWind": 55,
+		"AvarageRain": 42,
+		"LowWind": 40,
+		"HighWind": 80,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 175,
+		"AvarageWind": 35,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 90,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 174,
+		"AvarageWind": 26,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 100,
+		"WindStoot": 170
+	},
+	{
+		"AvarageTemperature": 174,
+		"AvarageWind": 20,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 70,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 174,
+		"AvarageWind": 22,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 80,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 173,
+		"AvarageWind": 26,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 173,
+		"AvarageWind": 28,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 171,
+		"AvarageWind": 29,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 171,
+		"AvarageWind": 29,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 170,
+		"AvarageWind": 32,
+		"AvarageRain": 103,
+		"LowWind": 10,
+		"HighWind": 70,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 170,
+		"AvarageWind": 17,
+		"AvarageRain": 52,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 169,
+		"AvarageWind": 31,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 168,
+		"AvarageWind": 15,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 168,
+		"AvarageWind": 30,
+		"AvarageRain": 4,
+		"LowWind": 0,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 168,
+		"AvarageWind": 43,
+		"AvarageRain": 7,
+		"LowWind": 0,
+		"HighWind": 60,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 167,
+		"AvarageWind": 35,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 166,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 166,
+		"AvarageWind": 15,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 165,
+		"AvarageWind": 30,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 165,
+		"AvarageWind": 26,
+		"AvarageRain": 48,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 164,
+		"AvarageWind": 28,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 164,
+		"AvarageWind": 28,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 162,
+		"AvarageWind": 29,
+		"AvarageRain": 123,
+		"LowWind": 20,
+		"HighWind": 80,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 162,
+		"AvarageWind": 46,
+		"AvarageRain": -1,
+		"LowWind": 20,
+		"HighWind": 90,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 162,
+		"AvarageWind": 34,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 162,
+		"AvarageWind": 17,
+		"AvarageRain": 38,
+		"LowWind": 0,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 161,
+		"AvarageWind": 53,
+		"AvarageRain": 12,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 160,
+		"AvarageWind": 29,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 100,
+		"WindStoot": 210
+	},
+	{
+		"AvarageTemperature": 159,
+		"AvarageWind": 20,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 110,
+		"WindStoot": 190
+	},
+	{
+		"AvarageTemperature": 157,
+		"AvarageWind": 44,
+		"AvarageRain": 28,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 156,
+		"AvarageWind": 40,
+		"AvarageRain": 8,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 156,
+		"AvarageWind": 41,
+		"AvarageRain": 53,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 156,
+		"AvarageWind": 71,
+		"AvarageRain": 87,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 154,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 153,
+		"AvarageWind": 29,
+		"AvarageRain": 9,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 152,
+		"AvarageWind": 18,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 152,
+		"AvarageWind": 40,
+		"AvarageRain": 28,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 151,
+		"AvarageWind": 43,
+		"AvarageRain": 10,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 150,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 150,
+		"AvarageWind": 25,
+		"AvarageRain": 23,
+		"LowWind": 20,
+		"HighWind": 30,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 147,
+		"AvarageWind": 30,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 70,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 147,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 145,
+		"AvarageWind": 34,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 145,
+		"AvarageWind": 31,
+		"AvarageRain": 6,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 145,
+		"AvarageWind": 39,
+		"AvarageRain": -1,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 144,
+		"AvarageWind": 15,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 143,
+		"AvarageWind": 33,
+		"AvarageRain": 17,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 143,
+		"AvarageWind": 40,
+		"AvarageRain": 26,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 141,
+		"AvarageWind": 55,
+		"AvarageRain": 77,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 140,
+		"AvarageWind": 40,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 140,
+		"AvarageWind": 30,
+		"AvarageRain": 1,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 138,
+		"AvarageWind": 38,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 138,
+		"AvarageWind": 24,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 137,
+		"AvarageWind": 32,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 135,
+		"AvarageWind": 60,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 135,
+		"AvarageWind": 35,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 135,
+		"AvarageWind": 19,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 134,
+		"AvarageWind": 28,
+		"AvarageRain": 7,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 134,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 150
+	},
+	{
+		"AvarageTemperature": 133,
+		"AvarageWind": 45,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 133,
+		"AvarageWind": 37,
+		"AvarageRain": 14,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 133,
+		"AvarageWind": 19,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 20,
+		"WindStoot": 40
+	},
+	{
+		"AvarageTemperature": 132,
+		"AvarageWind": 31,
+		"AvarageRain": 132,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 131,
+		"AvarageWind": 15,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 130,
+		"AvarageWind": 24,
+		"AvarageRain": 35,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 130,
+		"AvarageWind": 33,
+		"AvarageRain": 3,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 129,
+		"AvarageWind": 49,
+		"AvarageRain": 32,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 128,
+		"AvarageWind": 42,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 127,
+		"AvarageWind": 34,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 127,
+		"AvarageWind": 52,
+		"AvarageRain": 33,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 127,
+		"AvarageWind": 43,
+		"AvarageRain": 1,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 126,
+		"AvarageWind": 19,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 125,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 70,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 125,
+		"AvarageWind": 40,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 124,
+		"AvarageWind": 48,
+		"AvarageRain": 40,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 123,
+		"AvarageWind": 28,
+		"AvarageRain": -1,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 122,
+		"AvarageWind": 27,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 122,
+		"AvarageWind": 10,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 119,
+		"AvarageWind": 45,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 119,
+		"AvarageWind": 28,
+		"AvarageRain": 6,
+		"LowWind": 30,
+		"HighWind": 90,
+		"WindStoot": 170
+	},
+	{
+		"AvarageTemperature": 117,
+		"AvarageWind": 76,
+		"AvarageRain": 21,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 117,
+		"AvarageWind": 41,
+		"AvarageRain": 20,
+		"LowWind": 0,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 117,
+		"AvarageWind": 50,
+		"AvarageRain": 54,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 116,
+		"AvarageWind": 43,
+		"AvarageRain": -1,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 116,
+		"AvarageWind": 51,
+		"AvarageRain": 3,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 116,
+		"AvarageWind": 36,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 115,
+		"AvarageWind": 33,
+		"AvarageRain": 130,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 114,
+		"AvarageWind": 27,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 114,
+		"AvarageWind": 49,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 114,
+		"AvarageWind": 24,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 112,
+		"AvarageWind": 40,
+		"AvarageRain": 32,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 112,
+		"AvarageWind": 57,
+		"AvarageRain": 25,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 112,
+		"AvarageWind": 12,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 112,
+		"AvarageWind": 43,
+		"AvarageRain": 84,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 112,
+		"AvarageWind": 57,
+		"AvarageRain": 50,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 112,
+		"AvarageWind": 53,
+		"AvarageRain": 73,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 111,
+		"AvarageWind": 61,
+		"AvarageRain": 12,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 108,
+		"AvarageWind": 30,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 108,
+		"AvarageWind": 28,
+		"AvarageRain": -1,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 107,
+		"AvarageWind": 44,
+		"AvarageRain": 58,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 107,
+		"AvarageWind": 29,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 107,
+		"AvarageWind": 16,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 106,
+		"AvarageWind": 65,
+		"AvarageRain": 89,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 104,
+		"AvarageWind": 51,
+		"AvarageRain": 14,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 103,
+		"AvarageWind": 28,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 102,
+		"AvarageWind": 33,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 101,
+		"AvarageWind": 21,
+		"AvarageRain": 38,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 100,
+		"AvarageWind": 33,
+		"AvarageRain": 17,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 100,
+		"AvarageWind": 53,
+		"AvarageRain": 24,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 100,
+		"AvarageWind": 28,
+		"AvarageRain": 4,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 98,
+		"AvarageWind": 32,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 97,
+		"AvarageWind": 30,
+		"AvarageRain": 39,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 97,
+		"AvarageWind": 30,
+		"AvarageRain": 4,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 97,
+		"AvarageWind": 49,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 180
+	},
+	{
+		"AvarageTemperature": 97,
+		"AvarageWind": 66,
+		"AvarageRain": 139,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 96,
+		"AvarageWind": 14,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 96,
+		"AvarageWind": 48,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 94,
+		"AvarageWind": 17,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 93,
+		"AvarageWind": 56,
+		"AvarageRain": 74,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 93,
+		"AvarageWind": 27,
+		"AvarageRain": 97,
+		"LowWind": 0,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 93,
+		"AvarageWind": 60,
+		"AvarageRain": 33,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 92,
+		"AvarageWind": 26,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 92,
+		"AvarageWind": 50,
+		"AvarageRain": 19,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 91,
+		"AvarageWind": 69,
+		"AvarageRain": 4,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 91,
+		"AvarageWind": 70,
+		"AvarageRain": 140,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 90,
+		"AvarageWind": 43,
+		"AvarageRain": -1,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 88,
+		"AvarageWind": 28,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 88,
+		"AvarageWind": 36,
+		"AvarageRain": 2,
+		"LowWind": 10,
+		"HighWind": 70,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 86,
+		"AvarageWind": 78,
+		"AvarageRain": 52,
+		"LowWind": 0,
+		"HighWind": 100,
+		"WindStoot": 180
+	},
+	{
+		"AvarageTemperature": 86,
+		"AvarageWind": 35,
+		"AvarageRain": 11,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 160
+	},
+	{
+		"AvarageTemperature": 85,
+		"AvarageWind": 22,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 90,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 84,
+		"AvarageWind": 38,
+		"AvarageRain": 9,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 82,
+		"AvarageWind": 13,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 82,
+		"AvarageWind": 16,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 81,
+		"AvarageWind": 43,
+		"AvarageRain": 149,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 80,
+		"AvarageWind": 38,
+		"AvarageRain": 86,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 79,
+		"AvarageWind": 39,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 79,
+		"AvarageWind": 18,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 79,
+		"AvarageWind": 80,
+		"AvarageRain": 98,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 77,
+		"AvarageWind": 38,
+		"AvarageRain": 9,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 76,
+		"AvarageWind": 53,
+		"AvarageRain": 8,
+		"LowWind": 0,
+		"HighWind": 20,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": 76,
+		"AvarageWind": 39,
+		"AvarageRain": 6,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 75,
+		"AvarageWind": 96,
+		"AvarageRain": 204,
+		"LowWind": 0,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 75,
+		"AvarageWind": 49,
+		"AvarageRain": 12,
+		"LowWind": 10,
+		"HighWind": 80,
+		"WindStoot": 160
+	},
+	{
+		"AvarageTemperature": 74,
+		"AvarageWind": 63,
+		"AvarageRain": 42,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 74,
+		"AvarageWind": 20,
+		"AvarageRain": 26,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 74,
+		"AvarageWind": 54,
+		"AvarageRain": 13,
+		"LowWind": 20,
+		"HighWind": 90,
+		"WindStoot": 160
+	},
+	{
+		"AvarageTemperature": 73,
+		"AvarageWind": 35,
+		"AvarageRain": 8,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": 73,
+		"AvarageWind": 33,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 73,
+		"AvarageWind": 29,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 73,
+		"AvarageWind": 65,
+		"AvarageRain": 59,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 73,
+		"AvarageWind": 45,
+		"AvarageRain": 2,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 71,
+		"AvarageWind": 65,
+		"AvarageRain": 38,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 71,
+		"AvarageWind": 5,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 71,
+		"AvarageWind": 13,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 20,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": 68,
+		"AvarageWind": 23,
+		"AvarageRain": 13,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 67,
+		"AvarageWind": 42,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 67,
+		"AvarageWind": 33,
+		"AvarageRain": 101,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 66,
+		"AvarageWind": 53,
+		"AvarageRain": 72,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 65,
+		"AvarageWind": 23,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 65,
+		"AvarageWind": 56,
+		"AvarageRain": 21,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 64,
+		"AvarageWind": 49,
+		"AvarageRain": 15,
+		"LowWind": 20,
+		"HighWind": 80,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 63,
+		"AvarageWind": 24,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 62,
+		"AvarageWind": 38,
+		"AvarageRain": 109,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 62,
+		"AvarageWind": 55,
+		"AvarageRain": -1,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 62,
+		"AvarageWind": 28,
+		"AvarageRain": 10,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 61,
+		"AvarageWind": 31,
+		"AvarageRain": 134,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 61,
+		"AvarageWind": 19,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 60,
+		"AvarageWind": 21,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 80,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 60,
+		"AvarageWind": 55,
+		"AvarageRain": 119,
+		"LowWind": 20,
+		"HighWind": 80,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 59,
+		"AvarageWind": 38,
+		"AvarageRain": 14,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 58,
+		"AvarageWind": 60,
+		"AvarageRain": 70,
+		"LowWind": 40,
+		"HighWind": 100,
+		"WindStoot": 180
+	},
+	{
+		"AvarageTemperature": 58,
+		"AvarageWind": 57,
+		"AvarageRain": 6,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 58,
+		"AvarageWind": 42,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 57,
+		"AvarageWind": 52,
+		"AvarageRain": 27,
+		"LowWind": 10,
+		"HighWind": 70,
+		"WindStoot": 160
+	},
+	{
+		"AvarageTemperature": 57,
+		"AvarageWind": 35,
+		"AvarageRain": -1,
+		"LowWind": 0,
+		"HighWind": 20,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": 56,
+		"AvarageWind": 30,
+		"AvarageRain": 2,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 54,
+		"AvarageWind": 47,
+		"AvarageRain": 12,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 54,
+		"AvarageWind": 61,
+		"AvarageRain": 33,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 54,
+		"AvarageWind": 44,
+		"AvarageRain": 29,
+		"LowWind": 0,
+		"HighWind": 20,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": 51,
+		"AvarageWind": 45,
+		"AvarageRain": 14,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": 51,
+		"AvarageWind": 16,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 80,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 50,
+		"AvarageWind": 38,
+		"AvarageRain": 36,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 50,
+		"AvarageWind": 41,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 49,
+		"AvarageWind": 57,
+		"AvarageRain": 8,
+		"LowWind": 30,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 46,
+		"AvarageWind": 18,
+		"AvarageRain": 46,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 46,
+		"AvarageWind": 26,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 46,
+		"AvarageWind": 38,
+		"AvarageRain": 26,
+		"LowWind": 0,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 46,
+		"AvarageWind": 23,
+		"AvarageRain": 4,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 46,
+		"AvarageWind": 25,
+		"AvarageRain": 1,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 44,
+		"AvarageWind": 25,
+		"AvarageRain": -1,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 44,
+		"AvarageWind": 53,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 44,
+		"AvarageWind": 20,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 44,
+		"AvarageWind": 49,
+		"AvarageRain": 24,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 43,
+		"AvarageWind": 67,
+		"AvarageRain": 84,
+		"LowWind": 20,
+		"HighWind": 80,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 42,
+		"AvarageWind": 32,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 41,
+		"AvarageWind": 21,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 40
+	},
+	{
+		"AvarageTemperature": 39,
+		"AvarageWind": 11,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": 39,
+		"AvarageWind": 58,
+		"AvarageRain": 119,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 39,
+		"AvarageWind": 18,
+		"AvarageRain": -1,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 38,
+		"AvarageWind": 49,
+		"AvarageRain": 9,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 37,
+		"AvarageWind": 80,
+		"AvarageRain": 43,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 37,
+		"AvarageWind": 34,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 37,
+		"AvarageWind": 35,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 80,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 37,
+		"AvarageWind": 31,
+		"AvarageRain": 7,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 34,
+		"AvarageWind": 37,
+		"AvarageRain": 12,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 34,
+		"AvarageWind": 20,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 34,
+		"AvarageWind": 23,
+		"AvarageRain": -1,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 33,
+		"AvarageWind": 11,
+		"AvarageRain": -1,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 33,
+		"AvarageWind": 33,
+		"AvarageRain": 123,
+		"LowWind": 40,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 33,
+		"AvarageWind": 38,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 90,
+		"WindStoot": 150
+	},
+	{
+		"AvarageTemperature": 33,
+		"AvarageWind": 27,
+		"AvarageRain": -1,
+		"LowWind": 20,
+		"HighWind": 80,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 32,
+		"AvarageWind": 45,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 30,
+		"AvarageWind": 67,
+		"AvarageRain": 91,
+		"LowWind": 10,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 30,
+		"AvarageWind": 32,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 30,
+		"AvarageWind": 36,
+		"AvarageRain": 2,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": 28,
+		"AvarageWind": 57,
+		"AvarageRain": 10,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 26,
+		"AvarageWind": 40,
+		"AvarageRain": 3,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 26,
+		"AvarageWind": 48,
+		"AvarageRain": 19,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 26,
+		"AvarageWind": 34,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 26,
+		"AvarageWind": 24,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 25,
+		"AvarageWind": 24,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 80,
+		"WindStoot": 170
+	},
+	{
+		"AvarageTemperature": 25,
+		"AvarageWind": 30,
+		"AvarageRain": -1,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 24,
+		"AvarageWind": 22,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": 23,
+		"AvarageWind": 46,
+		"AvarageRain": 1,
+		"LowWind": 30,
+		"HighWind": 80,
+		"WindStoot": 150
+	},
+	{
+		"AvarageTemperature": 21,
+		"AvarageWind": 31,
+		"AvarageRain": 29,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 21,
+		"AvarageWind": 27,
+		"AvarageRain": 1,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 40
+	},
+	{
+		"AvarageTemperature": 20,
+		"AvarageWind": 48,
+		"AvarageRain": 119,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 20,
+		"AvarageWind": 48,
+		"AvarageRain": 19,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 19,
+		"AvarageWind": 40,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 19,
+		"AvarageWind": 30,
+		"AvarageRain": 14,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 17,
+		"AvarageWind": 29,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 80,
+		"WindStoot": 160
+	},
+	{
+		"AvarageTemperature": 17,
+		"AvarageWind": 30,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 17,
+		"AvarageWind": 54,
+		"AvarageRain": 70,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 16,
+		"AvarageWind": 33,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 16,
+		"AvarageWind": 20,
+		"AvarageRain": -1,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 15,
+		"AvarageWind": 34,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": 15,
+		"AvarageWind": 44,
+		"AvarageRain": 50,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": 15,
+		"AvarageWind": 17,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 14,
+		"AvarageWind": 29,
+		"AvarageRain": 27,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": 13,
+		"AvarageWind": 42,
+		"AvarageRain": 0,
+		"LowWind": 50,
+		"HighWind": 80,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": 13,
+		"AvarageWind": 45,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 13,
+		"AvarageWind": 15,
+		"AvarageRain": -1,
+		"LowWind": 40,
+		"HighWind": 70,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 12,
+		"AvarageWind": 34,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 70,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": 11,
+		"AvarageWind": 32,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 6,
+		"AvarageWind": 25,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 40,
+		"WindStoot": 60
+	},
+	{
+		"AvarageTemperature": 4,
+		"AvarageWind": 59,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": 4,
+		"AvarageWind": 21,
+		"AvarageRain": 0,
+		"LowWind": 40,
+		"HighWind": 70,
+		"WindStoot": 120
+	},
+	{
+		"AvarageTemperature": 3,
+		"AvarageWind": 41,
+		"AvarageRain": 9,
+		"LowWind": 50,
+		"HighWind": 80,
+		"WindStoot": 170
+	},
+	{
+		"AvarageTemperature": 3,
+		"AvarageWind": 35,
+		"AvarageRain": -1,
+		"LowWind": 70,
+		"HighWind": 90,
+		"WindStoot": 230
+	},
+	{
+		"AvarageTemperature": 2,
+		"AvarageWind": 50,
+		"AvarageRain": 0,
+		"LowWind": 50,
+		"HighWind": 90,
+		"WindStoot": 160
+	},
+	{
+		"AvarageTemperature": 1,
+		"AvarageWind": 33,
+		"AvarageRain": 8,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": 0,
+		"AvarageWind": 13,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 40,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": -1,
+		"AvarageWind": 35,
+		"AvarageRain": 0,
+		"LowWind": 0,
+		"HighWind": 30,
+		"WindStoot": 40
+	},
+	{
+		"AvarageTemperature": -3,
+		"AvarageWind": 41,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": -7,
+		"AvarageWind": 45,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 40,
+		"WindStoot": 70
+	},
+	{
+		"AvarageTemperature": -8,
+		"AvarageWind": 22,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": -9,
+		"AvarageWind": 38,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": -10,
+		"AvarageWind": 27,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": -13,
+		"AvarageWind": 50,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": -14,
+		"AvarageWind": 47,
+		"AvarageRain": -1,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 100
+	},
+	{
+		"AvarageTemperature": -16,
+		"AvarageWind": 69,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 60,
+		"WindStoot": 110
+	},
+	{
+		"AvarageTemperature": -23,
+		"AvarageWind": 78,
+		"AvarageRain": -1,
+		"LowWind": 40,
+		"HighWind": 100,
+		"WindStoot": 180
+	},
+	{
+		"AvarageTemperature": -29,
+		"AvarageWind": 33,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 70,
+		"WindStoot": 130
+	},
+	{
+		"AvarageTemperature": -32,
+		"AvarageWind": 46,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": -32,
+		"AvarageWind": 45,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": -35,
+		"AvarageWind": 16,
+		"AvarageRain": 0,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 90
+	},
+	{
+		"AvarageTemperature": -37,
+		"AvarageWind": 50,
+		"AvarageRain": -1,
+		"LowWind": 30,
+		"HighWind": 50,
+		"WindStoot": 80
+	},
+	{
+		"AvarageTemperature": -42,
+		"AvarageWind": 22,
+		"AvarageRain": 0,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": -54,
+		"AvarageWind": 30,
+		"AvarageRain": 5,
+		"LowWind": 10,
+		"HighWind": 30,
+		"WindStoot": 50
+	},
+	{
+		"AvarageTemperature": -57,
+		"AvarageWind": 60,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 90,
+		"WindStoot": 160
+	},
+	{
+		"AvarageTemperature": -62,
+		"AvarageWind": 74,
+		"AvarageRain": 0,
+		"LowWind": 30,
+		"HighWind": 70,
+		"WindStoot": 140
+	},
+	{
+		"AvarageTemperature": -81,
+		"AvarageWind": 55,
+		"AvarageRain": -1,
+		"LowWind": 20,
+		"HighWind": 60,
+		"WindStoot": 90
+	}
+ ]
