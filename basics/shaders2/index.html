@@ -131,8 +131,8 @@
 
 	vUv = uv;
 
-	noise = transformScale *  -.10 * turbulence( normal + time );
-	float b = transformIntencity * pnoise( 0.3 * position + vec3( 2.0 * time ), vec3( 10.0 ) );
+	noise = -.10 * turbulence( normal + time );
+	float b = transformIntencity * pnoise( transformScale * position + vec3( 2.0 * time ), vec3( 10.0 ) );
 	float displacement = - noise + b;
 
 	vec3 newPosition = position + normal * displacement;
@@ -147,15 +147,8 @@
 >
 	varying vec2 vUv;
 
-	uniform float radius1;
-	uniform float radius2;
-	uniform float amount;
 
 	uniform float opacity;
-
-	uniform vec3 fogColor;
-	uniform float fogNear;
-	uniform float fogFar;
 
 	uniform vec3 dotColor;
 	uniform vec3 shapeColor;
@@ -163,20 +156,9 @@
 	uniform sampler2D texture; // <---------------------------------- texture sampler uniform
 
 	void main() {
-	float p = smoothstep(radius1, (radius2 + .05), length(fract(amount*vUv)-0.5));
-	vec3 col = mix(dotColor, shapeColor, vec3(p));
+	vec3 col = shapeColor;
 
 	gl_FragColor = texture2D(texture, vUv);
-
-	#ifdef USE_FOG
-	#ifdef USE_LOGDEPTHBUF_EXT
-	float depth = gl_FragDepthEXT / gl_FragCoord.w;
-	#else
-	float depth = gl_FragCoord.z / gl_FragCoord.w;
-	#endif
-	float fogFactor = smoothstep( fogNear, fogFar, depth );
-	gl_FragColor.rgb = mix( gl_FragColor.rgb, fogColor, fogFactor );
-	#endif
 	}
 </script>
 	<script src="./../../build/shaders2.bundle.js"></script>
