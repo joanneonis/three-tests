@@ -95,7 +95,7 @@
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "body {\n  background: red; }\n", ""]);
+exports.push([module.i, "h1, h2, h3 {\n  font-family: 'reno_monoregular'; }\n", ""]);
 
 
 
