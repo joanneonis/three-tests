@@ -108,11 +108,7 @@ __webpack_require__.r(__webpack_exports__);
 //? 	Earth source: http://blog.mastermaps.com/2013/09/creating-webgl-earth-with-threejs.html
 //?--------------------------------------------------------------------
 
-var renderer,
-    scene,
-    camera,
-    controls,
-    theCanvas = document.getElementById('gl-canvas');
+var renderer, scene, camera;
 var gui;
 var material;
 var presets = {
@@ -158,65 +154,36 @@ var cameraSettings = {
 var start = Date.now();
 
 function init() {
-  initRenderer();
-  scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"](); // camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-  // camera.position.z = 50;
-
-  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](70, window.innerWidth < 700 ? window.innerWidth / window.innerWidth : 600 / 600, 0.001, 1000);
-  camera.position.set(0, 0, cameraSettings.clip ? 10 : 25);
-  camera.aspect = width / height;
+  scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
   material = materialGeomitry();
-  planeTest();
-  var dist = camera.position.z;
-  var height = 1;
-  camera.fov = 2 * (180 / Math.PI) * Math.atan(height / (2 * dist)); // initControls();
-
-  var light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 1);
-  light.position.set(5, 3, 5);
-  scene.add(light); // scene.background = new THREE.Color( params.bgColor.bgColor);
-
-  window.addEventListener('resize', onResize, false);
+  initRenderer();
+  initCamera();
+  addPlane();
 }
 
-function SphereExample() {
-  // init sphere with materialoptions
-  var mesh = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](new three__WEBPACK_IMPORTED_MODULE_1__["IcosahedronGeometry"](5, 5), // new THREE.PlaneBufferGeometry( 5, 20, 32 ),
-  material);
-  scene.add(mesh);
-  mesh.position.set(30, 0, 0);
-  rotateObject(mesh, -10, 160, 10);
-}
-
-function onResize() {// width = container.offsetWidth;
-  // height = container.offsetHeight;
-  // renderer.setSize(width, height);
-  // camera.aspect = width / height;
-  // camera.updateProjectionMatrix();
-}
-
-function planeTest() {
+function addPlane() {
   var geometry = new three__WEBPACK_IMPORTED_MODULE_1__["PlaneBufferGeometry"](20, 20, 120, 120);
   plane = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](geometry, material);
   scene.add(plane);
 }
 
+function initCamera() {
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](70, window.innerWidth < 700 ? window.innerWidth / window.innerWidth : 600 / 600, 0.001, 1000);
+  camera.position.set(0, 0, cameraSettings.clip ? 10 : 25);
+  camera.aspect = width / height;
+  var dist = camera.position.z;
+  var height = 1;
+  camera.fov = 2 * (180 / Math.PI) * Math.atan(height / (2 * dist));
+}
+
 function render() {
-  // controls.update();
   material.uniforms.time.value = params.speed.speed * (Date.now() - start);
   requestAnimationFrame(render);
   renderer.render(scene, camera);
 }
 
 function initGui() {
-  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"](); // gui.add(
-  // 	presets,
-  // 	'type',
-  // 	['shade'] 
-  // )
-  // .onChange((val) => {
-  // 	updatePresets(val); 
-  // });
-
+  gui = new dat_gui__WEBPACK_IMPORTED_MODULE_0__["GUI"]();
   Object.keys(params).forEach(function (key) {
     if (params[key].type === 'color') {
       gui.addColor(params[key], key).onChange(function (e) {
@@ -232,7 +199,7 @@ function initGui() {
   });
   gui.add(cameraSettings, "clip").onChange(function (e) {
     camera.position.set(0, 0, e ? 10 : 25);
-  }); // camera.position.set(0, 0, 10);
+  });
 }
 
 init();
@@ -246,24 +213,9 @@ function initRenderer() {
   });
   renderer.setPixelRatio(window.devicePixelRatio);
   container = document.querySelector(".canvascontainer");
-  var width = container.offsetWidth;
-  var height = container.offsetHeight;
-  container.appendChild(renderer.domElement);
-  renderer.setSize(width, height); // renderer = new THREE.WebGLRenderer({
-  // 	canvas: theCanvas, 
-  // 	antialias: true
-  // });
-
+  renderer.setSize(container.offsetWidth, container.offsetHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
-  container.appendChild(renderer.domElement); // renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-function initControls() {
-  controls = new three__WEBPACK_IMPORTED_MODULE_1__["OrbitControls"](camera, renderer.domElement); //? NO trackball for gui issues
-  // controls.addEventListener('change', render); //? needed if theres no loop going on
-
-  controls.minDistance = 0;
-  controls.maxDistance = 700; // controls.enablePan = true;
+  container.appendChild(renderer.domElement);
 }
 
 function materialGeomitry() {
@@ -299,60 +251,43 @@ function materialGeomitry() {
   return material;
 }
 
-function rotateObject(object) {
-  var degreeX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var degreeY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-  var degreeZ = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-  object.rotateX(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeX));
-  object.rotateY(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeY));
-  object.rotateZ(three__WEBPACK_IMPORTED_MODULE_1__["Math"].degToRad(degreeZ));
-}
+function paralaxstuff() {
+  // eslint-disable-next-line no-undef
+  var instance = basicScroll.create({
+    elem: document.querySelector('.canvascontainer'),
+    from: 'top-bottom',
+    to: 'bottom-top',
+    direct: true,
+    inside: function inside(instance, percentage, props) {
+      var val = parseFloat(props.speed);
 
-function updatePresets(e) {
-  Object.keys(presets[e]).forEach(function (key) {
-    if (key === 'speed') {
-      params.speed.speed = presets[e][key];
-    } else {
-      params[key][key] = presets[e][key];
-      params[key].update(presets[e][key]);
-      gui.updateDisplay();
+      if (val >= 0) {
+        val = 0;
+      }
+
+      params.transformIntencity.transformIntencity = val;
+      params.transformIntencity.update(val);
+    },
+    props: {
+      '--translate-y': {
+        from: '80px',
+        to: '-80px'
+      },
+      '--scale': {
+        from: 1.3,
+        to: 2 // 1.5
+
+      },
+      'speed': {
+        from: -6.4,
+        to: 6.4
+      }
     }
   });
+  instance.start();
 }
 
-var instance1 = basicScroll.create({
-  elem: document.querySelector('.canvascontainer'),
-  from: 'top-bottom',
-  to: 'bottom-top',
-  direct: true,
-  inside: function inside(instance, percentage, props) {
-    console.log(instance, percentage, props);
-    var val = parseFloat(props.speed);
-
-    if (val >= 0) {
-      val = 0;
-    }
-
-    params.transformIntencity.transformIntencity = val;
-    params.transformIntencity.update(val);
-  },
-  props: {
-    '--translate-y': {
-      from: '80px',
-      to: '-80px'
-    },
-    '--scale': {
-      from: 1.3,
-      to: 2 // 1.5
-
-    },
-    'speed': {
-      from: -6.4,
-      to: 6.4
-    }
-  }
-});
-instance1.start();
+paralaxstuff();
 
 /***/ }),
 
