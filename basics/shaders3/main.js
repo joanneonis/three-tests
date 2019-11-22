@@ -72,10 +72,11 @@ function init() {
 
 	camera = new THREE.PerspectiveCamera(
 		70,
-		600 / 600,
+		window.innerWidth < 700 ? window.innerWidth / window.innerWidth : 600 / 600,
 		0.001,
 		1000
 	);
+
 
 	camera.position.set(0, 0, cameraSettings.clip ? 10 : 25);
 

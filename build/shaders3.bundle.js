@@ -162,7 +162,7 @@ function init() {
   scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"](); // camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
   // camera.position.z = 50;
 
-  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](70, 600 / 600, 0.001, 1000);
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](70, window.innerWidth < 700 ? window.innerWidth / window.innerWidth : 600 / 600, 0.001, 1000);
   camera.position.set(0, 0, cameraSettings.clip ? 10 : 25);
   camera.aspect = width / height;
   material = materialGeomitry();

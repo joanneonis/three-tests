@@ -70,6 +70,13 @@ figure {
   overflow: hidden;
   /* background-color: #000; */
 }
+
+@media screen and (max-width: 700px){
+  .visual {
+    overflow: visible;
+  }
+}
+
 .visual .canvascontainer {
   display: block;
   -webkit-transform: scale3d(var(--scale), var(--scale), 1) translatey(var(--translate-y));
