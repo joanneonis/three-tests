@@ -13,6 +13,7 @@ export default {
         // materials: path.join(__dirname, 'basics/materials/main.js'),
         // shaders: path.join(__dirname, 'basics/shaders/main.js'),
         shaders2: path.join(__dirname, 'basics/shaders2/main.js'),
+        shaders3: path.join(__dirname, 'basics/shaders3/main.js'),
         // modalloaders: path.join(__dirname, 'basics/modal-loaders/main.js'),
         // bloom: path.join(__dirname, 'basics/bloom/main.js'),
         // car: path.join(__dirname, 'experiments/tractor/car-v1/main.js'),
