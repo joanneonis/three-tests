@@ -29,6 +29,7 @@ let presets = {
 let width;
 let plane;
 let height;
+var container;
 
 let params = {
 	speed: {
@@ -113,10 +114,12 @@ function SphereExample() {
 }
 
 function onResize() {
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
+	// width = container.offsetWidth;
+	// height = container.offsetHeight;
+	// renderer.setSize(width, height);
 
-	renderer.setSize(window.innerWidth, window.innerHeight);
+	// camera.aspect = width / height;
+	// camera.updateProjectionMatrix();
 }
 
 function planeTest() {
@@ -177,7 +180,7 @@ function initRenderer() {
 
 	renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 	renderer.setPixelRatio(window.devicePixelRatio);
-	let container = document.querySelector(".canvascontainer");
+	container = document.querySelector(".canvascontainer");
 	let width = container.offsetWidth;
 	let height = container.offsetHeight;
 	container.appendChild(renderer.domElement);

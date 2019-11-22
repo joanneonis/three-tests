@@ -125,6 +125,7 @@ var presets = {
 var width;
 var plane;
 var height;
+var container;
 var params = {
   speed: {
     speed: presets.shade.speed,
@@ -186,10 +187,11 @@ function SphereExample() {
   rotateObject(mesh, -10, 160, 10);
 }
 
-function onResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+function onResize() {// width = container.offsetWidth;
+  // height = container.offsetHeight;
+  // renderer.setSize(width, height);
+  // camera.aspect = width / height;
+  // camera.updateProjectionMatrix();
 }
 
 function planeTest() {
@@ -243,7 +245,7 @@ function initRenderer() {
     antialias: true
   });
   renderer.setPixelRatio(window.devicePixelRatio);
-  var container = document.querySelector(".canvascontainer");
+  container = document.querySelector(".canvascontainer");
   var width = container.offsetWidth;
   var height = container.offsetHeight;
   container.appendChild(renderer.domElement);
