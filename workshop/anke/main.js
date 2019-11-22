@@ -209,7 +209,7 @@ function initControls() {
 function loadModelThingies() {
 	var loader = new THREE.GLTFLoader();
 
-	loader.load('./models/3dthinking.glb', function (gltf) {
+	loader.load('./models/v2.glb', function (gltf) {
 		model = gltf.scene.children[2];
 
 		createGrid(GridSize, GridSize, model);
@@ -286,8 +286,8 @@ function createGrid(x, y, model) {
 				theData[count].FX * 3,
 				0,
 				scales.WindStoot[1], 
-				2,
-				-2
+				1.6,
+				-1.5
 			);
 
 			// Hoog-Laag: 2 
@@ -315,13 +315,13 @@ function createGrid(x, y, model) {
 			newModel.morphTargetInfluences[1] = east;
 
 
-			// newModel.morphTargetInfluences[1] = THREE.Math.mapLinear(
-			// 	theData[count].AvarageRain,
-			// 	scales.AvarageRain[0],
-			// 	scales.AvarageRain[1], 
-			// 	1,
-			// 	-2
-			// );
+			newModel.morphTargetInfluences[3] = THREE.Math.mapLinear(
+				theData[count].FF * 2,
+				0,
+				110, 
+				-1,
+				1
+			);
 
 			// console.log(theData[i][2015]);
 
