@@ -7,11 +7,19 @@
 	<title>Shaders</title>
 	<style>
     body { margin: 0; width: 100%; height: 100vh; overflow: hidden; }
-    canvas { width: 100%; height: 100%; }
+		
+		.container {
+			width: 600px;
+			height: 600px;
+			margin: auto;
+			margin-top: 20px;
+		}
   </style>
 </head>
 <body>
-	<canvas id="gl-canvas"></canvas>
+
+	<div class="container"></div>
+
 	<script
 	id="vertexShader"
 	type="x-shader/x-vertex"
@@ -146,19 +154,10 @@
 	type="x-shader/x-vertex"
 >
 	varying vec2 vUv;
-
-
-	uniform float opacity;
-
-	uniform vec3 dotColor;
-	uniform vec3 shapeColor;
-
 	uniform sampler2D texture; // <---------------------------------- texture sampler uniform
 
 	void main() {
-	vec3 col = shapeColor;
-
-	gl_FragColor = texture2D(texture, vUv);
+		gl_FragColor = texture2D(texture, vUv);
 	}
 </script>
 	<script src="./../../build/shaders2.bundle.js"></script>
