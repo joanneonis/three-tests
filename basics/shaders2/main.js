@@ -20,40 +20,27 @@ let material;
 
 let presets = {
 	shade: {
-		bgColor: "rgb(53,133,190)",
 		speed: 0.00041,
-		shapeColor: "rgb(53,133,190)",
-		transformIntencity: 10,
+		transformIntencity: 3,
 		transformScale: 0.3,
 	}
 }
 
+let width;
+let plane;
+let height;
+
 let params = {
-	bgColor: {
-		bgColor: "rgb(5,5,5)",
-		type: 'color',
-		update: function(e) {
-			scene.background = new THREE.Color(e)
-		},
-	},
 	speed: {
 		speed: presets.shade.speed,
 		min: 0.000001,
 		max: 0.001,
 		uniform: true,
 	},
-	shapeColor: {
-		shapeColor: "rgb(65,65,65)",
-		type: 'color',
-		uniform: true,
-		update: function(e) {
-			material.uniforms.shapeColor.value = new THREE.Color(e);
-		},
-	},
 	transformIntencity: {
 		transformIntencity: presets.shade.transformIntencity,
 		min: 0,
-		max: 50,
+		max: 10,
 		uniform: true,
 		update: function(e) {
 			material.uniforms.transformIntencity.value = e;
@@ -61,14 +48,16 @@ let params = {
 	},
 	transformScale: {
 		transformScale: presets.shade.transformScale,
-		min: -1000,
-		max: 1000,
+		min: 0,
+		max: 10,
 		uniform: true,
 		update: function(e) {
 			material.uniforms.transformScale.value = e;
 		} 
 	},
 };
+
+var cameraSettings = { clip : true };
 
 const start = Date.now();
 
@@ -77,8 +66,27 @@ function init() {
 	
 	scene = new THREE.Scene();
 	
-	camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-	camera.position.z = 50;
+	// camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+	// camera.position.z = 50;
+
+	camera = new THREE.PerspectiveCamera(
+		70,
+		600 / 600,
+		0.001,
+		1000
+	);
+
+	camera.position.set(0, 0, cameraSettings.clip ? 10 : 20);
+
+	camera.aspect = width / height;
+    
+	material = materialGeomitry();
+
+	planeTest();
+
+	const dist  = camera.position.z;
+	const height = 1;
+	camera.fov = 2*(180/Math.PI)*Math.atan(height/(2*dist));
 	
 	initControls();
 	
@@ -86,14 +94,8 @@ function init() {
 	light.position.set(5,3,5);
 	scene.add(light);
 
-	material = materialGeomitry();
-
 	
-	// SphereExample();
-	planeTest();
-	
-	
-	scene.background = new THREE.Color( params.bgColor.bgColor);
+	// scene.background = new THREE.Color( params.bgColor.bgColor);
 	window.addEventListener('resize', onResize, false);
 }
 
@@ -118,8 +120,9 @@ function onResize() {
 }
 
 function planeTest() {
-	var geometry = new THREE.PlaneBufferGeometry( 20, 20, 60, 60 );
-	var plane = new THREE.Mesh( geometry, material );
+	var geometry = new THREE.PlaneBufferGeometry( 20, 20, 120, 120 );
+	plane = new THREE.Mesh( geometry, material );
+
 	scene.add( plane );
 }
 
@@ -157,6 +160,11 @@ function initGui() {
 			});
 		}
 	});
+
+	gui.add(cameraSettings, "clip").onChange(function(e) { 
+		camera.position.set(0, 0, e ? 10 : 20);
+	});
+	// camera.position.set(0, 0, 10);
 }
 
 
@@ -166,12 +174,23 @@ initGui();
 
 
 function initRenderer() {
-	renderer = new THREE.WebGLRenderer({
-		canvas: theCanvas, 
-		antialias: true
-	});
+
+	renderer = new THREE.WebGLRenderer({ alpha: true });
 	renderer.setPixelRatio(window.devicePixelRatio);
-	renderer.setSize(window.innerWidth, window.innerHeight);
+	let container = document.querySelector(".container");
+	let width = container.offsetWidth;
+	let height = container.offsetHeight;
+	container.appendChild(renderer.domElement);
+	renderer.setSize(width, height);
+	
+	
+	// renderer = new THREE.WebGLRenderer({
+	// 	canvas: theCanvas, 
+	// 	antialias: true
+	// });
+	renderer.setPixelRatio(window.devicePixelRatio);
+	container.appendChild(renderer.domElement);
+	// renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 
@@ -205,10 +224,6 @@ function materialGeomitry() {
       time: {
         type: 'f',
         value: 0.0,
-      },
-      shapeColor: {
-        type: 'c',
-        value: new THREE.Color(params.shapeColor.shapeColor),
       },
     },
     vertexShader: document.getElementById('vertexShader').textContent,

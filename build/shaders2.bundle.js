@@ -117,39 +117,25 @@ var gui;
 var material;
 var presets = {
   shade: {
-    bgColor: "rgb(53,133,190)",
     speed: 0.00041,
-    shapeColor: "rgb(53,133,190)",
-    transformIntencity: 10,
+    transformIntencity: 3,
     transformScale: 0.3
   }
 };
+var width;
+var plane;
+var height;
 var params = {
-  bgColor: {
-    bgColor: "rgb(5,5,5)",
-    type: 'color',
-    update: function update(e) {
-      scene.background = new three__WEBPACK_IMPORTED_MODULE_1__["Color"](e);
-    }
-  },
   speed: {
     speed: presets.shade.speed,
     min: 0.000001,
     max: 0.001,
     uniform: true
   },
-  shapeColor: {
-    shapeColor: "rgb(65,65,65)",
-    type: 'color',
-    uniform: true,
-    update: function update(e) {
-      material.uniforms.shapeColor.value = new three__WEBPACK_IMPORTED_MODULE_1__["Color"](e);
-    }
-  },
   transformIntencity: {
     transformIntencity: presets.shade.transformIntencity,
     min: 0,
-    max: 50,
+    max: 10,
     uniform: true,
     update: function update(e) {
       material.uniforms.transformIntencity.value = e;
@@ -157,29 +143,37 @@ var params = {
   },
   transformScale: {
     transformScale: presets.shade.transformScale,
-    min: -1000,
-    max: 1000,
+    min: 0,
+    max: 10,
     uniform: true,
     update: function update(e) {
       material.uniforms.transformScale.value = e;
     }
   }
 };
+var cameraSettings = {
+  clip: true
+};
 var start = Date.now();
 
 function init() {
   initRenderer();
-  scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"]();
-  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](70, window.innerWidth / window.innerHeight, 1, 1000);
-  camera.position.z = 50;
+  scene = new three__WEBPACK_IMPORTED_MODULE_1__["Scene"](); // camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+  // camera.position.z = 50;
+
+  camera = new three__WEBPACK_IMPORTED_MODULE_1__["PerspectiveCamera"](70, 600 / 600, 0.001, 1000);
+  camera.position.set(0, 0, cameraSettings.clip ? 10 : 20);
+  camera.aspect = width / height;
+  material = materialGeomitry();
+  planeTest();
+  var dist = camera.position.z;
+  var height = 1;
+  camera.fov = 2 * (180 / Math.PI) * Math.atan(height / (2 * dist));
   initControls();
   var light = new three__WEBPACK_IMPORTED_MODULE_1__["DirectionalLight"](0xffffff, 1);
   light.position.set(5, 3, 5);
-  scene.add(light);
-  material = materialGeomitry(); // SphereExample();
+  scene.add(light); // scene.background = new THREE.Color( params.bgColor.bgColor);
 
-  planeTest();
-  scene.background = new three__WEBPACK_IMPORTED_MODULE_1__["Color"](params.bgColor.bgColor);
   window.addEventListener('resize', onResize, false);
 }
 
@@ -199,8 +193,8 @@ function onResize() {
 }
 
 function planeTest() {
-  var geometry = new three__WEBPACK_IMPORTED_MODULE_1__["PlaneBufferGeometry"](20, 20, 60, 60);
-  var plane = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](geometry, material);
+  var geometry = new three__WEBPACK_IMPORTED_MODULE_1__["PlaneBufferGeometry"](20, 20, 120, 120);
+  plane = new three__WEBPACK_IMPORTED_MODULE_1__["Mesh"](geometry, material);
   scene.add(plane);
 }
 
@@ -234,6 +228,9 @@ function initGui() {
       });
     }
   });
+  gui.add(cameraSettings, "clip").onChange(function (e) {
+    camera.position.set(0, 0, e ? 10 : 20);
+  }); // camera.position.set(0, 0, 10);
 }
 
 init();
@@ -242,11 +239,20 @@ initGui();
 
 function initRenderer() {
   renderer = new three__WEBPACK_IMPORTED_MODULE_1__["WebGLRenderer"]({
-    canvas: theCanvas,
-    antialias: true
+    alpha: true
   });
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  var container = document.querySelector(".container");
+  var width = container.offsetWidth;
+  var height = container.offsetHeight;
+  container.appendChild(renderer.domElement);
+  renderer.setSize(width, height); // renderer = new THREE.WebGLRenderer({
+  // 	canvas: theCanvas, 
+  // 	antialias: true
+  // });
+
+  renderer.setPixelRatio(window.devicePixelRatio);
+  container.appendChild(renderer.domElement); // renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function initControls() {
@@ -279,10 +285,6 @@ function materialGeomitry() {
       time: {
         type: 'f',
         value: 0.0
-      },
-      shapeColor: {
-        type: 'c',
-        value: new three__WEBPACK_IMPORTED_MODULE_1__["Color"](params.shapeColor.shapeColor)
       }
     },
     vertexShader: document.getElementById('vertexShader').textContent,
