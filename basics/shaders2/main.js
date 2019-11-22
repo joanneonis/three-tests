@@ -20,7 +20,6 @@ let material;
 
 let presets = {
 	shade: {
-		bgColor: "rgb(53,133,190)",
 		speed: 0.00041,
 		transformIntencity: 3,
 		transformScale: 0.3,
@@ -32,13 +31,6 @@ let plane;
 let height;
 
 let params = {
-	bgColor: {
-		bgColor: "rgb(5,5,5)",
-		type: 'color',
-		update: function(e) {
-			scene.background = new THREE.Color(e)
-		},
-	},
 	speed: {
 		speed: presets.shade.speed,
 		min: 0.000001,

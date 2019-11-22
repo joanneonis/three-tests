@@ -117,7 +117,6 @@ var gui;
 var material;
 var presets = {
   shade: {
-    bgColor: "rgb(53,133,190)",
     speed: 0.00041,
     transformIntencity: 3,
     transformScale: 0.3
@@ -127,13 +126,6 @@ var width;
 var plane;
 var height;
 var params = {
-  bgColor: {
-    bgColor: "rgb(5,5,5)",
-    type: 'color',
-    update: function update(e) {
-      scene.background = new three__WEBPACK_IMPORTED_MODULE_1__["Color"](e);
-    }
-  },
   speed: {
     speed: presets.shade.speed,
     min: 0.000001,
