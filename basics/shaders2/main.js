@@ -17,26 +17,14 @@ let renderer,
 var gui;
 
 let material;
-let texture;
 
 let presets = {
-	type: 'dots',
-	dots: {
-		dotColor: "rgb(0,0,0)",
-		dotAmount: 80,
-		dotSize: 0.2,
-	},
 	shade: {
 		bgColor: "rgb(53,133,190)",
-		dotColor: "rgb(53,133,190)",
 		speed: 0.00041,
-		dotAmount: 115,
-		fogIntencity: 150,
-		dotSize: 0.18,
 		shapeColor: "rgb(53,133,190)",
-		transformIntencity: 20,
-		transformScale: 0,
-		fogColor: "rgb(148,0,255)",
+		transformIntencity: 10,
+		transformScale: 0.3,
 	}
 }
 
@@ -48,46 +36,11 @@ let params = {
 			scene.background = new THREE.Color(e)
 		},
 	},
-	dotColor: {
-		dotColor: "rgb(0,0,0)",
-		type: 'color',
-		uniform: true,
-		update: function(e) {
-			material.uniforms.dotColor.value = new THREE.Color(e);
-		},
-	},
 	speed: {
-		speed: 0.000284,
+		speed: presets.shade.speed,
 		min: 0.000001,
 		max: 0.001,
 		uniform: true,
-	},
-	dotAmount: {
-		dotAmount: 80,
-		min: 0,
-		max: 150,
-		uniform: true,
-		update: function(e) {
-			material.uniforms.amount.value = e;
-		}
-	},
-	fogIntencity: {
-		fogIntencity: 150,
-		min: 10,
-		max: 150,
-		update: function(e) {
-			scene.fog.far = e;
-		}
-	},
-	dotSize: {
-		dotSize: 0.2,
-		min: 0.02,
-		max: 0.5,
-		uniform: true,
-		update: function(e) {
-			material.uniforms.radius1.value = e;
-			material.uniforms.radius2.value = e;
-		}
 	},
 	shapeColor: {
 		shapeColor: "rgb(65,65,65)",
@@ -98,7 +51,7 @@ let params = {
 		},
 	},
 	transformIntencity: {
-		transformIntencity: 10,
+		transformIntencity: presets.shade.transformIntencity,
 		min: 0,
 		max: 50,
 		uniform: true,
@@ -107,19 +60,12 @@ let params = {
 		}
 	},
 	transformScale: {
-		transformScale: 0,
+		transformScale: presets.shade.transformScale,
 		min: -1000,
 		max: 1000,
 		uniform: true,
 		update: function(e) {
 			material.uniforms.transformScale.value = e;
-		} 
-	},
-	fogColor: {
-		fogColor: "rgb(65,65,65)",
-		type: 'color',
-		update: function(e) {
-			scene.fog.color = new THREE.Color(e);
 		} 
 	},
 };
@@ -140,27 +86,28 @@ function init() {
 	light.position.set(5,3,5);
 	scene.add(light);
 
-	// fog
-	const fogColor = params.fogColor.fogColor;
-  scene.fog = new THREE.Fog(fogColor, 0, params.fogIntencity.fogIntencity);
-
 	material = materialGeomitry();
 
-	// init sphere with materialoptions
-  // const mesh = new THREE.Mesh(
-	// 	new THREE.IcosahedronGeometry(5, 5),
-	// 	// new THREE.PlaneBufferGeometry( 5, 20, 32 ),
-  //   material,
-	// );
 	
+	// SphereExample();
 	planeTest();
 	
-	// scene.add(mesh);
-	// mesh.position.set(30, 0, 0);
-	// rotateObject(mesh, -10, 160, 10);
 	
 	scene.background = new THREE.Color( params.bgColor.bgColor);
 	window.addEventListener('resize', onResize, false);
+}
+
+function SphereExample() {
+	// init sphere with materialoptions
+  const mesh = new THREE.Mesh(
+		new THREE.IcosahedronGeometry(5, 5),
+		// new THREE.PlaneBufferGeometry( 5, 20, 32 ),
+    material,
+	);
+
+	scene.add(mesh);
+	mesh.position.set(30, 0, 0);
+	rotateObject(mesh, -10, 160, 10);
 }
 
 function onResize() {
@@ -172,7 +119,6 @@ function onResize() {
 
 function planeTest() {
 	var geometry = new THREE.PlaneBufferGeometry( 20, 20, 60, 60 );
-	// var material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
 	var plane = new THREE.Mesh( geometry, material );
 	scene.add( plane );
 }
@@ -189,14 +135,14 @@ function render() {
 function initGui() {
 	gui = new dat.GUI();
 
-	gui.add(
-		presets,
-		'type',
-		['dots', 'shade'] 
-	)
-	.onChange((val) => {
-		updatePresets(val); 
-	});
+	// gui.add(
+	// 	presets,
+	// 	'type',
+	// 	['shade'] 
+	// )
+	// .onChange((val) => {
+	// 	updatePresets(val); 
+	// });
 
 	Object.keys(params).forEach((key) => {		
 		if (params[key].type === 'color') {
@@ -256,37 +202,9 @@ function materialGeomitry() {
         type: 'f',
         value: 1,
       },
-      radius1: {
-        type: 'f',
-        value: params.dotSize.dotSize,
-      },
-      radius2: {
-        type: 'f',
-        value: params.dotSize.dotSize,
-      },
-      amount: {
-        type: 'f',
-        value: params.dotAmount.dotAmount,
-      },
       time: {
         type: 'f',
         value: 0.0,
-      },
-      fogColor: {
-        type: 'c',
-        value: scene.fog.color,
-      },
-      fogNear: {
-        type: 'f',
-        value: scene.fog.near,
-      },
-      fogFar: {
-        type: 'f',
-        value: scene.fog.far,
-      },
-      dotColor: {
-        type: 'c',
-        value: new THREE.Color(params.dotColor.dotColor),
       },
       shapeColor: {
         type: 'c',
@@ -295,14 +213,11 @@ function materialGeomitry() {
     },
     vertexShader: document.getElementById('vertexShader').textContent,
     fragmentShader: document.getElementById('fragmentShader').textContent,
-		fog: true,
 	});
 	
 	const speedFactor = 0.00001;
   material.uniforms.time.value = speedFactor * (Date.now() - start);
 
-  // enable transparency in the material
-	material.transparent = true;
 	material.needsUpdate = true;
 
 	return material;
